@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B372B75F5750035FF3E /* LoginViewModel.swift */; };
+		184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B392B75F62C0035FF3E /* LoginViewController.swift */; };
+		184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B3B2B75F6400035FF3E /* LoginModel.swift */; };
+		184B8B3E2B762D330035FF3E /* Session.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184B8B3D2B762D330035FF3E /* Session.storyboard */; };
+		184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B3F2B7636270035FF3E /* BaseViewController.swift */; };
+		185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65BF2B72435C00FEC922 /* AppDelegate.swift */; };
+		185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C12B72435C00FEC922 /* SceneDelegate.swift */; };
+		185E65C42B72435C00FEC922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C32B72435C00FEC922 /* ViewController.swift */; };
+		185E65C72B72435C00FEC922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65C52B72435C00FEC922 /* Main.storyboard */; };
+		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
+		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
+		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		184B8B372B75F5750035FF3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		184B8B392B75F62C0035FF3E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		184B8B3B2B75F6400035FF3E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		184B8B3D2B762D330035FF3E /* Session.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Session.storyboard; sourceTree = "<group>"; };
+		184B8B3F2B7636270035FF3E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		185E65BC2B72435C00FEC922 /* TicketSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicketSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		185E65BF2B72435C00FEC922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		185E65C12B72435C00FEC922 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		185E65C32B72435C00FEC922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		185E65C62B72435C00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketSpark.xcdatamodel; sourceTree = "<group>"; };
+		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		185E65B92B72435C00FEC922 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		184B8B362B75F5360035FF3E /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				184B8B372B75F5750035FF3E /* LoginViewModel.swift */,
+				184B8B392B75F62C0035FF3E /* LoginViewController.swift */,
+				184B8B3B2B75F6400035FF3E /* LoginModel.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		185E65B32B72435C00FEC922 = {
+			isa = PBXGroup;
+			children = (
+				185E65BE2B72435C00FEC922 /* TicketSpark */,
+				185E65BD2B72435C00FEC922 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		185E65BD2B72435C00FEC922 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				185E65BC2B72435C00FEC922 /* TicketSpark.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		185E65BE2B72435C00FEC922 /* TicketSpark */ = {
+			isa = PBXGroup;
+			children = (
+				185E65D62B7243DA00FEC922 /* TicketSpark */,
+				185E65D02B72435E00FEC922 /* Info.plist */,
+				185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */,
+			);
+			path = TicketSpark;
+			sourceTree = "<group>";
+		};
+		185E65D62B7243DA00FEC922 /* TicketSpark */ = {
+			isa = PBXGroup;
+			children = (
+				185E65DA2B72458C00FEC922 /* Utilities */,
+				185E65BF2B72435C00FEC922 /* AppDelegate.swift */,
+				185E65C12B72435C00FEC922 /* SceneDelegate.swift */,
+				185E65D92B72445000FEC922 /* Modules */,
+				185E65D82B72443600FEC922 /* View */,
+				185E65D72B7243F300FEC922 /* Resources */,
+			);
+			path = TicketSpark;
+			sourceTree = "<group>";
+		};
+		185E65D72B7243F300FEC922 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				185E65C32B72435C00FEC922 /* ViewController.swift */,
+				185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */,
+				185E65CB2B72435E00FEC922 /* Assets.xcassets */,
+				184B8B3F2B7636270035FF3E /* BaseViewController.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		185E65D82B72443600FEC922 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185E65C52B72435C00FEC922 /* Main.storyboard */,
+				184B8B3D2B762D330035FF3E /* Session.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		185E65D92B72445000FEC922 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				184B8B362B75F5360035FF3E /* LoginView */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		185E65DA2B72458C00FEC922 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		185E65BB2B72435C00FEC922 /* TicketSpark */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 185E65D32B72435E00FEC922 /* Build configuration list for PBXNativeTarget "TicketSpark" */;
+			buildPhases = (
+				185E65B82B72435C00FEC922 /* Sources */,
+				185E65B92B72435C00FEC922 /* Frameworks */,
+				185E65BA2B72435C00FEC922 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TicketSpark;
+			productName = TicketSpark;
+			productReference = 185E65BC2B72435C00FEC922 /* TicketSpark.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		185E65B42B72435C00FEC922 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					185E65BB2B72435C00FEC922 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+				};
+			};
+			buildConfigurationList = 185E65B72B72435C00FEC922 /* Build configuration list for PBXProject "TicketSpark" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 185E65B32B72435C00FEC922;
+			productRefGroup = 185E65BD2B72435C00FEC922 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				185E65BB2B72435C00FEC922 /* TicketSpark */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		185E65BA2B72435C00FEC922 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
+				184B8B3E2B762D330035FF3E /* Session.storyboard in Resources */,
+				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
+				185E65C72B72435C00FEC922 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		185E65B82B72435C00FEC922 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,
+				184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */,
+				185E65C42B72435C00FEC922 /* ViewController.swift in Sources */,
+				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
+				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
+				184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */,
+				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
+				185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		185E65C52B72435C00FEC922 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				185E65C62B72435C00FEC922 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				185E65CE2B72435E00FEC922 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		185E65D12B72435E00FEC922 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		185E65D22B72435E00FEC922 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		185E65D42B72435E00FEC922 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicketSpark/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TicketSpark;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		185E65D52B72435E00FEC922 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TicketSpark/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.TicketSpark;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		185E65B72B72435C00FEC922 /* Build configuration list for PBXProject "TicketSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185E65D12B72435E00FEC922 /* Debug */,
+				185E65D22B72435E00FEC922 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		185E65D32B72435E00FEC922 /* Build configuration list for PBXNativeTarget "TicketSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				185E65D42B72435E00FEC922 /* Debug */,
+				185E65D52B72435E00FEC922 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */,
+			);
+			currentVersion = 185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */;
+			path = TicketSpark.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 185E65B42B72435C00FEC922 /* Project object */;
+}
