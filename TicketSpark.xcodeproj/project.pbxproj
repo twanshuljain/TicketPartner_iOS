@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		183765012B7A24F900CCE9F4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765002B7A24F900CCE9F4 /* UIView+Extension.swift */; };
-		183765032B7A27DD00CCE9F4 /* UIColour+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765022B7A27DD00CCE9F4 /* UIColour+Extension.swift */; };
+		183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765062B7A32A900CCE9F4 /* UIView+Extension.swift */; };
+		183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */; };
 		184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B372B75F5750035FF3E /* LoginViewModel.swift */; };
 		184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B392B75F62C0035FF3E /* LoginViewController.swift */; };
 		184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B3B2B75F6400035FF3E /* LoginModel.swift */; };
@@ -24,8 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		183765002B7A24F900CCE9F4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		183765022B7A27DD00CCE9F4 /* UIColour+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColour+Extension.swift"; sourceTree = "<group>"; };
+		183765062B7A32A900CCE9F4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColour+Extension.swift"; sourceTree = "<group>"; };
 		184B8B372B75F5750035FF3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		184B8B392B75F62C0035FF3E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		184B8B3B2B75F6400035FF3E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -53,13 +53,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		183764FF2B7A24EC00CCE9F4 /* Extensions */ = {
+		183765052B7A329000CCE9F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				183765002B7A24F900CCE9F4 /* UIView+Extension.swift */,
-				183765022B7A27DD00CCE9F4 /* UIColour+Extension.swift */,
+				183765062B7A32A900CCE9F4 /* UIView+Extension.swift */,
+				183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */,
 			);
-			path = Extensions;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		184B8B362B75F5360035FF3E /* LoginView */ = {
@@ -101,12 +101,12 @@
 		185E65D62B7243DA00FEC922 /* TicketSpark */ = {
 			isa = PBXGroup;
 			children = (
-				185E65DA2B72458C00FEC922 /* Utilities */,
 				185E65BF2B72435C00FEC922 /* AppDelegate.swift */,
 				185E65C12B72435C00FEC922 /* SceneDelegate.swift */,
 				185E65D92B72445000FEC922 /* Modules */,
 				185E65D82B72443600FEC922 /* View */,
 				185E65D72B7243F300FEC922 /* Resources */,
+				183765052B7A329000CCE9F4 /* Utility */,
 			);
 			path = TicketSpark;
 			sourceTree = "<group>";
@@ -137,14 +137,6 @@
 				184B8B362B75F5360035FF3E /* LoginView */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		185E65DA2B72458C00FEC922 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				183764FF2B7A24EC00CCE9F4 /* Extensions */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,11 +214,11 @@
 				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,
 				184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */,
 				185E65C42B72435C00FEC922 /* ViewController.swift in Sources */,
-				183765012B7A24F900CCE9F4 /* UIView+Extension.swift in Sources */,
+				183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */,
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */,
-				183765032B7A27DD00CCE9F4 /* UIColour+Extension.swift in Sources */,
+				183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
 				185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */,
 			);
