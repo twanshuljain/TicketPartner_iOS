@@ -14,6 +14,8 @@
 		184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B3B2B75F6400035FF3E /* LoginModel.swift */; };
 		184B8B3E2B762D330035FF3E /* Session.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184B8B3D2B762D330035FF3E /* Session.storyboard */; };
 		184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184B8B3F2B7636270035FF3E /* BaseViewController.swift */; };
+		185971842B7A526100175D84 /* GoogleSignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185971832B7A526100175D84 /* GoogleSignInView.xib */; };
+		185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185971852B7A52DE00175D84 /* GoogleSignInView.swift */; };
 		185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65BF2B72435C00FEC922 /* AppDelegate.swift */; };
 		185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C12B72435C00FEC922 /* SceneDelegate.swift */; };
 		185E65C42B72435C00FEC922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C32B72435C00FEC922 /* ViewController.swift */; };
@@ -21,6 +23,15 @@
 		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
 		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
+		18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093322B7B414800BFB4C3 /* Lato-Black.ttf */; };
+		18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */; };
+		18F0933C2B7B414800BFB4C3 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */; };
+		18F0933D2B7B414800BFB4C3 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093352B7B414800BFB4C3 /* Lato-Italic.ttf */; };
+		18F0933E2B7B414800BFB4C3 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093362B7B414800BFB4C3 /* Lato-Bold.ttf */; };
+		18F0933F2B7B414800BFB4C3 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093372B7B414800BFB4C3 /* Lato-Regular.ttf */; };
+		18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093382B7B414800BFB4C3 /* Lato-BoldItalic.ttf */; };
+		18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093392B7B414800BFB4C3 /* Lato-Light.ttf */; };
+		18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F093422B7B456500BFB4C3 /* CustomFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +42,8 @@
 		184B8B3B2B75F6400035FF3E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		184B8B3D2B762D330035FF3E /* Session.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Session.storyboard; sourceTree = "<group>"; };
 		184B8B3F2B7636270035FF3E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		185971832B7A526100175D84 /* GoogleSignInView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleSignInView.xib; sourceTree = "<group>"; };
+		185971852B7A52DE00175D84 /* GoogleSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInView.swift; sourceTree = "<group>"; };
 		185E65BC2B72435C00FEC922 /* TicketSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicketSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		185E65BF2B72435C00FEC922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		185E65C12B72435C00FEC922 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +53,15 @@
 		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18F093322B7B414800BFB4C3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		18F093352B7B414800BFB4C3 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		18F093362B7B414800BFB4C3 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		18F093372B7B414800BFB4C3 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		18F093382B7B414800BFB4C3 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		18F093392B7B414800BFB4C3 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		18F093422B7B456500BFB4C3 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +80,9 @@
 			children = (
 				183765062B7A32A900CCE9F4 /* UIView+Extension.swift */,
 				183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */,
+				185971832B7A526100175D84 /* GoogleSignInView.xib */,
+				185971852B7A52DE00175D84 /* GoogleSignInView.swift */,
+				18F093422B7B456500BFB4C3 /* CustomFont.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -114,9 +139,9 @@
 		185E65D72B7243F300FEC922 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				18F093202B7B408800BFB4C3 /* Assets */,
 				185E65C32B72435C00FEC922 /* ViewController.swift */,
 				185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */,
-				185E65CB2B72435E00FEC922 /* Assets.xcassets */,
 				184B8B3F2B7636270035FF3E /* BaseViewController.swift */,
 			);
 			path = Resources;
@@ -137,6 +162,30 @@
 				184B8B362B75F5360035FF3E /* LoginView */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		18F093202B7B408800BFB4C3 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				185E65CB2B72435E00FEC922 /* Assets.xcassets */,
+				18F093212B7B409F00BFB4C3 /* Fonts */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		18F093212B7B409F00BFB4C3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				18F093322B7B414800BFB4C3 /* Lato-Black.ttf */,
+				18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */,
+				18F093362B7B414800BFB4C3 /* Lato-Bold.ttf */,
+				18F093382B7B414800BFB4C3 /* Lato-BoldItalic.ttf */,
+				18F093352B7B414800BFB4C3 /* Lato-Italic.ttf */,
+				18F093392B7B414800BFB4C3 /* Lato-Light.ttf */,
+				18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */,
+				18F093372B7B414800BFB4C3 /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,10 +246,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F0933C2B7B414800BFB4C3 /* Lato-BlackItalic.ttf in Resources */,
+				18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */,
+				18F0933E2B7B414800BFB4C3 /* Lato-Bold.ttf in Resources */,
+				185971842B7A526100175D84 /* GoogleSignInView.xib in Resources */,
+				18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */,
 				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
 				184B8B3E2B762D330035FF3E /* Session.storyboard in Resources */,
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
+				18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */,
 				185E65C72B72435C00FEC922 /* Main.storyboard in Resources */,
+				18F0933D2B7B414800BFB4C3 /* Lato-Italic.ttf in Resources */,
+				18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */,
+				18F0933F2B7B414800BFB4C3 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +275,10 @@
 				183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */,
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
+				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
 				184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */,
 				183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */,
+				18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
 				185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */,
 			);
