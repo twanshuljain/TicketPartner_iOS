@@ -30,6 +30,8 @@
 		18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */; };
 		18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61572B7B52760074C959 /* CreateEvent.storyboard */; };
 		18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF615A2B7B529A0074C959 /* CreatEventVC.swift */; };
+		18EF615E2B7B60260074C959 /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF615D2B7B60250074C959 /* FloatingTextField.swift */; };
+		18EF61612B7B6CBA0074C959 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18EF61602B7B6CBA0074C959 /* IQKeyboardManagerSwift */; };
 		18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093322B7B414800BFB4C3 /* Lato-Black.ttf */; };
 		18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */; };
 		18F0933C2B7B414800BFB4C3 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */; };
@@ -67,6 +69,7 @@
 		18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextFieldView.xib; sourceTree = "<group>"; };
 		18EF61572B7B52760074C959 /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		18EF615A2B7B529A0074C959 /* CreatEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatEventVC.swift; sourceTree = "<group>"; };
+		18EF615D2B7B60250074C959 /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		18F093322B7B414800BFB4C3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18EF61612B7B6CBA0074C959 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +188,7 @@
 		18EF614A2B7B51E50074C959 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				18EF615C2B7B60080074C959 /* FloatingTextField */,
 				18EF614C2B7B51FB0074C959 /* DropDownTextField */,
 				18EF614B2B7B51ED0074C959 /* CustomTextField */,
 			);
@@ -215,6 +220,14 @@
 				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
 			);
 			path = CreateEvent;
+			sourceTree = "<group>";
+		};
+		18EF615C2B7B60080074C959 /* FloatingTextField */ = {
+			isa = PBXGroup;
+			children = (
+				18EF615D2B7B60250074C959 /* FloatingTextField.swift */,
+			);
+			path = FloatingTextField;
 			sourceTree = "<group>";
 		};
 		18F093202B7B408800BFB4C3 /* Assets */ = {
@@ -257,6 +270,9 @@
 			dependencies = (
 			);
 			name = TicketSpark;
+			packageProductDependencies = (
+				18EF61602B7B6CBA0074C959 /* IQKeyboardManagerSwift */,
+			);
 			productName = TicketSpark;
 			productReference = 185E65BC2B72435C00FEC922 /* TicketSpark.app */;
 			productType = "com.apple.product-type.application";
@@ -285,6 +301,9 @@
 				Base,
 			);
 			mainGroup = 185E65B32B72435C00FEC922;
+			packageReferences = (
+				18EF615F2B7B6CBA0074C959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 185E65BD2B72435C00FEC922 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -333,6 +352,7 @@
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
 				18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */,
+				18EF615E2B7B60260074C959 /* FloatingTextField.swift in Sources */,
 				18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */,
 				18EF61552B7B523D0074C959 /* CustomTextFieldView.swift in Sources */,
 				184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */,
@@ -556,6 +576,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18EF615F2B7B6CBA0074C959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18EF61602B7B6CBA0074C959 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18EF615F2B7B6CBA0074C959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */ = {
