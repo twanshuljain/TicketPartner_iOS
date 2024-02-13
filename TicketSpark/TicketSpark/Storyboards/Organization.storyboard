@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eww-C4-hfJ">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="03T-D0-HXQ">
+                                <rect key="frame" x="0.0" y="103" width="393" height="450"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TaJ-XZ-LCU" customClass="CustomTextFieldView" customModule="TicketSpark" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="ncd-W1-1MA"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SFY-tV-Dan" customClass="CustomTextFieldView" customModule="TicketSpark" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="70" width="393" height="70"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="ftK-k2-Xl7"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPj-Yh-VsS">
+                                        <rect key="frame" x="0.0" y="140" width="393" height="262"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add" translatesAutoresizingMaskIntoConstraints="NO" id="olF-sF-3Au">
+                                                <rect key="frame" x="138" y="72.666666666666686" width="117" height="117"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="117" id="01c-CP-5IB"/>
+                                                    <constraint firstAttribute="height" constant="117" id="uYj-gF-wQ1"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9D7-Gh-6BW">
+                                                <rect key="frame" x="143" y="30.666666666666686" width="107.33333333333331" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="Y2M-bw-n2g"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Change logo" image="ic_changeLogo"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="olF-sF-3Au" firstAttribute="centerX" secondItem="SPj-Yh-VsS" secondAttribute="centerX" id="9qj-zU-pMF"/>
+                                            <constraint firstItem="olF-sF-3Au" firstAttribute="centerY" secondItem="SPj-Yh-VsS" secondAttribute="centerY" id="B61-uU-C9x"/>
+                                            <constraint firstItem="olF-sF-3Au" firstAttribute="top" secondItem="9D7-Gh-6BW" secondAttribute="bottom" constant="10" id="Uu4-u8-Oux"/>
+                                            <constraint firstItem="9D7-Gh-6BW" firstAttribute="centerX" secondItem="olF-sF-3Au" secondAttribute="centerX" id="gVE-8z-Uk7"/>
+                                            <constraint firstAttribute="height" constant="262" id="oLf-Pf-PUD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82v-Hp-KiW" customClass="NextButton" customModule="TicketSpark" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="402" width="393" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="VtN-En-ywT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="03T-D0-HXQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="GOM-Y1-QZ5"/>
+                            <constraint firstItem="03T-D0-HXQ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XRk-k2-pqB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="03T-D0-HXQ" secondAttribute="trailing" id="guK-NZ-UUW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="03T-D0-HXQ" secondAttribute="bottom" id="h6G-7D-IS2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yi1-rv-kWs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973.28244274809151" y="-17.605633802816904"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="S0h-Ub-drg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eww-C4-hfJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pEh-Hl-RIc">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="bDT-Z7-N8d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wma-Hh-zaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46.564885496183201" y="-17.605633802816904"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_add" width="79.333335876464844" height="56.666667938232422"/>
+        <image name="ic_changeLogo" width="20.333333969116211" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
