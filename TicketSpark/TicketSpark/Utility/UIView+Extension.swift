@@ -20,7 +20,14 @@ extension UIView {
         layer.borderColor = #colorLiteral(red: 0.9019607843, green: 0.9098039216, blue: 0.9254901961, alpha: 1)
         layer.backgroundColor = .none
     }
-    
+    static func loadFromXib<T>(withOwner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> T where T: UIView {
+        let bundle = Bundle(for: self)
+        let nib = UINib(nibName: "\(self)", bundle: bundle)
+        guard let view = nib.instantiate(withOwner: withOwner, options: options).first as? T else {
+            fatalError("Could not load view from nib file.")
+        }
+        return view
+    }
     
     func createDottedLine(width: CGFloat, color: CGColor, dashPattern: [NSNumber]) {
        let caShapeLayer = CAShapeLayer()
