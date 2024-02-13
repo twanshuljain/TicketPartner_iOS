@@ -3,4 +3,54 @@
    uuid = "8147AD0F-F1DD-4D13-9796-0E5A1E661319"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E6A2008-B336-4B39-B72D-2F578C2E898D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TicketSpark/TicketSpark/Modules/CreatEventVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1E6A2008-B336-4B39-B72D-2F578C2E898D - a8e420711b479954"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TicketSpark.CreatEventVC.viewDidLoad() -&gt; ()"
+                  moduleName = "TicketSpark"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/Projects/TicketPartner/Code/TicketPartner_iOS/TicketSpark/TicketSpark/Modules/CreatEventVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "73">
+               </Location>
+               <Location
+                  uuid = "1E6A2008-B336-4B39-B72D-2F578C2E898D - a8e420711b479a92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TicketSpark.CreatEventVC.viewDidLoad() -&gt; ()"
+                  moduleName = "TicketSpark"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/Projects/TicketPartner/Code/TicketPartner_iOS/TicketSpark/TicketSpark/Modules/CreatEventVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "82">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
