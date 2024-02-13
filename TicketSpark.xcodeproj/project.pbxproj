@@ -23,6 +23,13 @@
 		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
 		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
+		18EF61502B7B52340074C959 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */; };
+		18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */; };
+		18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614F2B7B52330074C959 /* DropDownTextField.swift */; };
+		18EF61552B7B523D0074C959 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF61532B7B523D0074C959 /* CustomTextFieldView.swift */; };
+		18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */; };
+		18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61572B7B52760074C959 /* CreateEvent.storyboard */; };
+		18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF615A2B7B529A0074C959 /* CreatEventVC.swift */; };
 		18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093322B7B414800BFB4C3 /* Lato-Black.ttf */; };
 		18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */; };
 		18F0933C2B7B414800BFB4C3 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */; };
@@ -53,6 +60,13 @@
 		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
+		18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
+		18EF614F2B7B52330074C959 /* DropDownTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTextField.swift; sourceTree = "<group>"; };
+		18EF61532B7B523D0074C959 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
+		18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextFieldView.xib; sourceTree = "<group>"; };
+		18EF61572B7B52760074C959 /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
+		18EF615A2B7B529A0074C959 /* CreatEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatEventVC.swift; sourceTree = "<group>"; };
 		18F093322B7B414800BFB4C3 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		18F093332B7B414800BFB4C3 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		18F093342B7B414800BFB4C3 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -128,6 +142,7 @@
 			children = (
 				185E65BF2B72435C00FEC922 /* AppDelegate.swift */,
 				185E65C12B72435C00FEC922 /* SceneDelegate.swift */,
+				18EF614A2B7B51E50074C959 /* CommonView */,
 				185E65D92B72445000FEC922 /* Modules */,
 				185E65D82B72443600FEC922 /* View */,
 				185E65D72B7243F300FEC922 /* Resources */,
@@ -152,6 +167,7 @@
 			children = (
 				185E65C52B72435C00FEC922 /* Main.storyboard */,
 				184B8B3D2B762D330035FF3E /* Session.storyboard */,
+				18EF61572B7B52760074C959 /* CreateEvent.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,9 +175,46 @@
 		185E65D92B72445000FEC922 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				18EF61592B7B52860074C959 /* CreateEvent */,
 				184B8B362B75F5360035FF3E /* LoginView */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		18EF614A2B7B51E50074C959 /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				18EF614C2B7B51FB0074C959 /* DropDownTextField */,
+				18EF614B2B7B51ED0074C959 /* CustomTextField */,
+			);
+			path = CommonView;
+			sourceTree = "<group>";
+		};
+		18EF614B2B7B51ED0074C959 /* CustomTextField */ = {
+			isa = PBXGroup;
+			children = (
+				18EF61532B7B523D0074C959 /* CustomTextFieldView.swift */,
+				18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */,
+			);
+			path = CustomTextField;
+			sourceTree = "<group>";
+		};
+		18EF614C2B7B51FB0074C959 /* DropDownTextField */ = {
+			isa = PBXGroup;
+			children = (
+				18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */,
+				18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */,
+				18EF614F2B7B52330074C959 /* DropDownTextField.swift */,
+			);
+			path = DropDownTextField;
+			sourceTree = "<group>";
+		};
+		18EF61592B7B52860074C959 /* CreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
+			);
+			path = CreateEvent;
 			sourceTree = "<group>";
 		};
 		18F093202B7B408800BFB4C3 /* Assets */ = {
@@ -248,6 +301,8 @@
 			files = (
 				18F0933C2B7B414800BFB4C3 /* Lato-BlackItalic.ttf in Resources */,
 				18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */,
+				18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */,
+				18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */,
 				18F0933E2B7B414800BFB4C3 /* Lato-Bold.ttf in Resources */,
 				185971842B7A526100175D84 /* GoogleSignInView.xib in Resources */,
 				18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */,
@@ -256,6 +311,7 @@
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
 				18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */,
 				185E65C72B72435C00FEC922 /* Main.storyboard in Resources */,
+				18EF61502B7B52340074C959 /* DropDownTableViewCell.xib in Resources */,
 				18F0933D2B7B414800BFB4C3 /* Lato-Italic.ttf in Resources */,
 				18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */,
 				18F0933F2B7B414800BFB4C3 /* Lato-Regular.ttf in Resources */,
@@ -276,8 +332,12 @@
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
+				18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */,
+				18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */,
+				18EF61552B7B523D0074C959 /* CustomTextFieldView.swift in Sources */,
 				184B8B402B7636270035FF3E /* BaseViewController.swift in Sources */,
 				183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */,
+				18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */,
 				18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
 				185E65C22B72435C00FEC922 /* SceneDelegate.swift in Sources */,
