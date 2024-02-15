@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class LoginViewModel {
+    
+}
+
+// MARK: - FUNCTIONS
+extension LoginViewModel {
+
+}

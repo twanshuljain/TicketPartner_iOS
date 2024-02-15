@@ -72,9 +72,9 @@ class CustomFont: NSObject {
 //        return UIFont(name: fontType == .lato ? "openSans-ExtraboldItalic" : "Poppins-ExtraboldItalic", size: GETFONTSIZE(fontSize: sizeOfFont))!
 //    }
 //
-//    func condensedBold(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
-//        return UIFont(name: fontType == .lato ? "openSans-ExtraBold" : "Poppins-ExtraBold", size: GETFONTSIZE(fontSize: sizeOfFont))!
-//    }
+    func medium(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
+        return UIFont(name: fontType == .lato ? "Lato-Medium" : "Lato-Medium", size: GETFONTSIZE(fontSize: sizeOfFont))!
+    }
     
     func light(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
         return UIFont(name: fontType == .lato ? "Lato-Light" : "Lato-Light", size: GETFONTSIZE(fontSize: sizeOfFont))!
@@ -92,9 +92,9 @@ class CustomFont: NSObject {
         return UIFont(name: fontType == .lato ? "Lato-Bold" : "Lato-Bold", size: GETFONTSIZE(fontSize: sizeOfFont))!
     }
     
-//    func semiBold(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
-//        return UIFont(name: fontType == .lato ? "openSans-Bold" : "Poppins-SemiBold", size: GETFONTSIZE(fontSize: sizeOfFont))!
-//    }
+    func semiBold(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
+        return UIFont(name: fontType == .lato ? "Lato-SemiBold" : "Lato-SemiBold", size: GETFONTSIZE(fontSize: sizeOfFont))!
+    }
     
     func lightItalic(fontType: FontType = .lato, sizeOfFont: CGFloat) -> UIFont {
         return UIFont(name: fontType == .lato ? "Lato-LightItalic" : "Lato-LightItalic", size: GETFONTSIZE(fontSize: sizeOfFont))!
