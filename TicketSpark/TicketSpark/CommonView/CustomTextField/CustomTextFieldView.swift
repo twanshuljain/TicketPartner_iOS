@@ -27,5 +27,6 @@ class CustomTextFieldView: UIView {
         view.frame = self.bounds
         addSubview(view)
         self.layer.masksToBounds = true
+         txtFld.setTextFiledBorder()
     }
 }

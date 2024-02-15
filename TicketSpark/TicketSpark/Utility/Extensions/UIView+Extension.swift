@@ -18,7 +18,7 @@ extension UIView {
         layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = #colorLiteral(red: 0.9019607843, green: 0.9098039216, blue: 0.9254901961, alpha: 1)
-        layer.backgroundColor = .none
+//        layer.backgroundColor = .none
     }
     static func loadFromXib<T>(withOwner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> T where T: UIView {
         let bundle = Bundle(for: self)

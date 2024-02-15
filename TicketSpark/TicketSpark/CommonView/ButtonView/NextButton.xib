@@ -24,7 +24,7 @@
                     <color key="backgroundColor" red="0.97254901959999995" green="0.45882352939999999" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="SignIn">
+                    <state key="normal" title="Next">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -49,6 +49,11 @@
             <point key="canvasLocation" x="225.95419847328245" y="-264.78873239436621"/>
         </view>
     </objects>
+    <designables>
+        <designable name="V6K-sP-HaT">
+            <size key="intrinsicContentSize" width="40" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVI-YZ-et3">
-                    <rect key="frame" x="0.0" y="59" width="49" height="46"/>
+                    <rect key="frame" x="0.0" y="59" width="49" height="58"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <attributedString key="attributedText">
                         <fragment content="Label">
@@ -38,8 +38,9 @@
                     </attributedString>
                     <color key="highlightedColor" systemColor="systemRedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-CR-Pvb">
-                    <rect key="frame" x="0.0" y="113" width="850" height="48"/>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Event name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z8j-CR-Pvb">
+                    <rect key="frame" x="0.0" y="123" width="850" height="48"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="3Y3-ts-Byu"/>
                     </constraints>
@@ -48,23 +49,20 @@
                 </textField>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Z8j-CR-Pvb" secondAttribute="bottom" constant="10" id="Gr6-PJ-XCl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Z8j-CR-Pvb" secondAttribute="bottom" id="Gr6-PJ-XCl"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Z8j-CR-Pvb" secondAttribute="trailing" id="MkS-bf-6gZ"/>
                 <constraint firstItem="Z8j-CR-Pvb" firstAttribute="leading" secondItem="bVI-YZ-et3" secondAttribute="leading" id="OIR-Dk-HU4"/>
                 <constraint firstItem="bVI-YZ-et3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bJx-hL-UIx"/>
                 <constraint firstItem="bVI-YZ-et3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fKZ-Qe-77T"/>
-                <constraint firstItem="Z8j-CR-Pvb" firstAttribute="top" secondItem="bVI-YZ-et3" secondAttribute="bottom" constant="8" symbolic="YES" id="xvO-Do-1dH"/>
+                <constraint firstItem="Z8j-CR-Pvb" firstAttribute="top" secondItem="bVI-YZ-et3" secondAttribute="bottom" constant="6" id="xvO-Do-1dH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="474.80916030534348" y="-229.22535211267606"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -101,3 +101,8 @@ extension UIColor {
         )
     }
 }
+extension UIColor {
+    static let organizerBGColor: UIColor = {
+        return UIColor(named: "organizerbgColor")!
+    }()
+}

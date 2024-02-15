@@ -24,6 +24,8 @@
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
 		188F5C782B7B98F00039B86C /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C762B7B98F00039B86C /* OTPView.swift */; };
 		188F5C792B7B98F00039B86C /* OTPView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C772B7B98F00039B86C /* OTPView.xib */; };
+		188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */; };
+		188F5C7E2B7BA0A00039B86C /* AddOrganizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */; };
 		18EF61502B7B52340074C959 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */; };
 		18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */; };
 		18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614F2B7B52330074C959 /* DropDownTextField.swift */; };
@@ -71,6 +73,8 @@
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		188F5C762B7B98F00039B86C /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		188F5C772B7B98F00039B86C /* OTPView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPView.xib; sourceTree = "<group>"; };
+		188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
+		188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrganizerVC.swift; sourceTree = "<group>"; };
 		18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
 		18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
 		18EF614F2B7B52330074C959 /* DropDownTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTextField.swift; sourceTree = "<group>"; };
@@ -194,10 +198,19 @@
 		185E65D92B72445000FEC922 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				188F5C7C2B7BA0420039B86C /* Organization */,
 				18EF61592B7B52860074C959 /* CreateEvent */,
 				184B8B362B75F5360035FF3E /* LoginView */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		188F5C7C2B7BA0420039B86C /* Organization */ = {
+			isa = PBXGroup;
+			children = (
+				188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */,
+			);
+			path = Organization;
 			sourceTree = "<group>";
 		};
 		18EF614A2B7B51E50074C959 /* CommonView */ = {
@@ -290,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				185E65CB2B72435E00FEC922 /* Assets.xcassets */,
+				188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */,
 				18F093212B7B409F00BFB4C3 /* Fonts */,
 			);
 			path = Assets;
@@ -382,6 +396,7 @@
 				18F0933E2B7B414800BFB4C3 /* Lato-Bold.ttf in Resources */,
 				18EF61642B7B80930074C959 /* AddOrganizerTab.storyboard in Resources */,
 				185971842B7A526100175D84 /* GoogleSignInView.xib in Resources */,
+				188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */,
 				18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */,
 				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
@@ -408,6 +423,7 @@
 				18EF616E2B7B92C00074C959 /* CustomButton.swift in Sources */,
 				184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */,
 				185E65C42B72435C00FEC922 /* ViewController.swift in Sources */,
+				188F5C7E2B7BA0A00039B86C /* AddOrganizerVC.swift in Sources */,
 				183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */,
 				18EF61752B7B96BC0074C959 /* UITextField+Extension.swift in Sources */,
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
