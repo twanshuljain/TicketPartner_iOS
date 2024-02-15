@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopOverView" customModule="TicketSpark" customModuleProvider="target">
+            <connections>
+                <outlet property="btnPop" destination="M1D-bL-QMo" id="CBc-fe-A3Y"/>
+                <outlet property="lblMsg" destination="wfe-lD-ZGa" id="tA8-4Y-Jr8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="745" height="599"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5L-84-eW8">
+                    <rect key="frame" x="20" y="20" width="705" height="20"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfe-lD-ZGa">
+                            <rect key="frame" x="45" y="10" width="650" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgRightCircle" translatesAutoresizingMaskIntoConstraints="NO" id="hr5-QO-LAQ">
+                            <rect key="frame" x="10" y="-2.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="VgP-Gl-WHf"/>
+                                <constraint firstAttribute="width" constant="25" id="i35-N8-xag"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.12941176469999999" green="0.74509803919999995" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="hr5-QO-LAQ" firstAttribute="centerY" secondItem="wfe-lD-ZGa" secondAttribute="centerY" id="25p-kk-Y64"/>
+                        <constraint firstAttribute="trailing" secondItem="wfe-lD-ZGa" secondAttribute="trailing" constant="10" id="DoU-tw-rXf"/>
+                        <constraint firstItem="hr5-QO-LAQ" firstAttribute="leading" secondItem="c5L-84-eW8" secondAttribute="leading" constant="10" id="RxI-fg-FH2"/>
+                        <constraint firstItem="wfe-lD-ZGa" firstAttribute="top" secondItem="c5L-84-eW8" secondAttribute="top" constant="10" id="Ttc-tg-eA0"/>
+                        <constraint firstItem="wfe-lD-ZGa" firstAttribute="leading" secondItem="hr5-QO-LAQ" secondAttribute="trailing" constant="10" id="Xpb-vz-KPE"/>
+                        <constraint firstAttribute="bottom" secondItem="wfe-lD-ZGa" secondAttribute="bottom" constant="10" id="lc0-0D-tzx"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1D-bL-QMo">
+                    <rect key="frame" x="0.0" y="0.0" width="745" height="599"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="M1D-bL-QMo" secondAttribute="bottom" id="DSd-gU-3gh"/>
+                <constraint firstItem="c5L-84-eW8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="KXu-qA-mUK"/>
+                <constraint firstItem="M1D-bL-QMo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OCO-QR-5D4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="M1D-bL-QMo" secondAttribute="trailing" id="TOz-sn-O7b"/>
+                <constraint firstItem="c5L-84-eW8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="ZlC-fq-hLz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="c5L-84-eW8" secondAttribute="trailing" constant="20" id="baI-zW-XAQ"/>
+                <constraint firstItem="M1D-bL-QMo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vtQ-EZ-prc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="495.9375" y="16.37323943661972"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="imgRightCircle" width="24" height="24"/>
+    </resources>
+</document>

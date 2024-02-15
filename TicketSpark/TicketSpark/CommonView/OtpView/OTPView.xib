@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPView" customModule="TicketSpark" customModuleProvider="target">
             <connections>
+                <outlet property="lblOTP" destination="Dyq-A2-L7Z" id="NZe-VD-slj"/>
                 <outlet property="lblReceiveOtp" destination="ICl-do-94F" id="LmB-MB-b0f"/>
                 <outlet property="txtOtp1" destination="dbx-KC-jfq" id="38S-nL-Cb1"/>
                 <outlet property="txtOtp2" destination="ozc-OW-QQS" id="VLU-3s-zmL"/>

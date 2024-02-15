@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "665A524E-C0E8-4E4A-A083-74BC744E7D5B"
+            uuid = "2D08A75A-52BB-4D2C-960E-0E55CC342D1C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TicketSpark/TicketSpark/Utility/GoogleSignInView.swift"
+            filePath = "TicketSpark/TicketSpark/Modules/Splash/SplashViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "loadViewFromNib()"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "setFont()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
