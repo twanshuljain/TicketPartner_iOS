@@ -14,6 +14,7 @@ class GoogleSignInView: UIView {
     @IBOutlet weak var btnApple: UIButton!
     @IBOutlet weak var lblSeperator: UILabel!
     @IBOutlet weak var btnSignIn: UIButton!
+    @IBOutlet weak var lblDontHaveAccount: UILabel!
     
     let XIB_NAME = "GoogleSignInView"
     
@@ -30,12 +31,26 @@ class GoogleSignInView: UIView {
             guard let view = loadViewFromNib() else { return }
             view.frame = self.bounds
             self.addSubview(view)
+            self.setFont()
         }
         func loadViewFromNib() -> UIView? {
             let nib = UINib(nibName: nibName, bundle: nil)
             return nib.instantiate(withOwner: self, options: nil).first as? UIView
         }
     
+}
+
+// MARK: - FUNCTIONS
+extension GoogleSignInView {
+    func initSetup() {
+        self.setFont()
+    }
+    
+    func setFont() {
+        self.lblSeperator.font = CustomFont.shared.bold(sizeOfFont: 12.0)
+        self.lblDontHaveAccount.font = CustomFont.shared.regular(sizeOfFont: 14.0)
+        self.btnSignIn.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14.0)
+    }
 }
 
 // MARK: - ACTIONS

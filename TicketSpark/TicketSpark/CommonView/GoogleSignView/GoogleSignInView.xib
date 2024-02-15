@@ -13,6 +13,7 @@
                 <outlet property="btnApple" destination="8j2-AY-cHY" id="8Dn-pO-X1Q"/>
                 <outlet property="btnGoogle" destination="kii-KJ-ANS" id="5kv-ZQ-oYs"/>
                 <outlet property="btnSignIn" destination="S0v-Kw-Zuh" id="rKt-Ok-fyI"/>
+                <outlet property="lblDontHaveAccount" destination="Jwn-p4-jav" id="Kjw-YS-5QI"/>
                 <outlet property="lblSeperator" destination="gKc-NJ-Ojd" id="xUo-J5-Hlm"/>
             </connections>
         </placeholder>
@@ -119,10 +120,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0v-Kw-Zuh">
-                            <rect key="frame" x="276.66666666666669" y="119.33333333333334" width="220" height="10"/>
+                            <rect key="frame" x="276.66666666666669" y="119.33333333333334" width="211" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="NQ4-YT-qc7"/>
-                                <constraint firstAttribute="width" constant="220" id="Y9l-S4-1Xx"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -139,6 +139,7 @@
                         <constraint firstItem="Jwn-p4-jav" firstAttribute="top" secondItem="JBk-5o-LMF" secondAttribute="bottom" constant="25" id="0V7-Vm-Ti2"/>
                         <constraint firstAttribute="trailing" secondItem="AKJ-dY-Tdc" secondAttribute="trailing" constant="15" id="1l8-Jb-Guh"/>
                         <constraint firstItem="AKJ-dY-Tdc" firstAttribute="leading" secondItem="NfM-p2-tYP" secondAttribute="leading" constant="15" id="2oY-p8-YFI"/>
+                        <constraint firstItem="S0v-Kw-Zuh" firstAttribute="trailing" secondItem="Jwn-p4-jav" secondAttribute="trailing" constant="50" id="8nK-y6-w2e"/>
                         <constraint firstItem="JBk-5o-LMF" firstAttribute="leading" secondItem="NfM-p2-tYP" secondAttribute="leading" constant="15" id="8sy-4y-5St"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jwn-p4-jav" secondAttribute="bottom" constant="15" id="COC-cH-ceF"/>
                         <constraint firstItem="S0v-Kw-Zuh" firstAttribute="leading" secondItem="Jwn-p4-jav" secondAttribute="leading" id="Cz7-wp-Jmu"/>
