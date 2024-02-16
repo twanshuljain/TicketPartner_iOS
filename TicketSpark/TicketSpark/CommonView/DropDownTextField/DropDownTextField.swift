@@ -66,7 +66,6 @@ open class DropDownTextField: UITextField {
     fileprivate var pointToParent = CGPoint(x: 0, y: 0)
     fileprivate var backgroundView = UIView()
     fileprivate var keyboardHeight: CGFloat = 0
-
     public var optionArray: [String] = [] {
         didSet {
             dataArray = optionArray
@@ -155,10 +154,9 @@ open class DropDownTextField: UITextField {
             rightView?.addSubview(arrowContainerView)
         }
 
-        arrow = Arrow(origin: CGPoint(x: center.x - arrowSize / 2, y: center.y - arrowSize / 2), size: arrowSize)
+        arrow = Arrow(origin: CGPoint(x: self.frame.width - size, y: center.y/2), size: arrowSize)
         arrowContainerView.addSubview(arrow)
-
-//        self.font = CustomFont.shared.regular(fontType: .poppins, sizeOfFont: 16)
+        self.addSubview(arrowContainerView)
         backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = .clear
         addGesture()
