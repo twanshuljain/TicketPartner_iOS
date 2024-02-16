@@ -14,10 +14,10 @@ extension UIView {
         return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)?[0] as! T
     }
 
-    func setTextFiledBorder() {
+    func setTextFiledBorder(borderColor: UIColor? = .appPurpleBorderColor) {
         layer.cornerRadius = 10
         layer.borderWidth = 1
-        layer.borderColor = #colorLiteral(red: 0.9019607843, green: 0.9098039216, blue: 0.9254901961, alpha: 1)
+        layer.borderColor = borderColor?.cgColor
 //        layer.backgroundColor = .none
     }
     static func loadFromXib<T>(withOwner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> T where T: UIView {

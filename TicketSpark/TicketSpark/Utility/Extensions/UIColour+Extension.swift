@@ -105,4 +105,17 @@ extension UIColor {
     static let organizerBGColor: UIColor = {
         return UIColor(named: "organizerbgColor")!
     }()
+    static let btnThemeColor: UIColor = {
+        return UIColor(named: "btnThemeColor")!
+    }()
+    static let appBlackTextColor: UIColor = {
+        return UIColor(named: "appBlackTextColor")!
+    }()
+    static let appPurpleBorderColor: UIColor = {
+        return UIColor(named: "appPurpleBorderColor")!
+    }()
+    static let grayTextColor: UIColor = {
+        return UIColor(named: "grayTextColor")!
+    }()
+    //
 }

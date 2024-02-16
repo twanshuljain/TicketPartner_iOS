@@ -122,12 +122,14 @@ open class DropDownTextField: UITextField {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        addPadding()
         delegate = self
     }
 
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         setupUI()
+        addPadding()
         delegate = self
     }
 
@@ -212,7 +214,11 @@ open class DropDownTextField: UITextField {
         }
         return superView!.convert(pnt, to: baseView)
     }
-
+    private func addPadding() {
+       let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
     public func showList() {
         if parentController == nil {
             parentController = parentViewController
@@ -468,7 +474,7 @@ class Arrow: UIView {
         }
     }
     
-    var arrowImage: UIImage? = UIImage(named: "ic_drop_down") {
+    var arrowImage: UIImage? = UIImage(systemName: "chevron.down") {
         didSet {
             self.layer.contents = arrowImage?.cgImage
         }

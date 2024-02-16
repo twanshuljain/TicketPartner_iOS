@@ -37,6 +37,7 @@
 		188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */; };
 		188F5C7E2B7BA0A00039B86C /* AddOrganizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */; };
 		188F5C812B7DE51C0039B86C /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C802B7DE51C0039B86C /* StringConstants.swift */; };
+		188F5C832B7E2D720039B86C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C822B7E2D720039B86C /* String+Extension.swift */; };
 		18EF61502B7B52340074C959 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */; };
 		18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */; };
 		18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614F2B7B52330074C959 /* DropDownTextField.swift */; };
@@ -97,6 +98,7 @@
 		188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
 		188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrganizerVC.swift; sourceTree = "<group>"; };
 		188F5C802B7DE51C0039B86C /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		188F5C822B7E2D720039B86C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
 		18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
 		18EF614F2B7B52330074C959 /* DropDownTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTextField.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */,
 				18EF61742B7B96BC0074C959 /* UITextField+Extension.swift */,
 				183546A52B7CEB2700649EE2 /* UIWindow+Extension.swift */,
+				188F5C822B7E2D720039B86C /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				184B8B3C2B75F6400035FF3E /* LoginModel.swift in Sources */,
 				185E65C42B72435C00FEC922 /* ViewController.swift in Sources */,
 				188F5C7E2B7BA0A00039B86C /* AddOrganizerVC.swift in Sources */,
+				188F5C832B7E2D720039B86C /* String+Extension.swift in Sources */,
 				183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */,
 				188F5C812B7DE51C0039B86C /* StringConstants.swift in Sources */,
 				18EF61752B7B96BC0074C959 /* UITextField+Extension.swift in Sources */,

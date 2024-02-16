@@ -53,4 +53,47 @@ struct StringConstants {
             }
         }
     }
+    
+    enum AddOrganizer {
+        case website
+        case facebookPage
+        case linkdin
+        case  twitter
+        case organizationName
+        case country
+        case organizationLogo
+        case changeLogo
+        case socialNetworkFeeds
+        case selectCountry
+        case saveAndNext
+        case aboutOrganization
+        var value: String {
+            switch self {
+            case .website:
+                return "Website"
+            case .facebookPage:
+                return "Facebook Page"
+            case .linkdin:
+                return "LinkdIn"
+            case .twitter:
+                return "Twitter"
+            case .organizationName:
+                return "Organization Name*"
+            case .country:
+                return "Country"
+            case .organizationLogo:
+                return "Organization Logo"
+            case .changeLogo:
+                return "Change Logo"
+            case .socialNetworkFeeds:
+                return "Social Network Feeds"
+            case .selectCountry:
+                return "Select Country"
+            case .saveAndNext:
+                return "Save and Continue"
+            case .aboutOrganization:
+                return "Tell us about your Organization"
+            }
+        }
+    }
 }

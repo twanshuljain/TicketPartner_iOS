@@ -117,7 +117,7 @@ class BaseViewController: UIViewController {
         self.initSetup()
         // Do any additional setup after loading the view.
     }
-    
+   
     func configCallNavBar(){
         
         super.viewDidLoad()
