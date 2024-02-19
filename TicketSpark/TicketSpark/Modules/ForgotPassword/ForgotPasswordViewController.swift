@@ -24,6 +24,7 @@ class ForgotPasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initSetup()
+        self.hideNavBarImage = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

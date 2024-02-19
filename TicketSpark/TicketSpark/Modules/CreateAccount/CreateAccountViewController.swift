@@ -16,6 +16,7 @@ class CreateAccountViewController: BaseViewController {
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var btnEmailVerify: UIButton!
     @IBOutlet weak var otpEmailView: OTPView!
+    @IBOutlet weak var imgEmailVerified: UIImageView!
     
     @IBOutlet weak var lblFirstName: UILabel!
     @IBOutlet weak var txtFirstName: UITextField!
@@ -24,6 +25,9 @@ class CreateAccountViewController: BaseViewController {
     
     @IBOutlet weak var txtMobileNumber: UITextField!
     @IBOutlet weak var btnMobileVerify: UIButton!
+    @IBOutlet weak var imgCountry: UIImageView!
+    @IBOutlet weak var lblDialCountryCode: UILabel!
+    @IBOutlet weak var imgeMobileVerified: UIImageView!
     
     @IBOutlet weak var otpMobileView: OTPView!
     
@@ -37,10 +41,72 @@ class CreateAccountViewController: BaseViewController {
     // MARK: - VARIABLES
     let popOverView = PopOverView()
     let window = UIApplication.shared.keyWindow!
+    let viewModel = CreateAccountViewModel()
+    var verifyEmailBtnEnabled = false {
+        didSet {
+            if verifyEmailBtnEnabled {
+                self.btnEmailVerify.isEnabled = true
+                self.btnEmailVerify.alpha = 1
+            }  else {
+                self.btnEmailVerify.isEnabled = false
+                self.btnEmailVerify.alpha = 0.5
+            }
+        }
+    }
+    var verifyMobileBtnEnabled = false {
+        didSet {
+            if verifyMobileBtnEnabled {
+                self.btnMobileVerify.isEnabled = true
+                self.btnMobileVerify.alpha = 1
+            }  else {
+                self.btnMobileVerify.isEnabled = false
+                self.btnMobileVerify.alpha = 0.5
+            }
+        }
+    }
+    var createAccountBtnEnabled = false {
+        didSet {
+            if createAccountBtnEnabled {
+                self.btnCreateAccount.isEnabled = true
+                self.btnCreateAccount.alpha = 1
+            }  else {
+                self.btnCreateAccount.isEnabled = false
+                self.btnCreateAccount.alpha = 0.5
+            }
+        }
+    }
+    
+    var emailVerified = false {
+        didSet {
+            if emailVerified {
+                self.otpEmailView.isHidden = true
+                self.btnEmailVerify.isHidden = true
+                self.imgEmailVerified.isHidden = false
+            }  else {
+                self.otpEmailView.isHidden = false
+                self.btnEmailVerify.isHidden = false
+                self.imgEmailVerified.isHidden = true
+            }
+        }
+    }
+    var mobileVerified = false {
+        didSet {
+            if mobileVerified {
+                self.otpMobileView.isHidden = true
+                self.btnMobileVerify.isHidden = true
+                self.imgeMobileVerified.isHidden = false
+            }  else {
+                self.otpMobileView.isHidden = false
+                self.btnMobileVerify.isHidden = false
+                self.imgeMobileVerified.isHidden = true
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initSetup()
+        self.hideNavBarImage = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +123,8 @@ extension CreateAccountViewController {
         self.setFont()
         self.setUpAction()
         self.setText()
+        self.setUpCountryPicker()
+        self.setData()
     }
     
     func addPopOverView() {
@@ -72,6 +140,8 @@ extension CreateAccountViewController {
     }
     
     func setUpView() {
+        self.mobileVerified = false
+        self.emailVerified = false
         self.otpEmailView.isHidden = !self.otpEmailView.isHidden
         self.otpMobileView.isHidden = !self.otpMobileView.isHidden
         self.hideBackButton = true
@@ -101,8 +171,17 @@ extension CreateAccountViewController {
     }
     
     func setUpAction() {
+        self.otpEmailView.otpVerifyCallBack = {
+            self.otpVerify()
+        }
+        
+        self.otpMobileView.otpVerifyCallBack = {
+            self.otpVerify()
+        }
         self.popOverView.btnPop.addTarget(self,action:#selector(popOverViewAction), for:.touchUpInside)
         self.gogleSignInView.btnSignIn.addTarget(self,action:#selector(signInAction), for:.touchUpInside)
+        txtEmail.addTarget(self, action: #selector(editingChangedEmail), for: .editingChanged)
+        txtMobileNumber.addTarget(self, action: #selector(editingChangedMobile), for: .editingChanged)
     }
     
     
@@ -122,21 +201,283 @@ extension CreateAccountViewController {
             }
         })
     }
+    
+    func setUpCountryPicker() {
+        self.viewModel.countries = self.jsonSerial()
+        self.collectCountries()
+    }
+    
+    func setData() {
+        self.txtEmail.text = self.viewModel.signUpRequest?.email ?? ""
+        self.txtMobileNumber.addDoneButtonOnKeyboard()
+        self.imgCountry.image = nil
+        var str = ""
+        var arr = viewModel.countriesModel.filter({$0.dial_code == str})
+        
+        str = NSLocale.current.language.region?.identifier ?? ""
+        arr = viewModel.countriesModel.filter({$0.country_code == str})
+        
+        let imagePath = "CountryPicker.bundle/\(str ).png"
+        self.imgCountry.image = UIImage(named: imagePath)
+        self.lblDialCountryCode.text = "+91"
+        
+        if arr.count>0 {
+            let country = arr[0]
+            self.viewModel.strCountryDialCode = country.dial_code
+            self.lblDialCountryCode.text = country.dial_code
+            self.viewModel.strCountryCode = country.country_code
+            self.viewModel.strCountryName = country.country_name
+            self.lblDialCountryCode.text = country.dial_code
+            self.viewModel.strCountryCode = country.country_code
+            let imagePath = "CountryPicker.bundle/\( country.country_code).png"
+            self.imgCountry.image = UIImage(named: imagePath)
+        }
+        self.validateFields()
+        self.validateEmail()
+        self.validateMobile()
+    }
+    
+    func validateFields() {
+            guard
+                let email = txtEmail.text, !email.isEmpty,
+                self.emailVerified,
+                let fName = txtFirstName.text, !fName.isEmpty,
+                let lName = txtLastName.text, !lName.isEmpty,
+                let mobileNumber = txtMobileNumber.text, !mobileNumber.isEmpty,
+                self.mobileVerified,
+                let password = txtPassword.text, !password.isEmpty
+            else {
+                self.createAccountBtnEnabled = false
+                return
+            }
+            self.createAccountBtnEnabled = true
+    }
+    
+    func validateEmail() {
+            guard
+                let email = txtEmail.text, !email.isEmpty
+            else {
+                self.verifyEmailBtnEnabled = false
+                return
+            }
+            self.verifyEmailBtnEnabled = true
+    }
+    
+    func validateMobile() {
+            guard
+                let mobileNumber = txtMobileNumber.text, !mobileNumber.isEmpty
+            else {
+                self.verifyMobileBtnEnabled = false
+                return
+            }
+            self.verifyMobileBtnEnabled = true
+    }
+    
+    func sendOTPForMobile() {
+        let isValidate = self.viewModel.validateMobile(self.txtMobileNumber.text ?? "")
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.sendMobileOTP(mobileNumber: self.txtMobileNumber.text ?? "", countryCode: self.viewModel.strCountryDialCode) { isSuccess, data, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                            DispatchQueue.main.async {
+                                self.otpMobileView.isHidden = false
+                                self.otpMobileView.startTimer()
+                                self.viewModel.otpVerify = .number
+                                self.showToast(with: msg ?? "", position: .top, type: .success)
+                            }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+            }
+        }
+    }
+    
+    func sendOTPForEmail() {
+        let isValidate = self.viewModel.validateEmail(self.txtEmail.text ?? "")
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.sendEmailOTP(email: self.txtEmail.text ?? "") { isSuccess, data, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                            DispatchQueue.main.async {
+                                self.otpEmailView.isHidden = false
+                                self.otpEmailView.startTimer()
+                                self.viewModel.otpVerify = .email
+                                self.showToast(with: msg ?? "", position: .top, type: .success)
+                            }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+            }
+        }
+    }
+    
+    func otpVerifyForEmail(otp: String) {
+        if Reachability.isConnectedToNetwork() {
+            LoadingIndicatorView.show()
+            self.viewModel.verifyEmailOTP(email: self.txtEmail.text ?? "", otp: otp) { isSuccess, data, msg in
+                DispatchQueue.main.async {
+                    LoadingIndicatorView.hide()
+                }
+                if isSuccess {
+                        DispatchQueue.main.async {
+                            // EMAIL OTP VERIFIED
+                            self.setViewForVerified()
+                            self.showToast(with: msg ?? "", position: .top, type: .success)
+                        }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                    }
+                }
+            }
+        } else {
+            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+        }
+    }
+    
+    func setViewForVerified() {
+        if self.viewModel.otpVerify == .email {
+            self.emailVerified = true
+        } else {
+            self.mobileVerified = true
+        }
+    }
+    
+    func otpVerifyForMobile(otp: String) {
+        if Reachability.isConnectedToNetwork() {
+            LoadingIndicatorView.show()
+            self.viewModel.verifyMobileOTP(mobileNumber: self.txtMobileNumber.text ?? "", countryCode: self.viewModel.strCountryDialCode, otp: otp) { isSuccess, data, msg in
+                DispatchQueue.main.async {
+                    LoadingIndicatorView.hide()
+                }
+                if isSuccess {
+                        DispatchQueue.main.async {
+                            // MOBILE OTP VERIFIED
+                            self.setViewForVerified()
+                            self.showToast(with: msg ?? "", position: .top, type: .success)
+                        }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                    }
+                }
+            }
+        } else {
+            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+        }
+    }
+
+    
+    func otpVerify() {
+        let otp = "\(self.otpEmailView.txtOtp1.text ?? "")" + "\(self.otpEmailView.txtOtp2.text ?? "")" + "\(self.otpEmailView.txtOtp3.text ?? "")" + "\(self.otpEmailView.txtOtp4.text ?? "")"
+        if self.otpEmailView.txtOtp1.text ?? "" == "" || self.otpEmailView.txtOtp2.text ?? "" == "" || self.otpEmailView.txtOtp3.text ?? "" == "" || self.otpEmailView.txtOtp4.text ?? "" == "" {
+            //self.showToast(with: StringConstants.Login.enterOTP.value, position: .top, type: .warning)
+        } else {
+            if Reachability.isConnectedToNetwork(){
+                LoadingIndicatorView.show()
+                if self.viewModel.otpVerify == .email {
+                    self.otpVerifyForEmail(otp: otp)
+                } else {
+                    self.otpVerifyForMobile(otp: otp)
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        }
+    }
+    
+    @objc func editingChangedEmail(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        self.validateEmail()
+    }
+    
+    @objc func editingChangedMobile(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        self.validateMobile()
+    }
 }
 
 // MARK: - ACTIONS
 extension CreateAccountViewController {
     
     @IBAction func btnEmailVerifyAction(_ sender : UIButton) {
-        self.otpEmailView.isHidden = !self.otpEmailView.isHidden
+       // self.viewModel.signUpRequest?.email = self.txtEmail.text ?? ""
+        self.sendOTPForEmail()
     }
     
     @IBAction func btnMobileVerifyAction(_ sender : UIButton) {
-        self.otpMobileView.isHidden = !self.otpMobileView.isHidden
+        self.sendOTPForMobile()
     }
     
     @IBAction func btnCreateAccount(_ sender : UIButton) {
         self.popOverView.isHidden = !self.popOverView.isHidden
     }
     
+    @IBAction func btnCountryCodePickerAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        if let sb = self.storyboard?.instantiateViewController(withIdentifier: "RSCountryPickerController") as? RSCountryPickerController {
+            sb.RScountryDelegate = self
+            sb.strCheckCountry = self.viewModel.strCountryName
+            self.navigationController?.pushViewController(sb, animated: false)
+        }
+       
+    }
+    
+}
+// MARK: - Country Code
+extension CreateAccountViewController: RSCountrySelectedDelegate, UITextFieldDelegate {
+    func collectCountries() {
+        for country in viewModel.countries {
+            let code = country["code"] ?? ""
+            let name = country["name"] ?? ""
+            let dailcode = country["dial_code"] ?? ""
+            viewModel.countriesModel.append(CountryInfo(country_code:code, dial_code:dailcode, country_name:name))
+        }
+    }
+    func RScountrySelected(countrySelected country: CountryInfo) {
+        let imagePath = "CountryPicker.bundle/\(country.country_code).png"
+        self.imgCountry.image = UIImage(named: imagePath)
+        self.viewModel.strCountryDialCode = country.dial_code
+        self.lblDialCountryCode.text = country.dial_code
+        self.viewModel.strCountryCode = country.country_code
+        self.viewModel.strCountryName = country.country_name
+        self.txtMobileNumber.becomeFirstResponder()
+    }
 }

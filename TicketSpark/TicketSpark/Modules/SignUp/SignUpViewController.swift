@@ -17,10 +17,25 @@ class SignUpViewController: BaseViewController {
     @IBOutlet weak var lblPolicy: UILabel!
     @IBOutlet weak var btnSignUp: UIButton!
     @IBOutlet weak var gogleSignInView: GoogleSignInView!
+    
+    // MARK: - VARIABLES
+    let viewModel = SignUpViewModel()
+    var signUpButtonEnabled = false {
+        didSet {
+            if signUpButtonEnabled {
+                self.btnSignUp.isEnabled = true
+                self.btnSignUp.alpha = 1
+            }  else {
+                self.btnSignUp.isEnabled = false
+                self.btnSignUp.alpha = 0.5
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initSetup()
+        self.hideNavBarImage = false
     }
 
 }
@@ -31,6 +46,7 @@ extension SignUpViewController {
         self.setText()
         self.setUpAction()
         self.setUpView()
+        
     }
     
     func setText() {
@@ -41,6 +57,7 @@ extension SignUpViewController {
     
     func setUpView() {
         self.hideBackButton = true
+        self.validateFields()
     }
     
     func setFont() {
@@ -54,6 +71,7 @@ extension SignUpViewController {
     
     func setUpAction() {
         self.gogleSignInView.btnSignIn.addTarget(self,action:#selector(signInAction), for:.touchUpInside)
+        self.txtEmail.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
     }
     
     @objc func signInAction() {
@@ -63,12 +81,40 @@ extension SignUpViewController {
             }
         })
     }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        self.validateFields()
+    }
+    
+    func validateFields() {
+        guard
+            let email = txtEmail.text, !email.isEmpty
+        else {
+            self.signUpButtonEnabled = false
+            return
+        }
+        self.signUpButtonEnabled = true
+    }
 }
 // MARK: - ACTIONS
 extension SignUpViewController {
-    
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountViewController") as! CreateAccountViewController
-        self.navigationController?.pushViewController(vc, animated: false)
+        let isValidate = viewModel.validateFields(self.txtEmail.text ?? "")
+        if isValidate.1 {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountViewController") as! CreateAccountViewController
+            vc.viewModel.signUpRequest = SignUpRequest(email: self.txtEmail.text ?? "")
+            self.navigationController?.pushViewController(vc, animated: false)
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+               //self.showAlert(message: isValidate.0)
+            }
+        }
     }
 }

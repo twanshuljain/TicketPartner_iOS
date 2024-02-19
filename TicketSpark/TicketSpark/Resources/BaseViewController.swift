@@ -111,6 +111,16 @@ class BaseViewController: UIViewController {
             }
         }
     }
+    
+    var hideNavBarImage = false {
+        didSet {
+            if hideNavigationBar {
+                
+            } else {
+                self.addNavBarImage()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,7 +227,7 @@ class BaseViewController: UIViewController {
     fileprivate func initSetup () {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 20.0), NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:CustomFont.shared.semiBold(sizeOfFont: 18.0), NSAttributedString.Key.foregroundColor:UIColor.black]
        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont(name: "Gilroy-Bold", size: 20.0)!, NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.barTintColor = .white //THEME_COLOR.appBlueColor
         self.navigationController?.navigationBar.isTranslucent = true
@@ -225,7 +235,7 @@ class BaseViewController: UIViewController {
         self.hideNavigationBar = false
         self.navigationItem.leftBarButtonItem = backBarButton
         //self.setNavBar()
-        self.addNavBarImage()
+      // self.addNavBarImage()
     }
     
     @objc func popBack () {

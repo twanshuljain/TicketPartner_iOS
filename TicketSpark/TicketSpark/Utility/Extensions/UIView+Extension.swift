@@ -513,6 +513,39 @@ extension UIView {
             layer.render(in: rendererContext.cgContext)
         }
     }
+    
+    func animationShow(from: SelectPosition) {
+        let animation: AnimationOptions = from == .top ? .transitionCrossDissolve : .transitionFlipFromLeft
+        UIView.animate(withDuration: 0.5, delay: 0, options: [animation], animations: {
+            self.frame.size.height = 50.0
+            self.layoutIfNeeded()
+            UIView.animate(withDuration: 1, delay: 1, options: [.curveEaseOut], animations: {
+                let view = self as? BottomAlert
+                if let lbl = view?.lblMessage {
+                    lbl.alpha = 1
+                }
+            }, completion: nil)
+        }, completion: {_ in
+            self.animationHide()
+        })
+        self.isHidden = false
+    }
+      func animationHide() {
+        UIView.animate(withDuration: 0.5, delay: 4, options: [.transitionFlipFromRight], animations: {
+          self.frame.size.height = 0
+          self.layoutIfNeeded()
+        }, completion: {(_ completed: Bool) -> Void in
+          self.isHidden = true
+          self.removeFromSuperview()
+        })
+      }
+    
+    func timeFormatted(_ totalSeconds: Int) -> String {
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        //     let hours: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 }
 
 class customSocialLoginView: UIView {
