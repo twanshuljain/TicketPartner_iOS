@@ -28,14 +28,29 @@ extension UIView {
         }
         return view
     }
-    
-    func createDottedLine(width: CGFloat, color: CGColor, dashPattern: [NSNumber]) {
+    func addDashedBorder(dottedColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
+        let color = dottedColor.cgColor
+        let shapeLayer: CAShapeLayer = CAShapeLayer()
+        let frameSize = self.frame.size
+        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width - 16, height: frameSize.height)
+        
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: (frameSize.width - 16) / 2, y: frameSize.height / 2)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = 2
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPattern = [6, 3]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 4).cgPath
+        self.layer.addSublayer(shapeLayer)
+    }
+    func createDottedLine(width: CGFloat, color: CGColor, dashPattern: [NSNumber], adjustFrameWidth: CGFloat) {
        let caShapeLayer = CAShapeLayer()
        caShapeLayer.strokeColor = color
        caShapeLayer.lineWidth = width
        caShapeLayer.lineDashPattern = dashPattern
        let cgPath = CGMutablePath()
-       let cgPoint = [CGPoint(x: 0, y: 0), CGPoint(x: self.frame.width, y: 0)]
+       let cgPoint = [CGPoint(x: 0, y: 0), CGPoint(x: self.frame.width - adjustFrameWidth, y: 0)]
        cgPath.addLines(between: cgPoint)
        caShapeLayer.path = cgPath
        layer.addSublayer(caShapeLayer)

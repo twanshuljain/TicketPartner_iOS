@@ -38,6 +38,9 @@
 		188F5C7E2B7BA0A00039B86C /* AddOrganizerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */; };
 		188F5C812B7DE51C0039B86C /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C802B7DE51C0039B86C /* StringConstants.swift */; };
 		188F5C832B7E2D720039B86C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C822B7E2D720039B86C /* String+Extension.swift */; };
+		188F5CA42B832ABB0039B86C /* quill.html in Resources */ = {isa = PBXBuildFile; fileRef = 188F5CA32B832ABB0039B86C /* quill.html */; };
+		188F5CA72B8381F60039B86C /* CreateEventStepper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F5CA62B8381F60039B86C /* CreateEventStepper.xib */; };
+		188F5CA92B8382120039B86C /* CreateEventStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5CA82B8382120039B86C /* CreateEventStepper.swift */; };
 		18EF61502B7B52340074C959 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */; };
 		18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */; };
 		18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF614F2B7B52330074C959 /* DropDownTextField.swift */; };
@@ -99,6 +102,9 @@
 		188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrganizerVC.swift; sourceTree = "<group>"; };
 		188F5C802B7DE51C0039B86C /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		188F5C822B7E2D720039B86C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		188F5CA32B832ABB0039B86C /* quill.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = quill.html; sourceTree = "<group>"; };
+		188F5CA62B8381F60039B86C /* CreateEventStepper.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateEventStepper.xib; sourceTree = "<group>"; };
+		188F5CA82B8382120039B86C /* CreateEventStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventStepper.swift; sourceTree = "<group>"; };
 		18EF614D2B7B52330074C959 /* DropDownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownTableViewCell.xib; sourceTree = "<group>"; };
 		18EF614E2B7B52330074C959 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
 		18EF614F2B7B52330074C959 /* DropDownTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTextField.swift; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 		183765052B7A329000CCE9F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				188F5CA22B832A950039B86C /* QuillHtmlFile */,
 				188F5C7F2B7DE5070039B86C /* Constants */,
 				18EF61712B7B967B0074C959 /* Extensions */,
 				18F093422B7B456500BFB4C3 /* CustomFont.swift */,
@@ -300,6 +307,23 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		188F5CA22B832A950039B86C /* QuillHtmlFile */ = {
+			isa = PBXGroup;
+			children = (
+				188F5CA32B832ABB0039B86C /* quill.html */,
+			);
+			path = QuillHtmlFile;
+			sourceTree = "<group>";
+		};
+		188F5CA52B8381D20039B86C /* CreateEventStepper */ = {
+			isa = PBXGroup;
+			children = (
+				188F5CA62B8381F60039B86C /* CreateEventStepper.xib */,
+				188F5CA82B8382120039B86C /* CreateEventStepper.swift */,
+			);
+			path = CreateEventStepper;
+			sourceTree = "<group>";
+		};
 		18EF614A2B7B51E50074C959 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +360,7 @@
 		18EF61592B7B52860074C959 /* CreateEvent */ = {
 			isa = PBXGroup;
 			children = (
+				188F5CA52B8381D20039B86C /* CreateEventStepper */,
 				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
 			);
 			path = CreateEvent;
@@ -484,6 +509,7 @@
 				18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */,
 				18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */,
 				183546A42B7CD03E00649EE2 /* Lato-Medium.ttf in Resources */,
+				188F5CA72B8381F60039B86C /* CreateEventStepper.xib in Resources */,
 				18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */,
 				18EF616C2B7B92450074C959 /* NextButton.xib in Resources */,
 				18F0933E2B7B414800BFB4C3 /* Lato-Bold.ttf in Resources */,
@@ -503,6 +529,7 @@
 				18EF61662B7B8ABC0074C959 /* Organization.storyboard in Resources */,
 				183546AB2B7CF96C00649EE2 /* Lato-SemiBold.ttf in Resources */,
 				18F0933B2B7B414800BFB4C3 /* Lato-LightItalic.ttf in Resources */,
+				188F5CA42B832ABB0039B86C /* quill.html in Resources */,
 				18F0933F2B7B414800BFB4C3 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +553,7 @@
 				188F5C812B7DE51C0039B86C /* StringConstants.swift in Sources */,
 				18EF61752B7B96BC0074C959 /* UITextField+Extension.swift in Sources */,
 				18006CE72B7C9FA800C301D3 /* PopOverView.swift in Sources */,
+				188F5CA92B8382120039B86C /* CreateEventStepper.swift in Sources */,
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				183546A62B7CEB2700649EE2 /* UIWindow+Extension.swift in Sources */,

@@ -117,5 +117,12 @@ extension UIColor {
     static let grayTextColor: UIColor = {
         return UIColor(named: "grayTextColor")!
     }()
-    //
+    static let blueDottedColor: UIColor = {
+        return UIColor(named: "blueDottedColor")!
+    }()
+    static let appIndigoSelectedColor: UIColor = {
+        return UIColor(named: "appIndigoSelectedColor")!
+    }()
+    
 }
+

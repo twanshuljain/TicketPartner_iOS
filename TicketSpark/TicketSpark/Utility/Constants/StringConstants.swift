@@ -96,4 +96,64 @@ struct StringConstants {
             }
         }
     }
+    
+    enum CreateEvent {
+        case selectEventType
+        case eventName
+        case startDate
+        case startTime
+        case endDate
+        case endTime
+        case locationName
+        case streetAddress
+        case city
+        case enterLocation
+        case enterStreetAddress
+        case enterCity
+        case state
+        case country
+        case saveAndContinue
+        case enterState
+        case enterCountry
+        
+        
+       var value: String {
+            switch self {
+            case .selectEventType:
+                return "Select event type"
+            case .eventName:
+                return "Event Name"
+            case .startDate:
+                return "Start Date"
+            case .startTime:
+                return "Start Time"
+            case .endDate:
+                return "End Date"
+            case .endTime:
+                return "End Time"
+            case .locationName:
+                return "Location Name*"
+            case .streetAddress:
+                return "Street Address*"
+            case .city:
+                return "City*"
+            case .enterLocation:
+                return "Enter Location"
+            case .enterStreetAddress:
+                return "Enter street Address"
+            case .enterCity:
+                return "Enter city"
+            case .state:
+                return "State*"
+            case .country:
+                return "Country*"
+            case .saveAndContinue:
+                return "Save & Continue"
+            case .enterState:
+                return "Enter Sate"
+            case .enterCountry:
+                return "Enter Country"
+            }
+        }
+    }
 }
