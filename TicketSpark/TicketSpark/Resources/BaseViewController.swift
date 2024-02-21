@@ -153,7 +153,7 @@ class BaseViewController: UIViewController {
     }
     
     func setNavBar() {
-        let image = UIImage(named: "img_nav_star")
+        let image = UIImage(named: ImageConstants.Image.imgNavStar.value)
         let navLabel = UILabel()
         let string = "MyTicketPartner" as NSString
 
@@ -183,7 +183,7 @@ class BaseViewController: UIViewController {
     
     func addNavBarImage() {
             let navController = navigationController!
-            let image = UIImage(named: "img_logo")
+        let image = UIImage(named: ImageConstants.Image.imgLogo.value)
             let imageView = UIImageView(image: image)
         let bannerWidth = navController.navigationBar.frame.size.width - 20.0
         let bannerHeight = navController.navigationBar.frame.size.height - 20.0

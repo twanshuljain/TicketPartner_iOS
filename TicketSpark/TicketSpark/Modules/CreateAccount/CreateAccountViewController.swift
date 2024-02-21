@@ -36,6 +36,8 @@ class CreateAccountViewController: BaseViewController {
     @IBOutlet weak var btnCreateAccount: UIButton!
     
     @IBOutlet weak var gogleSignInView: GoogleSignInView!
+    
+    @IBOutlet weak var btnEyePassword: UIButton!
    // @IBOutlet weak var popOverView: PopOverView!
     
     // MARK: - VARIABLES
@@ -142,6 +144,7 @@ extension CreateAccountViewController {
     func setUpView() {
         self.mobileVerified = false
         self.emailVerified = false
+        self.txtPassword.isSecureTextEntry = true
         self.otpEmailView.isHidden = !self.otpEmailView.isHidden
         self.otpMobileView.isHidden = !self.otpMobileView.isHidden
         self.hideBackButton = true
@@ -164,6 +167,7 @@ extension CreateAccountViewController {
         
         self.txtMobileNumber.font = CustomFont.shared.medium(sizeOfFont: 14.0)
         self.btnMobileVerify.titleLabel?.font = CustomFont.shared.medium(sizeOfFont: 12.0)
+        self.lblDialCountryCode.font = CustomFont.shared.regular(sizeOfFont: 12.0)
         
         self.lblPassword.font = CustomFont.shared.medium(sizeOfFont: 12.0)
         self.txtPassword.font = CustomFont.shared.medium(sizeOfFont: 14.0)
@@ -182,6 +186,7 @@ extension CreateAccountViewController {
         self.gogleSignInView.btnSignIn.addTarget(self,action:#selector(signInAction), for:.touchUpInside)
         txtEmail.addTarget(self, action: #selector(editingChangedEmail), for: .editingChanged)
         txtMobileNumber.addTarget(self, action: #selector(editingChangedMobile), for: .editingChanged)
+        [txtEmail, txtFirstName, txtLastName, txtPassword, txtMobileNumber].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
     }
     
     
@@ -365,8 +370,10 @@ extension CreateAccountViewController {
     func setViewForVerified() {
         if self.viewModel.otpVerify == .email {
             self.emailVerified = true
+            self.validateFields()
         } else {
             self.mobileVerified = true
+            self.validateFields()
         }
     }
     
@@ -393,25 +400,34 @@ extension CreateAccountViewController {
             self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
         }
     }
-
     
     func otpVerify() {
-        let otp = "\(self.otpEmailView.txtOtp1.text ?? "")" + "\(self.otpEmailView.txtOtp2.text ?? "")" + "\(self.otpEmailView.txtOtp3.text ?? "")" + "\(self.otpEmailView.txtOtp4.text ?? "")"
-        if self.otpEmailView.txtOtp1.text ?? "" == "" || self.otpEmailView.txtOtp2.text ?? "" == "" || self.otpEmailView.txtOtp3.text ?? "" == "" || self.otpEmailView.txtOtp4.text ?? "" == "" {
-            //self.showToast(with: StringConstants.Login.enterOTP.value, position: .top, type: .warning)
-        } else {
-            if Reachability.isConnectedToNetwork(){
-                LoadingIndicatorView.show()
-                if self.viewModel.otpVerify == .email {
+        if self.viewModel.otpVerify == .email {
+            let otp = "\(self.otpEmailView.txtOtp1.text ?? "")" + "\(self.otpEmailView.txtOtp2.text ?? "")" + "\(self.otpEmailView.txtOtp3.text ?? "")" + "\(self.otpEmailView.txtOtp4.text ?? "")"
+            if self.otpEmailView.txtOtp1.text ?? "" == "" || self.otpEmailView.txtOtp2.text ?? "" == "" || self.otpEmailView.txtOtp3.text ?? "" == "" || self.otpEmailView.txtOtp4.text ?? "" == "" {
+                //self.showToast(with: StringConstants.Login.enterOTP.value, position: .top, type: .warning)
+            } else {
+                if Reachability.isConnectedToNetwork(){
+                    LoadingIndicatorView.show()
                     self.otpVerifyForEmail(otp: otp)
                 } else {
-                    self.otpVerifyForMobile(otp: otp)
+                    self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
                 }
+            }
+        } else {
+            let otp = "\(self.otpMobileView.txtOtp1.text ?? "")" + "\(self.otpMobileView.txtOtp2.text ?? "")" + "\(self.otpMobileView.txtOtp3.text ?? "")" + "\(self.otpMobileView.txtOtp4.text ?? "")"
+            if self.otpMobileView.txtOtp1.text ?? "" == "" || self.otpMobileView.txtOtp2.text ?? "" == "" || self.otpMobileView.txtOtp3.text ?? "" == "" || self.otpMobileView.txtOtp4.text ?? "" == "" {
             } else {
-                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+                if Reachability.isConnectedToNetwork(){
+                    LoadingIndicatorView.show()
+                    self.otpVerifyForMobile(otp: otp)
+                } else {
+                    self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+                }
             }
         }
     }
+    
     
     @objc func editingChangedEmail(_ textField: UITextField) {
         if textField.text?.count == 1 {
@@ -432,6 +448,48 @@ extension CreateAccountViewController {
         }
         self.validateMobile()
     }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        self.validateFields()
+    }
+    
+    func signUp(){
+        let isValidate = self.viewModel.validateSignUp(self.txtFirstName.text ?? "", lName: self.txtLastName.text ?? "", self.txtEmail.text ?? "", self.txtPassword.text ?? "", self.txtMobileNumber.text ?? "", self.viewModel.strCountryDialCode)
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.signUpAPI(self.txtFirstName.text ?? "", self.txtLastName.text ?? "", self.txtEmail.text ?? "", self.txtPassword.text ?? "", self.txtMobileNumber.text ?? "", self.viewModel.strCountryDialCode) { isSuccess, signUpData, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if var signUpData = signUpData {
+                            DispatchQueue.main.async {
+                                self.popOverView.isHidden = !self.popOverView.isHidden
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+               //self.showAlert(message: isValidate.0)
+            }
+        }
+    }
 }
 
 // MARK: - ACTIONS
@@ -447,7 +505,7 @@ extension CreateAccountViewController {
     }
     
     @IBAction func btnCreateAccount(_ sender : UIButton) {
-        self.popOverView.isHidden = !self.popOverView.isHidden
+        self.signUp()
     }
     
     @IBAction func btnCountryCodePickerAction(_ sender: UIButton) {
@@ -458,6 +516,16 @@ extension CreateAccountViewController {
             self.navigationController?.pushViewController(sb, animated: false)
         }
        
+    }
+    
+    @IBAction func btnPasswordEyeAction(_ sender: UIButton) {
+        if self.txtPassword.isSecureTextEntry == false {
+            self.btnEyePassword.setImage(UIImage(named: ImageConstants.Image.imgEyeHide.value), for: .normal)
+            self.txtPassword.isSecureTextEntry = true
+        } else {
+            self.btnEyePassword.setImage(UIImage(named: ImageConstants.Image.imgEyeOpen.value), for: .normal)
+            self.txtPassword.isSecureTextEntry = false
+        }
     }
     
 }

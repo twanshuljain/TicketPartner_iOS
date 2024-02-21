@@ -159,6 +159,25 @@ class Validation {
         }
     }
     
+    func resetPasswordValidation(newPassword: String, confirmPassword: String, validationType: InputValidation) -> (Bool, String) {
+        switch validationType {
+        case .password:
+            return(
+                newPassword.isEmpty ? true :
+                    newPassword.count < 4 ? true : false,
+                newPassword.isEmpty ? ValidationConstantStrings.emptyPassword : ValidationConstantStrings.invalidPassword)
+        case .confirmPassword:
+            return(
+                confirmPassword.isEmpty ? true :
+                    newPassword != confirmPassword ? true : false,
+                confirmPassword.isEmpty ? ValidationConstantStrings.emptyConfirmPassword : ValidationConstantStrings.invalidConfirmNewPassword)
+        
+        case .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword:
+            break;
+        }
+        return (true,"")
+    }
+    
     func CompareValidation(fieldName: ValidationParam, compare: (CompareField: UITextField, CompareFieldTo: UITextField)? = nil) -> (Bool, String) {
         var valuess = fieldName.sorted(by: { (arg0, arg1) -> Bool in
             return arg0.value.priority < arg1.value.priority

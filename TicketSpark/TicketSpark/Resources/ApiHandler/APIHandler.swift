@@ -24,7 +24,7 @@ public enum APIName: String {
     
     //MARK: - FORGOT PASSWORD
     case ForgotPasswordSendLink = "/auth/user/forgot-password/send-link/"
-    case ForgotPasswordVerifyLink = "/auth/user/forgot-password/"
+    case ResetPasswordLink = "/auth/user/forgot-password/"
     
 }
 public enum GroupApiName: String {
@@ -43,7 +43,7 @@ class APIHandler: NSObject {
     private let boundary = "Boundary-\(NSUUID().uuidString)"
     
     
-    func executeRequestWith<T: Decodable, U: Encodable>(of type: T.Type = T.self, apiName: APIName, parameters: U?, methodType: MethodType,  authRequired: Bool = true, complition: @escaping(Result<ResponseModal<T>, Error>) -> Void) {
+    func executeRequestWith<T: Decodable, U: Encodable>(of type: T.Type = T.self, apiName: APIName, parameters: U?, methodType: MethodType,  authRequired: Bool = true, resetTokenKey: Bool? = false, resetKey: String? = "",  complition: @escaping(Result<ResponseModal<T>, Error>) -> Void) {
         
         var finalURL = baseURL + apiName.rawValue
         
@@ -90,6 +90,14 @@ class APIHandler: NSObject {
             print("userModel?.accessToken........ ",userModel!.accessToken! )
             request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
         }
+        
+        //FOR RESET PASSWORD
+        if resetTokenKey ?? false, let token = resetKey {
+            print("resetTokenKey........ ",token )
+            request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+        }
+        
+        
         debugPrint("finalURL is \(finalURL)")
         debugPrint("parameters is \(String(describing: parameters))")
         

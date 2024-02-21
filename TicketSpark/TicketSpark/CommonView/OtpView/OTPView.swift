@@ -48,7 +48,7 @@ class OTPView: UIView {
 extension OTPView {
     func initSetup() {
         self.setFont()
-        self.setDelegate()
+        //self.setDelegate()
     }
     
     func setFont() {
@@ -136,6 +136,7 @@ extension OTPView : UITextFieldDelegate {
                 }
                 
                 textField.text = ""
+                self.otpVerifyCallBack?()
                 return false
             }
             return false

@@ -29,6 +29,7 @@ class ValidationConstantStrings: NSObject {
     static let emptyNewPassword = "New password is required"
     static let invalidPassword = "Please enter valid password"
     static let invalidNewPassword = "Please enter valid new password"
+    static let invalidConfirmNewPassword = "New password and confirm password doesn't match"
     static let emptyCurrentPassword = "Current password is required"
     static let emptyConfirmPassword = "Confirm password is required"
     static let invalidCurrentPassword = "Please enter valid current password"

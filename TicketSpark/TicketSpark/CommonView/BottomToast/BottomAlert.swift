@@ -57,7 +57,7 @@ class BottomAlert: UIView {
             //self.alertIconImageView.image = UIImage(named: "ic_pin_success_white")
         case .warning:
             self.backgroundView.backgroundColor = .red
-            self.alertIconImageView.image = UIImage(named: "imgError")
+            self.alertIconImageView.image = UIImage(named: ImageConstants.Image.imgError.value)
         case .failure:
             self.backgroundView.backgroundColor = .red
             //self.alertIconImageView.image = UIImage(named: "error_Icon")

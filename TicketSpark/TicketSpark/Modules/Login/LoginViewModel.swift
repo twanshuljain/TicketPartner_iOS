@@ -57,7 +57,7 @@ extension LoginViewModel {
     
     func signInAPI(_ email:String,_ password:String,_ mobileNumber:String, _ countryCode:String, _ otp:String, isEmailViewSelected:Bool, complition:@escaping LoginDataCompletion) {
         let paramForEmail = SignInRequest(emailPhone: email, password: password)
-        let paramForNumber = SignInForNumberRequest(cellphone: mobileNumber, countryCode: self.strCountryDialCode, otp: "")
+        let paramForNumber = SignInForNumberRequest(cellphone: mobileNumber, countryCode: self.strCountryDialCode, otp: otp)
         
         if isEmailViewSelected == true {
             APIHandler.shared.executeRequestWith(apiName: .SignInEmail, parameters: paramForEmail, methodType: .POST) { (result: Result<ResponseModal<SignInAuthModel>, Error>) in

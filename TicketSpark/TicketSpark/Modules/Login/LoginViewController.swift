@@ -58,14 +58,14 @@ class LoginViewController: BaseViewController {
             if isEmailViewSelected {
                 emailView.isHidden = false
                 mobileView.isHidden = true
-                self.imgEmail.image = UIImage(named: "imgRadioSelected")
-                self.imgMobileNumber.image = UIImage(named: "imgRadioUnselected")
+                self.imgEmail.image = UIImage(named: ImageConstants.Image.imgRadioSelected.value)
+                self.imgMobileNumber.image = UIImage(named: ImageConstants.Image.imgRadioUnselected.value)
                 self.signInBtnTop.constant = self.viewModel.emailSignInTop
             } else {
                 emailView.isHidden = true
                 mobileView.isHidden = false
-                self.imgEmail.image = UIImage(named: "imgRadioUnselected")
-                self.imgMobileNumber.image = UIImage(named: "imgRadioSelected")
+                self.imgEmail.image = UIImage(named: ImageConstants.Image.imgRadioUnselected.value)
+                self.imgMobileNumber.image = UIImage(named: ImageConstants.Image.imgRadioSelected.value)
                 self.signInBtnTop.constant = self.viewModel.mobileSignInTop
             }
             self.validateFields()
@@ -74,9 +74,9 @@ class LoginViewController: BaseViewController {
     var isRememberMe = false {
         didSet {
             if isRememberMe {
-                self.imgRememberMe.image = UIImage.init(named: "imgCheckboxSelected")
+                self.imgRememberMe.image = UIImage.init(named: ImageConstants.Image.imgCheckboxSelected.value)
             } else {
-                self.imgRememberMe.image = UIImage.init(named: "imgCheckboxUnselected")
+                self.imgRememberMe.image = UIImage.init(named: ImageConstants.Image.imgCheckboxUnselected.value)
             }
         }
     }
@@ -193,7 +193,7 @@ extension LoginViewController {
         
         self.lblMobileNumber.font = CustomFont.shared.regular(sizeOfFont: 12.0)
         self.txtMobileNumber.font = CustomFont.shared.regular(sizeOfFont: 16.0)
-        self.lblDialCountryCode.font = CustomFont.shared.semiBold(sizeOfFont: 10.0)
+        self.lblDialCountryCode.font = CustomFont.shared.regular(sizeOfFont: 12.0)
     }
     
     func setUpAction() {
@@ -207,6 +207,17 @@ extension LoginViewController {
         [txtEmail, txtPassword, txtMobileNumber, otpView.txtOtp1, otpView.txtOtp2, otpView.txtOtp3, otpView.txtOtp4].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
         self.otpView.endTimeCallBack = {
             //self.signInBtnTop.constant -= 30.0
+        }
+        
+        self.otpView.otpVerifyCallBack = {
+            //self.otpVerify()
+            let otp = "\(self.otpView.txtOtp1.text ?? "")" + "\(self.otpView.txtOtp2.text ?? "")" + "\(self.otpView.txtOtp3.text ?? "")" + "\(self.otpView.txtOtp4.text ?? "")"
+            if self.otpView.txtOtp1.text ?? "" != "" && self.otpView.txtOtp2.text ?? "" != "" && self.otpView.txtOtp3.text ?? "" != "" && self.otpView.txtOtp4.text ?? "" != "" {
+                self.viewModel.otp = otp
+            } else {
+                self.viewModel.otp = ""
+            }
+            self.validateFields()
         }
     }
     
