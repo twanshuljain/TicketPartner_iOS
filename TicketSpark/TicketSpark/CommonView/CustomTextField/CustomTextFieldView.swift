@@ -9,7 +9,11 @@ import UIKit
 class CustomTextFieldView: UIView {
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var txtFld: UITextField!
-    
+    var placeholder: String = "" {
+        didSet {
+            txtFld.placeholder = placeholder
+        }
+    }
     let nibName = "CustomTextFieldView"
     override init(frame: CGRect) {
         super.init(frame: frame)

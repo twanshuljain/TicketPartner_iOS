@@ -115,8 +115,22 @@ struct StringConstants {
         case saveAndContinue
         case enterState
         case enterCountry
-        
-        
+        case eventType
+        case description
+        case timeZone
+        case ticketName
+        case quantity
+        case price
+        case fees
+        case buyerPrice
+        case revenuePerTicket
+        case dateTime
+        case ticketStartEnd
+        case advanceSettings
+        case ticketPerOrder
+        case ticketPerUser
+        case ticketVisibilty
+        case createTicket
        var value: String {
             switch self {
             case .selectEventType:
@@ -153,6 +167,38 @@ struct StringConstants {
                 return "Enter Sate"
             case .enterCountry:
                 return "Enter Country"
+            case .eventType:
+                return "Event Type*"
+            case .description:
+                return "Description*"
+            case .timeZone:
+                return "Timezone*"
+            case .ticketName:
+                return "Ticket Name"
+            case .quantity:
+                return "Quantity*"
+            case .price:
+                return "Price*"
+            case .fees:
+                return "Fees*"
+            case .buyerPrice:
+                return "Buyer price"
+            case .revenuePerTicket:
+                return "Revenue per ticket"
+            case .dateTime:
+                return "Date / Time"
+            case .ticketStartEnd:
+                return "Ticker Start & End"
+            case .advanceSettings:
+                return "Advance Settings"
+            case .ticketPerOrder:
+                return "Tickets per order*"
+            case .ticketPerUser:
+                return "Ticket per user"
+            case .ticketVisibilty:
+                return "Ticket Visibility"
+            case .createTicket:
+                return "Create Ticket"
             }
         }
     }

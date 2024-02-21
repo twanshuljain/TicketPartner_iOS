@@ -32,6 +32,7 @@
 		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
 		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
+		1874E2292B85E38B00DA4F1F /* TicketsCreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */; };
 		188F5C782B7B98F00039B86C /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C762B7B98F00039B86C /* OTPView.swift */; };
 		188F5C792B7B98F00039B86C /* OTPView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C772B7B98F00039B86C /* OTPView.xib */; };
 		188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */; };
@@ -96,6 +97,7 @@
 		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCreateEventVC.swift; sourceTree = "<group>"; };
 		188F5C762B7B98F00039B86C /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		188F5C772B7B98F00039B86C /* OTPView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPView.xib; sourceTree = "<group>"; };
 		188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
@@ -291,6 +293,22 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
+		1874E2262B85E33A00DA4F1F /* CreatEventFirst */ = {
+			isa = PBXGroup;
+			children = (
+				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
+			);
+			path = CreatEventFirst;
+			sourceTree = "<group>";
+		};
+		1874E2272B85E35B00DA4F1F /* TicketsCreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */,
+			);
+			path = TicketsCreateEvent;
+			sourceTree = "<group>";
+		};
 		188F5C7C2B7BA0420039B86C /* Organization */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,8 +378,9 @@
 		18EF61592B7B52860074C959 /* CreateEvent */ = {
 			isa = PBXGroup;
 			children = (
+				1874E2272B85E35B00DA4F1F /* TicketsCreateEvent */,
 				188F5CA52B8381D20039B86C /* CreateEventStepper */,
-				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
+				1874E2262B85E33A00DA4F1F /* CreatEventFirst */,
 			);
 			path = CreateEvent;
 			sourceTree = "<group>";
@@ -554,6 +573,7 @@
 				18EF61752B7B96BC0074C959 /* UITextField+Extension.swift in Sources */,
 				18006CE72B7C9FA800C301D3 /* PopOverView.swift in Sources */,
 				188F5CA92B8382120039B86C /* CreateEventStepper.swift in Sources */,
+				1874E2292B85E38B00DA4F1F /* TicketsCreateEventVC.swift in Sources */,
 				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				183546A62B7CEB2700649EE2 /* UIWindow+Extension.swift in Sources */,
