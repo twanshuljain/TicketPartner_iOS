@@ -66,7 +66,6 @@ open class DropDownTextField: UITextField {
     fileprivate var pointToParent = CGPoint(x: 0, y: 0)
     fileprivate var backgroundView = UIView()
     fileprivate var keyboardHeight: CGFloat = 0
-
     public var optionArray: [String] = [] {
         didSet {
             dataArray = optionArray
@@ -122,12 +121,14 @@ open class DropDownTextField: UITextField {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        addPadding()
         delegate = self
     }
 
     public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         setupUI()
+        addPadding()
         delegate = self
     }
 
@@ -153,10 +154,9 @@ open class DropDownTextField: UITextField {
             rightView?.addSubview(arrowContainerView)
         }
 
-        arrow = Arrow(origin: CGPoint(x: center.x - arrowSize / 2, y: center.y - arrowSize / 2), size: arrowSize)
+        arrow = Arrow(origin: CGPoint(x: self.frame.width - size, y: center.y/2), size: arrowSize)
         arrowContainerView.addSubview(arrow)
-
-//        self.font = CustomFont.shared.regular(fontType: .poppins, sizeOfFont: 16)
+        self.addSubview(arrowContainerView)
         backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = .clear
         addGesture()
@@ -212,7 +212,11 @@ open class DropDownTextField: UITextField {
         }
         return superView!.convert(pnt, to: baseView)
     }
-
+    private func addPadding() {
+       let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
     public func showList() {
         if parentController == nil {
             parentController = parentViewController
@@ -468,7 +472,7 @@ class Arrow: UIView {
         }
     }
     
-    var arrowImage: UIImage? = UIImage(named: "ic_drop_down") {
+    var arrowImage: UIImage? = UIImage(systemName: "chevron.down") {
         didSet {
             self.layer.contents = arrowImage?.cgImage
         }

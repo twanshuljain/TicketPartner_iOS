@@ -9,7 +9,11 @@ import UIKit
 class CustomTextFieldView: UIView {
     @IBOutlet weak var lbl: UILabel!
     @IBOutlet weak var txtFld: UITextField!
-    
+    var placeholder: String = "" {
+        didSet {
+            txtFld.placeholder = placeholder
+        }
+    }
     let nibName = "CustomTextFieldView"
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +31,20 @@ class CustomTextFieldView: UIView {
         view.frame = self.bounds
         addSubview(view)
         self.layer.masksToBounds = true
-         txtFld.setTextFiledBorder()
+          addPadding()
+          setUI()
+        
+    }
+    func setUI() {
+        txtFld.setTextFiledBorder()
+        lbl.textColor = .appBlackTextColor
+        lbl.font = CustomFont.shared.medium(sizeOfFont: 14)
+        txtFld.font = CustomFont.shared.regular(sizeOfFont: 14)
+        txtFld.textColor = .appBlackTextColor
+    }
+    private func addPadding() {
+       let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        txtFld.leftView = paddingView
+        txtFld.leftViewMode = .always
     }
 }

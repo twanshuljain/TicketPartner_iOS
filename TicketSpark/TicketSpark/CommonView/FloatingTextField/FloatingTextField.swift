@@ -30,7 +30,7 @@ class FloatingTextField: UITextField {
             self.setNeedsDisplay()
         }
     }
-    
+    var editingBegin: (()->())?
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self._placeholder = (self._placeholder != nil) ? self._placeholder : placeholder // Use our custom placeholder if none is set
@@ -49,12 +49,13 @@ class FloatingTextField: UITextField {
             self.floatingLabel.translatesAutoresizingMaskIntoConstraints = false
             self.floatingLabel.clipsToBounds = true
             self.floatingLabel.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.floatingLabelHeight)
-    self.layer.borderColor = self.activeBorderColor.cgColor
+       self.layer.borderColor = self.activeBorderColor.cgColor
             self.addSubview(self.floatingLabel)
           
             self.floatingLabel.bottomAnchor.constraint(equalTo:
             self.topAnchor, constant: 10).isActive = true // Place our label 10pts above the text field
             // Remove the placeholder
+            self.editingBegin?()
             self.placeholder = ""
         }
         self.setNeedsDisplay()

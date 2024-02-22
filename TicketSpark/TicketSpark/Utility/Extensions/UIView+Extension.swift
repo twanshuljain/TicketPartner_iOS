@@ -14,10 +14,10 @@ extension UIView {
         return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)?[0] as! T
     }
 
-    func setTextFiledBorder() {
+    func setTextFiledBorder(borderColor: UIColor? = .appPurpleBorderColor) {
         layer.cornerRadius = 10
         layer.borderWidth = 1
-        layer.borderColor = #colorLiteral(red: 0.9019607843, green: 0.9098039216, blue: 0.9254901961, alpha: 1)
+        layer.borderColor = borderColor?.cgColor
 //        layer.backgroundColor = .none
     }
     static func loadFromXib<T>(withOwner: Any? = nil, options: [UINib.OptionsKey: Any]? = nil) -> T where T: UIView {
@@ -28,14 +28,29 @@ extension UIView {
         }
         return view
     }
-    
-    func createDottedLine(width: CGFloat, color: CGColor, dashPattern: [NSNumber]) {
+    func addDashedBorder(dottedColor: UIColor = UIColor.black.withAlphaComponent(0.7)) {
+        let color = dottedColor.cgColor
+        let shapeLayer: CAShapeLayer = CAShapeLayer()
+        let frameSize = self.frame.size
+        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width - 16, height: frameSize.height)
+        
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: (frameSize.width - 16) / 2, y: frameSize.height / 2)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = 2
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPattern = [6, 3]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 4).cgPath
+        self.layer.addSublayer(shapeLayer)
+    }
+    func createDottedLine(width: CGFloat, color: CGColor, dashPattern: [NSNumber], adjustFrameWidth: CGFloat) {
        let caShapeLayer = CAShapeLayer()
        caShapeLayer.strokeColor = color
        caShapeLayer.lineWidth = width
        caShapeLayer.lineDashPattern = dashPattern
        let cgPath = CGMutablePath()
-       let cgPoint = [CGPoint(x: 0, y: 0), CGPoint(x: self.frame.width, y: 0)]
+       let cgPoint = [CGPoint(x: 0, y: 0), CGPoint(x: self.frame.width - adjustFrameWidth, y: 0)]
        cgPath.addLines(between: cgPoint)
        caShapeLayer.path = cgPath
        layer.addSublayer(caShapeLayer)

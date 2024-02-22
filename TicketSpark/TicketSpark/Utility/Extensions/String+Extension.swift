@@ -326,6 +326,13 @@ extension String {
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
     }
+    
+    func addAttributedString(highlightedString: String, highlightedColor: UIColor? = .red) -> NSMutableAttributedString {
+        let range = (self as NSString).range(of: highlightedString)
+        let attributedString = NSMutableAttributedString(string: self)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: highlightedColor, range: range)
+            return attributedString
+    }
 }
 
 extension StringProtocol {
