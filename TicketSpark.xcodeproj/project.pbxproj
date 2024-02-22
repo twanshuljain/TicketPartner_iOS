@@ -46,6 +46,10 @@
 		18C5F4E82B7F772000629656 /* RSCountryDialCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5F4E52B7F772000629656 /* RSCountryDialCode.swift */; };
 		18C5F4E92B7F772000629656 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18C5F4E62B7F772000629656 /* CountryPicker.bundle */; };
 		18C5F4EA2B7F772000629656 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 18C5F4E72B7F772000629656 /* countries.json */; };
+		18C71AD72B87523E001170C2 /* TicketsCreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AD12B87523E001170C2 /* TicketsCreateEventVC.swift */; };
+		18C71AD82B87523E001170C2 /* CreatEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AD32B87523E001170C2 /* CreatEventVC.swift */; };
+		18C71AD92B87523E001170C2 /* CreateEventStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AD52B87523E001170C2 /* CreateEventStepper.swift */; };
+		18C71ADA2B87523E001170C2 /* CreateEventStepper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71AD62B87523E001170C2 /* CreateEventStepper.xib */; };
 		18C9CB3C2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9CB3B2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift */; };
 		18DA0B3A2B7DF14A001DCF37 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA0B392B7DF14A001DCF37 /* SignUpViewModel.swift */; };
 		18DA0B3E2B7DFA43001DCF37 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA0B3D2B7DFA43001DCF37 /* UIViewController+Extension.swift */; };
@@ -68,7 +72,6 @@
 		18EF61552B7B523D0074C959 /* CustomTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF61532B7B523D0074C959 /* CustomTextFieldView.swift */; };
 		18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */; };
 		18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61572B7B52760074C959 /* CreateEvent.storyboard */; };
-		18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF615A2B7B529A0074C959 /* CreatEventVC.swift */; };
 		18EF615E2B7B60260074C959 /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF615D2B7B60250074C959 /* FloatingTextField.swift */; };
 		18EF61612B7B6CBA0074C959 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18EF61602B7B6CBA0074C959 /* IQKeyboardManagerSwift */; };
 		18EF61642B7B80930074C959 /* AddOrganizerTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18EF61632B7B80930074C959 /* AddOrganizerTab.storyboard */; };
@@ -131,6 +134,10 @@
 		18C5F4E52B7F772000629656 /* RSCountryDialCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSCountryDialCode.swift; sourceTree = "<group>"; };
 		18C5F4E62B7F772000629656 /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CountryPicker.bundle; sourceTree = "<group>"; };
 		18C5F4E72B7F772000629656 /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		18C71AD12B87523E001170C2 /* TicketsCreateEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsCreateEventVC.swift; sourceTree = "<group>"; };
+		18C71AD32B87523E001170C2 /* CreatEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatEventVC.swift; sourceTree = "<group>"; };
+		18C71AD52B87523E001170C2 /* CreateEventStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventStepper.swift; sourceTree = "<group>"; };
+		18C71AD62B87523E001170C2 /* CreateEventStepper.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateEventStepper.xib; sourceTree = "<group>"; };
 		18C9CB3B2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		18DA0B392B7DF14A001DCF37 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		18DA0B3D2B7DFA43001DCF37 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -153,7 +160,6 @@
 		18EF61532B7B523D0074C959 /* CustomTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldView.swift; sourceTree = "<group>"; };
 		18EF61542B7B523D0074C959 /* CustomTextFieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextFieldView.xib; sourceTree = "<group>"; };
 		18EF61572B7B52760074C959 /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
-		18EF615A2B7B529A0074C959 /* CreatEventVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatEventVC.swift; sourceTree = "<group>"; };
 		18EF615D2B7B60250074C959 /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
 		18EF61632B7B80930074C959 /* AddOrganizerTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddOrganizerTab.storyboard; sourceTree = "<group>"; };
 		18EF61652B7B8ABC0074C959 /* Organization.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Organization.storyboard; sourceTree = "<group>"; };
@@ -329,11 +335,12 @@
 		185E65D92B72445000FEC922 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				18C71ACF2B87523E001170C2 /* CreateEvent */,
+				18C71ACE2B875210001170C2 /* New Group */,
 				188F5C7C2B7BA0420039B86C /* Organization */,
 				183546A72B7CF5D000649EE2 /* Splash */,
 				1802DF882B7C9247008B25DB /* ResetPassword */,
 				1802DF872B7C923B008B25DB /* ForgotPassword */,
-				18EF61592B7B52860074C959 /* CreateEvent */,
 				184B8B362B75F5360035FF3E /* Login */,
 				181638C22B7B9CD90020854C /* SignUp */,
 				181638C52B7BA6C40020854C /* CreateAccount */,
@@ -374,6 +381,48 @@
 				18C5F4E52B7F772000629656 /* RSCountryDialCode.swift */,
 			);
 			path = "Country Picker";
+			sourceTree = "<group>";
+		};
+		18C71ACE2B875210001170C2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		18C71ACF2B87523E001170C2 /* CreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				18C71AD02B87523E001170C2 /* TicketsCreateEvent */,
+				18C71AD22B87523E001170C2 /* CreatEventFirst */,
+				18C71AD42B87523E001170C2 /* CreateEventStepper */,
+			);
+			path = CreateEvent;
+			sourceTree = "<group>";
+		};
+		18C71AD02B87523E001170C2 /* TicketsCreateEvent */ = {
+			isa = PBXGroup;
+			children = (
+				18C71AD12B87523E001170C2 /* TicketsCreateEventVC.swift */,
+			);
+			path = TicketsCreateEvent;
+			sourceTree = "<group>";
+		};
+		18C71AD22B87523E001170C2 /* CreatEventFirst */ = {
+			isa = PBXGroup;
+			children = (
+				18C71AD32B87523E001170C2 /* CreatEventVC.swift */,
+			);
+			path = CreatEventFirst;
+			sourceTree = "<group>";
+		};
+		18C71AD42B87523E001170C2 /* CreateEventStepper */ = {
+			isa = PBXGroup;
+			children = (
+				18C71AD52B87523E001170C2 /* CreateEventStepper.swift */,
+				18C71AD62B87523E001170C2 /* CreateEventStepper.xib */,
+			);
+			path = CreateEventStepper;
 			sourceTree = "<group>";
 		};
 		18DA0B3F2B7E184E001DCF37 /* Validation */ = {
@@ -457,14 +506,6 @@
 				18EF614F2B7B52330074C959 /* DropDownTextField.swift */,
 			);
 			path = DropDownTextField;
-			sourceTree = "<group>";
-		};
-		18EF61592B7B52860074C959 /* CreateEvent */ = {
-			isa = PBXGroup;
-			children = (
-				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
-			);
-			path = CreateEvent;
 			sourceTree = "<group>";
 		};
 		18EF615C2B7B60080074C959 /* FloatingTextField */ = {
@@ -620,6 +661,7 @@
 				188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */,
 				18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */,
 				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
+				18C71ADA2B87523E001170C2 /* CreateEventStepper.xib in Resources */,
 				18C5F4EA2B7F772000629656 /* countries.json in Resources */,
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
 				18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */,
@@ -646,6 +688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C5F4E82B7F772000629656 /* RSCountryDialCode.swift in Sources */,
+				18C71AD82B87523E001170C2 /* CreatEventVC.swift in Sources */,
 				18DA0B4C2B7E1E4D001DCF37 /* APIHandler.swift in Sources */,
 				181638C42B7B9CFE0020854C /* SignUpViewController.swift in Sources */,
 				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,
@@ -676,7 +719,6 @@
 				18DA0B592B7E2C3E001DCF37 /* BottomAlert.swift in Sources */,
 				1802DF8C2B7C9272008B25DB /* ForgotPasswordViewController.swift in Sources */,
 				186DA63C2B85DF0700F7EFB3 /* ForgotPasswordModel.swift in Sources */,
-				18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */,
 				18EF615E2B7B60260074C959 /* FloatingTextField.swift in Sources */,
 				18EF61512B7B52340074C959 /* DropDownTableViewCell.swift in Sources */,
 				18EF61552B7B523D0074C959 /* CustomTextFieldView.swift in Sources */,
@@ -689,6 +731,7 @@
 				18DA0B412B7E1857001DCF37 /* Validation.swift in Sources */,
 				186DA63E2B85E4B800F7EFB3 /* ResetPasswordViewModel.swift in Sources */,
 				188F5C782B7B98F00039B86C /* OTPView.swift in Sources */,
+				18C71AD92B87523E001170C2 /* CreateEventStepper.swift in Sources */,
 				18EF616A2B7B92300074C959 /* NextButton.swift in Sources */,
 				18DA0B522B7E1ED9001DCF37 /* UserDefaults+Extension.swift in Sources */,
 				183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */,
@@ -697,6 +740,7 @@
 				18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */,
 				18DA0B472B7E18D2001DCF37 /* String+Extension.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
+				18C71AD72B87523E001170C2 /* TicketsCreateEventVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
