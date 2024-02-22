@@ -336,7 +336,6 @@
 			isa = PBXGroup;
 			children = (
 				18C71ACF2B87523E001170C2 /* CreateEvent */,
-				18C71ACE2B875210001170C2 /* New Group */,
 				188F5C7C2B7BA0420039B86C /* Organization */,
 				183546A72B7CF5D000649EE2 /* Splash */,
 				1802DF882B7C9247008B25DB /* ResetPassword */,
@@ -381,13 +380,6 @@
 				18C5F4E52B7F772000629656 /* RSCountryDialCode.swift */,
 			);
 			path = "Country Picker";
-			sourceTree = "<group>";
-		};
-		18C71ACE2B875210001170C2 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		18C71ACF2B87523E001170C2 /* CreateEvent */ = {
