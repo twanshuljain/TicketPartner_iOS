@@ -51,6 +51,7 @@ struct StringConstants {
         case selectCountry
         case saveAndNext
         case aboutOrganization
+       
         var value: String {
             switch self {
             case .website:
@@ -77,6 +78,7 @@ struct StringConstants {
                 return "Save and Continue"
             case .aboutOrganization:
                 return "Tell us about your Organization"
+            
             }
         }
     }
@@ -115,6 +117,9 @@ struct StringConstants {
         case ticketPerUser
         case ticketVisibilty
         case createTicket
+        case minimum
+        case maximum
+        case enterTicketPerUser
        var value: String {
             switch self {
             case .selectEventType:
@@ -154,7 +159,7 @@ struct StringConstants {
             case .eventType:
                 return "Event Type*"
             case .description:
-                return "Description*"
+                return "Description"
             case .timeZone:
                 return "Timezone*"
             case .ticketName:
@@ -180,9 +185,15 @@ struct StringConstants {
             case .ticketPerUser:
                 return "Ticket per user"
             case .ticketVisibilty:
-                return "Ticket Visibility"
+                return "Ticket Visibility*"
             case .createTicket:
                 return "Create Ticket"
+            case .minimum:
+                return "Minimum"
+            case .maximum:
+                return "Maximum"
+            case .enterTicketPerUser:
+                return "Enter ticket per user"
             }
         }
     }

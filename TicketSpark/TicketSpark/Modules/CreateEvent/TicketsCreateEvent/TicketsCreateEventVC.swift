@@ -29,6 +29,7 @@ class TicketsCreateEventVC: UIViewController {
     @IBOutlet weak var txtMaxOrder: CustomTextFieldView!
     @IBOutlet weak var txtDescription: UITextView!
     @IBOutlet weak var txtDrpTicketVisibility: DropDownTextField!
+    @IBOutlet weak var txtTicketPerUser: CustomTextFieldView!
     
     @IBOutlet weak var txtStartDate: FloatingTextField!
     @IBOutlet weak var txtStartTime: FloatingTextField!
@@ -38,6 +39,12 @@ class TicketsCreateEventVC: UIViewController {
     @IBOutlet weak var viewStartTime: UIView!
     @IBOutlet weak var viewEndDate: UIView!
     @IBOutlet weak var viewEndTime: UIView!
+    
+    // MARK: - CENTER X Constraints
+    @IBOutlet weak var startDateCenterCons: NSLayoutConstraint!
+    @IBOutlet weak var startTimeCenterCons: NSLayoutConstraint!
+    @IBOutlet weak var endDateCenterCons: NSLayoutConstraint!
+    @IBOutlet weak var endTimeCenterCons: NSLayoutConstraint!
     
     @IBOutlet weak var btnCreateTicket: NextButton!
     
@@ -59,7 +66,7 @@ class TicketsCreateEventVC: UIViewController {
         lblBuyerPrice.text = StringConstants.CreateEvent.buyerPrice.value + "$1200"
         lblBuyerPrice.font = CustomFont.shared.regular(sizeOfFont: 12)
         lblBuyerPrice.textColor = .grayTextColor
-        lblFees.text = StringConstants.CreateEvent.fees.value
+        lblFees.attributedText = StringConstants.CreateEvent.fees.value.addAttributedString(highlightedString: "*")
         lblFees.font = CustomFont.shared.medium(sizeOfFont: 14)
         lblRevenuePerTicket.text = StringConstants.CreateEvent.revenuePerTicket.value + "$1200"
         lblRevenuePerTicket.font = CustomFont.shared.regular(sizeOfFont: 12)
@@ -78,18 +85,45 @@ class TicketsCreateEventVC: UIViewController {
         lblDescription.textColor = .appBlackTextColor
         lblTicketsPerOrder.attributedText = StringConstants.CreateEvent.ticketPerOrder.value.addAttributedString(highlightedString: "*")
         lblTicketsPerOrder.font = CustomFont.shared.medium(sizeOfFont: 14)
-        lblTicketsPerOrder.textColor = .appBlackTextColor
+       
         lblTicketsPerUser.text = StringConstants.CreateEvent.ticketPerUser.value
         lblTicketsPerUser.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblTicketsPerUser.textColor = .appBlackTextColor
+        lblTicketVisibility.font = CustomFont.shared.medium(sizeOfFont: 14)
         lblTicketVisibility.attributedText = StringConstants.CreateEvent.ticketVisibilty.value.addAttributedString(highlightedString: "*")
-        lblTicketVisibility.font = CustomFont.shared.medium(sizeOfFont: 16)
-        lblTicketVisibility.textColor = .appBlackTextColor
         
+        txtMaxOrder.lbl.isHidden = true
+        txtMaxOrder.placeholder = StringConstants.CreateEvent.maximum.value
+        txtMinOrder.lbl.isHidden = true
+        txtMinOrder.placeholder = StringConstants.CreateEvent.minimum.value
+        txtTicketPerUser.placeholder =  StringConstants.CreateEvent.enterTicketPerUser.value
+        txtTicketPerUser.lbl.isHidden = true
         let borderView = [txtDrpFees, txtDescription, txtDescription, txtDrpTicketVisibility, viewStartDate, viewStartTime, viewEndDate, viewEndTime]
         
         for view in borderView {
             view?.setTextFiledBorder()
+        }
+        txtStartDate.placeholder = StringConstants.CreateEvent.startDate.value
+        txtStartTime.placeholder = StringConstants.CreateEvent.startTime.value
+        txtEndDate.placeholder = StringConstants.CreateEvent.endDate.value
+        txtEndTime.placeholder = StringConstants.CreateEvent.endTime.value
+        let txtDates = [txtStartDate, txtStartTime, txtEndDate, txtEndTime]
+        for txtDate in txtDates {
+            txtDate?.floatingLabelFont = CustomFont.shared.regular(sizeOfFont: 12)
+            txtDate?.font = CustomFont.shared.semiBold(sizeOfFont: 14)
+        }
+        
+        txtStartDate.editingBegin = {
+            self.startDateCenterCons.constant = 10
+        }
+        txtStartTime.editingBegin = {
+            self.startTimeCenterCons.constant = 10
+        }
+        txtEndDate.editingBegin = {
+            self.endDateCenterCons.constant = 10
+        }
+        txtEndTime.editingBegin = {
+            self.endTimeCenterCons.constant = 10
         }
     }
 }
