@@ -104,13 +104,15 @@ extension LoginViewController {
         self.gogleSignInView.btnSignIn.setTitle("Sign up", for: .normal)
         
         let _ = viewModel.countriesModel.contains { countryData in
-            if countryData.country_code == NSLocale.current.language.region?.identifier {
+            //if countryData.country_code == NSLocale.current.language.region?.identifier {
+            if countryData.country_code == self.getCurrentLanguageIdentifier() {
                 self.viewModel.strCountryDialCode = countryData.dial_code
                 self.lblDialCountryCode.text = self.viewModel.strCountryDialCode
                 return true
             }
             return false
         }
+       self.setPicker(str: "", arr: nil)
     }
     
     func setData() {
@@ -119,7 +121,7 @@ extension LoginViewController {
                 self.isRememberMe = true
                 self.txtEmail.text = userModel.email ?? ""
                 self.txtPassword.text = userModel.password ?? ""
-                self.txtMobileNumber.text = userModel.number ?? ""
+               // self.txtMobileNumber.text = userModel.number ?? ""
                 self.txtMobileNumber.addDoneButtonOnKeyboard()
                 // Defoult Country
                  // UI Changes---
@@ -134,30 +136,17 @@ extension LoginViewController {
                         
                         
                         if !arr.indices.contains(0){
-                            str = NSLocale.current.language.region?.identifier ?? ""
+                            //str = NSLocale.current.language.region?.identifier ?? ""
+                            str = self.getCurrentLanguageIdentifier() ?? ""
                             arr = viewModel.countriesModel.filter({$0.country_code == str})
                         }
                     }else{
-                        str = NSLocale.current.language.region?.identifier ?? ""
+                        //str = NSLocale.current.language.region?.identifier ?? ""
+                        str = self.getCurrentLanguageIdentifier() ?? ""
                         arr = viewModel.countriesModel.filter({$0.country_code == str})
                     }
+                    self.setPicker(str: str, arr: arr)
                     
-                    let imagePath = "CountryPicker.bundle/\(str ).png"
-                    self.imgCountry.image = UIImage(named: imagePath)
-                    self.lblDialCountryCode.text = "+91"
-             //       let arr = viewModel.countriesModel.filter({$0.country_code == str})
-                    
-                    if arr.count>0 {
-                        let country = arr[0]
-                        self.viewModel.strCountryDialCode = country.dial_code
-                        self.lblDialCountryCode.text = country.dial_code
-                        self.viewModel.strCountryCode = country.country_code
-                        self.viewModel.strCountryName = country.country_name
-                        self.lblDialCountryCode.text = country.dial_code
-                        self.viewModel.strCountryCode = country.country_code
-                        let imagePath = "CountryPicker.bundle/\( country.country_code).png"
-                        self.imgCountry.image = UIImage(named: imagePath)
-                    }
                 } else {
                     // noting to do
                 }
@@ -165,6 +154,35 @@ extension LoginViewController {
             self.validateFields()
         } else {
             self.isRememberMe = false
+        }
+    }
+    
+    func setPicker(str:String, arr:[CountryInfo]? = nil) {
+        var str = str
+        var arr = arr
+        if str == "" {
+            self.imgCountry.image = nil
+            arr = viewModel.countriesModel.filter({$0.dial_code == str})
+            //str = NSLocale.current.language.region?.identifier ?? ""
+            str = self.getCurrentLanguageIdentifier() ?? ""
+            arr = viewModel.countriesModel.filter({$0.country_code == str})
+            
+        }
+        let imagePath = "CountryPicker.bundle/\(str ).png"
+        self.imgCountry.image = UIImage(named: imagePath)
+        self.lblDialCountryCode.text = "+91"
+ //       let arr = viewModel.countriesModel.filter({$0.country_code == str})
+        
+        if let arr = arr, arr.count>0 {
+            let country = arr[0]
+            self.viewModel.strCountryDialCode = country.dial_code
+            self.lblDialCountryCode.text = country.dial_code
+            self.viewModel.strCountryCode = country.country_code
+            self.viewModel.strCountryName = country.country_name
+            self.lblDialCountryCode.text = country.dial_code
+            self.viewModel.strCountryCode = country.country_code
+            let imagePath = "CountryPicker.bundle/\( country.country_code).png"
+            self.imgCountry.image = UIImage(named: imagePath)
         }
     }
     
@@ -283,14 +301,21 @@ extension LoginViewController {
                 if isSuccess {
                     if var loginData = loginData {
                         DispatchQueue.main.async {
+                            self.otpView.validateOTP(valid: true)
                             if let password = self.txtPassword.text {
                                 loginData.password = password
                             }
                             UserDefaultManager.share.saveModelDataToUserDefults(userData: loginData, key: .userData)
+                            self.navigateToOrganizer()
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
+                        if msg == StringConstants.Login.invalidOTP.value {
+                            self.otpView.validateOTP(valid: false)
+                            self.otpView.inValidateOTP()
+                            self.otpView.endTimerForInvalidOTP()
+                        }
                         self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }
@@ -327,7 +352,7 @@ extension LoginViewController {
                             self.otpView.startTimer()
                             if self.viewModel.timerShown {
                                 self.viewModel.timerShown = false
-                                self.signInBtnTop.constant += 30.0
+                                self.signInBtnTop.constant += 40.0
                             }
                             self.showToast(with: msg ?? "", position: .top, type: .success)
                         }
@@ -340,6 +365,12 @@ extension LoginViewController {
         } else {
             self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
         }
+    }
+    
+    func navigateToOrganizer() {
+        let storyBoard = UIStoryboard.init(name: Storyboard.organization.rawValue, bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "AddOrganizerVC") as! AddOrganizerVC
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 

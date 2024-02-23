@@ -43,7 +43,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JBk-5o-LMF">
-                            <rect key="frame" x="15" y="39.333333333333329" width="784" height="50"/>
+                            <rect key="frame" x="15" y="49.333333333333329" width="784" height="50"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I68-oL-CZP">
                                     <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
@@ -113,14 +113,14 @@
                             </constraints>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t have an account?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jwn-p4-jav">
-                            <rect key="frame" x="276.66666666666669" y="114.33333333333334" width="161" height="18"/>
+                            <rect key="frame" x="301.66666666666669" y="124.33333333333334" width="161" height="18"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.47450980390000003" green="0.47058823529999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0v-Kw-Zuh">
-                            <rect key="frame" x="276.66666666666669" y="119.33333333333334" width="211" height="10"/>
+                            <rect key="frame" x="301.66666666666669" y="128.33333333333334" width="211.00000000000006" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="NQ4-YT-qc7"/>
                             </constraints>
@@ -144,12 +144,12 @@
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jwn-p4-jav" secondAttribute="bottom" constant="15" id="COC-cH-ceF"/>
                         <constraint firstItem="S0v-Kw-Zuh" firstAttribute="leading" secondItem="Jwn-p4-jav" secondAttribute="leading" id="Cz7-wp-Jmu"/>
                         <constraint firstItem="gKc-NJ-Ojd" firstAttribute="centerX" secondItem="NfM-p2-tYP" secondAttribute="centerX" id="QGh-fE-hZ6"/>
-                        <constraint firstItem="Jwn-p4-jav" firstAttribute="centerX" secondItem="NfM-p2-tYP" secondAttribute="centerX" constant="-50" id="UkM-4i-RFE"/>
+                        <constraint firstItem="S0v-Kw-Zuh" firstAttribute="centerY" secondItem="Jwn-p4-jav" secondAttribute="centerY" id="TVq-5U-eav"/>
+                        <constraint firstItem="Jwn-p4-jav" firstAttribute="centerX" secondItem="NfM-p2-tYP" secondAttribute="centerX" constant="-25" id="UkM-4i-RFE"/>
                         <constraint firstItem="AKJ-dY-Tdc" firstAttribute="centerY" secondItem="gKc-NJ-Ojd" secondAttribute="centerY" id="X96-2w-Tct"/>
                         <constraint firstAttribute="trailing" secondItem="JBk-5o-LMF" secondAttribute="trailing" constant="15" id="ccU-Bw-MeM"/>
                         <constraint firstItem="gKc-NJ-Ojd" firstAttribute="top" secondItem="NfM-p2-tYP" secondAttribute="top" id="e9J-UA-PhC"/>
-                        <constraint firstItem="S0v-Kw-Zuh" firstAttribute="top" secondItem="Jwn-p4-jav" secondAttribute="top" constant="5" id="uNb-bG-5IO"/>
-                        <constraint firstItem="JBk-5o-LMF" firstAttribute="top" secondItem="gKc-NJ-Ojd" secondAttribute="bottom" constant="20" id="yYd-Gu-6Qj"/>
+                        <constraint firstItem="JBk-5o-LMF" firstAttribute="top" secondItem="gKc-NJ-Ojd" secondAttribute="bottom" constant="30" id="yYd-Gu-6Qj"/>
                     </constraints>
                 </view>
             </subviews>

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -96,7 +97,10 @@
                             </subviews>
                         </stackView>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8t9-Y5-EeZ">
-                            <rect key="frame" x="15" y="85" width="139" height="100"/>
+                            <rect key="frame" x="15" y="85" width="135" height="99"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hny-cf-636"/>
+                            </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
@@ -120,8 +124,11 @@
                                 </attributedString>
                             </state>
                         </button>
-                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will receive OTP in 4:00s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-do-94F">
-                            <rect key="frame" x="15" y="85" width="179.66666666666666" height="100"/>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will receive OTP in 4:00s" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-do-94F">
+                            <rect key="frame" x="15" y="85" width="179.66666666666666" height="99"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hRK-QH-kgK"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                             <color key="textColor" red="0.35294117650000001" green="0.40784313729999999" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -130,11 +137,11 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="ICl-do-94F" firstAttribute="top" secondItem="30E-9P-2HF" secondAttribute="bottom" constant="20" id="E4P-YQ-Txo"/>
-                        <constraint firstAttribute="bottom" secondItem="8t9-Y5-EeZ" secondAttribute="bottom" id="MPM-dG-tRw"/>
+                        <constraint firstAttribute="bottom" secondItem="8t9-Y5-EeZ" secondAttribute="bottom" constant="1" id="MPM-dG-tRw"/>
                         <constraint firstItem="Dyq-A2-L7Z" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="NCL-Fq-EAZ"/>
                         <constraint firstItem="Dyq-A2-L7Z" firstAttribute="top" secondItem="8R0-zj-El8" secondAttribute="top" constant="5" id="O1w-7q-YVm"/>
                         <constraint firstItem="8t9-Y5-EeZ" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="Pom-EQ-3wN"/>
-                        <constraint firstAttribute="bottom" secondItem="ICl-do-94F" secondAttribute="bottom" id="Pzs-fH-tHe"/>
+                        <constraint firstAttribute="bottom" secondItem="ICl-do-94F" secondAttribute="bottom" constant="1" id="Pzs-fH-tHe"/>
                         <constraint firstItem="ICl-do-94F" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="ePr-B1-2Pe"/>
                         <constraint firstItem="8t9-Y5-EeZ" firstAttribute="top" secondItem="30E-9P-2HF" secondAttribute="bottom" constant="20" id="gQt-8R-xbR"/>
                         <constraint firstItem="30E-9P-2HF" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="hRe-fN-I0n"/>

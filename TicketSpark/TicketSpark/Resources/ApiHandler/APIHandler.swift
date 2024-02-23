@@ -25,6 +25,8 @@ public enum APIName: String {
     //MARK: - FORGOT PASSWORD
     case ForgotPasswordSendLink = "/auth/user/forgot-password/send-link/"
     case ResetPasswordLink = "/auth/user/forgot-password/"
+    case ForgotPasswordSendEmailOTP = "/auth/user/forgot-password/send/email/otp/"
+    case ForgotPasswordVerifyOTP = "/auth/user/forgot-password/verify/email/otp/"
     
 }
 public enum GroupApiName: String {
@@ -72,7 +74,8 @@ class APIHandler: NSObject {
                             let queryItem = URLQueryItem(name: key, value: "\(value)")
                             queryItems.append(queryItem)
                         }
-                        requestURL =  requestURL.appending(queryItems: queryItems)
+                        requestURL = self.createURL(withBaseURL: requestURL, queryItems: queryItems) ?? requestURL
+                        //requestURL.appending(queryItems: queryItems)
                         
                     } catch {
                         print("errorMsg")
@@ -153,6 +156,14 @@ class APIHandler: NSObject {
             }
         }.resume()
     }
+    
+    func createURL(withBaseURL baseURL: URL, queryItems: [URLQueryItem]) -> URL? {
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        components?.queryItems = queryItems
+
+        return components?.url
+    }
+    
     func nsdataToJSON(data: NSData) -> AnyObject? {
         do {
             return try JSONSerialization.jsonObject(with: data as Data, options: .mutableContainers) as AnyObject

@@ -16,6 +16,8 @@ class ForgotPasswordViewController: BaseViewController {
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var btnContinue: UIButton!
     @IBOutlet weak var btnSignIn: UIButton!
+    @IBOutlet weak var otpView: OTPView!
+    @IBOutlet weak var btnEmailSendOTP: UIButton!
     
     // MARK: - VARIABLES
     let viewModel = ForgotPasswordViewModel()
@@ -75,9 +77,22 @@ extension ForgotPasswordViewController {
     }
     
     func setUpAction() {
+        self.btnEmailSendOTP.isEnabled = false
+        self.btnEmailSendOTP.alpha = 0.5
         self.viewModel.popOverView.btnPop.addTarget(self,action:#selector(popOverViewAction), for:.touchUpInside)
         self.btnSignIn.addTarget(self,action:#selector(signInAction), for:.touchUpInside)
-        self.txtEmail.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        self.otpView.btnResend.addTarget(self,action:#selector(resendOTPAction), for:.touchUpInside)
+        self.txtEmail.addTarget(self,action: #selector(textFieldChangedValue(_:)), for: .editingChanged)
+        [txtEmail, otpView.txtOtp1, otpView.txtOtp2, otpView.txtOtp3, otpView.txtOtp4].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
+        self.otpView.otpVerifyCallBack = {
+            let otp = "\(self.otpView.txtOtp1.text ?? "")" + "\(self.otpView.txtOtp2.text ?? "")" + "\(self.otpView.txtOtp3.text ?? "")" + "\(self.otpView.txtOtp4.text ?? "")"
+            if self.otpView.txtOtp1.text ?? "" != "" && self.otpView.txtOtp2.text ?? "" != "" && self.otpView.txtOtp3.text ?? "" != "" && self.otpView.txtOtp4.text ?? "" != "" {
+                self.viewModel.otp = otp
+            } else {
+                self.viewModel.otp = ""
+            }
+            self.validateFields()
+        }
     }
     
     @objc func signInAction() {
@@ -88,7 +103,16 @@ extension ForgotPasswordViewController {
         })
     }
     
+    @objc func textFieldChangedValue(_ sender: UITextField) {
+        self.btnEmailSendOTP.isEnabled = sender.text!.count >= 1
+        self.btnEmailSendOTP.alpha = (sender.text!.count >= 1) ? 1 : 0.5
+    }
+    
     @objc func popOverViewAction() {
+       // self.navigateToNextScreen()
+    }
+    
+    func navigateToNextScreen() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordViewController") as! ResetPasswordViewController
         vc.viewModel.resetPasswordRequest = self.viewModel.resetPasswordRequest
         self.viewModel.popOverView.isHidden = !self.viewModel.popOverView.isHidden
@@ -107,7 +131,8 @@ extension ForgotPasswordViewController {
     
     func validateFields() {
         guard
-            let email = txtEmail.text, !email.isEmpty
+            let email = txtEmail.text, !email.isEmpty,
+            !self.viewModel.otp.isEmpty
         else {
             self.btnContinueEnabled = false
             return
@@ -128,9 +153,49 @@ extension ForgotPasswordViewController {
                         if var response = response {
                             DispatchQueue.main.async {
                                 self.viewModel.resetPasswordRequest = ResetPasswordRequest(newPassword: "", confirmPassword: "", resetToken: response.resetToken)
-                                self.viewModel.popOverView.isHidden = !self.viewModel.popOverView.isHidden
+                                self.showToast(with: msg ?? "", position: .top, type: .success)
+                                self.otpView.validateOTP(valid: true)
+                                self.navigateToNextScreen()
+                                //self.viewModel.popOverView.isHidden = !self.viewModel.popOverView.isHidden
                             }
                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.otpView.validateOTP(valid: false)
+                            self.otpView.inValidateOTP()
+                            self.otpView.endTimerForInvalidOTP()
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+            }
+        }
+    }
+    
+    @objc func resendOTPAction() {
+        self.sendOTP()
+    }
+    
+    func sendOTP() {
+        let isValidate = viewModel.validateFields(self.txtEmail.text ?? "")
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.sendOTP(self.txtEmail.text ?? "") { isSuccess, data, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        DispatchQueue.main.async {
+                            self.otpView.startTimer()
+                            self.showToast(with: msg ?? "", position: .top, type: .success)
+                        }
                     } else {
                         DispatchQueue.main.async {
                             self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
@@ -153,4 +218,8 @@ extension ForgotPasswordViewController{
    @IBAction func btnContinueAction(_ sender: UIButton) {
        self.sendLink()
    }
+    
+    @IBAction func btnSendOTPAction(_ sender: UIButton) {
+        self.sendOTP()
+    }
 }

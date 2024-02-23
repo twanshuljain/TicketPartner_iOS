@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddOrganizerVC: UIViewController {
+class AddOrganizerVC: BaseViewController {
     @IBOutlet weak var txtOrganizationName: CustomTextFieldView!
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var countryDropDown: DropDownTextField!
@@ -69,6 +69,9 @@ class AddOrganizerVC: UIViewController {
     }
 
     func setUI() {
+        self.hideNavigationBar = false
+        self.title = "Add Organization"
+        self.hideBackButton = true
         stackOrganizationLogo.isHidden = true
         btnNext.isHidden = true
         stackSocialFeedView.isHidden = true

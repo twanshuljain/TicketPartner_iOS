@@ -48,13 +48,14 @@ class BottomAlert: UIView {
       }
 
     func change_Position(toPosition: SelectPosition, text: String, type: AlertType) {
+        lblMessage.font = CustomFont.shared.regular(sizeOfFont: 14.0)
         lblMessage.text = text
         self.lblMessage.textColor = .white
         
         switch type {
         case .success:
             self.backgroundView.backgroundColor = UIColor(hex: "#21BE79")
-            //self.alertIconImageView.image = UIImage(named: "ic_pin_success_white")
+            self.alertIconImageView.image = UIImage(named: "imgRightCircle")
         case .warning:
             self.backgroundView.backgroundColor = .red
             self.alertIconImageView.image = UIImage(named: ImageConstants.Image.imgError.value)

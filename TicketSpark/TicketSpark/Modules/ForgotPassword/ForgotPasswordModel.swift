@@ -9,6 +9,7 @@ import Foundation
 
 struct ForgotPasswordRequest: Codable {
     let email: String?
+    var otp: String? = ""
 }
 
 // MARK: - DataClass

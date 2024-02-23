@@ -28,6 +28,7 @@ class CreateAccountViewController: BaseViewController {
     @IBOutlet weak var imgCountry: UIImageView!
     @IBOutlet weak var lblDialCountryCode: UILabel!
     @IBOutlet weak var imgeMobileVerified: UIImageView!
+    @IBOutlet weak var btnCountryPicker: UIButton!
     
     @IBOutlet weak var otpMobileView: OTPView!
     
@@ -84,10 +85,12 @@ class CreateAccountViewController: BaseViewController {
                 self.otpEmailView.isHidden = true
                 self.btnEmailVerify.isHidden = true
                 self.imgEmailVerified.isHidden = false
+                self.txtEmail.isUserInteractionEnabled = false
             }  else {
                 self.otpEmailView.isHidden = false
                 self.btnEmailVerify.isHidden = false
                 self.imgEmailVerified.isHidden = true
+                self.txtEmail.isUserInteractionEnabled = true
             }
         }
     }
@@ -97,10 +100,14 @@ class CreateAccountViewController: BaseViewController {
                 self.otpMobileView.isHidden = true
                 self.btnMobileVerify.isHidden = true
                 self.imgeMobileVerified.isHidden = false
+                self.txtMobileNumber.isUserInteractionEnabled = false
+                self.btnCountryPicker.isUserInteractionEnabled = false
             }  else {
                 self.otpMobileView.isHidden = false
                 self.btnMobileVerify.isHidden = false
                 self.imgeMobileVerified.isHidden = true
+                self.txtMobileNumber.isUserInteractionEnabled = true
+                self.btnCountryPicker.isUserInteractionEnabled = true
             }
         }
     }
@@ -110,7 +117,7 @@ class CreateAccountViewController: BaseViewController {
         self.initSetup()
         self.hideNavBarImage = false
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.addPopOverView()
@@ -219,7 +226,8 @@ extension CreateAccountViewController {
         var str = ""
         var arr = viewModel.countriesModel.filter({$0.dial_code == str})
         
-        str = NSLocale.current.language.region?.identifier ?? ""
+        //str = NSLocale.current.language.region?.identifier ?? ""
+        str = self.getCurrentLanguageIdentifier() ?? ""
         arr = viewModel.countriesModel.filter({$0.country_code == str})
         
         let imagePath = "CountryPicker.bundle/\(str ).png"
@@ -354,10 +362,14 @@ extension CreateAccountViewController {
                         DispatchQueue.main.async {
                             // EMAIL OTP VERIFIED
                             self.setViewForVerified()
+                            self.otpEmailView.validateOTP(valid: true)
                             self.showToast(with: msg ?? "", position: .top, type: .success)
                         }
                 } else {
                     DispatchQueue.main.async {
+                        self.otpEmailView.validateOTP(valid: false)
+                        self.otpEmailView.inValidateOTP()
+                        self.otpEmailView.endTimerForInvalidOTP()
                         self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }
@@ -389,9 +401,13 @@ extension CreateAccountViewController {
                             // MOBILE OTP VERIFIED
                             self.setViewForVerified()
                             self.showToast(with: msg ?? "", position: .top, type: .success)
+                            self.otpMobileView.validateOTP(valid: true)
                         }
                 } else {
                     DispatchQueue.main.async {
+                        self.otpMobileView.validateOTP(valid: false)
+                        self.otpMobileView.inValidateOTP()
+                        self.otpMobileView.endTimerForInvalidOTP()
                         self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }

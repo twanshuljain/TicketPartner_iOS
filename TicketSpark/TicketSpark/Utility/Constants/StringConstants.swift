@@ -10,6 +10,7 @@ struct StringConstants {
     enum Login {
         case enterOTP
         case otpNotReceived
+        case invalidOTP
         
         var value: String {
             switch self {
@@ -17,6 +18,8 @@ struct StringConstants {
                 return "Please enter otp"
             case .otpNotReceived:
                 return "Not received yet? Resend"
+            case .invalidOTP:
+                return "Invalid OTP"
             }
         }
     }
@@ -25,6 +28,7 @@ struct StringConstants {
         case reset
         case continueTitle
         case sendLinkSuccess
+        case invalidOTP
         
         var value: String {
             switch self {
@@ -34,6 +38,8 @@ struct StringConstants {
                 return "Continue"
             case .sendLinkSuccess:
                 return "Your reset password link has been sent to your registered email address. Please check your email."
+            case .invalidOTP:
+                return "Invalid OTP. Please try again"
             }
         }
     }

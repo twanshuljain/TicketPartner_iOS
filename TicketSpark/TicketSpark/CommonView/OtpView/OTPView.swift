@@ -57,7 +57,7 @@ extension OTPView {
         self.txtOtp2.font = CustomFont.shared.regular(sizeOfFont: 16.0)
         self.txtOtp3.font = CustomFont.shared.regular(sizeOfFont: 16.0)
         self.txtOtp4.font = CustomFont.shared.regular(sizeOfFont: 16.0)
-        self.lblReceiveOtp.font = CustomFont.shared.regular(sizeOfFont: 14.0)
+        self.lblReceiveOtp.font = CustomFont.shared.regular(sizeOfFont: 13.0)
         self.btnResend.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 12.0)
     }
     
@@ -71,6 +71,12 @@ extension OTPView {
 
 extension OTPView {
     func startTimer() {
+        txtOtp1.text = ""
+        txtOtp2.text = ""
+        txtOtp3.text = ""
+        txtOtp4.text = ""
+        self.validateOTP(valid: true)
+        self.lblReceiveOtp.textColor = .black
         self.totalTime = 240
         self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
@@ -98,10 +104,30 @@ extension OTPView {
         //btnContinue.isEnabled = false
         //btnContinue.alpha = 0.5
     }
+    
+    func endTimerForInvalidOTP() {
+        if countdownTimer != nil {
+            self.countdownTimer.invalidate()
+        }
+    }
+    
+    func validateOTP(valid:Bool) {
+        self.lblOTP.borderColor = valid ? .clear : .red
+        self.txtOtp1.borderColor = valid ? .clear : .red
+        self.txtOtp2.borderColor = valid ? .clear : .red
+        self.txtOtp3.borderColor = valid ? .clear : .red
+        self.txtOtp4.borderColor = valid ? .clear : .red
+    }
+    
+    func inValidateOTP() {
+        self.lblReceiveOtp.textColor = .red
+        self.lblReceiveOtp.text = StringConstants.ForgotPassword.invalidOTP.value
+    }
 }
 // MARK: - UITEXTFIELDDELEGATE
 extension OTPView : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+         self.validateOTP(valid: true)
 
             if (textField.text!.count < 1) && (string.count > 0) {
                 if textField == txtOtp1 {

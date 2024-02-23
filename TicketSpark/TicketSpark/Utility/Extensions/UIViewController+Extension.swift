@@ -53,4 +53,18 @@ extension UIViewController {
         }
         return countries
     }
+    
+//    func getCurrentLanguageIdentifier() -> String? {
+//        let preferredLanguage = Bundle.main.preferredLocalizations.first
+//        return Locale(identifier: preferredLanguage ?? "").languageCode
+//    }
+    
+    func getCurrentLanguageIdentifier() -> String? {
+        let currentLocale = Locale.current
+
+        let languageCode = currentLocale.languageCode
+        let regionCode = currentLocale.regionCode
+
+        return regionCode
+    }
 }
