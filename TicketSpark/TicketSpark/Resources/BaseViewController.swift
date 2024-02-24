@@ -182,16 +182,47 @@ class BaseViewController: UIViewController {
     }
     
     func addNavBarImage() {
-            let navController = navigationController!
-        let image = UIImage(named: ImageConstants.Image.imgLogo.value)
-            let imageView = UIImageView(image: image)
-        let bannerWidth = navController.navigationBar.frame.size.width - 20.0
-        let bannerHeight = navController.navigationBar.frame.size.height - 20.0
-            let bannerX = bannerWidth / 2 - (image?.size.width)! / 2
-            let bannerY = bannerHeight / 2 - (image?.size.height)! / 2
-        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
-            imageView.contentMode = .scaleAspectFit
-            navigationItem.titleView = imageView
+//        let navController = navigationController!
+//        let image = UIImage(named: ImageConstants.Image.imgLogo.value)
+//        let imageView = UIImageView(image: image)
+//        let bannerWidth = navController.navigationBar.frame.size.width - 20.0
+//        let bannerHeight = navController.navigationBar.frame.size.height - 20.0
+//        let bannerX = bannerWidth / 2 - (image?.size.width)! / 2
+//        let bannerY = bannerHeight / 2 - (image?.size.height)! / 2
+//        imageView.backgroundColor = .clear
+//        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
+//            imageView.contentMode = .scaleAspectFit
+//            navigationItem.titleView = imageView
+        let image = UIImage(named: ImageConstants.Image.imgNavStar.value)
+        let navLabel = UILabel()
+        let string = "MyTicketPartner" as NSString
+
+        let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 18.0)])
+
+        let boldFontAttribute = [NSAttributedString.Key.font: CustomFont.shared.black(sizeOfFont: 18.0)]
+        let normalFontAttribute = [NSAttributedString.Key.font: CustomFont.shared.medium(sizeOfFont: 18.0)]
+        let labelColorAttribute = [NSAttributedString.Key.foregroundColor: UIColor.black]
+
+        // Part of string to be bold
+        attributedString.addAttributes(boldFontAttribute, range: string.range(of: "My"))
+        attributedString.addAttributes(normalFontAttribute, range: string.range(of: "Ticket"))
+        attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Partner"))
+        
+        attributedString.addAttributes(labelColorAttribute, range: string.range(of: "MyTicketPartner"))
+
+        // 4
+        navLabel.attributedText = attributedString
+        navLabel.tintColor = UIColor.white
+        
+        let imageView = UIImageView(image: image)
+        imageView.backgroundColor = .clear
+        navLabel.backgroundColor = .clear
+        let titleView = UIStackView(arrangedSubviews: [imageView, navLabel])
+        titleView.axis = .horizontal
+        titleView.spacing = 2.0
+        titleView.backgroundColor = .clear
+        navigationItem.titleView = titleView
+        navigationItem.titleView?.backgroundColor = .clear
         }
 
     
@@ -228,9 +259,19 @@ class BaseViewController: UIViewController {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:CustomFont.shared.semiBold(sizeOfFont: 18.0), NSAttributedString.Key.foregroundColor:UIColor.black]
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        appearance.shadowColor = .clear
+        self.navigationController?.navigationBar.standardAppearance = appearance;
+        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance
+        
+        
+        
        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:UIFont(name: "Gilroy-Bold", size: 20.0)!, NSAttributedString.Key.foregroundColor:UIColor.white]
-        self.navigationController?.navigationBar.barTintColor = .white //THEME_COLOR.appBlueColor
-        self.navigationController?.navigationBar.isTranslucent = true
+    //    self.navigationController?.navigationBar.barTintColor = .white //THEME_COLOR.appBlueColor
+     //   self.navigationController?.navigationBar.isTranslucent = true
         let backBarButton = UIBarButtonItem(customView: backButton)
         self.hideNavigationBar = false
         self.navigationItem.leftBarButtonItem = backBarButton

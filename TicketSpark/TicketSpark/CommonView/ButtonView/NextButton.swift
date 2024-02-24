@@ -53,11 +53,16 @@ class NextButton: UIView {
         setupFromNib()
     }
     
+    func setFont() {
+        self.btnSubmit.titleLabel?.font = CustomFont.shared.bold(sizeOfFont: 16.0)
+    }
+    
     private func setupFromNib() {
         let view = Self.loadFromXib(withOwner: self, options: nil)
         view.frame = self.bounds
         updateBackgroundColor()
         addSubview(view)
+        self.setFont()
     }
 
 }

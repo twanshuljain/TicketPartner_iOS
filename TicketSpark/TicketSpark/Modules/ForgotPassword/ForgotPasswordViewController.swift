@@ -46,6 +46,11 @@ class ForgotPasswordViewController: BaseViewController {
         self.addPopOverView()
         self.viewModel.popOverView.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.resetView()
+    }
 }
 // MARK: - FUNCTIONS
 extension ForgotPasswordViewController {
@@ -62,6 +67,15 @@ extension ForgotPasswordViewController {
         self.txtEmail.font = CustomFont.shared.regular(sizeOfFont: 16.0)
         self.btnContinue.titleLabel?.font = CustomFont.shared.bold(sizeOfFont: 14.0)
         self.btnSignIn.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14.0)
+    }
+    
+    func resetView() {
+        self.lblEmail.text = ""
+        self.txtEmail.text = ""
+        self.otpView.resetField()
+        if self.otpView.countdownTimer != nil {
+            self.otpView.endTimer()
+        }
     }
     
     func setUpView() {

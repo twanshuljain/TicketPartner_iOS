@@ -8,6 +8,7 @@
 import UIKit
 
 class AddOrganizerVC: BaseViewController {
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var txtOrganizationName: CustomTextFieldView!
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var countryDropDown: DropDownTextField!
@@ -35,18 +36,14 @@ class AddOrganizerVC: BaseViewController {
     var isToHideSocialOrganizationView: Bool = false {
         didSet {
                btnNext.isHidden = false
-            UIView.animate(withDuration: 0.5,
-                           delay: 0.0,
-                           usingSpringWithDamping: 0.9,
-                           initialSpringVelocity: 1,
-                           options: [.curveEaseOut],
-                           animations: {
+//            UIView.animate(withDuration: 0.5,delay: 0.0,usingSpringWithDamping: 0.9,initialSpringVelocity: 1, options: [.curveEaseOut],animations: {
                 self.stackSocialFeedView.layoutIfNeeded()
                 if self.isToHideSocialOrganizationView {
                     self.stackOrganizationLogo.alpha = 1
                     self.stackSocialFeedView.alpha = 0
                     self.stackOrganizationLogo.isHidden = false
                     self.stackSocialFeedView.isHidden = true
+                    self.btnNext.title = StringConstants.AddOrganizer.next.value
                 } else {
                     self.stackOrganizationLogo.alpha = 0
                     self.stackSocialFeedView.alpha = 1
@@ -54,13 +51,14 @@ class AddOrganizerVC: BaseViewController {
                     self.stackSocialFeedView.isHidden = false
                     self.btnNext.title = StringConstants.AddOrganizer.saveAndNext.value
                 }
-            },
-            completion: nil)
+//            },
+//            completion: nil)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setFont()
         btnNext.actionSubmit = { [weak self] _ in
             if let self {
                 self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
@@ -69,8 +67,7 @@ class AddOrganizerVC: BaseViewController {
     }
 
     func setUI() {
-        self.hideNavigationBar = false
-        self.title = "Add Organization"
+        self.addNavBarImage()
         self.hideBackButton = true
         stackOrganizationLogo.isHidden = true
         btnNext.isHidden = true
@@ -87,7 +84,7 @@ class AddOrganizerVC: BaseViewController {
         lblCountry.font = CustomFont.shared.medium(sizeOfFont: 14)
         lblOrganzationLogo.font = CustomFont.shared.medium(sizeOfFont: 14)
         countryDropDown.placeholder = StringConstants.AddOrganizer.selectCountry.value
-        countryDropDown.arrowImage = UIImage(systemName: "chevron.down")
+        countryDropDown.arrowImage = UIImage(systemName: "imgDropDown")
         countryDropDown.isSearchEnable = false
         countryDropDown.optionArray = ["India", "Australia", "New Zealand", "Nepal", "Bhutan"]
         btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14)
@@ -100,6 +97,16 @@ class AddOrganizerVC: BaseViewController {
         lblSocialNetwork.textColor = .appBlackTextColor
         txtOrganizationName.lbl.attributedText = StringConstants.AddOrganizer.organizationName.value.addAttributedString(highlightedString: "*")
     
+    }
+    
+    func setFont() {
+        self.lblTitle.font = CustomFont.shared.bold(sizeOfFont: 18.0)
+        self.lblAboutOrganization.font = CustomFont.shared.bold(sizeOfFont: 18.0)
+        self.lblCountry.font = CustomFont.shared.medium(sizeOfFont: 14.0)
+        self.lblOrganzationLogo.font = CustomFont.shared.medium(sizeOfFont: 14.0)
+        self.lblOrganizerDescription.font = CustomFont.shared.regular(sizeOfFont: 18.0)
+        self.btnAddOrgaizer.titleLabel?.font = CustomFont.shared.bold(sizeOfFont: 16.0)
+        self.btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14.0)
     }
     
     @IBAction func actionAddOrganizer(_ sender: UIButton) {

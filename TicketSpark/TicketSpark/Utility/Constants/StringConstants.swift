@@ -57,6 +57,7 @@ struct StringConstants {
         case selectCountry
         case saveAndNext
         case aboutOrganization
+        case next
        
         var value: String {
             switch self {
@@ -65,7 +66,7 @@ struct StringConstants {
             case .facebookPage:
                 return "Facebook Page"
             case .linkdin:
-                return "LinkdIn"
+                return "LinkedIn"
             case .twitter:
                 return "Twitter"
             case .organizationName:
@@ -84,6 +85,8 @@ struct StringConstants {
                 return "Save and Continue"
             case .aboutOrganization:
                 return "Tell us about your Organization"
+            case .next:
+                return "Next"
             
             }
         }

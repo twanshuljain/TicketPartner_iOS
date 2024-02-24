@@ -472,7 +472,7 @@ class Arrow: UIView {
         }
     }
     
-    var arrowImage: UIImage? = UIImage(systemName: "chevron.down") {
+    var arrowImage: UIImage? = UIImage(systemName: "imgDropDown") {
         didSet {
             self.layer.contents = arrowImage?.cgImage
         }

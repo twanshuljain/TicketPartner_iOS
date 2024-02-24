@@ -76,11 +76,20 @@ extension OTPView {
         txtOtp3.text = ""
         txtOtp4.text = ""
         self.validateOTP(valid: true)
+        lblReceiveOtp.isHidden = false
         self.lblReceiveOtp.textColor = .black
         self.totalTime = 240
         self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
+    func resetField() {
+        txtOtp1.text = ""
+        txtOtp2.text = ""
+        txtOtp3.text = ""
+        txtOtp4.text = ""
+        self.btnResend.isHidden = true
+        lblReceiveOtp.isHidden = true
+    }
     
     @objc func updateTime() {
         self.btnResend.isHidden = true
