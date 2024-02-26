@@ -125,31 +125,34 @@ extension LoginViewController {
                 self.txtMobileNumber.addDoneButtonOnKeyboard()
                 // Defoult Country
                  // UI Changes---
-                self.imgCountry.image = nil
-                if self.imgCountry.image == nil {
-                    var str = ""
-                    var arr = viewModel.countriesModel.filter({$0.dial_code == str})
-                    
-                    if userModel.strDialCountryCode != nil && userModel.strDialCountryCode != ""{
-                        str = userModel.strDialCountryCode ?? ""
-                        arr = viewModel.countriesModel.filter({$0.dial_code == str})
-                        
-                        
-                        if !arr.indices.contains(0){
-                            //str = NSLocale.current.language.region?.identifier ?? ""
-                            str = self.getCurrentLanguageIdentifier() ?? ""
-                            arr = viewModel.countriesModel.filter({$0.country_code == str})
-                        }
-                    }else{
-                        //str = NSLocale.current.language.region?.identifier ?? ""
-                        str = self.getCurrentLanguageIdentifier() ?? ""
-                        arr = viewModel.countriesModel.filter({$0.country_code == str})
-                    }
-                    self.setPicker(str: str, arr: arr)
-                    
-                } else {
-                    // noting to do
-                }
+                /*
+//                self.imgCountry.image = nil
+//                if self.imgCountry.image == nil {
+//                    var str = ""
+//                    var arr = viewModel.countriesModel.filter({$0.dial_code == str})
+//
+//                    if userModel.strDialCountryCode != nil && userModel.strDialCountryCode != ""{
+//                        str = userModel.strDialCountryCode ?? ""
+//                        arr = viewModel.countriesModel.filter({$0.dial_code == str})
+//
+//
+//                        if !arr.indices.contains(0){
+//                            //str = NSLocale.current.language.region?.identifier ?? ""
+//                            str = self.getCurrentLanguageIdentifier() ?? ""
+//                            arr = viewModel.countriesModel.filter({$0.country_code == str})
+//                        }
+//                    }else{
+//                        //str = NSLocale.current.language.region?.identifier ?? ""
+//                        str = self.getCurrentLanguageIdentifier() ?? ""
+//                        arr = viewModel.countriesModel.filter({$0.country_code == str})
+//                    }
+//                    self.setPicker(str: str, arr: arr)
+//
+//                } else {
+//                    // noting to do
+//                }
+                  */
+                self.setPicker(str: "", arr: nil)
             }
             self.validateFields()
         } else {
