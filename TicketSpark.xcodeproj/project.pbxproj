@@ -17,6 +17,9 @@
 		183546A62B7CEB2700649EE2 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183546A52B7CEB2700649EE2 /* UIWindow+Extension.swift */; };
 		183546A92B7CF5F500649EE2 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183546A82B7CF5F500649EE2 /* SplashViewController.swift */; };
 		183546AB2B7CF96C00649EE2 /* Lato-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 183546AA2B7CF96C00649EE2 /* Lato-SemiBold.ttf */; };
+		1836ED4A2B8C71C000334E6E /* AddOrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836ED492B8C71C000334E6E /* AddOrganizerViewModel.swift */; };
+		1836ED4C2B8C75DF00334E6E /* AddOrganizerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836ED4B2B8C75DF00334E6E /* AddOrganizerModel.swift */; };
+		1836ED4F2B8CA95900334E6E /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836ED4E2B8CA95900334E6E /* ImagePickerManager.swift */; };
 		183765072B7A32A900CCE9F4 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765062B7A32A900CCE9F4 /* UIView+Extension.swift */; };
 		183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */; };
 		1846EFA52B835D3E0049BDC0 /* CreateAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846EFA42B835D3E0049BDC0 /* CreateAccountModel.swift */; };
@@ -103,6 +106,9 @@
 		183546A52B7CEB2700649EE2 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		183546A82B7CF5F500649EE2 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		183546AA2B7CF96C00649EE2 /* Lato-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-SemiBold.ttf"; sourceTree = "<group>"; };
+		1836ED492B8C71C000334E6E /* AddOrganizerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrganizerViewModel.swift; sourceTree = "<group>"; };
+		1836ED4B2B8C75DF00334E6E /* AddOrganizerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrganizerModel.swift; sourceTree = "<group>"; };
+		1836ED4E2B8CA95900334E6E /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		183765062B7A32A900CCE9F4 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		183765082B7A32CE00CCE9F4 /* UIColour+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColour+Extension.swift"; sourceTree = "<group>"; };
 		1846EFA42B835D3E0049BDC0 /* CreateAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountModel.swift; sourceTree = "<group>"; };
@@ -247,9 +253,18 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		1836ED4D2B8CA94D00334E6E /* ImagePickerManager */ = {
+			isa = PBXGroup;
+			children = (
+				1836ED4E2B8CA95900334E6E /* ImagePickerManager.swift */,
+			);
+			path = ImagePickerManager;
+			sourceTree = "<group>";
+		};
 		183765052B7A329000CCE9F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				1836ED4D2B8CA94D00334E6E /* ImagePickerManager */,
 				18DA0B532B7E20E4001DCF37 /* UserDefaultManager */,
 				18DA0B3F2B7E184E001DCF37 /* Validation */,
 				188F5C7F2B7DE5070039B86C /* Constants */,
@@ -351,6 +366,8 @@
 			isa = PBXGroup;
 			children = (
 				188F5C7D2B7BA0A00039B86C /* AddOrganizerVC.swift */,
+				1836ED492B8C71C000334E6E /* AddOrganizerViewModel.swift */,
+				1836ED4B2B8C75DF00334E6E /* AddOrganizerModel.swift */,
 			);
 			path = Organization;
 			sourceTree = "<group>";
@@ -683,6 +700,8 @@
 				18C71AD82B87523E001170C2 /* CreatEventVC.swift in Sources */,
 				18DA0B4C2B7E1E4D001DCF37 /* APIHandler.swift in Sources */,
 				181638C42B7B9CFE0020854C /* SignUpViewController.swift in Sources */,
+				1836ED4A2B8C71C000334E6E /* AddOrganizerViewModel.swift in Sources */,
+				1836ED4C2B8C75DF00334E6E /* AddOrganizerModel.swift in Sources */,
 				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,
 				1846EFA72B835E7F0049BDC0 /* CreateAccountViewModel.swift in Sources */,
 				18EF616E2B7B92C00074C959 /* CustomButton.swift in Sources */,
@@ -709,6 +728,7 @@
 				18DA0B452B7E187A001DCF37 /* ValidationConstantStrings.swift in Sources */,
 				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
 				18DA0B592B7E2C3E001DCF37 /* BottomAlert.swift in Sources */,
+				1836ED4F2B8CA95900334E6E /* ImagePickerManager.swift in Sources */,
 				1802DF8C2B7C9272008B25DB /* ForgotPasswordViewController.swift in Sources */,
 				186DA63C2B85DF0700F7EFB3 /* ForgotPasswordModel.swift in Sources */,
 				18EF615E2B7B60260074C959 /* FloatingTextField.swift in Sources */,

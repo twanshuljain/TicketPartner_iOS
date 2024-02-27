@@ -28,6 +28,10 @@ public enum APIName: String {
     case ForgotPasswordSendEmailOTP = "/auth/user/forgot-password/send/email/otp/"
     case ForgotPasswordVerifyOTP = "/auth/user/forgot-password/verify/email/otp/"
     
+    //MARK: - ORGANIZATION
+    case CreateOrganization = "/organization/create/organization/"
+    case UpdateOrganization = "/organization/about/info/organization/"
+    
 }
 public enum GroupApiName: String {
     case auth = "auth"
@@ -113,6 +117,103 @@ class APIHandler: NSObject {
         
        
       
+        print("\(request.httpMethod ?? "") \(request.url)")
+        let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
+        print("BODY \n \(str)")
+        print("HEADERS \n \(request.allHTTPHeaderFields)")
+        
+        session.dataTask(with: request) { data, response, error in
+            var httpStatusCode = 0
+            if let httpResponse = response as? HTTPURLResponse {
+                httpStatusCode = httpResponse.statusCode
+            }
+            if error != nil {
+                complition(.failure(error?.localizedDescription ?? "Something went wrong"))
+            } else {
+                if httpStatusCode == 401 {
+                    // Refresh Token
+                    if let fbData = data {
+                        let message = String(decoding: fbData, as: UTF8.self)
+                        complition(.failure(message))
+                    } else {
+                        let message = response?.url?.lastPathComponent
+                        complition(.failure("API \(message ?? "") Invalid Response."))
+                    }
+                } else if httpStatusCode == 200, let data = data {
+                    let JSON = self.nsdataToJSON(data: data as NSData)
+                    print("----------------JSON in APIClient", JSON)
+                    do {
+                        let responseModel = try JSONDecoder().decode(ResponseModal<T>.self, from: data)
+                        complition(.success(responseModel))
+                    }
+                    catch {
+                        print(error)
+                    }
+                } else {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data!, options: []) as! NSDictionary
+                        complition(.failure(json["message"] as? String ?? "something went wrong"))
+                    } catch {
+                        complition(.failure("Unable to get json."))
+                    }
+                }
+            }
+        }.resume()
+    }
+    
+    func executeRequestWithMultipartData<T: Codable>(of type: T.Type = T.self, apiName: APIName, parameters: AddOrganizerRequest?, methodType: MethodType,  authRequired: Bool = true, resetTokenKey: Bool? = false, resetKey: String? = "",  complition: @escaping(Result<ResponseModal<T>, Error>) -> Void) {
+        var finalURL = baseURL + apiName.rawValue
+        guard var requestURL = URL(string: finalURL) else {
+            complition(.failure("Incorrect request URL"))
+            return
+        }
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = methodType.rawValue
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var body = Data()
+        let name = parameters?.name ?? ""
+        let countryId = parameters?.countryId ?? 0
+        let organizationLogo = parameters?.organizationLogo ?? Data()
+        
+        // Name Data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"name\"\r\n\r\n")
+        body.append(name.data(using: .utf8)!)
+        body.append("\r\n")
+        
+        // Country ID
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"country_id\"\r\n\r\n")
+        body.append(String(countryId).data(using: .utf8)!)
+        body.append("\r\n")
+        
+        // Organization Logo Data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"organization_logo\"; filename=\"organization_logo.png\"\r\n")
+        body.append("Content-Type: organization_logo/png\r\n\r\n")
+        body.append(organizationLogo)
+        body.append("\r\n")
+        body.append("--\(boundary)--\r\n")
+        
+        request.httpBody = body
+        
+        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userAuthData)
+        
+        if authRequired, let token = userModel?.accessToken {
+            print("userModel?.accessToken........ ",userModel!.accessToken! )
+            request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+        }
+        
+        //FOR RESET PASSWORD
+        if resetTokenKey ?? false, let token = resetKey {
+            print("resetTokenKey........ ",token )
+            request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+        }
+        
+        
+        debugPrint("finalURL is \(finalURL)")
+        debugPrint("parameters is \(String(describing: parameters))")
         print("\(request.httpMethod ?? "") \(request.url)")
         let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
         print("BODY \n \(str)")

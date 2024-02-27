@@ -52,6 +52,7 @@ class RSCountryPickerController: BaseViewController,UITextFieldDelegate {
         self.tfSearchBar.addTarget(self, action: #selector(searchWorkersAsPerText(_ :)), for: .editingChanged)
         self.hideNavigationBar = true
         self.hideBackButton = false
+        self.configBackButton()
         self.title = "Select Country"
     }
     

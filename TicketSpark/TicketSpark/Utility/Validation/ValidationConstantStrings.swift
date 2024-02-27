@@ -38,4 +38,9 @@ class ValidationConstantStrings: NSObject {
     static let networkLost = "Check Network Availibilty"
     static let passwordValidationMessage = "Password must have at least 8 characters including 1 uppercase and 1 lowercase letter, 1 digit, and 1 special character"
     static let confirmPasswordValidationMessage = "Confirm Password must have at least 8 characters including 1 uppercase and 1 lowercase letter, 1 digit, and 1 special character"
+    
+    //ORGANISATION
+    static let organizationName = "Please enter organization name"
+    static let organizationCountry = "Please select country"
+    static let organizationImage = "Please select logo"
 }

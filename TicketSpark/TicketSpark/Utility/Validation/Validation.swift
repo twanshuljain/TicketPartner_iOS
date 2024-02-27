@@ -21,6 +21,9 @@ enum InputValidation: String {
     case signUpPassword
     case signUpConfirmPassword
     case confirmPassword
+    case organizationName
+    case organizationCountry
+    case organizationImage
 }
 enum ValidationType: String {
     case reqName = "reqName"
@@ -103,59 +106,16 @@ class Validation {
             return( text.isEmpty ? true :
                         text.count < 2 ? true : false,
                     text.isEmpty ? ValidationConstantStrings.emptyLastName : ValidationConstantStrings.invalidLastName)
-        }
-    }
-    
-    func organizerInputValidation(text: String, validationType: InputValidation) -> (Bool, String) {
-        switch validationType {
-        case .email:
-            return(
-                text.isEmpty ? true: Validation.shared.isValidEmail(emaiId: text) == false ? true: false,
-                text.isEmpty ? ValidationConstantStrings.emptyEmail:ValidationConstantStrings.emailInvalid)
-        case .number:
-            return(
-                text.isEmpty ? true:
-                    text.count < 4 ? true : false,
-                text.isEmpty ? ValidationConstantStrings.emptyNumber:ValidationConstantStrings.invalidNumber)
-        case .password:
-            return(
-                text.isEmpty ? true :
-                    text.count < 4 ? true : false,
-                text.isEmpty ? ValidationConstantStrings.emptyPassword : ValidationConstantStrings.invalidPassword)
-        case .signUpPassword:
-            return(
-                text.isEmpty ? true :
-                    text.count < 8 ? true : false,
-                text.isEmpty ? ValidationConstantStrings.emptyNewPassword : ValidationConstantStrings.invalidNewPassword)
-        case .signUpConfirmPassword:
-            return(
-                text.isEmpty ? true :
-                    text.count < 8 ? true : false,
-                text.isEmpty ? ValidationConstantStrings.emptyCurrentPassword : ValidationConstantStrings.invalidCurrentPassword)
-        case .confirmPassword:
-            return(
-                text.isEmpty ? true :
-                    text.count < 8 ? true : false,
-                text.isEmpty ? ValidationConstantStrings.emptyConfirmPassword : ValidationConstantStrings.invalidPassword)
-        case .name:
-            return( text.isEmpty ? true : false,
-                    text.isEmpty ? ValidationConstantStrings.emptyName : ValidationConstantStrings.invalidName)
-        case .description:
+        case .organizationName:
             return( text.isEmpty ? true :
-                        text.count > 140 ? true : false,
-                    text.isEmpty ? "AppConstant.emptyDescription": "AppConstant.invalidDescription")
-        case .otp:
-            return(text.isEmpty ? true :
-                    text.count < 4 ? true : false,
-                   text.isEmpty ? ValidationConstantStrings.emptyOtp : ValidationConstantStrings.invalidOtp)
-        case .firstname:
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.organizationName : ValidationConstantStrings.organizationName)
+        case .organizationCountry:
             return( text.isEmpty ? true :
-                        text.count < 2 ? true : false,
-                    text.isEmpty ? ValidationConstantStrings.emptyFirstName : ValidationConstantStrings.invalidFirstName)
-        case .lastname:
-            return( text.isEmpty ? true :
-                        text.count < 2 ? true : false,
-                    text.isEmpty ? ValidationConstantStrings.emptyLastName : ValidationConstantStrings.invalidLastName)
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.organizationCountry : ValidationConstantStrings.organizationCountry)
+        case .organizationImage:
+            return (true, "")
         }
     }
     
@@ -172,7 +132,7 @@ class Validation {
                     newPassword != confirmPassword ? true : false,
                 confirmPassword.isEmpty ? ValidationConstantStrings.emptyConfirmPassword : ValidationConstantStrings.invalidConfirmNewPassword)
         
-        case .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword:
+        case .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword, .organizationName, .organizationCountry, .organizationImage:
             break;
         }
         return (true,"")

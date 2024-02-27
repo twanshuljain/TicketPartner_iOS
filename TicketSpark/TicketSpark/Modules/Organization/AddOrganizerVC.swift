@@ -33,6 +33,11 @@ class AddOrganizerVC: BaseViewController {
     @IBOutlet weak var btnAddOrgaizer: UIButton!
     @IBOutlet weak var addOrgStackView: UIStackView!
     
+    @IBOutlet weak var btnCountryPicker: UIButton!
+    
+    
+    // MARK: - VARIABLES
+    var viewModel = AddOrganizerViewModel()
     var isToHideSocialOrganizationView: Bool = false {
         didSet {
                btnNext.isHidden = false
@@ -44,12 +49,19 @@ class AddOrganizerVC: BaseViewController {
                     self.stackOrganizationLogo.isHidden = false
                     self.stackSocialFeedView.isHidden = true
                     self.btnNext.title = StringConstants.AddOrganizer.next.value
+                    lblAboutOrganization.isHidden = false
+                    self.hideBackButton = true
+                   // btnCountryPicker.isHidden = true
                 } else {
                     self.stackOrganizationLogo.alpha = 0
                     self.stackSocialFeedView.alpha = 1
                     self.stackOrganizationLogo.isHidden = true
                     self.stackSocialFeedView.isHidden = false
                     self.btnNext.title = StringConstants.AddOrganizer.saveAndNext.value
+                    lblAboutOrganization.isHidden = false
+                    self.hideBackButton = false
+                   // btnCountryPicker.isHidden = false
+                    self.configBackButton()
                 }
 //            },
 //            completion: nil)
@@ -61,15 +73,25 @@ class AddOrganizerVC: BaseViewController {
         setFont()
         btnNext.actionSubmit = { [weak self] _ in
             if let self {
-                self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
+                //self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
+                if self.isToHideSocialOrganizationView {
+                    self.apiCall()
+                } else {
+                    self.hideBackButton = false
+                }
             }
         }
+    }
+    
+    override func popBack() {
+        self.isToHideSocialOrganizationView = true
     }
 
     func setUI() {
         self.addNavBarImage()
         self.hideBackButton = true
         stackOrganizationLogo.isHidden = true
+        lblAboutOrganization.isHidden = true
         btnNext.isHidden = true
         stackSocialFeedView.isHidden = true
         txtWebSiteView.lbl.text = StringConstants.AddOrganizer.website.value
@@ -96,7 +118,8 @@ class AddOrganizerVC: BaseViewController {
         lblSocialNetwork.font = CustomFont.shared.semiBold(sizeOfFont: 18)
         lblSocialNetwork.textColor = .appBlackTextColor
         txtOrganizationName.lbl.attributedText = StringConstants.AddOrganizer.organizationName.value.addAttributedString(highlightedString: "*")
-    
+        btnChangeLogo.addTarget(self, action:#selector(changeImage), for: .touchUpInside)
+      //  countryDropDown.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: openCountryPicker()))
     }
     
     func setFont() {
@@ -109,9 +132,82 @@ class AddOrganizerVC: BaseViewController {
         self.btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14.0)
     }
     
+    @objc func changeImage() {
+        ImagePickerManager().pickImage(self) {image in
+            self.imgViewLogo.image = image
+            //ImagePickerManager().openGallery(viewController: self)
+        }
+    }
+    
+     func openCountryPicker() {
+        self.view.endEditing(true)
+        let storyBoard = UIStoryboard(name: Storyboard.session.rawValue, bundle: nil)
+        if let sb = storyBoard.instantiateViewController(withIdentifier: "RSCountryPickerController") as? RSCountryPickerController {
+            sb.RScountryDelegate = self
+            //sb.strCheckCountry = self.viewModel.strCountryName
+            self.navigationController?.pushViewController(sb, animated: false)
+        }
+    }
+    
+    
+    func apiCall(){
+        let imgData = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
+        let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", imgData)
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.createOrganization(name: self.txtOrganizationName.txtFld.text ?? "", organizationLogo: UIImage(named: ImageConstants.Image.imgEyeHide.value)!, countryId: 1) { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            DispatchQueue.main.async {
+                               // self.hideBackButton = false
+                               // self.configBackButton()
+                                self.addOrgStackView.isHidden = true
+                                self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
+                                //self.isToHideSocialOrganizationView = true
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+               //self.showAlert(message: isValidate.0)
+            }
+        }
+    }
+    
     @IBAction func actionAddOrganizer(_ sender: UIButton) {
         addOrgStackView.isHidden = true
         self.isToHideSocialOrganizationView = true
     }
     
+    @IBAction func btnCountryPicketAction(_ sender: UIButton) {
+        self.openCountryPicker()
+    }
+    
+}
+// MARK: - Country Code
+extension AddOrganizerVC: RSCountrySelectedDelegate, UITextFieldDelegate {
+    func collectCountries() {
+        for country in viewModel.countries {
+            let code = country["code"] ?? ""
+            let name = country["name"] ?? ""
+            let dailcode = country["dial_code"] ?? ""
+            viewModel.countriesModel.append(CountryInfo(country_code:code, dial_code:dailcode, country_name:name))
+        }
+    }
+    func RScountrySelected(countrySelected country: CountryInfo) {
+        self.countryDropDown.text = country.country_name
+    }
 }
