@@ -168,11 +168,11 @@ class AddOrganizerVC: BaseViewController {
     
     func apiCallForAddOrganization(){
         let imgData = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
-        let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", imgData)
+        let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", self.imgViewLogo.image)
         if isValidate.1 {
             if Reachability.isConnectedToNetwork() {
                 LoadingIndicatorView.show()
-                self.viewModel.createOrganization(name: self.txtOrganizationName.txtFld.text ?? "", organizationLogo: UIImage(named: ImageConstants.Image.imgEyeHide.value)!, countryId: self.viewModel.selectedCountry?.id ?? 0) { isSuccess, response, msg in
+                self.viewModel.createOrganization(name: self.txtOrganizationName.txtFld.text ?? "", organizationLogo: self.imgViewLogo.image!, countryId: self.viewModel.selectedCountry?.id ?? 0) { isSuccess, response, msg in
                     DispatchQueue.main.async {
                         LoadingIndicatorView.hide()
                     }
@@ -212,7 +212,7 @@ class AddOrganizerVC: BaseViewController {
                         LoadingIndicatorView.hide()
                     }
                     if isSuccess {
-                        if let response = response {
+                        if let _ = response {
                             DispatchQueue.main.async {
                                 //MOVE TO NEXT VIEW
                                 self.showToast(with: msg ?? "success", position: .top, type: .success)

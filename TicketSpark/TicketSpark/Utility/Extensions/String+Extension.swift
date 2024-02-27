@@ -231,10 +231,10 @@ extension String {
     }
     func convertStringToDate(date: String) -> Date {
         let dateFormatter = DateFormatter()
-        let tempLocale = dateFormatter.locale // save locale temporarily
+        _ = dateFormatter.locale // save locale temporarily
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        var date = dateFormatter.date(from: date) ?? Date()
+        let date = dateFormatter.date(from: date) ?? Date()
         return date
     }
     func convertStringToDateForProfile(date: String) -> Date {
@@ -263,7 +263,7 @@ extension String {
         var components = self.components(separatedBy: " ")
         if components.count > 0 {
          firstName = components.removeFirst()
-         let lastName = components.joined(separator: " ")
+            _ = components.joined(separator: " ")
          debugPrint(firstName)
         }
         
@@ -274,7 +274,7 @@ extension String {
         var lastName = ""
         var components = self.components(separatedBy: " ")
         if components.count > 0 {
-         let firstName = components.removeFirst()
+            _ = components.removeFirst()
          lastName = components.joined(separator: " ")
          debugPrint(lastName)
         }
@@ -330,7 +330,7 @@ extension String {
     func addAttributedString(highlightedString: String, highlightedColor: UIColor? = .red) -> NSMutableAttributedString {
         let range = (self as NSString).range(of: highlightedString)
         let attributedString = NSMutableAttributedString(string: self)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: highlightedColor, range: range)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: highlightedColor ?? .red, range: range)
             return attributedString
     }
 }

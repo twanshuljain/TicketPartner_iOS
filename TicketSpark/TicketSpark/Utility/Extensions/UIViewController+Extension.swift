@@ -62,7 +62,7 @@ extension UIViewController {
     func getCurrentLanguageIdentifier() -> String? {
         let currentLocale = Locale.current
 
-        let languageCode = currentLocale.languageCode
+        _ = currentLocale.languageCode
         let regionCode = currentLocale.regionCode
 
         return regionCode

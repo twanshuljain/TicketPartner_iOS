@@ -24,7 +24,7 @@ extension AddOrganizerViewModel {
     
     public func validate(_ name:String,
                               _ country:String,
-                              _ logo:Data?) -> (String,Bool) {
+                              _ logo:UIImage?) -> (String,Bool) {
             if Validation.shared.textValidation(text: name, validationType: .organizationName).0 {
                 let errMsg = Validation.shared.textValidation(text: name, validationType: .organizationName).1
                 return (errMsg, false)
@@ -34,8 +34,12 @@ extension AddOrganizerViewModel {
                 let errMsg = Validation.shared.textValidation(text: country, validationType: .organizationCountry).1
                 return (errMsg, false)
             }
+        
+        if let img = logo, img == UIImage.init(systemName: "plus") {
+            return (ValidationConstantStrings.organizationImage, false)
+        }
              
-        guard let logo = logo else { return (ValidationConstantStrings.organizationImage, false) }
+       // guard let logo = logo else { return (ValidationConstantStrings.organizationImage, false) }
         
         return ("", true)
     }
