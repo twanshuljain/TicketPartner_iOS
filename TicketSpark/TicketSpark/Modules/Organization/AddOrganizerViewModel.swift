@@ -8,10 +8,13 @@
 import UIKit
 
 typealias AddOrganizationCompletion = (Bool,AddOrganizerModel?,String?)->Void
+typealias GetCountryListCompletion = (Bool,[CountryData]?,String?)->Void
+
 class AddOrganizerViewModel {
     // MARK: - VARIABLES
     var countriesModel = [CountryInfo]()
     var countries = [[String: String]]()
+    var organizerData:AddOrganizerModel?
     
 }
 
@@ -62,6 +65,21 @@ extension AddOrganizerViewModel {
         let param = UpdateOrganizerRequest(organizationId: organizationId, websiteUrl: websiteURL, facebookUrl: facebookURL, twitterUrl: twitterURL, linkedinUrl: linkedinURL)
         
         APIHandler.shared.executeRequestWith(apiName: .UpdateOrganization, parameters: param, methodType: .POST) { (result: Result<ResponseModal<AddOrganizerModel>, Error>) in
+            switch result {
+            case .success(let response):
+                if response.status_code == 200 {
+                    complition(true, response.data , response.message)
+                } else {
+                    complition(false,response.data, response.message ?? "error message")
+                }
+            case .failure(let error):
+                complition(false, nil, "\(error)")
+            }
+        }
+    }
+    
+    func getCountryList(complition:@escaping GetCountryListCompletion) {
+        APIHandler.shared.executeRequestWith(apiName: .GetAllCountry, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[CountryData]>, Error>) in
             switch result {
             case .success(let response):
                 if response.status_code == 200 {

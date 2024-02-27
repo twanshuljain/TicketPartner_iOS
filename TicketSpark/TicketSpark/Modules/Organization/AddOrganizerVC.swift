@@ -38,6 +38,16 @@ class AddOrganizerVC: BaseViewController {
     
     // MARK: - VARIABLES
     var viewModel = AddOrganizerViewModel()
+    var hideBackBtn: Bool = true {
+        didSet {
+            if hideBackBtn {
+                self.hideBackButton = true
+            } else {
+                self.hideBackButton = false
+                self.configBackButton()
+            }
+        }
+    }
     var isToHideSocialOrganizationView: Bool = false {
         didSet {
                btnNext.isHidden = false
@@ -50,7 +60,7 @@ class AddOrganizerVC: BaseViewController {
                     self.stackSocialFeedView.isHidden = true
                     self.btnNext.title = StringConstants.AddOrganizer.next.value
                     lblAboutOrganization.isHidden = false
-                    self.hideBackButton = true
+                    self.hideBackBtn = true
                    // btnCountryPicker.isHidden = true
                 } else {
                     self.stackOrganizationLogo.alpha = 0
@@ -59,9 +69,9 @@ class AddOrganizerVC: BaseViewController {
                     self.stackSocialFeedView.isHidden = false
                     self.btnNext.title = StringConstants.AddOrganizer.saveAndNext.value
                     lblAboutOrganization.isHidden = false
-                    self.hideBackButton = false
+                    self.hideBackBtn = false
                    // btnCountryPicker.isHidden = false
-                    self.configBackButton()
+                   // self.configBackButton()
                 }
 //            },
 //            completion: nil)
@@ -75,9 +85,10 @@ class AddOrganizerVC: BaseViewController {
             if let self {
                 //self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
                 if self.isToHideSocialOrganizationView {
-                    self.apiCall()
+                    self.apiCallForAddOrganization()
                 } else {
-                    self.hideBackButton = false
+                    self.hideBackBtn = false
+                    self.apiCallForOrganizationInfo()
                 }
             }
         }
@@ -89,7 +100,7 @@ class AddOrganizerVC: BaseViewController {
 
     func setUI() {
         self.addNavBarImage()
-        self.hideBackButton = true
+        self.hideBackBtn = true
         stackOrganizationLogo.isHidden = true
         lblAboutOrganization.isHidden = true
         btnNext.isHidden = true
@@ -150,7 +161,7 @@ class AddOrganizerVC: BaseViewController {
     }
     
     
-    func apiCall(){
+    func apiCallForAddOrganization(){
         let imgData = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
         let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", imgData)
         if isValidate.1 {
@@ -162,8 +173,9 @@ class AddOrganizerVC: BaseViewController {
                     }
                     if isSuccess {
                         if let response = response {
+                            self.viewModel.organizerData = response
                             DispatchQueue.main.async {
-                               // self.hideBackButton = false
+                               // self.hideBackBtn = false
                                // self.configBackButton()
                                 self.addOrgStackView.isHidden = true
                                 self.isToHideSocialOrganizationView = !self.isToHideSocialOrganizationView
@@ -185,6 +197,31 @@ class AddOrganizerVC: BaseViewController {
                //self.showAlert(message: isValidate.0)
             }
         }
+    }
+    
+    func apiCallForOrganizationInfo(){
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.updateOrganizationInfo(organizationId: self.viewModel.organizerData?.id ?? 0, websiteURL: self.txtWebSiteView.txtFld.text ?? "", facebookURL: self.txtFacebookPage.txtFld.text ?? "", twitterURL: self.txtTwitter.txtFld.text ?? "", linkedinURL: self.txtLinkdin.txtFld.text ?? "") { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            DispatchQueue.main.async {
+                                //MOVE TO NEXT VIEW
+                                self.showToast(with: msg ?? "success", position: .top, type: .success)
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
     }
     
     @IBAction func actionAddOrganizer(_ sender: UIButton) {

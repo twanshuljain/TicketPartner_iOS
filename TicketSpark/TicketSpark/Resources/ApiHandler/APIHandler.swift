@@ -31,7 +31,11 @@ public enum APIName: String {
     //MARK: - ORGANIZATION
     case CreateOrganization = "/organization/create/organization/"
     case UpdateOrganization = "/organization/about/info/organization/"
+    case GetAllCountry = "/default/data/all/country/"
     
+}
+// MARK: - EmptyModel
+struct EmptyModel: Codable {
 }
 public enum GroupApiName: String {
     case auth = "auth"
@@ -91,7 +95,7 @@ class APIHandler: NSObject {
         request.httpMethod = methodType.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userAuthData)
+        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
         
         if authRequired, let token = userModel?.accessToken {
             print("userModel?.accessToken........ ",userModel!.accessToken! )
@@ -198,7 +202,7 @@ class APIHandler: NSObject {
         
         request.httpBody = body
         
-        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userAuthData)
+        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
         
         if authRequired, let token = userModel?.accessToken {
             print("userModel?.accessToken........ ",userModel!.accessToken! )

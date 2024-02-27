@@ -44,8 +44,8 @@ struct AddOrganizerModel: Codable {
     var description, facebookURL, linkedinURL: String?
     var countryID: Int?
     var updatedAt: String?
-    var id: Int?
-    var updatedBy, userID: String?
+    var id, userID: Int?
+    var updatedBy : String?
     var organizationLogo: String
     var websiteURL, twitterURL: String?
 
@@ -62,5 +62,23 @@ struct AddOrganizerModel: Codable {
         case organizationLogo = "organization_logo"
         case websiteURL = "website_url"
         case twitterURL = "twitter_url"
+    }
+}
+
+// MARK: - Datum
+struct CountryData: Codable {
+    var countryName: String?
+    var isCaribbean: String?
+    var id: Int?
+    var isActive: Bool?
+    var sort, countryCode: String?
+
+    enum CodingKeys: String, CodingKey {
+        case countryName = "country_name"
+        case isCaribbean = "is_caribbean"
+        case id
+        case isActive = "is_active"
+        case sort
+        case countryCode = "country_code"
     }
 }

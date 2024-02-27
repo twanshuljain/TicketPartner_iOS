@@ -21,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIStoryboard(name: "Session", bundle: nil).instantiateInitialViewController()
-        window.makeKeyAndVisible()
+        //window.rootViewController = UIStoryboard(name: "Session", bundle: nil).instantiateInitialViewController()
+       // window.makeKeyAndVisible()
+        self.IsUserAlreadyLogin()
         
         return true
     }
@@ -55,6 +56,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
+    // MARK: - Check User Login
+    func IsUserAlreadyLogin(){
+        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
+        print("Get data",userModel?.email ?? "")
+        if userModel?.email != nil {
+            showOrganisation()
+        } else {
+            showIntroScreen()
+        }
+    }
+    
+    func  showOrganisation(){
+        let sb = UIStoryboard(name: Storyboard.organization.rawValue, bundle: Bundle.main)
+        let navController = sb.instantiateViewController(withIdentifier: "AddOrganizerNavigation") as? UINavigationController
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
+    }
+    func showIntroScreen(){
+        let sb = UIStoryboard(name: Storyboard.session.rawValue, bundle: Bundle.main)
+        let  navController = sb.instantiateViewController(withIdentifier: "SessionNavigation") as? UINavigationController
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
+    }
 
     // MARK: - Core Data Saving support
 

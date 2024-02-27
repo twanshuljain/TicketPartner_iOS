@@ -1309,7 +1309,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ksi-t2-ZRJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ANQ-42-cH9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SessionNavigation" automaticallyAdjustsScrollViewInsets="NO" id="ANQ-42-cH9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nnA-RM-uIb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
