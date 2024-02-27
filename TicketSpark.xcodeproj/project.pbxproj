@@ -54,6 +54,7 @@
 		18C71AD92B87523E001170C2 /* CreateEventStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AD52B87523E001170C2 /* CreateEventStepper.swift */; };
 		18C71ADA2B87523E001170C2 /* CreateEventStepper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71AD62B87523E001170C2 /* CreateEventStepper.xib */; };
 		18C9CB3C2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C9CB3B2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift */; };
+		18CA27D92B8E291C008829C7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA27D82B8E291B008829C7 /* Array+Extension.swift */; };
 		18DA0B3A2B7DF14A001DCF37 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA0B392B7DF14A001DCF37 /* SignUpViewModel.swift */; };
 		18DA0B3E2B7DFA43001DCF37 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA0B3D2B7DFA43001DCF37 /* UIViewController+Extension.swift */; };
 		18DA0B412B7E1857001DCF37 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DA0B402B7E1857001DCF37 /* Validation.swift */; };
@@ -145,6 +146,7 @@
 		18C71AD52B87523E001170C2 /* CreateEventStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventStepper.swift; sourceTree = "<group>"; };
 		18C71AD62B87523E001170C2 /* CreateEventStepper.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateEventStepper.xib; sourceTree = "<group>"; };
 		18C9CB3B2B85DD8C0066A5AE /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		18CA27D82B8E291B008829C7 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		18DA0B392B7DF14A001DCF37 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		18DA0B3D2B7DFA43001DCF37 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		18DA0B402B7E1857001DCF37 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				18DA0B3D2B7DFA43001DCF37 /* UIViewController+Extension.swift */,
 				18DA0B462B7E18D2001DCF37 /* String+Extension.swift */,
 				18DA0B512B7E1ED9001DCF37 /* UserDefaults+Extension.swift */,
+				18CA27D82B8E291B008829C7 /* Array+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C5F4E82B7F772000629656 /* RSCountryDialCode.swift in Sources */,
+				18CA27D92B8E291C008829C7 /* Array+Extension.swift in Sources */,
 				18C71AD82B87523E001170C2 /* CreatEventVC.swift in Sources */,
 				18DA0B4C2B7E1E4D001DCF37 /* APIHandler.swift in Sources */,
 				181638C42B7B9CFE0020854C /* SignUpViewController.swift in Sources */,

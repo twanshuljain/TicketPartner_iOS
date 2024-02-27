@@ -15,6 +15,7 @@ class AddOrganizerViewModel {
     var countriesModel = [CountryInfo]()
     var countries = [[String: String]]()
     var organizerData:AddOrganizerModel?
+    var selectedCountry : CountryInfo?
     
 }
 

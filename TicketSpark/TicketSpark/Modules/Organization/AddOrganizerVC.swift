@@ -61,6 +61,7 @@ class AddOrganizerVC: BaseViewController {
                     self.btnNext.title = StringConstants.AddOrganizer.next.value
                     lblAboutOrganization.isHidden = false
                     self.hideBackBtn = true
+                    self.btnCountryPicker.isHidden = false
                    // btnCountryPicker.isHidden = true
                 } else {
                     self.stackOrganizationLogo.alpha = 0
@@ -70,6 +71,7 @@ class AddOrganizerVC: BaseViewController {
                     self.btnNext.title = StringConstants.AddOrganizer.saveAndNext.value
                     lblAboutOrganization.isHidden = false
                     self.hideBackBtn = false
+                    self.btnCountryPicker.isHidden = true
                    // btnCountryPicker.isHidden = false
                    // self.configBackButton()
                 }
@@ -119,7 +121,7 @@ class AddOrganizerVC: BaseViewController {
         countryDropDown.placeholder = StringConstants.AddOrganizer.selectCountry.value
         countryDropDown.arrowImage = UIImage(systemName: "imgDropDown")
         countryDropDown.isSearchEnable = false
-        countryDropDown.optionArray = ["India", "Australia", "New Zealand", "Nepal", "Bhutan"]
+       // countryDropDown.optionArray = ["India", "Australia", "New Zealand", "Nepal", "Bhutan"]
         btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14)
         btnChangeLogo.titleLabel?.tintColor = .grayTextColor
         countryDropDown.font = CustomFont.shared.regular(sizeOfFont: 14)
@@ -152,9 +154,12 @@ class AddOrganizerVC: BaseViewController {
     
      func openCountryPicker() {
         self.view.endEditing(true)
+         self.viewModel.countriesModel = self.viewModel.countriesModel.removeDuplicates()
         let storyBoard = UIStoryboard(name: Storyboard.session.rawValue, bundle: nil)
         if let sb = storyBoard.instantiateViewController(withIdentifier: "RSCountryPickerController") as? RSCountryPickerController {
             sb.RScountryDelegate = self
+            sb.RScountriesModel = self.viewModel.countriesModel
+            sb.isFromOrganization = true
             //sb.strCheckCountry = self.viewModel.strCountryName
             self.navigationController?.pushViewController(sb, animated: false)
         }
@@ -167,7 +172,7 @@ class AddOrganizerVC: BaseViewController {
         if isValidate.1 {
             if Reachability.isConnectedToNetwork() {
                 LoadingIndicatorView.show()
-                self.viewModel.createOrganization(name: self.txtOrganizationName.txtFld.text ?? "", organizationLogo: UIImage(named: ImageConstants.Image.imgEyeHide.value)!, countryId: 1) { isSuccess, response, msg in
+                self.viewModel.createOrganization(name: self.txtOrganizationName.txtFld.text ?? "", organizationLogo: UIImage(named: ImageConstants.Image.imgEyeHide.value)!, countryId: self.viewModel.selectedCountry?.id ?? 0) { isSuccess, response, msg in
                     DispatchQueue.main.async {
                         LoadingIndicatorView.hide()
                     }
@@ -224,27 +229,47 @@ class AddOrganizerVC: BaseViewController {
             }
     }
     
+    func apiCallForGetAllCountry(){
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.getCountryList() { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            response.forEach { data in
+                                self.viewModel.countriesModel.append(CountryInfo(country_code: data.countryCode ?? "", dial_code: "", country_name: data.countryName ?? "", id: data.id ?? 0))
+                            }
+                            DispatchQueue.main.async {
+                                self.openCountryPicker()
+                            }
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+    }
+    
     @IBAction func actionAddOrganizer(_ sender: UIButton) {
         addOrgStackView.isHidden = true
         self.isToHideSocialOrganizationView = true
     }
     
     @IBAction func btnCountryPicketAction(_ sender: UIButton) {
-        self.openCountryPicker()
+        self.apiCallForGetAllCountry()
     }
     
 }
 // MARK: - Country Code
 extension AddOrganizerVC: RSCountrySelectedDelegate, UITextFieldDelegate {
-    func collectCountries() {
-        for country in viewModel.countries {
-            let code = country["code"] ?? ""
-            let name = country["name"] ?? ""
-            let dailcode = country["dial_code"] ?? ""
-            viewModel.countriesModel.append(CountryInfo(country_code:code, dial_code:dailcode, country_name:name))
-        }
-    }
     func RScountrySelected(countrySelected country: CountryInfo) {
+        self.viewModel.selectedCountry = country
         self.countryDropDown.text = country.country_name
     }
 }

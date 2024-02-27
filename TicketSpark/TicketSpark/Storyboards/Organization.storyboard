@@ -252,6 +252,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lv5-1y-AWJ">
+                                <rect key="frame" x="16" y="259" width="382" height="48"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="btnCountryPicketAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p9g-7x-3HZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="organizerbgColor"/>
@@ -261,12 +268,16 @@
                             <constraint firstItem="03T-D0-HXQ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="GOM-Y1-QZ5"/>
                             <constraint firstItem="Cds-Vv-27t" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="NPh-GJ-Ham"/>
                             <constraint firstItem="Cds-Vv-27t" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="XT4-Xk-G57"/>
+                            <constraint firstItem="lv5-1y-AWJ" firstAttribute="leading" secondItem="SFY-tV-Dan" secondAttribute="leading" id="cg3-jQ-8EH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="03T-D0-HXQ" secondAttribute="trailing" constant="16" id="guK-NZ-UUW"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="03T-D0-HXQ" secondAttribute="bottom" constant="15" id="h6G-7D-IS2"/>
                             <constraint firstItem="Cds-Vv-27t" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="20" id="hXG-X4-bga"/>
                             <constraint firstAttribute="trailing" secondItem="AWz-do-RzF" secondAttribute="trailing" id="ifs-hg-Xzj"/>
+                            <constraint firstItem="lv5-1y-AWJ" firstAttribute="top" secondItem="SFY-tV-Dan" secondAttribute="top" id="kSG-3a-kKe"/>
+                            <constraint firstItem="lv5-1y-AWJ" firstAttribute="trailing" secondItem="SFY-tV-Dan" secondAttribute="trailing" id="lhA-rn-DI3"/>
                             <constraint firstItem="AWz-do-RzF" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="vBh-qm-OcH"/>
                             <constraint firstItem="AWz-do-RzF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xAo-X2-Vbq"/>
+                            <constraint firstItem="lv5-1y-AWJ" firstAttribute="bottom" secondItem="SFY-tV-Dan" secondAttribute="bottom" id="xld-zs-BQD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Yi1-rv-kWs"/>
@@ -274,6 +285,7 @@
                         <outlet property="addOrgStackView" destination="Cds-Vv-27t" id="FVV-Gu-Rl1"/>
                         <outlet property="btnAddOrgaizer" destination="Mu9-UX-46V" id="jts-32-prv"/>
                         <outlet property="btnChangeLogo" destination="9D7-Gh-6BW" id="3Xx-28-cJv"/>
+                        <outlet property="btnCountryPicker" destination="lv5-1y-AWJ" id="WmM-V8-Gua"/>
                         <outlet property="btnNext" destination="5Qn-Iq-OeN" id="7BZ-Ms-ayn"/>
                         <outlet property="countryDropDown" destination="SFY-tV-Dan" id="TNe-QX-kYp"/>
                         <outlet property="imgViewLogo" destination="olF-sF-3Au" id="CLz-7a-OIb"/>

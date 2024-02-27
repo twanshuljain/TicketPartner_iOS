@@ -9,10 +9,11 @@ import Foundation
 
 import UIKit
 
-struct CountryInfo {
+struct CountryInfo : Hashable {
     let country_code : String
     let dial_code: String
     let country_name : String
+    var id : Int? = 0
     // let flag : UIImage
 }
 
@@ -35,6 +36,7 @@ class RSCountryPickerController: BaseViewController,UITextFieldDelegate {
     var RScountriesFiltered = [CountryInfo]()
     var RScountriesModel = [CountryInfo]()
     var strCheckCountry = ""
+    var isFromOrganization = false
     
     //App LifeCycle
     override func viewDidLoad() {
@@ -55,8 +57,6 @@ class RSCountryPickerController: BaseViewController,UITextFieldDelegate {
         self.configBackButton()
         self.title = "Select Country"
     }
-    
-   
 }
 
 //MARK:- Searching
@@ -86,11 +86,13 @@ extension RSCountryPickerController{
 extension RSCountryPickerController{
    
     func collectCountries() {
-        for country in countries  {
-            let code = country["code"] ?? ""
-            let name = country["name"] ?? ""
-            let dailcode = country["dial_code"] ?? ""
-            RScountriesModel.append(CountryInfo(country_code:code,dial_code:dailcode, country_name:name))
+        if !isFromOrganization {
+            for country in countries  {
+                let code = country["code"] ?? ""
+                let name = country["name"] ?? ""
+                let dailcode = country["dial_code"] ?? ""
+                RScountriesModel.append(CountryInfo(country_code:code,dial_code:dailcode, country_name:name))
+            }
         }
     }
     
@@ -226,6 +228,9 @@ extension RSCountryPickerController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if checkSearchBarActive() {
             return RScountriesFiltered.count
+        }
+        if self.isFromOrganization {
+            return RScountriesModel.count
         }
         return countries.count
     }
