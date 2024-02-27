@@ -123,6 +123,13 @@ extension UIColor {
     static let appIndigoSelectedColor: UIColor = {
         return UIColor(named: "appIndigoSelectedColor")!
     }()
+    static let lightGrayBgColor: UIColor = {
+        return UIColor(named: "lightGrayBgColor")!
+    }()
+    static let appBlueBGColor: UIColor = {
+        return UIColor(named: "appBlueBGColor")!
+    }()
     
 }
+
 
