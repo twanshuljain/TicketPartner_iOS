@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPView" customModule="TicketSpark" customModuleProvider="target">
             <connections>
+                <outlet property="btnResend" destination="8t9-Y5-EeZ" id="vw5-zz-dFh"/>
                 <outlet property="lblOTP" destination="Dyq-A2-L7Z" id="NZe-VD-slj"/>
                 <outlet property="lblReceiveOtp" destination="ICl-do-94F" id="LmB-MB-b0f"/>
                 <outlet property="txtOtp1" destination="dbx-KC-jfq" id="38S-nL-Cb1"/>
@@ -39,55 +41,94 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="30E-9P-2HF">
                             <rect key="frame" x="15" y="25" width="190" height="40"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dbx-KC-jfq" customClass="setCustomTextField" customModule="TicketSpark" customModuleProvider="target">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dbx-KC-jfq" customClass="CustomTextField" customModule="TicketSpark" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="RgR-VY-QWX"/>
                                         <constraint firstAttribute="width" constant="40" id="wCy-Az-F6X"/>
                                     </constraints>
-                                    <color key="textColor" name="EnterTxtFiled"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="jd8-5A-x1d"/>
+                                    </connections>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ozc-OW-QQS" customClass="setCustomTextField" customModule="TicketSpark" customModuleProvider="target">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ozc-OW-QQS" customClass="CustomTextField" customModule="TicketSpark" customModuleProvider="target">
                                     <rect key="frame" x="50" y="0.0" width="40" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="textColor" name="EnterTxtFiled"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="DX2-IV-hJk"/>
+                                    </connections>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZt-0c-rqE" customClass="setCustomTextField" customModule="TicketSpark" customModuleProvider="target">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZt-0c-rqE" customClass="CustomTextField" customModule="TicketSpark" customModuleProvider="target">
                                     <rect key="frame" x="100" y="0.0" width="40" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="textColor" name="EnterTxtFiled"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="Dil-XP-g9S"/>
+                                    </connections>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-OO-XO2" customClass="setCustomTextField" customModule="TicketSpark" customModuleProvider="target">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOW-OO-XO2" customClass="CustomTextField" customModule="TicketSpark" customModuleProvider="target">
                                     <rect key="frame" x="150" y="0.0" width="40" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" name="TiitleColourDarkBlue"/>
-                                    <color key="textColor" name="EnterTxtFiled"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="Ndg-Fn-p9T"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will receive OTP in 4:00s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-do-94F">
-                            <rect key="frame" x="15" y="85" width="179.66666666666666" height="100"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8t9-Y5-EeZ">
+                            <rect key="frame" x="15" y="85" width="135" height="99"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hny-cf-636"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Not received yet?">
+                                        <attributes>
+                                            <color key="NSColor" red="0.41568627450980389" green="0.42745098039215684" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="Lato-SemiBold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="12" name="Lato-SemiBold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Resend">
+                                        <attributes>
+                                            <color key="NSColor" red="0.45882352941176469" green="0.34901960784313724" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="12" name="Lato-SemiBold"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                        </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will receive OTP in 4:00s" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-do-94F">
+                            <rect key="frame" x="15" y="85" width="179.66666666666666" height="99"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="hRK-QH-kgK"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                             <color key="textColor" red="0.35294117650000001" green="0.40784313729999999" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -96,10 +137,13 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="ICl-do-94F" firstAttribute="top" secondItem="30E-9P-2HF" secondAttribute="bottom" constant="20" id="E4P-YQ-Txo"/>
+                        <constraint firstAttribute="bottom" secondItem="8t9-Y5-EeZ" secondAttribute="bottom" constant="1" id="MPM-dG-tRw"/>
                         <constraint firstItem="Dyq-A2-L7Z" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="NCL-Fq-EAZ"/>
                         <constraint firstItem="Dyq-A2-L7Z" firstAttribute="top" secondItem="8R0-zj-El8" secondAttribute="top" constant="5" id="O1w-7q-YVm"/>
-                        <constraint firstAttribute="bottom" secondItem="ICl-do-94F" secondAttribute="bottom" id="Pzs-fH-tHe"/>
+                        <constraint firstItem="8t9-Y5-EeZ" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="Pom-EQ-3wN"/>
+                        <constraint firstAttribute="bottom" secondItem="ICl-do-94F" secondAttribute="bottom" constant="1" id="Pzs-fH-tHe"/>
                         <constraint firstItem="ICl-do-94F" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="ePr-B1-2Pe"/>
+                        <constraint firstItem="8t9-Y5-EeZ" firstAttribute="top" secondItem="30E-9P-2HF" secondAttribute="bottom" constant="20" id="gQt-8R-xbR"/>
                         <constraint firstItem="30E-9P-2HF" firstAttribute="leading" secondItem="8R0-zj-El8" secondAttribute="leading" constant="15" id="hRe-fN-I0n"/>
                         <constraint firstItem="30E-9P-2HF" firstAttribute="top" secondItem="Dyq-A2-L7Z" secondAttribute="bottom" constant="5" id="wGH-Vz-zVh"/>
                     </constraints>
@@ -118,9 +162,6 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="EnterTxtFiled">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="TiitleColourDarkBlue">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

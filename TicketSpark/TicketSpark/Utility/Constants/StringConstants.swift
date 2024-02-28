@@ -8,48 +8,38 @@
 import Foundation
 struct StringConstants {
     enum Login {
-        case registerNow
-        case typeHere
-        case forgotPIN
-        case loginToNagad
-        case enterMobile
-        case enterPin
-        case mobileNumberError
-        case exit
-        case downloadQR
-        case shareQR
-        case myQR
-        case loginRegister
-        case pinError
+        case enterOTP
+        case otpNotReceived
+        case invalidOTP
         
         var value: String {
             switch self {
-            case .registerNow:
-                return "registor_now"
-            case .typeHere:
-                return "Type here"
-            case .forgotPIN:
-                return "Forgot PIN"
-            case .loginToNagad:
-                return "Log in to Nagad account"
-            case .enterMobile:
-                return "Enter mobile number"
-            case .enterPin:
-                return "Enter pin"
-            case .mobileNumberError:
-                return "Please input correct mobile number"
-            case .exit:
-                return "EXIT"
-            case .downloadQR:
-                return "Download QR"
-            case .shareQR:
-                return "Share QR"
-            case .myQR:
-                return "My QR Code"
-            case .loginRegister:
-                return "LOG IN/REGISTER"
-            case .pinError:
-                return "Pin Should be 4 or 5 digit long"
+            case .enterOTP:
+                return "Please enter otp"
+            case .otpNotReceived:
+                return "Not received yet? Resend"
+            case .invalidOTP:
+                return "Invalid OTP"
+            }
+        }
+    }
+    
+    enum ForgotPassword {
+        case reset
+        case continueTitle
+        case sendLinkSuccess
+        case invalidOTP
+        
+        var value: String {
+            switch self {
+            case .reset:
+                return "Reset"
+            case .continueTitle:
+                return "Continue"
+            case .sendLinkSuccess:
+                return "Your reset password link has been sent to your registered email address. Please check your email."
+            case .invalidOTP:
+                return "Invalid OTP. Please try again"
             }
         }
     }
@@ -67,6 +57,7 @@ struct StringConstants {
         case selectCountry
         case saveAndNext
         case aboutOrganization
+        case next
        
         var value: String {
             switch self {
@@ -75,7 +66,7 @@ struct StringConstants {
             case .facebookPage:
                 return "Facebook Page"
             case .linkdin:
-                return "LinkdIn"
+                return "LinkedIn"
             case .twitter:
                 return "Twitter"
             case .organizationName:
@@ -94,6 +85,8 @@ struct StringConstants {
                 return "Save and Continue"
             case .aboutOrganization:
                 return "Tell us about your Organization"
+            case .next:
+                return "Next"
             
             }
         }
@@ -219,4 +212,61 @@ struct StringConstants {
             }
         }
     }
+}
+
+struct ImageConstants {
+    enum Image {
+        case imgEyeOpen
+        case imgEyeHide
+        case imgError
+        case imgRadioSelected
+        case imgRadioUnselected
+        case imgCheckboxSelected
+        case imgCheckboxUnselected
+        case imgLogo
+        case imgNavStar
+        
+        var value: String {
+            switch self {
+            case .imgEyeOpen:
+                return "imgEyeOpen"
+            case .imgEyeHide:
+                return "imgEyeHide"
+            case .imgError:
+                return "imgError"
+            case .imgRadioSelected:
+                return "imgRadioSelected"
+            case .imgRadioUnselected:
+                return "imgRadioUnselected"
+            case .imgCheckboxSelected:
+                return "imgCheckboxSelected"
+            case .imgCheckboxUnselected:
+                return "imgCheckboxUnselected"
+            case .imgLogo:
+                return "img_logo"
+            case .imgNavStar:
+                return "img_nav_star"
+            }
+        }
+    }
+}
+
+
+enum Storyboard: String {
+    case main = "Main"
+    case createEvent = "CreateEvent"
+    case session = "Session"
+    case addOrganizerTab =  "AddOrganizerTab"
+    case organization = "Organization"
+}
+
+enum StoryboardIdentifier: String {
+    //Session
+    case SplashViewController
+    case LoginViewController
+    case SignUpViewController
+    case CreateAccountViewController
+    case ForgotPasswordViewController
+    case ResetPasswordViewController
+    case RSCountryPickerController
 }

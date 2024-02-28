@@ -18,18 +18,29 @@ class ResetPasswordViewController: BaseViewController {
     @IBOutlet weak var btnReset: UIButton!
     
     // MARK: - VARIABLES
-    let popOverView = PopOverView()
-    let window = UIApplication.shared.keyWindow!
+    var viewModel = ResetPasswordViewModel()
+    var btnResetEnabled = false {
+        didSet {
+            if btnResetEnabled {
+                self.btnReset.isEnabled = true
+                self.btnReset.alpha = 1
+            }  else {
+                self.btnReset.isEnabled = false
+                self.btnReset.alpha = 0.5
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initSetup()
+        self.hideNavBarImage = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.addPopOverView()
-        self.popOverView.isHidden = true
+        self.viewModel.popOverView.isHidden = true
     }
 }
 
@@ -51,33 +62,85 @@ extension ResetPasswordViewController {
     }
     
     func addPopOverView() {
-        window.removePopOverView
-        window.addSubview(self.popOverView)
-        self.popOverView.frame = window.bounds
+        viewModel.window.removePopOverView
+        viewModel.window.addSubview(self.viewModel.popOverView)
+        self.viewModel.popOverView.frame = viewModel.window.bounds
     }
     
     func setUpAction() {
-        self.popOverView.btnPop.addTarget(self,action:#selector(popOverViewAction), for:.touchUpInside)
+        self.viewModel.popOverView.btnPop.addTarget(self,action:#selector(popOverViewAction), for:.touchUpInside)
+        [txtNewPassword, txtConfirmPassword].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
     }
     
     func setUpView() {
-        self.popOverView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        self.popOverView.lblMsg.text = "Your password has been reset successfully"
+        self.viewModel.popOverView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.viewModel.popOverView.lblMsg.text = "Your password has been reset successfully"
+        self.validateFields()
     }
     
     @objc func popOverViewAction() {
         self.navigationController?.viewControllers.forEach({ vc in
             if vc is LoginViewController {
-                self.popOverView.isHidden = !self.popOverView.isHidden
+                self.viewModel.popOverView.isHidden = !self.viewModel.popOverView.isHidden
                 self.navigationController?.popToViewController(vc as! LoginViewController, animated: false)
             }
         })
+    }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        self.validateFields()
+    }
+    
+    func validateFields() {
+        guard
+            let newPass = txtNewPassword.text, !newPass.isEmpty,
+            let confirmPass = txtConfirmPassword.text, !confirmPass.isEmpty
+        else {
+            self.btnResetEnabled = false
+            return
+        }
+        self.btnResetEnabled = true
+    }
+    
+    func resetPassword() {
+        let isValidate = viewModel.validateFields(self.txtNewPassword.text ?? "", self.txtConfirmPassword.text ?? "")
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.resetPasswordAPI(self.txtNewPassword.text ?? "", self.txtConfirmPassword.text ?? "", resetToken: self.viewModel.resetPasswordRequest?.resetToken ?? "") { isSuccess, data, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                            DispatchQueue.main.async {
+                                self.viewModel.popOverView.isHidden = !self.viewModel.popOverView.isHidden
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+            }
+        }
     }
 }
 
 // MARK: - ACTIONS
 extension ResetPasswordViewController {
     @IBAction func btnResetAction(_ sender: UIButton) {
-        self.popOverView.isHidden = !self.popOverView.isHidden
+        self.resetPassword()
     }
 }

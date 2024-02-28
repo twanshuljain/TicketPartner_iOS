@@ -33,6 +33,7 @@ class CustomTextFieldView: UIView {
         self.layer.masksToBounds = true
           addPadding()
           setUI()
+          self.setFont()
         
     }
     func setUI() {
@@ -42,6 +43,12 @@ class CustomTextFieldView: UIView {
         txtFld.font = CustomFont.shared.regular(sizeOfFont: 14)
         txtFld.textColor = .appBlackTextColor
     }
+    
+    func setFont() {
+        self.lbl.font = CustomFont.shared.medium(sizeOfFont: 14.0)
+        self.txtFld.font = CustomFont.shared.regular(sizeOfFont: 16.0)
+    }
+    
     private func addPadding() {
        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         txtFld.leftView = paddingView
