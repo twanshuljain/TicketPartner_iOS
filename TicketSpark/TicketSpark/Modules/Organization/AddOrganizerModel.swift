@@ -20,6 +20,7 @@ struct AddOrganizerRequest: Codable {
     
 }
 
+
 struct UpdateOrganizerRequest: Codable {
     var organizationId: Int?
     var websiteUrl: String?

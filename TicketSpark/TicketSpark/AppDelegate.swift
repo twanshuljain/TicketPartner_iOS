@@ -62,7 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
         print("Get data",userModel?.email ?? "")
         if userModel?.email != nil {
-            showOrganisation()
+            //showOrganisation()
+            setRootToDashboardVC()
         } else {
             showIntroScreen()
         }
@@ -81,6 +82,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
 
+    func setRootToDashboardVC(){
+        let sb = UIStoryboard.init(name: Storyboard.addOrganizerTab.rawValue, bundle: nil)
+        guard let objHomeViewController = sb.instantiateViewController(withIdentifier: StoryboardIdentifier.DashboardTabBarController.rawValue) as? DashboardTabBarController else {
+            return
+        }
+        
+        let navController = sb.instantiateViewController(withIdentifier: "DashboardNavigation") as? UINavigationController
+        navController?.isNavigationBarHidden = true
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
+    }
+    
     // MARK: - Core Data Saving support
 
     func saveContext () {

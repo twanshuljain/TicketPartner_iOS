@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eww-C4-hfJ">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -10,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add OrganizerVC-->
+        <!--Dashboard-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="AddOrganizerVC" id="Y6W-OH-hqX" customClass="AddOrganizerVC" customModule="TicketSpark" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddOrganizerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="AddOrganizerVC" customModule="TicketSpark" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,7 +279,9 @@
                             <constraint firstItem="lv5-1y-AWJ" firstAttribute="bottom" secondItem="SFY-tV-Dan" secondAttribute="bottom" id="xld-zs-BQD"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="ic_dashboard" id="w7W-Ki-7t1"/>
                     <navigationItem key="navigationItem" id="Yi1-rv-kWs"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addOrgStackView" destination="Cds-Vv-27t" id="FVV-Gu-Rl1"/>
                         <outlet property="btnAddOrgaizer" destination="Mu9-UX-46V" id="jts-32-prv"/>
@@ -312,7 +313,7 @@
         <!--Navigation Controller-->
         <scene sceneID="S0h-Ub-drg">
             <objects>
-                <navigationController storyboardIdentifier="AddOrganizerNavigation" automaticallyAdjustsScrollViewInsets="NO" id="eww-C4-hfJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AddOrganizerNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eww-C4-hfJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pEh-Hl-RIc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -330,6 +331,7 @@
     </scenes>
     <resources>
         <image name="ic_changeLogo" width="20.333333969116211" height="20"/>
+        <image name="ic_dashboard" width="24.333333969116211" height="24"/>
         <image name="imgDropDown" width="24" height="24.333333969116211"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="PlaceHolder">
