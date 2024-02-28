@@ -62,7 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
         print("Get data",userModel?.email ?? "")
         if userModel?.email != nil {
-            showOrganisation()
+            //showOrganisation()  //Will uncomment when logout is enabled
+            showIntroScreen()
         } else {
             showIntroScreen()
         }
