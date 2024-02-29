@@ -129,6 +129,8 @@ struct StringConstants {
         case minimum
         case maximum
         case enterTicketPerUser
+        case edit
+        case delete
        var value: String {
             switch self {
             case .selectEventType:
@@ -203,6 +205,10 @@ struct StringConstants {
                 return "Maximum"
             case .enterTicketPerUser:
                 return "Enter ticket per user"
+            case .edit:
+                return "Edit"
+            case .delete:
+                return "Delete"
             }
         }
     }
@@ -263,4 +269,8 @@ enum StoryboardIdentifier: String {
     case ForgotPasswordViewController
     case ResetPasswordViewController
     case RSCountryPickerController
+    
+    
+    //Organization
+    case DashboardTabBarController
 }
