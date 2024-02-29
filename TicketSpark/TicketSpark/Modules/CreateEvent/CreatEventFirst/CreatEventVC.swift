@@ -108,7 +108,6 @@ class CreatEventVC: BaseViewController {
         lblDisplayEndTime.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblDateTime.font = CustomFont.shared.semiBold(sizeOfFont: 18)
         lblLocation.font = CustomFont.shared.semiBold(sizeOfFont: 18)
-        viewOrganizationLogo.addDashedBorder(dottedColor: .blueDottedColor)
         txtDrpEventType.text = StringConstants.CreateEvent.selectEventType.value
         txtDrpEventType.optionArray = ["Hardy Sandu", "KK", "AR Rehman", "Arjit singh"]
         let text = StringConstants.CreateEvent.eventName.value + "*"

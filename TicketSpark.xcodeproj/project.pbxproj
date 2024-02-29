@@ -48,6 +48,7 @@
 		18C71AE32B876108001170C2 /* TicketCreatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */; };
 		18C71AEA2B87861D001170C2 /* TicketEventListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */; };
 		18C71AEB2B87861D001170C2 /* TicketEventListTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */; };
+		18D7B8002B906B07003B2EFD /* RectangleDashedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */; };
 		18E47A7E2B8F13140078D89A /* AddOrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */; };
 		18E47A7F2B8F13140078D89A /* AddOrganizerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E47A7D2B8F13140078D89A /* AddOrganizerModel.swift */; };
 		18E47A982B8F13B50078D89A /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E47A842B8F13B40078D89A /* LoadingIndicatorView.swift */; };
@@ -155,6 +156,7 @@
 		18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCreatViewModel.swift; sourceTree = "<group>"; };
 		18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEventListTableVC.swift; sourceTree = "<group>"; };
 		18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketEventListTableVC.xib; sourceTree = "<group>"; };
+		18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDashedBorder.swift; sourceTree = "<group>"; };
 		18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddOrganizerViewModel.swift; sourceTree = "<group>"; };
 		18E47A7D2B8F13140078D89A /* AddOrganizerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddOrganizerModel.swift; sourceTree = "<group>"; };
 		18E47A842B8F13B40078D89A /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 		18EF614A2B7B51E50074C959 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */,
 				18E47AA52B8F143D0078D89A /* CustomSetpper */,
 				18E47AA42B8F14340078D89A /* BottomSheet */,
 				18E47A882B8F13B40078D89A /* Country Picker */,
@@ -844,6 +847,7 @@
 				18C71AEA2B87861D001170C2 /* TicketEventListTableVC.swift in Sources */,
 				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,
 				18E47AC92B8F16CB0078D89A /* FileUploader.swift in Sources */,
+				18D7B8002B906B07003B2EFD /* RectangleDashedBorder.swift in Sources */,
 				18E47A9A2B8F13B50078D89A /* BottomAlert.swift in Sources */,
 				18EF616E2B7B92C00074C959 /* CustomButton.swift in Sources */,
 				18E47ACA2B8F16CB0078D89A /* ResponseModal.swift in Sources */,

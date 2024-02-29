@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ao-wB-RpU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Ao-wB-RpU">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -78,7 +79,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvC-T7-OlJ">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvC-T7-OlJ" customClass="RectangularDashedView" customModule="TicketSpark" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="30.333333333333314" width="361" height="165"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4zO-he-HeB">
@@ -113,6 +114,23 @@
                                                                     <constraint firstItem="4zO-he-HeB" firstAttribute="centerY" secondItem="wvC-T7-OlJ" secondAttribute="centerY" id="TUe-mR-5d4"/>
                                                                     <constraint firstAttribute="height" constant="165" id="hkx-e9-z2w"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="dashColor">
+                                                                        <color key="value" name="blueDottedColor"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="dashWidth">
+                                                                        <real key="value" value="2.5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="dashLength">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="betweenDashesSpace">
+                                                                        <real key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
@@ -746,7 +764,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="Hyb-RO-vr0"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5au-b9-E68">
-                                <rect key="frame" x="0.0" y="761" width="393" height="1"/>
+                                <rect key="frame" x="0.0" y="678" width="393" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="yjE-5T-tT5"/>
@@ -756,7 +774,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="di4-84-vQZ">
-                                <rect key="frame" x="0.0" y="762" width="393" height="90"/>
+                                <rect key="frame" x="0.0" y="679" width="393" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CA9-ie-bEL" customClass="NextButton" customModule="TicketSpark" customModuleProvider="target">
                                         <rect key="frame" x="16" y="16" width="361" height="48"/>
@@ -780,7 +798,7 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="di4-84-vQZ" secondAttribute="trailing" id="1hb-13-LdG"/>
                             <constraint firstAttribute="bottom" secondItem="yZX-ry-obT" secondAttribute="bottom" id="58o-aq-E5W"/>
-                            <constraint firstAttribute="bottom" secondItem="di4-84-vQZ" secondAttribute="bottom" id="D6K-cD-XBn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="di4-84-vQZ" secondAttribute="bottom" id="D6K-cD-XBn"/>
                             <constraint firstItem="5au-b9-E68" firstAttribute="leading" secondItem="di4-84-vQZ" secondAttribute="leading" id="MvK-Zz-pG1"/>
                             <constraint firstItem="di4-84-vQZ" firstAttribute="top" secondItem="5au-b9-E68" secondAttribute="bottom" id="QjZ-eI-ceR"/>
                             <constraint firstItem="yZX-ry-obT" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Tfq-KH-0Eg"/>
@@ -1544,6 +1562,9 @@
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <namedColor name="appIndigoSelectedColor">
             <color red="0.45882352941176469" green="0.34901960784313724" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blueDottedColor">
+            <color red="0.17647058823529413" green="0.61176470588235299" blue="0.85882352941176465" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="grayTextColor">
             <color red="0.41568627450980394" green="0.42745098039215684" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
