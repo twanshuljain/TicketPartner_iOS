@@ -371,9 +371,7 @@ extension LoginViewController {
     }
     
     func navigateToOrganizer() {
-        let storyBoard = UIStoryboard.init(name: Storyboard.organization.rawValue, bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "AddOrganizerVC") as! AddOrganizerVC
-        self.navigationController?.pushViewController(vc, animated: false)
+        AppShareData.shared.setRootToDashboardVC()
     }
 }
 

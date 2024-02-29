@@ -12,19 +12,22 @@ struct TicketTypeModel {
     var isSelected: Bool = false
 }
 class TicketCreateViewModel {
-    
+    // MARK: - Variables
     var ticketType: [TicketTypeModel] = []
 //    ["Paid Ticket", "Free Ticket", "Group", "Donation"]
     var numberOfRow: Int {
         return ticketType.count
     }
-    
-    func getItems(at index: Int) -> TicketTypeModel {
-        return ticketType[index]
-    }
     init() {
         appendTicketType()
     }
+}
+// MARK: - Functions
+extension TicketCreateViewModel {
+    func getItems(at index: Int) -> TicketTypeModel {
+        return ticketType[index]
+    }
+    
     func appendTicketType() {
         let paid = TicketTypeModel(ticketType: "Paid Ticket")
         let freeTicket = TicketTypeModel(ticketType: "Free Ticket")

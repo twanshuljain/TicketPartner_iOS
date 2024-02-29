@@ -167,7 +167,7 @@ class AddOrganizerVC: BaseViewController {
     
     
     func apiCallForAddOrganization(){
-        let imgData = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
+        let _ = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
         let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", self.imgViewLogo.image)
         if isValidate.1 {
             if Reachability.isConnectedToNetwork() {

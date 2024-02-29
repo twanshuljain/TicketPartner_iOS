@@ -43,7 +43,7 @@ class CreateAccountViewController: BaseViewController {
     
     // MARK: - VARIABLES
     let popOverView = PopOverView()
-    let window = UIApplication.shared.keyWindow!
+   // let window = UIApplication.shared.keyWindow!
     let viewModel = CreateAccountViewModel()
     var verifyEmailBtnEnabled = false {
         didSet {
@@ -137,9 +137,9 @@ extension CreateAccountViewController {
     }
     
     func addPopOverView() {
-        window.removePopOverView
-        window.addSubview(self.popOverView)
-        self.popOverView.frame = window.bounds
+        window?.removePopOverView
+        window?.addSubview(self.popOverView)
+        self.popOverView.frame = window?.bounds ?? .zero
     }
     
     func setText() {
@@ -485,10 +485,8 @@ extension CreateAccountViewController {
                         LoadingIndicatorView.hide()
                     }
                     if isSuccess {
-                        if var signUpData = signUpData {
-                            DispatchQueue.main.async {
-                                self.popOverView.isHidden = !self.popOverView.isHidden
-                            }
+                        DispatchQueue.main.async {
+                            self.popOverView.isHidden = !self.popOverView.isHidden
                         }
                     } else {
                         DispatchQueue.main.async {

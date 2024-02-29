@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let shared = AppDelegate()
     
     private override init() { }
-    var window: UIWindow!
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //window.rootViewController = UIStoryboard(name: "Session", bundle: nil).instantiateInitialViewController()
        // window.makeKeyAndVisible()
-        self.IsUserAlreadyLogin()
+        AppShareData.shared.IsUserAlreadyLogin()
         
         return true
     }
@@ -57,42 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
-    // MARK: - Check User Login
-    func IsUserAlreadyLogin(){
-        let userModel = UserDefaultManager.share.getModelDataFromUserDefults(userData: SignInAuthModel.self, key: .userData)
-        print("Get data",userModel?.email ?? "")
-        if userModel?.email != nil {
-            //showOrganisation()
-            setRootToDashboardVC()
-        } else {
-            showIntroScreen()
-        }
-    }
-    
-    func  showOrganisation(){
-        let sb = UIStoryboard(name: Storyboard.organization.rawValue, bundle: Bundle.main)
-        let navController = sb.instantiateViewController(withIdentifier: "AddOrganizerNavigation") as? UINavigationController
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
-    }
-    func showIntroScreen(){
-        let sb = UIStoryboard(name: Storyboard.session.rawValue, bundle: Bundle.main)
-        let  navController = sb.instantiateViewController(withIdentifier: "SessionNavigation") as? UINavigationController
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
-    }
-
-    func setRootToDashboardVC(){
-        let sb = UIStoryboard.init(name: Storyboard.addOrganizerTab.rawValue, bundle: nil)
-        guard let objHomeViewController = sb.instantiateViewController(withIdentifier: StoryboardIdentifier.DashboardTabBarController.rawValue) as? DashboardTabBarController else {
-            return
-        }
-        
-        let navController = sb.instantiateViewController(withIdentifier: "DashboardNavigation") as? UINavigationController
-        navController?.isNavigationBarHidden = true
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
-    }
     
     // MARK: - Core Data Saving support
 

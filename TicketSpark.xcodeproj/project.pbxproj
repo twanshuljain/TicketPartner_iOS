@@ -29,11 +29,11 @@
 		185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185971852B7A52DE00175D84 /* GoogleSignInView.swift */; };
 		185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65BF2B72435C00FEC922 /* AppDelegate.swift */; };
 		185E65C42B72435C00FEC922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C32B72435C00FEC922 /* ViewController.swift */; };
-		185E65C72B72435C00FEC922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65C52B72435C00FEC922 /* Main.storyboard */; };
 		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
 		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
 		1874E2292B85E38B00DA4F1F /* TicketsCreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */; };
+		187C28A72B909B340082C458 /* AppShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C28A62B909B340082C458 /* AppShareData.swift */; };
 		188F5C782B7B98F00039B86C /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C762B7B98F00039B86C /* OTPView.swift */; };
 		188F5C792B7B98F00039B86C /* OTPView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C772B7B98F00039B86C /* OTPView.xib */; };
 		188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */; };
@@ -136,12 +136,12 @@
 		185E65BC2B72435C00FEC922 /* TicketSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicketSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		185E65BF2B72435C00FEC922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		185E65C32B72435C00FEC922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		185E65C62B72435C00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketSpark.xcdatamodel; sourceTree = "<group>"; };
 		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCreateEventVC.swift; sourceTree = "<group>"; };
+		187C28A62B909B340082C458 /* AppShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShareData.swift; sourceTree = "<group>"; };
 		188F5C762B7B98F00039B86C /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		188F5C772B7B98F00039B86C /* OTPView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPView.xib; sourceTree = "<group>"; };
 		188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
@@ -290,6 +290,7 @@
 		183765052B7A329000CCE9F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				187C28A52B909B210082C458 /* AppShareData */,
 				18E47ADF2B8F188B0078D89A /* ImagePickerManager */,
 				18E47ACD2B8F170C0078D89A /* Validation */,
 				18E47ABE2B8F159A0078D89A /* UserDefaultManager */,
@@ -365,7 +366,6 @@
 		185E65D82B72443600FEC922 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				185E65C52B72435C00FEC922 /* Main.storyboard */,
 				18EF61572B7B52760074C959 /* CreateEvent.storyboard */,
 				18EF616F2B7B964A0074C959 /* Session.storyboard */,
 				18EF61632B7B80930074C959 /* AddOrganizerTab.storyboard */,
@@ -406,6 +406,14 @@
 				18C71ADF2B875ED3001170C2 /* Cell */,
 			);
 			path = TicketsCreateEvent;
+			sourceTree = "<group>";
+		};
+		187C28A52B909B210082C458 /* AppShareData */ = {
+			isa = PBXGroup;
+			children = (
+				187C28A62B909B340082C458 /* AppShareData.swift */,
+			);
+			path = AppShareData;
 			sourceTree = "<group>";
 		};
 		188F5C7C2B7BA0420039B86C /* Organization */ = {
@@ -816,7 +824,6 @@
 				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
 				18F0933A2B7B414800BFB4C3 /* Lato-Black.ttf in Resources */,
-				185E65C72B72435C00FEC922 /* Main.storyboard in Resources */,
 				18EF61702B7B964B0074C959 /* Session.storyboard in Resources */,
 				18006CEB2B7CA3CF00C301D3 /* PopOverView.xib in Resources */,
 				188F5C792B7B98F00039B86C /* OTPView.xib in Resources */,
@@ -893,6 +900,7 @@
 				18E47ACC2B8F16CB0078D89A /* APIHandler.swift in Sources */,
 				181638C72B7BA6E10020854C /* CreateAccountViewController.swift in Sources */,
 				183546A92B7CF5F500649EE2 /* SplashViewController.swift in Sources */,
+				187C28A72B909B340082C458 /* AppShareData.swift in Sources */,
 				18E47AA82B8F14730078D89A /* CustomStepper.swift in Sources */,
 				18E47AB42B8F15100078D89A /* CreateAccountModel.swift in Sources */,
 				18E47AAF2B8F14A30078D89A /* BottomSheetTableViewCell.swift in Sources */,
@@ -915,14 +923,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		185E65C52B72435C00FEC922 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				185E65C62B72435C00FEC922 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

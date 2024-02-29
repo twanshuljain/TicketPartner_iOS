@@ -13,7 +13,7 @@ typealias ForgotPasswordCompletion = (Bool,ForgotPasswordResponse?,String?)->Voi
 class ForgotPasswordViewModel {
     // MARK: - VARIABLES
     let popOverView = PopOverView()
-    let window = UIApplication.shared.keyWindow!
+    //let window = UIApplication.shared.keyWindow!
     var resetPasswordRequest:ResetPasswordRequest?
     var otp: String = ""
 }

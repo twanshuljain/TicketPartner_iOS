@@ -9,6 +9,7 @@ import UIKit
 
 class TicketsCreateEventVC: UIViewController {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var lblFees: UILabel!
     @IBOutlet weak var lblBuyerPrice: UILabel!
     @IBOutlet weak var lblRevenuePerTicket: UILabel!
@@ -47,26 +48,25 @@ class TicketsCreateEventVC: UIViewController {
     @IBOutlet weak var endTimeCenterCons: NSLayoutConstraint!
     
     // MARK: - Hide and Show Stack
-    
     @IBOutlet weak var stackAdvanceSetting: UIStackView!
     @IBOutlet weak var collectionViewTicketType: UICollectionView!
     
     @IBOutlet weak var btnCreateTicket: NextButton!
     
+    
+    // MARK: - Variables
     var viewModel = TicketCreateViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
         setUI()
-        btnCreateTicket.actionSubmit = { [weak self] _ in
-            if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketEventListViewController") as! TicketEventListViewController
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
-        
+        setActions()
     }
+}
+
+// MARK: - Functions
+extension TicketsCreateEventVC {
     func setCollectionView() {
         collectionViewTicketType.register(UINib(nibName: "TicketTypeCollectionVC", bundle: .main), forCellWithReuseIdentifier: "TicketTypeCollectionVC")
         collectionViewTicketType.dataSource = self
@@ -149,10 +149,19 @@ class TicketsCreateEventVC: UIViewController {
         txtTicketPerUser.isHidden = true
         switchSettings.isOn = false
         switchTicketPerUser.isOn = false
-        switchSettings.addTarget(self, action: #selector(self.actionSwitchSettings(_ :)), for: .valueChanged)
-        switchTicketPerUser.addTarget(self, action: #selector(self.actionTicketsPerUser(_ :)), for: .valueChanged)
         btnCreateTicket.title = StringConstants.CreateEvent.createTicket.value
         
+    }
+    
+    func setActions() {
+        switchSettings.addTarget(self, action: #selector(self.actionSwitchSettings(_ :)), for: .valueChanged)
+        switchTicketPerUser.addTarget(self, action: #selector(self.actionTicketsPerUser(_ :)), for: .valueChanged)
+        btnCreateTicket.actionSubmit = { [weak self] _ in
+            if let self {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketEventListViewController") as! TicketEventListViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     @objc func actionSwitchSettings(_ sender: UISwitch) {
@@ -171,6 +180,8 @@ class TicketsCreateEventVC: UIViewController {
         
     }
 }
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension TicketsCreateEventVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRow

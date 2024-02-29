@@ -9,10 +9,12 @@ import UIKit
 import WebKit
 
 protocol RichTextEditiorDelegate: AnyObject {
-   func getRichText(text : String?)
+    func getRichText(text : String?)
 }
 
 class CreatEventVC: BaseViewController {
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var txtEventTitle: CustomTextFieldView!
     @IBOutlet weak var imgViewAdd1: UIImageView!
     @IBOutlet weak var txtDrpEventType: DropDownTextField!
@@ -73,28 +75,32 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var switchMediaPastEvent: UISwitch!
     @IBOutlet weak var btnnSaveAndContinue: NextButton!
     
-
+    
+    // MARK: - Variables
     var delegate : RichTextEditiorDelegate?
     var richTextString : String = ""
     var htmlCallbackState : Bool = false
     var editedText : String = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setView()
+    }
+}
+
+// MARK: - Functions
+extension CreatEventVC {
+    // MARK: - SetUp Navigation
+    func setView() {
         setUI()
         descriptionWebView.navigationDelegate = self
         descriptionWebView.configuration.userContentController.add(self, name: "content")
         setupWebView()
         loadQuillEditor()
-        
-        btnnSaveAndContinue.actionSubmit = { [weak self] _ in
-            if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
+        self.addAction()
     }
-    // MARK: - setUI()
+    // MARK: - SetUpUI
     func setUI() {
         let txtBorders = [txtDrpEventType, txtDrpTimeZone, viewStartDate, viewStartTime, viewEndDate, viewEndTime, viewDoorStartDate, viewDoorStartTime, viewDoorEndDate, viewDoorEndTime, txtDrpState, txtDrpCountry]
         for txtBorder in txtBorders {
@@ -108,7 +114,8 @@ class CreatEventVC: BaseViewController {
         lblDisplayEndTime.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblDateTime.font = CustomFont.shared.semiBold(sizeOfFont: 18)
         lblLocation.font = CustomFont.shared.semiBold(sizeOfFont: 18)
-        txtDrpEventType.text = StringConstants.CreateEvent.selectEventType.value
+        txtDrpEventType.font = CustomFont.shared.regular(sizeOfFont: 16)
+        txtDrpEventType.placeholder = StringConstants.CreateEvent.selectEventType.value
         txtDrpEventType.optionArray = ["Hardy Sandu", "KK", "AR Rehman", "Arjit singh"]
         let text = StringConstants.CreateEvent.eventName.value + "*"
         txtEventTitle.lbl.attributedText = text.addAttributedString(highlightedString: "*")
@@ -172,17 +179,27 @@ class CreatEventVC: BaseViewController {
         btnnSaveAndContinue.title = StringConstants.CreateEvent.saveAndContinue.value
         
     }
+    
+    // MARK: - AddAction
+    func addAction() {
+        btnnSaveAndContinue.actionSubmit = { [weak self] _ in
+            if let self {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
+    }
+    
     @objc func actionSwitchMediaPast(_ sender: UISwitch) {
         stackMediafromPast.isHidden = !sender.isOn
     }
     // MARK: - WebView Setup
     func setupWebView() {
         let viewportScriptString = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); meta.setAttribute('initial-scale', '1.0'); meta.setAttribute('maximum-scale', '1.0'); meta.setAttribute('minimum-scale', '1.0'); meta.setAttribute('user-scalable', 'no'); document.getElementsByTagName('head')[0].appendChild(meta);"
-
+        
         let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
-
         let disableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
-
         
         let viewportScript = WKUserScript(source: viewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let disableSelectionScript = WKUserScript(source: disableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
@@ -198,7 +215,6 @@ class CreatEventVC: BaseViewController {
             descriptionWebView.evaluateJavaScript(javascriptFunction, completionHandler: nil)
         }
     }
-    
     func loadQuillEditor() {
         if let htmlFilePath = Bundle.main.path(forResource: "quill", ofType: "html") {
             let htmlFileURL = URL(fileURLWithPath: htmlFilePath)
@@ -208,7 +224,6 @@ class CreatEventVC: BaseViewController {
             })
         }
     }
-    
     func setQuillContent(htmlContent: String) {
         let javascriptFunction = "setQuillContent('\(htmlContent)');"
         descriptionWebView.evaluateJavaScript(javascriptFunction, completionHandler: { (_, error) in
@@ -220,7 +235,9 @@ class CreatEventVC: BaseViewController {
         })
     }
 }
-//webview deleagate
+
+
+//WebView deleagate
 extension CreatEventVC : WKNavigationDelegate, WKScriptMessageHandler {
     // Handle content messages from JavaScript
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

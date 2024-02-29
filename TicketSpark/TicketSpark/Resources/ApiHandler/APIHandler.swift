@@ -107,24 +107,18 @@ class APIHandler: NSObject {
             print("resetTokenKey........ ",token )
             request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
         }
-        
-        
-        debugPrint("finalURL is \(finalURL)")
-        debugPrint("parameters is \(String(describing: parameters))")
-        
         if methodType == .POST{
             if parameters != nil {
                 let param = try? JSONEncoder().encode(parameters!)
                 request.httpBody = param
             }
         }
-        
-       
-      
-        print("\(request.httpMethod ?? "") \(request.url)")
+        debugPrint("finalURL is \(finalURL)")
+        debugPrint("parameters is \(String(describing: parameters))")
+        print("\(request.httpMethod ?? "") \(request.url!)")
         let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
         print("BODY \n \(str)")
-        print("HEADERS \n \(request.allHTTPHeaderFields)")
+        print("HEADERS \n \(request.allHTTPHeaderFields ?? [:])")
         
         session.dataTask(with: request) { data, response, error in
             var httpStatusCode = 0
@@ -145,7 +139,9 @@ class APIHandler: NSObject {
                     }
                 } else if httpStatusCode == 200, let data = data {
                     let JSON = self.nsdataToJSON(data: data as NSData)
-                    print("----------------JSON in APIClient", JSON)
+                    if let json = JSON {
+                        print("----------------JSON in APIClient", json)
+                    }
                     do {
                         let responseModel = try JSONDecoder().decode(ResponseModal<T>.self, from: data)
                         complition(.success(responseModel))
@@ -166,8 +162,8 @@ class APIHandler: NSObject {
     }
     
     func executeRequestWithMultipartData<T: Codable>(of type: T.Type = T.self, apiName: APIName, parameters: AddOrganizerRequest?, methodType: MethodType,  authRequired: Bool = true, resetTokenKey: Bool? = false, resetKey: String? = "",  complition: @escaping(Result<ResponseModal<T>, Error>) -> Void) {
-        var finalURL = baseURL + apiName.rawValue
-        guard var requestURL = URL(string: finalURL) else {
+        let finalURL = baseURL + apiName.rawValue
+        guard let requestURL = URL(string: finalURL) else {
             complition(.failure("Incorrect request URL"))
             return
         }
@@ -215,13 +211,12 @@ class APIHandler: NSObject {
             request.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
         }
         
-        
         debugPrint("finalURL is \(finalURL)")
         debugPrint("parameters is \(String(describing: parameters))")
-        print("\(request.httpMethod ?? "") \(request.url)")
+        print("\(request.httpMethod ?? "") \(request.url!)")
         let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
         print("BODY \n \(str)")
-        print("HEADERS \n \(request.allHTTPHeaderFields)")
+        print("HEADERS \n \(request.allHTTPHeaderFields ?? [:])")
         
         session.dataTask(with: request) { data, response, error in
             var httpStatusCode = 0
@@ -242,7 +237,9 @@ class APIHandler: NSObject {
                     }
                 } else if httpStatusCode == 200, let data = data {
                     let JSON = self.nsdataToJSON(data: data as NSData)
-                    print("----------------JSON in APIClient", JSON)
+                    if let json = JSON {
+                        print("----------------JSON in APIClient", json)
+                    }
                     do {
                         let responseModel = try JSONDecoder().decode(ResponseModal<T>.self, from: data)
                         complition(.success(responseModel))

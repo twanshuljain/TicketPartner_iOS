@@ -82,9 +82,9 @@ extension ForgotPasswordViewController {
     }
     
     func addPopOverView() {
-        viewModel.window.removePopOverView
-        viewModel.window.addSubview(self.viewModel.popOverView)
-        self.viewModel.popOverView.frame = viewModel.window.bounds
+        window?.removePopOverView
+        window?.addSubview(self.viewModel.popOverView)
+        self.viewModel.popOverView.frame = window?.bounds ?? .zero
     }
     
     func setUpAction() {
