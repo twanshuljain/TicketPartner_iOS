@@ -946,7 +946,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dQb-Rf-6M3">
-                                        <rect key="frame" x="0.0" y="150" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="150" width="414" height="95"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0r-WJ-AKu">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -964,7 +964,7 @@
                                                         <rect key="frame" x="15" y="25" width="384" height="50"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UCR-Mi-hBf">
-                                                                <rect key="frame" x="5" y="0.0" width="309" height="50"/>
+                                                                <rect key="frame" x="5" y="0.0" width="369" height="50"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
@@ -972,10 +972,10 @@
                                                                 </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPA-lQ-9kh">
-                                                                <rect key="frame" x="319" y="8.6666666666666572" width="60" height="33"/>
+                                                                <rect key="frame" x="379" y="8.6666666666666572" width="0.0" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="33" id="1b6-MQ-Ki6"/>
-                                                                    <constraint firstAttribute="width" constant="60" id="i28-MV-bSo"/>
+                                                                    <constraint firstAttribute="width" id="i28-MV-bSo"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="12"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1021,17 +1021,17 @@
                                                     <constraint firstAttribute="bottom" secondItem="SvE-D2-Zoy" secondAttribute="bottom" constant="5" id="zoK-eu-fRB"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mn-cX-pCr" customClass="OTPView" customModule="TicketSpark" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="95" width="414" height="105"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mn-cX-pCr">
+                                                <rect key="frame" x="0.0" y="95" width="414" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="105" id="1GH-Jj-2zR"/>
+                                                    <constraint firstAttribute="height" id="1GH-Jj-2zR"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-Ul-h4U">
-                                        <rect key="frame" x="15" y="370" width="384" height="48"/>
+                                        <rect key="frame" x="15" y="265" width="384" height="48"/>
                                         <color key="backgroundColor" red="0.97254901959999995" green="0.45882352939999999" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Amf-Ix-17Y"/>
@@ -1051,14 +1051,14 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember it?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7V-ph-uxn">
-                                        <rect key="frame" x="119.66666666666666" y="438" width="94.666666666666657" height="32"/>
+                                        <rect key="frame" x="119.66666666666666" y="333" width="94.666666666666657" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.47450980390000003" green="0.47058823529999999" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvE-TU-tIy">
-                                        <rect key="frame" x="219.33333333333334" y="438" width="51.000000000000028" height="32"/>
+                                        <rect key="frame" x="219.33333333333334" y="333" width="51.000000000000028" height="32"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Sign in">
@@ -1103,7 +1103,6 @@
                         <outlet property="lblEmail" destination="J6u-NR-eDF" id="U3W-6y-jgW"/>
                         <outlet property="lblSubTitle" destination="sjc-lb-Mo0" id="fZl-pY-9Rc"/>
                         <outlet property="lblTitle" destination="H7d-fW-tdW" id="Lpv-QK-FOV"/>
-                        <outlet property="otpView" destination="0Mn-cX-pCr" id="vr8-SG-tb0"/>
                         <outlet property="txtEmail" destination="UCR-Mi-hBf" id="jcE-YY-vi8"/>
                     </connections>
                 </viewController>
