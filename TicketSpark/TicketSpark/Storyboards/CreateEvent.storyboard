@@ -1558,7 +1558,7 @@
         <image name="ic_calender" width="20" height="20"/>
         <image name="ic_events" width="24.333333969116211" height="24"/>
         <image name="ic_timer" width="20" height="20"/>
-        <image name="info.circle" catalog="system" width="32" height="32"/>
+        <image name="info.circle" catalog="system" width="128" height="123"/>
         <namedColor name="appIndigoSelectedColor">
             <color red="0.45882352941176469" green="0.34901960784313724" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

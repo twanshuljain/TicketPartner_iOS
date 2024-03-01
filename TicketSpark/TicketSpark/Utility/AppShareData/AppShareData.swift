@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 let window = (UIApplication.shared.delegate as! AppDelegate).window
+let boundary = "Boundary-\(NSUUID().uuidString)"
+
 class AppShareData {
     public static var shared = AppShareData()
     var appdelegate = (UIApplication.shared.delegate as! AppDelegate)

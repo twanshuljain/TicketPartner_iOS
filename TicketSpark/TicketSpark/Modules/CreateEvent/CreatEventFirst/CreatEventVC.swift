@@ -81,7 +81,7 @@ class CreatEventVC: BaseViewController {
     var richTextString : String = ""
     var htmlCallbackState : Bool = false
     var editedText : String = ""
-    
+    let viewModel = CreatEventViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,8 +184,9 @@ extension CreatEventVC {
     func addAction() {
         btnnSaveAndContinue.actionSubmit = { [weak self] _ in
             if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
+//                self.navigationController?.pushViewController(vc, animated: true)
+                self.apiCallForCreateEventBasics()
             }
             
         }
@@ -233,6 +234,44 @@ extension CreatEventVC {
                 print("Quill content set successfully.")
             }
         })
+    }
+    
+    func apiCallForCreateEventBasics(){
+//        let _ = self.imgViewLogo.image?.jpegData(compressionQuality: 0.8)
+//        let isValidate = self.viewModel.validate(self.txtOrganizationName.txtFld.text ?? "", countryDropDown.text ?? "", self.imgViewLogo.image)
+//        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                
+                let coverImage = UIImage(systemName: "imgDropDown")?.convertImageToData()
+                let eventAdditionalCoverImagesList = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
+                let mediaFromPastEventImages = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
+                
+                let req =  CreateEventBasicRequest(name: "Rockyii122", eventDescription: "scsdds",eventStartDate: "2024-11-09",eventEndDate: "2024-11-09",doorCloseDate: "2024-11-09",doorStartDate: "2024-11-09",doorOpenTime: "11:00",doorCloseTime: "12:00",doorCloseTimeRepresents: "sds",doorOpenTimeRepresents: "csdc",eventTypeId: 2,eventCoverImage: coverImage,eventAdditionalCoverImagesList: eventAdditionalCoverImagesList,mediaFromPastEventImages: mediaFromPastEventImages,isVirtual: false,virtualEventLink: "",isVenue: true,locationName: "Indore Palasia",city: "Indore",stateId: "33",countryId: "21",eventAddress: "IndoreIndore",isToBeAnnounced: false,isEmail: false,state: "",country: "")
+                
+                self.viewModel.createEventBasics(createEventBasicRequest: req) { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            print(response)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+//        } else {
+//            DispatchQueue.main.async {
+//                self.showToast(with: isValidate.0, position: .top, type: .warning)
+//               //self.showAlert(message: isValidate.0)
+//            }
+//        }
     }
 }
 
