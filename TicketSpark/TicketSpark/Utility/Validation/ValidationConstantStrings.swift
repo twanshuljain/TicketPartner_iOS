@@ -43,4 +43,17 @@ class ValidationConstantStrings: NSObject {
     static let organizationName = "Please enter organization name"
     static let organizationCountry = "Please select country"
     static let organizationImage = "Please select logo"
+    
+   //Create Event
+    static let emptyEventName = "Please enter event name"
+    static let selectEventType = "Please select event type"
+    static let selectEventType1 = "Select event type"
+    static let emptDesc = "Please enter description"
+    static let emptyTimezone = "Please select timezone"
+    static let emptyLocationName = "Please enter location name"
+    static let emptyStreetAddress = "Please enter street address"
+    static let emptyCity = "Please enter city"
+    static let emptyState = "Please enter state"
+    static let emptyCountry = "Please enter country"
+    static let emptyEventLink = "Please enter event link"
 }

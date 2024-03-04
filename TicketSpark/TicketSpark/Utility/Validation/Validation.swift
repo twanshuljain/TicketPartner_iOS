@@ -24,6 +24,16 @@ enum InputValidation: String {
     case organizationName
     case organizationCountry
     case organizationImage
+    case eventName
+    case eventType
+    case desc
+    case timezone
+    case locationName
+    case streetAddress
+    case city
+    case state
+    case country
+    case eventLink
 }
 enum ValidationType: String {
     case reqName = "reqName"
@@ -116,6 +126,8 @@ class Validation {
                     text.isEmpty ? ValidationConstantStrings.organizationCountry : ValidationConstantStrings.organizationCountry)
         case .organizationImage:
             return (true, "")
+        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink:
+            return (true, "")
         }
     }
     
@@ -133,6 +145,56 @@ class Validation {
                 confirmPassword.isEmpty ? ValidationConstantStrings.emptyConfirmPassword : ValidationConstantStrings.invalidConfirmNewPassword)
         
         case .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword, .organizationName, .organizationCountry, .organizationImage:
+            break;
+        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink:
+            break;
+        }
+        return (true,"")
+    }
+    
+    func createEventBasicValidation(text: String, validationType: InputValidation) -> (Bool, String) {
+        switch validationType {
+        case .eventName:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyEventName : ValidationConstantStrings.emptyEventName)
+        case .eventType:
+            return(text.isEmpty ? true :
+                        text != ValidationConstantStrings.selectEventType1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectEventType : ValidationConstantStrings.selectEventType)
+        case .desc:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptDesc : ValidationConstantStrings.emptDesc)
+        case .timezone:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTimezone : ValidationConstantStrings.emptyTimezone)
+        case .locationName:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyLocationName : ValidationConstantStrings.emptyLocationName)
+        case .streetAddress:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyStreetAddress : ValidationConstantStrings.emptyStreetAddress)
+        case .city:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyCity : ValidationConstantStrings.emptyCity)
+        case .state:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyState : ValidationConstantStrings.emptyState)
+        case .country:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyCountry : ValidationConstantStrings.emptyCountry)
+        case .eventLink:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyEventLink : ValidationConstantStrings.emptyEventLink)
+        case .password, .confirmPassword, .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword, .organizationName, .organizationCountry, .organizationImage:
             break;
         }
         return (true,"")

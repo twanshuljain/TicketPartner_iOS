@@ -34,7 +34,9 @@ public enum APIName: String {
     case GetAllCountry = "/default/data/all/country/"
     
     //MARK: - CREATE EVENT
-    case createEvent = "/event/create/event/"
+    case CreateEvent = "/event/create/event/"
+    case GetTimeZone = "/default/data/time-zone/list/"
+    case SpecificCountry = "/default/data/specific/country/"
     
 }
 // MARK: - EmptyModel
@@ -52,8 +54,8 @@ class APIHandler: NSObject {
     static var shared = APIHandler()
     private override init() {}
     private let session = URLSession.shared
-    let baseURL = "http://13.235.115.189"
-    
+   // let baseURL = "http://13.235.115.189"
+    let baseURL = "https://dev.api.myticketpartner.com"
     
     
     func executeRequestWith<T: Decodable, U: Encodable>(of type: T.Type = T.self, apiName: APIName, parameters: U?, methodType: MethodType,  authRequired: Bool = true, resetTokenKey: Bool? = false, resetKey: String? = "",  complition: @escaping(Result<ResponseModal<T>, Error>) -> Void) {

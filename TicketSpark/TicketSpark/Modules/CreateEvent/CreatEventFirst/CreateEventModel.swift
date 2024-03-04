@@ -15,6 +15,7 @@ enum CreateEventType {
 
 struct CreateEventBasicRequest : Encodable {
     var name: String?
+    var timeZone: String?
     var eventDescription: String?
     var eventStartDate: String?
     var eventEndDate: String?
@@ -48,6 +49,7 @@ struct CreateEventBasicRequest : Encodable {
     
     enum CodingKeys: String, CodingKey {
         case name
+        case timeZone = "time_zone"
         case eventCoverImage = "event_cover_image"
         case eventAdditionalCoverImagesList = "event_additional_cover_images_list"
         case mediaFromPastEventImages = "media_from_past_event_images"
@@ -271,5 +273,39 @@ struct EventLocationData: Codable {
         case isVenue = "is_venue"
         case city, country
         case isEmail = "is_email"
+    }
+}
+
+
+// MARK: - Time Zone
+struct TimeZone: Codable {
+    var isActive: Bool?
+    var timeZoneID: String?
+    var id: Int?
+    var timeZoneName: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case isActive = "is_active"
+        case timeZoneID = "time_zone_id"
+        case id
+        case timeZoneName = "time_zone_name"
+    }
+}
+
+// MARK: - CountryData
+struct CountrySpecificData: Codable {
+    var id: Int?
+    var countryName, isCaribbean, image: String?
+    var isActive: Bool?
+    var sort, countryCode: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case countryName = "country_name"
+        case isCaribbean = "is_caribbean"
+        case image
+        case isActive = "is_active"
+        case sort
+        case countryCode = "country_code"
     }
 }

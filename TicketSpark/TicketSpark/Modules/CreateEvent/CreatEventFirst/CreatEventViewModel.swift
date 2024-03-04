@@ -8,14 +8,71 @@
 import Foundation
 
 typealias CreateEventCompletion = (Bool,CreateEvent?,String?)->Void
+typealias GetTimeZoneCompletion = (Bool,[TimeZone]?,String?)->Void
+typealias GetCountryDataCompletion = (Bool,[CountrySpecificData]?,String?)->Void
 
 class CreatEventViewModel {
     //MARK: - Variables
     var createEventType: CreateEventType = .venue
+    var createEvent: CreateEvent?
+    var timeZoneData = [TimeZone]()
+    var countryData = [CountrySpecificData]()
+    var dispatchGroup = DispatchGroup()
     
 }
 //MARK: - Functions
 extension CreatEventViewModel {
+    
+     func validateFields (_ createEventBasicRequest: CreateEvent) -> (String,Bool) {
+         if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventData?.name ?? "", validationType: .eventName).0 {
+             let errMsg = Validation.shared.createEventBasicValidation(text: "\(createEventBasicRequest.eventData?.eventTypeID ?? 0)", validationType: .eventName).1
+            return (errMsg, false)
+         }else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventData?.eventDescription ?? "", validationType: .desc).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventData?.eventDescription ?? "", validationType: .desc).1
+            return (errMsg, false)
+        }else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventDateTimeData?.timeZoneID ?? "", validationType: .timezone).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventDateTimeData?.timeZoneID ?? "", validationType: .timezone).1
+            return (errMsg, false)
+        }
+         if self.createEventType == .venue {
+             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.locationName ?? "", validationType: .locationName).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.locationName ?? "", validationType: .locationName).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.eventAddress ?? "", validationType: .streetAddress).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.eventAddress ?? "", validationType: .streetAddress).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.city ?? "", validationType: .city).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.city ?? "", validationType: .city).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.state ?? "", validationType: .state).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.state ?? "", validationType: .state).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.country ?? "", validationType: .country).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.country ?? "", validationType: .country).1
+                return (errMsg, false)
+            }
+         } else if self.createEventType == .virtual {
+             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.virtualEventLink ?? "", validationType: .eventLink).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.virtualEventLink ?? "", validationType: .eventLink).1
+                return (errMsg, false)
+            }
+         } else {
+             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.city ?? "", validationType: .city).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.city ?? "", validationType: .city).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.state ?? "", validationType: .state).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.state ?? "", validationType: .state).1
+                return (errMsg, false)
+             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.country ?? "", validationType: .country).0 {
+                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventLocationData?.country ?? "", validationType: .country).1
+                return (errMsg, false)
+            }
+         }
+         
+        return("", true)
+    }
+    
+    
     
     func createEventBasics(createEventBasicRequest: CreateEventBasicRequest, complition: @escaping CreateEventCompletion) {
         var body = Data()
@@ -113,7 +170,39 @@ extension CreatEventViewModel {
         // Add final boundary to indicate the end of the request
         body.append("--\(boundary)--\r\n")
         
-        APIHandler.shared.executeRequestWithMultipartData1(apiName: .createEvent, methodType: .POST, body: body) { (result: Result<ResponseModal<CreateEvent>, Error>) in
+        APIHandler.shared.executeRequestWithMultipartData1(apiName: .CreateEvent, methodType: .POST, body: body) { (result: Result<ResponseModal<CreateEvent>, Error>) in
+            switch result {
+            case .success(let response):
+                if response.status_code == 200 {
+                    complition(true, response.data , response.message)
+                } else {
+                    complition(false,response.data, response.message ?? "error message")
+                }
+            case .failure(let error):
+                complition(false, nil, "\(error)")
+            }
+        }
+    }
+    
+    func getTimeZoneList(complition:@escaping GetTimeZoneCompletion) {
+        APIHandler.shared.executeRequestWith(apiName: .GetTimeZone, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[TimeZone]>, Error>) in
+            switch result {
+            case .success(let response):
+                defer { self.dispatchGroup.leave() }
+                if response.status_code == 200 {
+                    complition(true, response.data , response.message)
+                } else {
+                    complition(false,response.data, response.message ?? "error message")
+                }
+            case .failure(let error):
+                defer { self.dispatchGroup.leave() }
+                complition(false, nil, "\(error)")
+            }
+        }
+    }
+    
+    func getCountryList(complition:@escaping GetCountryDataCompletion) {
+        APIHandler.shared.executeRequestWith(apiName: .SpecificCountry, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[CountrySpecificData]>, Error>) in
             switch result {
             case .success(let response):
                 if response.status_code == 200 {

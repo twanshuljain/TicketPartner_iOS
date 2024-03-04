@@ -22,7 +22,7 @@ open class DropDownTextField: UITextField {
     @IBInspectable public var itemsTintColor: UIColor = .blue
     @IBInspectable public var selectedRowColor: UIColor = .systemPink
     @IBInspectable public var hideOptionsWhenSelect: Bool = true
-    @IBInspectable public var isSearchEnable: Bool = true {
+    @IBInspectable public var isSearchEnable: Bool = false {
         didSet {
             addGesture()
         }
