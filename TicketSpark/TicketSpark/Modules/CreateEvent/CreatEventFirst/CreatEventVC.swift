@@ -9,10 +9,12 @@ import UIKit
 import WebKit
 
 protocol RichTextEditiorDelegate: AnyObject {
-   func getRichText(text : String?)
+    func getRichText(text : String?)
 }
 
 class CreatEventVC: BaseViewController {
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var txtEventTitle: CustomTextFieldView!
     @IBOutlet weak var imgViewAdd1: UIImageView!
     @IBOutlet weak var txtDrpEventType: DropDownTextField!
@@ -45,6 +47,11 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var txtDrpCountry: DropDownTextField!
     @IBOutlet weak var viewOrganizationLogo: UIView!
     
+    @IBOutlet weak var txtEventLink: CustomTextFieldView!
+    @IBOutlet weak var txtTobeAnnouncedCity: CustomTextFieldView!
+    @IBOutlet weak var txtTobeAnnouncedState: DropDownTextField!
+    @IBOutlet weak var txtTobeAnnouncedCountry: DropDownTextField!
+    
     @IBOutlet weak var viewStartDate: UIView!
     @IBOutlet weak var viewStartTime: UIView!
     @IBOutlet weak var viewEndDate: UIView!
@@ -73,30 +80,59 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var switchMediaPastEvent: UISwitch!
     @IBOutlet weak var btnnSaveAndContinue: NextButton!
     
-
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var stackViewVenue: UIStackView!
+    @IBOutlet weak var stackViewVirtual: UIStackView!
+    @IBOutlet weak var stackViewToBeAnnounced: UIStackView!
+    @IBOutlet weak var lblSendAddress: UILabel!
+    
+    
+    // MARK: - Variables
     var delegate : RichTextEditiorDelegate?
     var richTextString : String = ""
     var htmlCallbackState : Bool = false
     var editedText : String = ""
+    let viewModel = CreatEventViewModel()
+    
+    var changeSegment = 0 {
+        didSet {
+            if changeSegment == 0 {
+                stackViewVenue.isHidden = false
+                stackViewVirtual.isHidden = true
+                stackViewToBeAnnounced.isHidden = true
+            } else if changeSegment == 1 {
+                stackViewVenue.isHidden = true
+                stackViewVirtual.isHidden = false
+                stackViewToBeAnnounced.isHidden = true
+            } else if changeSegment == 2 {
+                stackViewVenue.isHidden = true
+                stackViewVirtual.isHidden = true
+                stackViewToBeAnnounced.isHidden = false
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setView()
+        self.apiCallForGetTimeZone()
+    }
+}
+
+// MARK: - Functions
+extension CreatEventVC {
+    // MARK: - SetUp Navigation
+    func setView() {
         setUI()
         descriptionWebView.navigationDelegate = self
         descriptionWebView.configuration.userContentController.add(self, name: "content")
         setupWebView()
         loadQuillEditor()
-        
-        btnnSaveAndContinue.actionSubmit = { [weak self] _ in
-            if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
+        self.addAction()
     }
-    // MARK: - setUI()
+    // MARK: - SetUpUI
     func setUI() {
-        let txtBorders = [txtDrpEventType, txtDrpTimeZone, viewStartDate, viewStartTime, viewEndDate, viewEndTime, viewDoorStartDate, viewDoorStartTime, viewDoorEndDate, viewDoorEndTime, txtDrpState, txtDrpCountry]
+        let txtBorders = [txtTobeAnnouncedState, txtTobeAnnouncedCountry, txtDrpEventType, txtDrpTimeZone, viewStartDate, viewStartTime, viewEndDate, viewEndTime, viewDoorStartDate, viewDoorStartTime, viewDoorEndDate, viewDoorEndTime, txtDrpState, txtDrpCountry]
         for txtBorder in txtBorders {
             txtBorder?.setTextFiledBorder()
         }
@@ -105,11 +141,22 @@ class CreatEventVC: BaseViewController {
             lbl?.font = CustomFont.shared.medium(sizeOfFont: 14)
             lbl?.textColor = .appBlackTextColor
         }
+        self.setDelegate()
+        lblDisplayEndTime.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblDisplayEndTime.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblDateTime.font = CustomFont.shared.semiBold(sizeOfFont: 18)
         lblLocation.font = CustomFont.shared.semiBold(sizeOfFont: 18)
-        txtDrpEventType.text = StringConstants.CreateEvent.selectEventType.value
+        txtDrpEventType.font = CustomFont.shared.regular(sizeOfFont: 16)
+        txtDrpEventType.placeholder = StringConstants.CreateEvent.selectEventType.value
         txtDrpEventType.optionArray = ["Hardy Sandu", "KK", "AR Rehman", "Arjit singh"]
+        
+        txtTobeAnnouncedState.font = CustomFont.shared.regular(sizeOfFont: 16)
+        txtTobeAnnouncedState.placeholder = StringConstants.CreateEvent.selectEventType.value
+        txtTobeAnnouncedState.optionArray = ["Hardy Sandu", "KK", "AR Rehman", "Arjit singh"]
+        
+        txtTobeAnnouncedCountry.font = CustomFont.shared.regular(sizeOfFont: 16)
+        txtTobeAnnouncedCountry.placeholder = StringConstants.CreateEvent.enterCountry.value
+        
         let text = StringConstants.CreateEvent.eventName.value + "*"
         txtEventTitle.lbl.attributedText = text.addAttributedString(highlightedString: "*")
         txtStartDate.placeholder = StringConstants.CreateEvent.startDate.value
@@ -152,6 +199,14 @@ class CreatEventVC: BaseViewController {
         txtLocationName.lbl.attributedText = StringConstants.CreateEvent.locationName.value.addAttributedString(highlightedString: "*")
         txtLocationName.txtFld.placeholder = StringConstants.CreateEvent.enterLocation.value
         
+        txtEventLink.lbl.attributedText = StringConstants.CreateEvent.locationName.value.addAttributedString(highlightedString: "*")
+        txtEventLink.txtFld.placeholder = StringConstants.CreateEvent.eventLink.value
+        
+        txtTobeAnnouncedCity.lbl.attributedText = StringConstants.CreateEvent.locationName.value.addAttributedString(highlightedString: "*")
+        txtTobeAnnouncedCity.txtFld.placeholder = StringConstants.CreateEvent.enterCity.value
+        
+        self.txtDrpTimeZone.placeholder = StringConstants.CreateEvent.selectTimeZone.value
+        
         txtCity.lbl.attributedText = StringConstants.CreateEvent.city.value.addAttributedString(highlightedString: "*")
         txtCity.txtFld.placeholder = StringConstants.CreateEvent.enterCity.value
         
@@ -172,17 +227,101 @@ class CreatEventVC: BaseViewController {
         btnnSaveAndContinue.title = StringConstants.CreateEvent.saveAndContinue.value
         
     }
+    
+    func setDelegate() {
+        self.txtEventTitle.txtFld.delegate = self
+        self.txtLocationName.txtFld.delegate = self
+        self.txtStreetAddress.txtFld.delegate = self
+        self.txtCity.txtFld.delegate = self
+     //   self.txtDrpState.delegate = self
+      //  self.txtDrpCountry.delegate = self
+        self.txtEventLink.txtFld.delegate = self
+        self.txtTobeAnnouncedCity.txtFld.delegate = self
+    //    self.txtTobeAnnouncedState.txtFld.delegate = self
+    //    self.txtTobeAnnouncedCountry.txtFld.delegate = self
+    }
+    
+    func apiCallForGetTimeZone(){
+        if Reachability.isConnectedToNetwork() {
+            LoadingIndicatorView.show()
+            self.viewModel.dispatchGroup.enter()
+            self.viewModel.getTimeZoneList() { isSuccess, response, msg in
+                DispatchQueue.main.async {
+                    LoadingIndicatorView.hide()
+                }
+                if isSuccess {
+                    if let response = response {
+                        response.forEach { data in
+                            self.viewModel.timeZoneData = response
+                            self.viewModel.timeZoneData.forEach { data in
+                                self.txtDrpTimeZone.optionArray.append(data.timeZoneName ?? "")
+                            }
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                    }
+                }
+            }
+        } else {
+            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+        }
+        
+        self.viewModel.dispatchGroup.notify(queue: .main) {
+            self.apiCallForGetCountryList()
+        }
+    }
+    
+    func apiCallForGetCountryList(){
+        if Reachability.isConnectedToNetwork() {
+            LoadingIndicatorView.show()
+            self.viewModel.getCountryList() { isSuccess, response, msg in
+                DispatchQueue.main.async {
+                    LoadingIndicatorView.hide()
+                }
+                if isSuccess {
+                    if let response = response {
+                        response.forEach { data in
+                            self.viewModel.countryData = response
+                            self.viewModel.countryData.forEach { data in
+                                self.txtDrpCountry.optionArray.append(data.countryName ?? "")
+                                self.txtTobeAnnouncedCountry.optionArray.append(data.countryName ?? "")
+                            }
+                            
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                    }
+                }
+            }
+        } else {
+            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+        }
+    }
+    
+    // MARK: - AddAction
+    func addAction() {
+        btnnSaveAndContinue.actionSubmit = { [weak self] _ in
+            if let self {
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
+//                self.navigationController?.pushViewController(vc, animated: true)
+                self.apiCallForCreateEventBasics()
+            }
+        }
+    }
+    
     @objc func actionSwitchMediaPast(_ sender: UISwitch) {
         stackMediafromPast.isHidden = !sender.isOn
     }
     // MARK: - WebView Setup
     func setupWebView() {
         let viewportScriptString = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); meta.setAttribute('initial-scale', '1.0'); meta.setAttribute('maximum-scale', '1.0'); meta.setAttribute('minimum-scale', '1.0'); meta.setAttribute('user-scalable', 'no'); document.getElementsByTagName('head')[0].appendChild(meta);"
-
+        
         let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
-
         let disableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
-
         
         let viewportScript = WKUserScript(source: viewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let disableSelectionScript = WKUserScript(source: disableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
@@ -198,7 +337,6 @@ class CreatEventVC: BaseViewController {
             descriptionWebView.evaluateJavaScript(javascriptFunction, completionHandler: nil)
         }
     }
-    
     func loadQuillEditor() {
         if let htmlFilePath = Bundle.main.path(forResource: "quill", ofType: "html") {
             let htmlFileURL = URL(fileURLWithPath: htmlFilePath)
@@ -208,7 +346,6 @@ class CreatEventVC: BaseViewController {
             })
         }
     }
-    
     func setQuillContent(htmlContent: String) {
         let javascriptFunction = "setQuillContent('\(htmlContent)');"
         descriptionWebView.evaluateJavaScript(javascriptFunction, completionHandler: { (_, error) in
@@ -219,8 +356,59 @@ class CreatEventVC: BaseViewController {
             }
         })
     }
+    
+    func apiCallForCreateEventBasics(){
+        let isValidate = self.viewModel.validateFields(self.viewModel.createEvent ?? CreateEvent())
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                let coverImage = UIImage(systemName: "imgDropDown")?.convertImageToData()
+                let eventAdditionalCoverImagesList = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
+                let mediaFromPastEventImages = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
+                
+                let req =  CreateEventBasicRequest(name: "Rockyii122", eventDescription: "scsdds",eventStartDate: "2024-11-09",eventEndDate: "2024-11-09",doorCloseDate: "2024-11-09",doorStartDate: "2024-11-09",doorOpenTime: "11:00",doorCloseTime: "12:00",doorCloseTimeRepresents: "sds",doorOpenTimeRepresents: "csdc",eventTypeId: 2,eventCoverImage: coverImage,eventAdditionalCoverImagesList: eventAdditionalCoverImagesList,mediaFromPastEventImages: mediaFromPastEventImages,isVirtual: false,virtualEventLink: "",isVenue: true,locationName: "Indore Palasia",city: "Indore",stateId: "33",countryId: "21",eventAddress: "IndoreIndore",isToBeAnnounced: false,isEmail: false,state: "",country: "")
+                
+                self.viewModel.createEventBasics(createEventBasicRequest: req) { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            print(response)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+            }
+        }
+    }
+    
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+          // Display the selected view controller based on the segmented control index
+          switch sender.selectedSegmentIndex {
+          case 0:
+              self.changeSegment = 0
+          case 1:
+              self.changeSegment = 1
+          case 2:
+              self.changeSegment = 2
+          default:
+              break
+          }
+      }
 }
-//webview deleagate
+
+
+//WebView deleagate
 extension CreatEventVC : WKNavigationDelegate, WKScriptMessageHandler {
     // Handle content messages from JavaScript
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -229,6 +417,36 @@ extension CreatEventVC : WKNavigationDelegate, WKScriptMessageHandler {
             richTextString = content
             self.htmlCallbackState = true
             print("Received content from Quill editor: \(content)")
+        }
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension CreatEventVC : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case self.txtEventTitle.txtFld:
+            self.viewModel.createEvent?.eventData?.name = textField.text
+        case self.txtLocationName:
+            self.viewModel.createEvent?.eventLocationData?.locationName = textField.text
+        case self.txtStreetAddress:
+            self.viewModel.createEvent?.eventLocationData?.eventAddress = textField.text
+        case self.txtCity:
+            self.viewModel.createEvent?.eventLocationData?.city = textField.text
+        case self.txtDrpState:
+            self.viewModel.createEvent?.eventLocationData?.state = textField.text
+        case self.txtDrpCountry:
+            self.viewModel.createEvent?.eventLocationData?.country = textField.text
+        case self.txtEventLink:
+            self.viewModel.createEvent?.eventLocationData?.virtualEventLink = textField.text
+        case self.txtTobeAnnouncedCity:
+            self.viewModel.createEvent?.eventLocationData?.city = textField.text
+//        case self.txtTobeAnnouncedState:
+//            self.viewModel.createEvent?.eventLocationData?.state = textField.text
+//        case self.txtTobeAnnouncedCountry:
+//            self.viewModel.createEvent?.eventLocationData?.country = textField.text
+        default:
+            break
         }
     }
 }

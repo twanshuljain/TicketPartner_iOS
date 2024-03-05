@@ -11,7 +11,7 @@ import UIKit
 class ResetPasswordViewModel {
     // MARK: - VARIABLES
     let popOverView = PopOverView()
-    let window = UIApplication.shared.keyWindow!
+   // let window = UIApplication.shared.keyWindow!
     var resetPasswordRequest:ResetPasswordRequest?
 }
 // MARK: - FUNCTIONS

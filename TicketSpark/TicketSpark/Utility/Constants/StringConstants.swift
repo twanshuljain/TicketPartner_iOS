@@ -131,6 +131,8 @@ struct StringConstants {
         case enterTicketPerUser
         case edit
         case delete
+        case eventLink
+        case selectTimeZone
        var value: String {
             switch self {
             case .selectEventType:
@@ -164,7 +166,7 @@ struct StringConstants {
             case .saveAndContinue:
                 return "Save & Continue"
             case .enterState:
-                return "Enter Sate"
+                return "Enter State"
             case .enterCountry:
                 return "Enter Country"
             case .eventType:
@@ -209,6 +211,10 @@ struct StringConstants {
                 return "Edit"
             case .delete:
                 return "Delete"
+            case .eventLink:
+                return "Enter event link"
+            case .selectTimeZone:
+                return "Select time zone"
             }
         }
     }

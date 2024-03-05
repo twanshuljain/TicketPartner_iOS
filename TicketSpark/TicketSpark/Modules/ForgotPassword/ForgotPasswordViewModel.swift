@@ -13,7 +13,7 @@ typealias ForgotPasswordCompletion = (Bool,ForgotPasswordResponse?,String?)->Voi
 class ForgotPasswordViewModel {
     // MARK: - VARIABLES
     let popOverView = PopOverView()
-    let window = UIApplication.shared.keyWindow!
+    //let window = UIApplication.shared.keyWindow!
     var resetPasswordRequest:ResetPasswordRequest?
     var otp: String = ""
 }
@@ -43,9 +43,27 @@ extension ForgotPasswordViewModel {
 //            }
 //    }
     
+    // API CALL FOR OTP FLOW
+//    func sendForgotPasswordLinkAPI(_ email:String, complition:@escaping ForgotPasswordCompletion) {
+//        let param = ForgotPasswordRequest(email: email, otp: self.otp)
+//            APIHandler.shared.executeRequestWith(apiName: .ForgotPasswordVerifyOTP, parameters: param, methodType: .POST) { (result: Result<ResponseModal<ForgotPasswordResponse>, Error>) in
+//                switch result {
+//                case .success(let response):
+//                    if response.status_code == 200 {
+//                        complition(true, response.data , response.message)
+//                    } else {
+//                        complition(false,response.data, response.message ?? "error message")
+//                    }
+//                case .failure(let error):
+//                    complition(false, nil, "\(error)")
+//                }
+//            }
+//    }
+    
+    // API CALL FOR SEND LINK
     func sendForgotPasswordLinkAPI(_ email:String, complition:@escaping ForgotPasswordCompletion) {
         let param = ForgotPasswordRequest(email: email, otp: self.otp)
-            APIHandler.shared.executeRequestWith(apiName: .ForgotPasswordVerifyOTP, parameters: param, methodType: .POST) { (result: Result<ResponseModal<ForgotPasswordResponse>, Error>) in
+            APIHandler.shared.executeRequestWith(apiName: .ForgotPasswordSendLink, parameters: param, methodType: .POST) { (result: Result<ResponseModal<ForgotPasswordResponse>, Error>) in
                 switch result {
                 case .success(let response):
                     if response.status_code == 200 {

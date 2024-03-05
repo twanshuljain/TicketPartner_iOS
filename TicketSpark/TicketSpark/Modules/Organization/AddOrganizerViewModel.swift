@@ -50,9 +50,35 @@ extension AddOrganizerViewModel {
             print("Error converting image to data")
             return
         }
+        var body = Data()
+        let name = name
+        let countryId = countryId
+        let organizationLogo = imageData 
+        
+        // Name Data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"name\"\r\n\r\n")
+        body.append(name.data(using: .utf8)!)
+        body.append("\r\n")
+        
+        // Country ID
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"country_id\"\r\n\r\n")
+        body.append(String(countryId).data(using: .utf8)!)
+        body.append("\r\n")
+        
+        // Organization Logo Data
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"organization_logo\"; filename=\"organization_logo.png\"\r\n")
+        body.append("Content-Type: organization_logo/png\r\n\r\n")
+        body.append(organizationLogo)
+        body.append("\r\n")
+        body.append("--\(boundary)--\r\n")
+        
+        
         let param = AddOrganizerRequest(name: name, organizationLogo: imageData, countryId: countryId)
         
-        APIHandler.shared.executeRequestWithMultipartData(apiName: .CreateOrganization, parameters: param, methodType: .POST) { (result: Result<ResponseModal<AddOrganizerModel>, Error>) in
+        APIHandler.shared.executeRequestWithMultipartData(apiName: .CreateOrganization, parameters: param, methodType: .POST, body: body) { (result: Result<ResponseModal<AddOrganizerModel>, Error>) in
             switch result {
             case .success(let response):
                 if response.status_code == 200 {

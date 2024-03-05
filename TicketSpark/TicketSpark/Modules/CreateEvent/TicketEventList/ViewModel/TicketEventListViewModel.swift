@@ -8,7 +8,7 @@
 import Foundation
 
 class TicketEventListViewModel {
-    
+    // MARK: - Variables
     var numberOfItems: Int {
         return 3
     }

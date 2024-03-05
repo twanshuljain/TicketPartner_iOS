@@ -50,7 +50,7 @@ class FileUploader: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
                 if httpStatusCode == ResponseCode.sessionExpire {
                     // Refresh Token
                 } else if httpStatusCode == ResponseCode.success {
-                    let json =   try? JSONSerialization.jsonObject(with: tmpdata!, options: []) as? NSDictionary
+                    let _ =   try? JSONSerialization.jsonObject(with: tmpdata!, options: []) as? NSDictionary
                     onSuccess(httpStatusCode, tmpdata)
                 } else {
                     do {

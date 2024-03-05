@@ -9,15 +9,20 @@ import UIKit
 
 class TicketEventListViewController: UIViewController {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var tbleView: UITableView!
     
+    // MARK: - Variables
     var viewModel = TicketEventListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         // Do any additional setup after loading the view.
     }
-    
+}
+// MARK: - Functions
+extension TicketEventListViewController {
     func setTableView() {
         tbleView.register(UINib(nibName: "TicketEventListTableVC", bundle: .main), forCellReuseIdentifier: "TicketEventListTableVC")
         tbleView.dataSource = self
@@ -34,8 +39,8 @@ class TicketEventListViewController: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true, completion: nil)
     }
-
 }
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension TicketEventListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfItems

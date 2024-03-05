@@ -62,9 +62,9 @@ extension ResetPasswordViewController {
     }
     
     func addPopOverView() {
-        viewModel.window.removePopOverView
-        viewModel.window.addSubview(self.viewModel.popOverView)
-        self.viewModel.popOverView.frame = viewModel.window.bounds
+        window?.removePopOverView
+        window?.addSubview(self.viewModel.popOverView)
+        self.viewModel.popOverView.frame = window?.bounds ?? CGRect.zero
     }
     
     func setUpAction() {

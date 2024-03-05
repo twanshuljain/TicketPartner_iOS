@@ -13,7 +13,7 @@ class ValidationCheckFuncs{
     // MARK: - Check DeviceType -
     // -------------------------
     public func isiPad() -> Bool {
-        return UI_USER_INTERFACE_IDIOM() == .pad
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
         
     // MARK: - Validation -
