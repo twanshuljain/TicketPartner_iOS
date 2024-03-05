@@ -170,6 +170,12 @@ struct CreateEvent: Codable {
     var eventData: EventData?
     var eventDateTimeData: EventDateTimeData?
     var eventLocationData: EventLocationData?
+    
+    init(eventData: EventData, eventDateTimeData: EventDateTimeData, eventLocationData: EventLocationData) {
+        self.eventData = eventData
+        self.eventDateTimeData = eventDateTimeData
+        self.eventLocationData = eventLocationData
+    }
 
     enum CodingKeys: String, CodingKey {
         case eventData = "event_obj"

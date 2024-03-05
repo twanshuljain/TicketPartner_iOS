@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoverImageCollectionViewCell" id="gTV-IL-0wX" customClass="CoverImageCollectionViewCell" customModule="TicketSpark" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="196" height="127"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="196" height="127"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkH-zp-8qA">
+                        <rect key="frame" x="0.0" y="0.0" width="196" height="127"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OyJ-I6-L63">
+                                <rect key="frame" x="0.0" y="0.0" width="196" height="127"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwS-cV-KuN">
+                                <rect key="frame" x="176" y="5" width="15" height="15"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="ANa-kU-fgA"/>
+                                    <constraint firstAttribute="height" constant="15" id="Eld-oF-WdK"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="imgDelete"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="OyJ-I6-L63" firstAttribute="leading" secondItem="fkH-zp-8qA" secondAttribute="leading" id="FYh-1V-8nu"/>
+                            <constraint firstAttribute="trailing" secondItem="OyJ-I6-L63" secondAttribute="trailing" id="FfX-j6-6zj"/>
+                            <constraint firstAttribute="bottom" secondItem="OyJ-I6-L63" secondAttribute="bottom" id="HgD-Rg-2xB"/>
+                            <constraint firstAttribute="trailing" secondItem="wwS-cV-KuN" secondAttribute="trailing" constant="5" id="QgQ-RX-VxY"/>
+                            <constraint firstItem="OyJ-I6-L63" firstAttribute="top" secondItem="fkH-zp-8qA" secondAttribute="top" id="YgJ-Ga-VVf"/>
+                            <constraint firstItem="wwS-cV-KuN" firstAttribute="top" secondItem="fkH-zp-8qA" secondAttribute="top" constant="5" id="qzM-Ta-LIX"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fkH-zp-8qA" secondAttribute="trailing" id="EiD-Xf-ti2"/>
+                <constraint firstItem="fkH-zp-8qA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ozk-EW-p2X"/>
+                <constraint firstAttribute="bottom" secondItem="fkH-zp-8qA" secondAttribute="bottom" id="gA7-eY-O0I"/>
+                <constraint firstItem="fkH-zp-8qA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mrC-UM-YZK"/>
+            </constraints>
+            <size key="customSize" width="196" height="127"/>
+            <connections>
+                <outlet property="additionalImage" destination="OyJ-I6-L63" id="3t5-I9-ReB"/>
+                <outlet property="btnDeleteCoverImage" destination="wwS-cV-KuN" id="KqE-0V-Vbl"/>
+            </connections>
+            <point key="canvasLocation" x="83.969465648854964" y="7.394366197183099"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imgDelete" width="21.333333969116211" height="21.333333969116211"/>
+    </resources>
+</document>

@@ -35,6 +35,9 @@
 		1874E2292B85E38B00DA4F1F /* TicketsCreateEventVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */; };
 		187C28A72B909B340082C458 /* AppShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C28A62B909B340082C458 /* AppShareData.swift */; };
 		187C28AA2B90A2D70082C458 /* CreatEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187C28A92B90A2D70082C458 /* CreatEventViewModel.swift */; };
+		1884FF2D2B9703AC00979327 /* CoverImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1884FF2B2B9703AC00979327 /* CoverImageCollectionViewCell.swift */; };
+		1884FF2E2B9703AC00979327 /* CoverImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1884FF2C2B9703AC00979327 /* CoverImageCollectionViewCell.xib */; };
+		1884FF302B9709CC00979327 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1884FF2F2B9709CC00979327 /* UICollectionView+Extension.swift */; };
 		188F5C782B7B98F00039B86C /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F5C762B7B98F00039B86C /* OTPView.swift */; };
 		188F5C792B7B98F00039B86C /* OTPView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C772B7B98F00039B86C /* OTPView.xib */; };
 		188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */; };
@@ -146,6 +149,9 @@
 		1874E2282B85E38B00DA4F1F /* TicketsCreateEventVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsCreateEventVC.swift; sourceTree = "<group>"; };
 		187C28A62B909B340082C458 /* AppShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShareData.swift; sourceTree = "<group>"; };
 		187C28A92B90A2D70082C458 /* CreatEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatEventViewModel.swift; sourceTree = "<group>"; };
+		1884FF2B2B9703AC00979327 /* CoverImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		1884FF2C2B9703AC00979327 /* CoverImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoverImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		1884FF2F2B9709CC00979327 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		188F5C762B7B98F00039B86C /* OTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		188F5C772B7B98F00039B86C /* OTPView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPView.xib; sourceTree = "<group>"; };
 		188F5C7A2B7B9EB20039B86C /* AppColors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppColors.xcassets; sourceTree = "<group>"; };
@@ -399,6 +405,7 @@
 		1874E2262B85E33A00DA4F1F /* CreatEventFirst */ = {
 			isa = PBXGroup;
 			children = (
+				1884FF2A2B97036A00979327 /* View */,
 				18EF615A2B7B529A0074C959 /* CreatEventVC.swift */,
 				187C28A92B90A2D70082C458 /* CreatEventViewModel.swift */,
 				18A7E6D22B91ABCA005997AD /* CreateEventModel.swift */,
@@ -422,6 +429,15 @@
 				187C28A62B909B340082C458 /* AppShareData.swift */,
 			);
 			path = AppShareData;
+			sourceTree = "<group>";
+		};
+		1884FF2A2B97036A00979327 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1884FF2B2B9703AC00979327 /* CoverImageCollectionViewCell.swift */,
+				1884FF2C2B9703AC00979327 /* CoverImageCollectionViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		188F5C7C2B7BA0420039B86C /* Organization */ = {
@@ -701,6 +717,7 @@
 				183546A52B7CEB2700649EE2 /* UIWindow+Extension.swift */,
 				188F5C822B7E2D720039B86C /* String+Extension.swift */,
 				18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */,
+				1884FF2F2B9709CC00979327 /* UICollectionView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -820,6 +837,7 @@
 				18E47A992B8F13B50078D89A /* BottomAlert.xib in Resources */,
 				18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */,
 				18EF61562B7B523D0074C959 /* CustomTextFieldView.xib in Resources */,
+				1884FF2E2B9703AC00979327 /* CoverImageCollectionViewCell.xib in Resources */,
 				183546A42B7CD03E00649EE2 /* Lato-Medium.ttf in Resources */,
 				188F5CA72B8381F60039B86C /* CreateEventStepper.xib in Resources */,
 				18EF61582B7B52760074C959 /* CreateEvent.storyboard in Resources */,
@@ -900,6 +918,7 @@
 				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
 				1802DF8C2B7C9272008B25DB /* ForgotPasswordViewController.swift in Sources */,
 				18E47AD72B8F17B70078D89A /* Array+Extension.swift in Sources */,
+				1884FF2D2B9703AC00979327 /* CoverImageCollectionViewCell.swift in Sources */,
 				18E47AB82B8F15290078D89A /* ForgotPasswordModel.swift in Sources */,
 				18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */,
 				18E47AA22B8F13B50078D89A /* RSCountryTableViewCell.swift in Sources */,
@@ -926,6 +945,7 @@
 				18E47ADC2B8F17E80078D89A /* ResetPasswordModel.swift in Sources */,
 				185593AC2B886D0C00174482 /* TicketEventListViewModel.swift in Sources */,
 				183765092B7A32CE00CCE9F4 /* UIColour+Extension.swift in Sources */,
+				1884FF302B9709CC00979327 /* UICollectionView+Extension.swift in Sources */,
 				18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */,
 				18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,

@@ -16,6 +16,7 @@ class CreatEventVC: BaseViewController {
     
     // MARK: - IBOutlets
     @IBOutlet weak var txtEventTitle: CustomTextFieldView!
+    @IBOutlet weak var imgCoverImage: UIImageView!
     @IBOutlet weak var imgViewAdd1: UIImageView!
     @IBOutlet weak var txtDrpEventType: DropDownTextField!
     @IBOutlet weak var txtDrpTimeZone: DropDownTextField!
@@ -46,6 +47,7 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var txtDrpState: DropDownTextField!
     @IBOutlet weak var txtDrpCountry: DropDownTextField!
     @IBOutlet weak var viewOrganizationLogo: UIView!
+    @IBOutlet weak var collectionViewCoverImages: UICollectionView!
     
     @IBOutlet weak var txtEventLink: CustomTextFieldView!
     @IBOutlet weak var txtTobeAnnouncedCity: CustomTextFieldView!
@@ -86,6 +88,7 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var stackViewToBeAnnounced: UIStackView!
     @IBOutlet weak var lblSendAddress: UILabel!
     
+    @IBOutlet weak var btnDeleteCoverImage: UIButton!
     
     // MARK: - Variables
     var delegate : RichTextEditiorDelegate?
@@ -93,6 +96,16 @@ class CreatEventVC: BaseViewController {
     var htmlCallbackState : Bool = false
     var editedText : String = ""
     let viewModel = CreatEventViewModel()
+    
+    var isCoverImagePicked = false {
+        didSet {
+            if isCoverImagePicked {
+                btnDeleteCoverImage.isHidden = false
+            } else {
+                btnDeleteCoverImage.isHidden = true
+            }
+        }
+    }
     
     var changeSegment = 0 {
         didSet {
@@ -160,42 +173,50 @@ extension CreatEventVC {
         let text = StringConstants.CreateEvent.eventName.value + "*"
         txtEventTitle.lbl.attributedText = text.addAttributedString(highlightedString: "*")
         txtStartDate.placeholder = StringConstants.CreateEvent.startDate.value
+        txtStartDate._placeholder = StringConstants.CreateEvent.startDate.value
         txtStartTime.placeholder = StringConstants.CreateEvent.startTime.value
+        txtStartTime._placeholder = StringConstants.CreateEvent.startTime.value
         txtEndDate.placeholder = StringConstants.CreateEvent.endDate.value
+        txtEndDate._placeholder = StringConstants.CreateEvent.endDate.value
         txtEndTime.placeholder = StringConstants.CreateEvent.endTime.value
+        txtEndTime._placeholder = StringConstants.CreateEvent.endTime.value
         txtDoorEndDate.placeholder = StringConstants.CreateEvent.endDate.value
+        txtDoorEndDate._placeholder = StringConstants.CreateEvent.endDate.value
         txtDoorEndTime.placeholder = StringConstants.CreateEvent.endTime.value
+        txtDoorEndTime._placeholder = StringConstants.CreateEvent.endTime.value
         txtDoorStartDate.placeholder = StringConstants.CreateEvent.startDate.value
+        txtDoorStartDate._placeholder = StringConstants.CreateEvent.startDate.value
         txtDoorStartTime.placeholder = StringConstants.CreateEvent.startTime.value
+        txtDoorStartTime._placeholder = StringConstants.CreateEvent.startTime.value
         let txtDates = [txtStartDate, txtStartTime, txtEndDate, txtEndTime, txtDoorEndDate, txtDoorEndTime, txtDoorStartDate, txtDoorStartTime]
         for txtDate in txtDates {
             txtDate?.floatingLabelFont = CustomFont.shared.regular(sizeOfFont: 12)
             txtDate?.font = CustomFont.shared.semiBold(sizeOfFont: 14)
         }
-        txtStartDate.editingBegin = {
-            self.startDateCenterCons.constant = 10
-        }
-        txtStartTime.editingBegin = {
-            self.startTimeCenterCons.constant = 10
-        }
-        txtEndDate.editingBegin = {
-            self.endDateCenterCons.constant = 10
-        }
-        txtEndTime.editingBegin = {
-            self.endTimeCenterCons.constant = 10
-        }
-        txtDoorEndDate.editingBegin = {
-            self.closeEndDateCenterCons.constant = 10
-        }
-        txtDoorEndTime.editingBegin = {
-            self.closeEndTimeCenterCons.constant = 10
-        }
-        txtDoorStartDate.editingBegin = {
-            self.closeStartDateCenterCons.constant = 10
-        }
-        txtDoorStartTime.editingBegin = {
-            self.closeStartTimeCenterCons.constant = 10
-        }
+//        txtStartDate.editingBegin = {
+//            self.startDateCenterCons.constant = 10
+//        }
+//        txtStartTime.editingBegin = {
+//            self.startTimeCenterCons.constant = 10
+//        }
+//        txtEndDate.editingBegin = {
+//            self.endDateCenterCons.constant = 10
+//        }
+//        txtEndTime.editingBegin = {
+//            self.endTimeCenterCons.constant = 10
+//        }
+//        txtDoorEndDate.editingBegin = {
+//            self.closeEndDateCenterCons.constant = 10
+//        }
+//        txtDoorEndTime.editingBegin = {
+//            self.closeEndTimeCenterCons.constant = 10
+//        }
+//        txtDoorStartDate.editingBegin = {
+//            self.closeStartDateCenterCons.constant = 10
+//        }
+//        txtDoorStartTime.editingBegin = {
+//            self.closeStartTimeCenterCons.constant = 10
+//        }
         txtLocationName.lbl.attributedText = StringConstants.CreateEvent.locationName.value.addAttributedString(highlightedString: "*")
         txtLocationName.txtFld.placeholder = StringConstants.CreateEvent.enterLocation.value
         
@@ -225,10 +246,16 @@ extension CreatEventVC {
         txtDrpCountry.font = CustomFont.shared.regular(sizeOfFont: 14)
         txtDrpState.font = CustomFont.shared.regular(sizeOfFont: 14)
         btnnSaveAndContinue.title = StringConstants.CreateEvent.saveAndContinue.value
-        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cellTappedMethod(_:)))
+
+        imgViewAdd1.isUserInteractionEnabled = true
+        imgViewAdd1.tag = 10
+        imgViewAdd1.addGestureRecognizer(tapGestureRecognizer)
+        self.isCoverImagePicked = self.viewModel.createEventReq.eventCoverImage == nil ? false : true
     }
     
     func setDelegate() {
+        self.collectionViewCoverImages.register(UINib(nibName: "CoverImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CoverImageCollectionViewCell")
         self.txtEventTitle.txtFld.delegate = self
         self.txtLocationName.txtFld.delegate = self
         self.txtStreetAddress.txtFld.delegate = self
@@ -313,6 +340,12 @@ extension CreatEventVC {
         }
     }
     
+    @objc func deletAdditionalImages(_ sender: UIButton) {
+        let data = self.viewModel.createEventReq.eventAdditionalCoverImagesList?[sender.tag]
+        self.viewModel.createEventReq.eventAdditionalCoverImagesList?.removeAll(where: { $0 == data })
+        self.collectionViewCoverImages.reloadData()
+    }
+    
     @objc func actionSwitchMediaPast(_ sender: UISwitch) {
         stackMediafromPast.isHidden = !sender.isOn
     }
@@ -358,7 +391,7 @@ extension CreatEventVC {
     }
     
     func apiCallForCreateEventBasics(){
-        let isValidate = self.viewModel.validateFields(self.viewModel.createEvent ?? CreateEvent())
+        let isValidate = self.viewModel.validateFields(self.viewModel.createEventReq)
         if isValidate.1 {
             if Reachability.isConnectedToNetwork() {
                 LoadingIndicatorView.show()
@@ -405,6 +438,31 @@ extension CreatEventVC {
               break
           }
       }
+    
+    @objc func cellTappedMethod(_ sender:AnyObject) {
+        ImagePickerManager().pickImage(self) { image in
+            if self.viewModel.createEventReq.eventAdditionalCoverImagesList == nil {
+                self.viewModel.createEventReq.eventAdditionalCoverImagesList = [image.convertImageToData()]
+            } else {
+                self.viewModel.createEventReq.eventAdditionalCoverImagesList?.append(image.convertImageToData())
+            }
+            self.collectionViewCoverImages.reloadData()
+        }
+    }
+    
+    @IBAction func btnImageUploadAction(_ sender: UIButton) {
+        ImagePickerManager().pickImage(self) { image in
+            self.viewModel.createEventReq.eventCoverImage = image.convertImageToData()
+            self.imgCoverImage.image = UIImage(data: self.viewModel.createEventReq.eventCoverImage ?? Data())
+            self.isCoverImagePicked = self.viewModel.createEventReq.eventCoverImage == nil ? false : true
+        }
+    }
+    
+    @IBAction func btnDeleteCoverImageAction(_ sender: UIButton) {
+        self.viewModel.createEventReq.eventCoverImage = nil
+        self.isCoverImagePicked = self.viewModel.createEventReq.eventCoverImage == nil ? false : true
+        self.imgCoverImage.image = nil
+    }
 }
 
 
@@ -426,21 +484,21 @@ extension CreatEventVC : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case self.txtEventTitle.txtFld:
-            self.viewModel.createEvent?.eventData?.name = textField.text
+            self.viewModel.createEventReq.name = textField.text
         case self.txtLocationName:
-            self.viewModel.createEvent?.eventLocationData?.locationName = textField.text
+            self.viewModel.createEventReq.locationName = textField.text
         case self.txtStreetAddress:
-            self.viewModel.createEvent?.eventLocationData?.eventAddress = textField.text
+            self.viewModel.createEventReq.eventAddress = textField.text
         case self.txtCity:
-            self.viewModel.createEvent?.eventLocationData?.city = textField.text
+            self.viewModel.createEventReq.city = textField.text
         case self.txtDrpState:
-            self.viewModel.createEvent?.eventLocationData?.state = textField.text
+            self.viewModel.createEventReq.state = textField.text
         case self.txtDrpCountry:
-            self.viewModel.createEvent?.eventLocationData?.country = textField.text
+            self.viewModel.createEventReq.country = textField.text
         case self.txtEventLink:
-            self.viewModel.createEvent?.eventLocationData?.virtualEventLink = textField.text
+            self.viewModel.createEventReq.virtualEventLink = textField.text
         case self.txtTobeAnnouncedCity:
-            self.viewModel.createEvent?.eventLocationData?.city = textField.text
+            self.viewModel.createEventReq.city = textField.text
 //        case self.txtTobeAnnouncedState:
 //            self.viewModel.createEvent?.eventLocationData?.state = textField.text
 //        case self.txtTobeAnnouncedCountry:
@@ -448,5 +506,26 @@ extension CreatEventVC : UITextFieldDelegate {
         default:
             break
         }
+    }
+}
+// MARK: - UITextFieldDelegate
+extension CreatEventVC : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewModel.createEventReq.eventAdditionalCoverImagesList?.count ?? 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoverImageCollectionViewCell", for: indexPath) as! CoverImageCollectionViewCell
+        let data = self.viewModel.createEventReq.eventAdditionalCoverImagesList?[indexPath.row]
+        cell.btnDeleteCoverImage.addTarget(self, action: #selector(deletAdditionalImages(_ :)), for: .touchUpInside)
+        cell.setData(indexPath: indexPath, imgData: data)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 62, height: 62)
     }
 }
