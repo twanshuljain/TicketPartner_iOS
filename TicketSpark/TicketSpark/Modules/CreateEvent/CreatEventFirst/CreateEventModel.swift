@@ -15,155 +15,84 @@ enum CreateEventType {
 
 struct CreateEventBasicRequest : Encodable {
     var name: String?
-    var timeZone: String?
     var eventDescription: String?
     var eventStartDate: String?
     var eventEndDate: String?
     var doorCloseDate: String?
     var doorStartDate: String?
+    var eventStartTime: String?
+    var eventEndTime: String?
     var doorOpenTime: String?
     var doorCloseTime: String?
     var doorCloseTimeRepresents: String?
     var doorOpenTimeRepresents: String?
+    var eventEndTimeRepresents: String?
+    var eventStartTimeRepresents: String?
+    var timeZoneId: Int?
     var eventTypeId: Int?
     var eventCoverImage: Data?
     var eventAdditionalCoverImagesList: [Data?]?
     var mediaFromPastEventImages: [Data?]?
-    //Virtual
-    var isVirtual: Bool?
-    var virtualEventLink: String?
+    var isEndTimeShow: Bool?
     //VENUE
     var isVenue: Bool?
     var locationName: String?
     var city: String?
-    var stateId: String?
-    var countryId: String?
-    var eventAddress: String?
-    //ToBeAnnounced
-    var isToBeAnnounced: Bool?
- //   var locationName: String?
- //   var city: String?
-    var isEmail: Bool?
     var state: String?
     var country: String?
+    var eventAddress: String?
+    //Virtual
+    var isVirtual: Bool?
+    var virtualEventLink: String?
+    //ToBeAnnounced
+    var isToBeAnnounced: Bool?
+    var announceEventAddress: String?
+    var announceCity: String?
+    var announceState: String?
+    var announceCountry: String?
+    var isEmail: Bool?
+
     
     enum CodingKeys: String, CodingKey {
         case name
-        case timeZone = "time_zone"
-        case eventCoverImage = "event_cover_image"
-        case eventAdditionalCoverImagesList = "event_additional_cover_images_list"
-        case mediaFromPastEventImages = "media_from_past_event_images"
         case eventDescription = "event_description"
         case eventStartDate = "event_start_date"
         case eventEndDate  = "event_end_date"
         case doorCloseDate  = "door_close_date"
         case doorStartDate  = "door_start_date"
+        case eventStartTime = "event_start_time"
+        case eventEndTime = "event_end_time"
         case doorOpenTime  = "door_open_time"
         case doorCloseTime  = "door_close_time"
         case doorCloseTimeRepresents  = "door_close_time_represents"
         case doorOpenTimeRepresents  = "door_open_time_represents"
-        case isVirtual  = "is_virtual"
-        case virtualEventLink  = "virtual_event_link"
+        case eventEndTimeRepresents = "event_end_time_represents"
+        case eventStartTimeRepresents = "event_start_time_represents"
+        case timeZoneId = "time_zone_id"
         case eventTypeId  = "event_type_id"
+        case eventCoverImage = "event_cover_image"
+        case eventAdditionalCoverImagesList = "event_additional_cover_images_list"
+        case mediaFromPastEventImages = "media_from_past_event_images"
+        case isEndTimeShow = "is_end_time_show"
+        //VENUE
         case isVenue  = "is_venue"
         case locationName = "location_name"
         case city
-        case stateId = "state_id"
-        case countryId = "country_id"
-        case eventAddress = "event_address"
-        case isToBeAnnounced  = "is_to_be_announced"
-        case isEmail = "is_email"
         case state
         case country
-        
+        case eventAddress = "event_address"
+        //Virtual
+        case isVirtual  = "is_virtual"
+        case virtualEventLink  = "virtual_event_link"
+        //ToBeAnnounced
+        case isToBeAnnounced  = "is_to_be_announced"
+        case announceEventAddress = "announce_event_address"
+        case announceCity = "announce_city"
+        case announceState = "announce_state"
+        case announceCountry = "announce_country"
+        case isEmail = "is_email"
     }
 }
-
-//struct CreateEventVenueBasicRequest : Encodable {
-//    var name: String?
-//    var eventDescription: String?
-//    var eventStartDate: String?
-//    var eventEndDate: String?
-//    var doorCloseDate: String?
-//    var doorStartDate: String?
-//    var doorOpenTime: String?
-//    var doorCloseTime: String?
-//    var doorCloseTimeRepresents: String?
-//    var doorOpenTimeRepresents: String?
-//    var isVenue: Bool?
-//    //var virtualEventLink: String?
-//    var eventTypeId: Int?
-//    var locationName: String?
-//    var city: String?
-//    var stateId: String?
-//    var countryId: String?
-//    var eventAddress: String?
-//
-//    enum CodingKeys: String, CodingKey {
-//        case name
-//        case eventDescription = "event_description"
-//        case eventStartDate = "event_start_date"
-//        case eventEndDate  = "event_end_date"
-//        case doorCloseDate  = "door_close_date"
-//        case doorStartDate  = "door_start_date"
-//        case doorOpenTime  = "door_open_time"
-//        case doorCloseTime  = "door_close_time"
-//        case doorCloseTimeRepresents  = "door_close_time_represents"
-//        case doorOpenTimeRepresents  = "door_open_time_represents"
-//      //  case virtualEventLink  = "virtual_event_link"
-//        case isVenue  = "is_venue"
-//        case eventTypeId  = "event_type_id"
-//        case locationName = "location_name"
-//        case city
-//        case stateId = "state_id"
-//        case countryId = "country_id"
-//        case eventAddress = "event_address"
-//    }
-//}
-//
-//struct CreateEventToBeAnnouncedBasicRequest : Encodable {
-//    var name: String?
-//    var eventDescription: String?
-//    var eventStartDate: String?
-//    var eventEndDate: String?
-//    var doorCloseDate: String?
-//    var doorStartDate: String?
-//    var doorOpenTime: String?
-//    var doorCloseTime: String?
-//    var doorCloseTimeRepresents: String?
-//    var doorOpenTimeRepresents: String?
-//    var isToBeAnnounced: Bool?
-//    //var virtualEventLink: String?
-//    var eventTypeId: Int?
-//    var locationName: String?
-//    var city: String?
-//    var isEmail: String?
-//    var state: String?
-//    var country: String?
-//
-//
-//    enum CodingKeys: String, CodingKey {
-//        case name
-//        case eventDescription = "event_description"
-//        case eventStartDate = "event_start_date"
-//        case eventEndDate  = "event_end_date"
-//        case doorCloseDate  = "door_close_date"
-//        case doorStartDate  = "door_start_date"
-//        case doorOpenTime  = "door_open_time"
-//        case doorCloseTime  = "door_close_time"
-//        case doorCloseTimeRepresents  = "door_close_time_represents"
-//        case doorOpenTimeRepresents  = "door_open_time_represents"
-//        case isToBeAnnounced  = "is_to_be_announced"
-//      //  case virtualEventLink  = "virtual_event_link"
-//        case eventTypeId  = "event_type_id"
-//        case locationName = "location_name"
-//        case city
-//        case isEmail = "is_email"
-//        case state
-//        case country
-//
-//    }
-//}
 
 // MARK: - DataClass
 struct CreateEvent: Codable {
@@ -316,6 +245,25 @@ struct CountrySpecificData: Codable {
     }
 }
 
+// MARK: - StateData
+struct StatesData: Codable {
+    var id: Int?
+    var stateName, stateCode, countryName: String?
+    var isActive: Bool?
+    var abbreviation: String?
+    var countryID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case stateName = "state_name"
+        case stateCode = "state_code"
+        case countryName = "country_name"
+        case isActive = "is_active"
+        case abbreviation
+        case countryID = "country_id"
+    }
+}
+
 // MARK: - EventType
 struct EventType: Codable {
     var id: Int?
@@ -328,3 +276,46 @@ struct EventType: Codable {
         case isActive = "is_active"
     }
 }
+
+/*
+ name:Canada carnival32
+ event_description:string
+ event_start_date:2024-11-09
+ event_end_date:2024-11-23
+ door_close_date:2024-11-09
+ door_start_date:2024-11-09
+       event_start_time: 11:30
+       event_end_time: 11:30
+ door_open_time:11:30
+ door_close_time:12:00
+ door_close_time_represents:am
+ door_open_time_represents:pm
+       event_end_time_represents: am
+       event_start_time_represents:pm
+ time_zone_id:1
+ event_type_id: 1
+
+ //VENUE
+ is_venue:false
+ location_name:test
+ city:inore
+ state:indore
+ country:india
+ event_address:indore
+
+ //Virtual
+ is_virtual:false
+ virtual_event_link:https://www.youtube.com/
+
+ //ToBeAnnounced
+ is_to_be_announced:true
+ announce_event_address:Indore
+ announce_city:indore
+ announce_state:indore
+ announce_country:India
+ is_email:True
+
+
+ organization_id:5
+*/
+

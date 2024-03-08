@@ -29,6 +29,7 @@
 		18544A9E2B99998B00C5EDC8 /* GoogleMapsM4B in Frameworks */ = {isa = PBXBuildFile; productRef = 18544A9D2B99998B00C5EDC8 /* GoogleMapsM4B */; };
 		18544AA02B99998B00C5EDC8 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 18544A9F2B99998B00C5EDC8 /* GooglePlaces */; };
 		18544AA32B999A1500C5EDC8 /* GoogleMapsUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 18544AA22B999A1500C5EDC8 /* GoogleMapsUtils */; };
+		18544AA52B9AE3E900C5EDC8 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18544AA42B9AE3E900C5EDC8 /* Encodable+Extension.swift */; };
 		185593AA2B88662C00174482 /* TicketEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185593A92B88662C00174482 /* TicketEventListViewController.swift */; };
 		185593AC2B886D0C00174482 /* TicketEventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185593AB2B886D0B00174482 /* TicketEventListViewModel.swift */; };
 		185971842B7A526100175D84 /* GoogleSignInView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185971832B7A526100175D84 /* GoogleSignInView.xib */; };
@@ -144,6 +145,7 @@
 		184B8B392B75F62C0035FF3E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		184B8B3B2B75F6400035FF3E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		184B8B3F2B7636270035FF3E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		18544AA42B9AE3E900C5EDC8 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		185593A92B88662C00174482 /* TicketEventListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEventListViewController.swift; sourceTree = "<group>"; };
 		185593AB2B886D0B00174482 /* TicketEventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEventListViewModel.swift; sourceTree = "<group>"; };
 		185971832B7A526100175D84 /* GoogleSignInView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleSignInView.xib; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */,
 				1884FF2F2B9709CC00979327 /* UICollectionView+Extension.swift */,
 				187279B02B987D0C006AD989 /* Date+Extension.swift */,
+				18544AA42B9AE3E900C5EDC8 /* Encodable+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -908,6 +911,7 @@
 				18E47A9B2B8F13B50078D89A /* RSCountryDialCode.swift in Sources */,
 				18C71AE32B876108001170C2 /* TicketCreatViewModel.swift in Sources */,
 				181638C42B7B9CFE0020854C /* SignUpViewController.swift in Sources */,
+				18544AA52B9AE3E900C5EDC8 /* Encodable+Extension.swift in Sources */,
 				18D2FE302B9208A3006202C5 /* UIImage+Extension.swift in Sources */,
 				18C71AEA2B87861D001170C2 /* TicketEventListTableVC.swift in Sources */,
 				184B8B3A2B75F62C0035FF3E /* LoginViewController.swift in Sources */,

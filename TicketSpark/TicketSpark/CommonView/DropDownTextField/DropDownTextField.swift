@@ -14,6 +14,7 @@ open class DropDownTextField: UITextField {
     var table: UITableView!
     var shadow: UIView!
     public var selectedIndex: Int?
+    var apiCall: (()->Void)?
 
     // MARK: IBInspectable
     @IBInspectable public var rowHeight: CGFloat = 50
@@ -79,6 +80,7 @@ open class DropDownTextField: UITextField {
         }
     }
 
+    var vc: UIViewController?
     public var optionIds: [Int]?
     var searchText = String() {
         didSet {
@@ -131,6 +133,13 @@ open class DropDownTextField: UITextField {
         setupUI()
         addPadding()
         delegate = self
+    }
+    
+    func setDelegate(vc:UIViewController) {
+        if  vc is CreatEventVC {
+            (vc as! CreatEventVC).delegateApiCall = self
+            self.vc = vc
+        }
     }
 
     // MARK: Closures
@@ -219,6 +228,18 @@ open class DropDownTextField: UITextField {
         self.leftViewMode = .always
     }
     public func showList() {
+        if self.vc != nil {
+            if self.optionArray.isEmpty {
+                self.apiCall?()
+            } else {
+                self.showData()
+            }
+        } else {
+            self.showData()
+        }
+    }
+    public func showData() {
+        
         if parentController == nil {
             parentController = parentViewController
         }
@@ -237,7 +258,7 @@ open class DropDownTextField: UITextField {
                                           height: frame.height))
         shadow = UIView(frame: table.frame)
         shadow.backgroundColor = .clear
-
+        
         table.dataSource = self
         table.delegate = self
         table.register(UINib(nibName: "DropDownTableViewCell", bundle: nil), forCellReuseIdentifier: "DropDownTableViewCell")
@@ -269,7 +290,7 @@ open class DropDownTextField: UITextField {
                                       height: self.tableheightX)
             self.table.alpha = 1
             self.shadow.frame = self.table.frame
-//            self.shadow.dropShadow()
+            //            self.shadow.dropShadow()
             self.arrow.position = .up
             
         },
@@ -544,3 +565,10 @@ extension UIView {
     }
 }
 
+extension DropDownTextField : APICallbackDelegate {
+    func apiCallFinished() {
+        DispatchQueue.main.async { [self] in
+            self.showData()
+        }
+    }
+}

@@ -13,6 +13,10 @@ protocol RichTextEditiorDelegate: AnyObject {
     func getRichText(text : String?)
 }
 
+protocol APICallbackDelegate: AnyObject {
+    func apiCallFinished()
+}
+
 class CreatEventVC: BaseViewController {
     
     // MARK: - IBOutlets
@@ -113,6 +117,7 @@ class CreatEventVC: BaseViewController {
     var editedText : String = ""
     let viewModel = CreatEventViewModel()
     var marker: GMSMarker?
+    var delegateApiCall: APICallbackDelegate?
     
     var isCoverImagePicked = false {
         didSet {
@@ -276,6 +281,7 @@ extension CreatEventVC {
         txtTobeAnnouncedCity.txtFld.placeholder = StringConstants.CreateEvent.enterCity.value
         
         self.txtDrpTimeZone.placeholder = StringConstants.CreateEvent.selectTimeZone.value
+       // self.txtDrpTimeZone.setDelegate(vc: self)
         
         txtCity.lbl.attributedText = StringConstants.CreateEvent.city.value.addAttributedString(highlightedString: "*")
         txtCity.txtFld.placeholder = StringConstants.CreateEvent.enterCity.value
@@ -327,13 +333,13 @@ extension CreatEventVC {
                 case self.txtDrpEventType :
                     self.viewModel.eventTypeData.forEach { data in
                         if data.eventTypeTitle == self.txtDrpEventType.text {
-                            self.viewModel.createEventReq.eventTypeId = data.id ?? 0
+                            self.viewModel.createEventReq.eventTypeId = data.id
                         }
                     }
                 case self.txtDrpTimeZone :
                     self.viewModel.timeZoneData.forEach { data in
                         if data.timeZoneName == self.txtDrpTimeZone.text {
-                            self.viewModel.createEventReq.timeZone = data.timeZoneName
+                            self.viewModel.createEventReq.timeZoneId = data.id
                         }
                     }
                 case self.txtDrpState :
@@ -347,21 +353,18 @@ extension CreatEventVC {
                     self.viewModel.countryData.forEach { data in
                         if data.countryName == self.txtDrpCountry.text {
                             self.viewModel.createEventReq.country = data.countryName
-                            self.viewModel.createEventReq.countryId = "\(data.id ?? 0)"
                         }
                     }
                 case self.txtTobeAnnouncedState :
-                    break;
-//                    self.viewModel.eventTypeData.forEach { data in
-//                        if data.eventTypeTitle == self.txtTobeAnnouncedState.text {
-//                            self.viewModel.createEventReq.eventTypeId = data.id
-//                        }
-//                    }
+                    self.viewModel.eventTypeData.forEach { data in
+                        if data.eventTypeTitle == self.txtTobeAnnouncedState.text {
+                            self.viewModel.createEventReq.eventTypeId = data.id
+                        }
+                    }
                 case self.txtTobeAnnouncedCountry :
                     self.viewModel.countryData.forEach { data in
                         if data.countryName == self.txtTobeAnnouncedCountry.text {
                             self.viewModel.createEventReq.country = data.countryName ?? ""
-                            self.viewModel.createEventReq.countryId = "\(data.id ?? 0)"
                         }
                     }
                 default:
@@ -388,32 +391,31 @@ extension CreatEventVC {
     }
     
     func apiCallForGetTimeZone(){
-        if Reachability.isConnectedToNetwork() {
-            LoadingIndicatorView.show()
-            self.viewModel.dispatchGroup.enter()
-            self.viewModel.getTimeZoneList() { isSuccess, response, msg in
-                DispatchQueue.main.async {
-                    LoadingIndicatorView.hide()
-                }
-                if isSuccess {
-                    if let response = response {
-                        response.forEach { data in
-                            self.viewModel.timeZoneData = response
-                            self.viewModel.timeZoneData.forEach { data in
-                                self.txtDrpTimeZone.optionArray.append(data.timeZoneName ?? "")
-                            }
+   //     self.txtDrpTimeZone.apiCall = {
+    //        if self.txtDrpTimeZone.optionArray.count != 0 { return }
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+               self.viewModel.dispatchGroup.enter()
+                self.viewModel.getTimeZoneList() { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                                self.viewModel.timeZoneData = response
+                                self.txtDrpTimeZone.optionArray = self.viewModel.timeZoneData.compactMap( { $0.timeZoneName ?? "" } )
+                       //     self.delegateApiCall?.apiCallFinished()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                         }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
-                    }
                 }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
             }
-        } else {
-            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
-        }
-        
+    //    }
         self.viewModel.dispatchGroup.notify(queue: .main) {
             self.apiCallForGetCountryList()
         }
@@ -429,14 +431,9 @@ extension CreatEventVC {
                 }
                 if isSuccess {
                     if let response = response {
-                        response.forEach { data in
-                            self.viewModel.countryData = response
-                            self.viewModel.countryData.forEach { data in
-                                self.txtDrpCountry.optionArray.append(data.countryName ?? "")
-                                self.txtTobeAnnouncedCountry.optionArray.append(data.countryName ?? "")
-                            }
-                            
-                        }
+                        self.viewModel.countryData = response
+                        self.txtDrpCountry.optionArray = self.viewModel.countryData.compactMap( { $0.countryName ?? "" } )
+                        self.txtTobeAnnouncedCountry.optionArray = self.viewModel.countryData.compactMap( { $0.countryName ?? "" } )
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -462,12 +459,8 @@ extension CreatEventVC {
                 }
                 if isSuccess {
                     if let response = response {
-                        response.forEach { data in
-                            self.viewModel.eventTypeData = response
-                            self.viewModel.eventTypeData.forEach { data in
-                                self.txtDrpEventType.optionArray.append(data.eventTypeTitle ?? "")
-                            }
-                        }
+                        self.viewModel.eventTypeData = response
+                        self.txtDrpEventType.optionArray = self.viewModel.eventTypeData.compactMap( { $0.eventTypeTitle ?? "" } )
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -560,7 +553,7 @@ extension CreatEventVC {
                 let eventAdditionalCoverImagesList = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
                 let mediaFromPastEventImages = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
                 
-                let req =  CreateEventBasicRequest(name: "Rockyii122", eventDescription: "scsdds",eventStartDate: "2024-11-09",eventEndDate: "2024-11-09",doorCloseDate: "2024-11-09",doorStartDate: "2024-11-09",doorOpenTime: "11:00",doorCloseTime: "12:00",doorCloseTimeRepresents: "sds",doorOpenTimeRepresents: "csdc",eventTypeId: 2,eventCoverImage: coverImage,eventAdditionalCoverImagesList: eventAdditionalCoverImagesList,mediaFromPastEventImages: mediaFromPastEventImages,isVirtual: false,virtualEventLink: "",isVenue: true,locationName: "Indore Palasia",city: "Indore",stateId: "33",countryId: "21",eventAddress: "IndoreIndore",isToBeAnnounced: false,isEmail: false,state: "",country: "")
+                let req =  self.viewModel.createEventReq
                 
                 self.viewModel.createEventBasics(createEventBasicRequest: req) { isSuccess, response, msg in
                     DispatchQueue.main.async {
