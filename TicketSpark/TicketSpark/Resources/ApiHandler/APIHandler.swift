@@ -37,6 +37,7 @@ public enum APIName: String {
     case CreateEvent = "/event/create/event/"
     case GetTimeZone = "/default/data/time-zone/list/"
     case SpecificCountry = "/default/data/specific/country/"
+    case GetEventList = "/event/event-type/list/"
     
 }
 // MARK: - EmptyModel

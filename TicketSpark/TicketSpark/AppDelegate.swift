@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true
         
+        GMSServices.provideAPIKey("AIzaSyC73yaRGGiQ-W1qpni-3WlKJJ3A1vWtmUs")
         self.window = UIWindow(frame: UIScreen.main.bounds)
         //window.rootViewController = UIStoryboard(name: "Session", bundle: nil).instantiateInitialViewController()
        // window.makeKeyAndVisible()

@@ -315,3 +315,16 @@ struct CountrySpecificData: Codable {
         case countryCode = "country_code"
     }
 }
+
+// MARK: - EventType
+struct EventType: Codable {
+    var id: Int?
+    var eventTypeTitle: String?
+    var isActive: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case eventTypeTitle = "event_type_title"
+        case isActive = "is_active"
+    }
+}

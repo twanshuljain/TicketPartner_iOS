@@ -40,7 +40,6 @@ class FloatingTextField: UITextField {
         self.addTarget(self, action: #selector(self.removeFloatingLabel), for: .editingDidEnd)
     }
     @objc func addFloatingLabel() {
-        self.setInputViewDatePicker(target: self, selector: #selector(doneTapped))
         if self.text == "" {
             self.floatingLabel.textColor = floatingLabelColor
             self.floatingLabel.font = floatingLabelFont
@@ -60,6 +59,15 @@ class FloatingTextField: UITextField {
         }
         self.setNeedsDisplay()
     }
+    
+    func addDatePicker(minimumDate: Date?, maximumDate: Date?) {
+        self.setInputViewDatePicker(minimumDate: minimumDate, maximumDate: maximumDate, target: self, selector: #selector(doneTapped))
+    }
+    
+    func addTimePicker(minimumDate: Date?, maximumDate: Date?) {
+        self.setInputViewTimePicker(minimumDate: minimumDate, maximumDate: maximumDate,target: self, selector: #selector(doneTimeTapped))
+    }
+    
     @objc func removeFloatingLabel() {
         if self.text == "" {
             UIView.animate(withDuration: 0.13) {
@@ -75,7 +83,17 @@ class FloatingTextField: UITextField {
         if let datePicker = self.inputView as? UIDatePicker {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
-            dateFormatter.dateFormat = "MM/yyyy"
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            self.text = dateFormatter.string(from: datePicker.date)
+        }
+        self.resignFirstResponder()
+    }
+    
+    @objc func doneTimeTapped() {
+        if let datePicker = self.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.dateFormat = "h:mm a"
             self.text = dateFormatter.string(from: datePicker.date)
         }
         self.resignFirstResponder()

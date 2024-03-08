@@ -59,6 +59,7 @@ open class DropDownTextField: UITextField {
     }
 
     // Variables
+    var completionForSelection : ((UITextField) -> (Void))?
     fileprivate var tableheightX: CGFloat = 100
     fileprivate var dataArray: [String] = []
     fileprivate var imageArray: [String] = []
@@ -438,7 +439,7 @@ extension DropDownTextField: UITableViewDelegate {
                        },
                        completion: { (_) -> Void in
                            self.text = "\(selectedText)"
-
+                           self.completionForSelection?(self)
                            tableView.reloadData()
                        })
         if hideOptionsWhenSelect {

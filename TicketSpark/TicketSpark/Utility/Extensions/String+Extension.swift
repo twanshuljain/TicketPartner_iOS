@@ -333,6 +333,46 @@ extension String {
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: highlightedColor ?? .red, range: range)
             return attributedString
     }
+    
+    func convertStringToDateFormatMMDDYYY() -> Date? {
+        let dateString = self
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        if let date = dateFormatter.date(from: dateString) {
+            return date
+        } else {
+           return nil
+        }
+    }
+    
+//    func convertStringToTimeHMMA() -> Date? {
+//        let dateString = self
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "h:mm a"
+//        if let date = dateFormatter.date(from: dateString) {
+//            return date
+//        } else {
+//           return nil
+//        }
+//    }
+    
+    func convertStringToTimeHMMA() -> Date? {
+        let dateString = self
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        
+        if let date = dateFormatter.date(from: dateString) {
+            let formattedDateFormatter = DateFormatter()
+            formattedDateFormatter.dateFormat = "h:mm a"
+            
+            let formattedTimeString = formattedDateFormatter.string(from: date)
+            if let formattedDate = formattedDateFormatter.date(from: formattedTimeString) {
+                return formattedDate
+            }
+        }
+        
+        return nil
+    }
 }
 
 extension StringProtocol {

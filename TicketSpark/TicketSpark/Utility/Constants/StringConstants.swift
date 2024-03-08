@@ -100,6 +100,7 @@ struct StringConstants {
         case endDate
         case endTime
         case locationName
+        case location
         case streetAddress
         case city
         case enterLocation
@@ -132,7 +133,11 @@ struct StringConstants {
         case edit
         case delete
         case eventLink
+        case joinEvent
         case selectTimeZone
+        case coverImage
+        case eventDate
+        case eventDoorDate
        var value: String {
             switch self {
             case .selectEventType:
@@ -148,9 +153,11 @@ struct StringConstants {
             case .endTime:
                 return "End Time"
             case .locationName:
-                return "Location Name*"
+                return "Location Name"
+            case .location:
+                return "Location*"
             case .streetAddress:
-                return "Street Address*"
+                return "Street Address"
             case .city:
                 return "City*"
             case .enterLocation:
@@ -213,8 +220,16 @@ struct StringConstants {
                 return "Delete"
             case .eventLink:
                 return "Enter event link"
+            case .joinEvent:
+                return "Link to join the event*"
             case .selectTimeZone:
                 return "Select time zone"
+            case .coverImage:
+                return "Event Cover*"
+            case .eventDate:
+                return "Event Start & End*"
+            case .eventDoorDate:
+                return "Door open at*"
             }
         }
     }

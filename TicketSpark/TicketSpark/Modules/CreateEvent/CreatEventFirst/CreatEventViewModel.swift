@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 typealias CreateEventCompletion = (Bool,CreateEvent?,String?)->Void
 typealias GetTimeZoneCompletion = (Bool,[TimeZone]?,String?)->Void
 typealias GetCountryDataCompletion = (Bool,[CountrySpecificData]?,String?)->Void
+typealias GetEventTypeDataCompletion = (Bool,[EventType]?,String?)->Void
 
 class CreatEventViewModel {
     //MARK: - Variables
@@ -19,7 +21,10 @@ class CreatEventViewModel {
     var timeZoneData = [TimeZone]()
     var countryData = [CountrySpecificData]()
     var dispatchGroup = DispatchGroup()
+    var dispatchGroup1 = DispatchGroup()
     var createEventReq = CreateEventBasicRequest()
+    var eventTypeData = [EventType]()
+    var locationManager = CLLocationManager()
     
     
 }
@@ -205,6 +210,23 @@ extension CreatEventViewModel {
     
     func getCountryList(complition:@escaping GetCountryDataCompletion) {
         APIHandler.shared.executeRequestWith(apiName: .SpecificCountry, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[CountrySpecificData]>, Error>) in
+            switch result {
+            case .success(let response):
+                defer { self.dispatchGroup1.leave() }
+                if response.status_code == 200 {
+                    complition(true, response.data , response.message)
+                } else {
+                    complition(false,response.data, response.message ?? "error message")
+                }
+            case .failure(let error):
+                defer { self.dispatchGroup1.leave() }
+                complition(false, nil, "\(error)")
+            }
+        }
+    }
+    
+    func getEventType(complition:@escaping GetEventTypeDataCompletion) {
+        APIHandler.shared.executeRequestWith(apiName: .GetEventList, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[EventType]>, Error>) in
             switch result {
             case .success(let response):
                 if response.status_code == 200 {
