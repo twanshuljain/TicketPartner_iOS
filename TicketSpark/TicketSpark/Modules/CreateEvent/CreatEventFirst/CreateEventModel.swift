@@ -13,6 +13,30 @@ enum CreateEventType {
     case toBeAnnounced
 }
 
+enum ScrollTo {
+    case eventName
+    case eventType
+    case eventCover
+    case timeZone
+    case eventStartDate
+    case eventEndDate
+    case eventStartTime
+    case eventEndTime
+    case eventDoorOpenDate
+    case eventDoorCloseDate
+    case eventDoorOpenTime
+    case eventDoorCloseTime
+    case eventCountryVenue
+    case eventStateVenue
+    case eventCityVenue
+    case eventLinkVirtual
+    case eventCountryToBeAnnounced
+    case eventStateToBeAnnounced
+    case eventCityToBeAnnounced
+    case eventLocationToBeAnnounced
+    case none
+}
+
 struct CreateEventBasicRequest : Encodable {
     var name: String?
     var eventDescription: String?

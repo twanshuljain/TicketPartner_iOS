@@ -1124,6 +1124,7 @@
                         <outlet property="lblVenueType" destination="yYB-fK-liw" id="xZn-Ag-X5C"/>
                         <outlet property="lblVirtualEventLink" destination="l7U-9m-hVj" id="KrJ-is-2wy"/>
                         <outlet property="mapViewVenue" destination="TVx-Bh-uya" id="gmU-mv-Pxc"/>
+                        <outlet property="scrollView" destination="yZX-ry-obT" id="fOm-n6-S6K"/>
                         <outlet property="segmentControl" destination="F6z-Kv-cLW" id="lmx-Dl-riT"/>
                         <outlet property="stackMediafromPast" destination="wN2-AC-4zn" id="IWK-b4-Ysx"/>
                         <outlet property="stackSendEmailConfirmation" destination="M6v-In-x3U" id="iFb-Pm-Paw"/>
@@ -1132,6 +1133,7 @@
                         <outlet property="stackViewVirtual" destination="NhC-0F-gWq" id="DV7-UW-JdZ"/>
                         <outlet property="startDateCenterCons" destination="HUx-bB-VWO" id="oqQ-9A-PcS"/>
                         <outlet property="startTimeCenterCons" destination="5Jb-TY-55v" id="OPF-1J-CSi"/>
+                        <outlet property="switchDisplayEvent" destination="1oL-xh-KFv" id="Ltc-nI-E25"/>
                         <outlet property="switchMediaPastEvent" destination="kjb-io-XCx" id="Hft-HU-7kd"/>
                         <outlet property="switchSendEmailConfirmation" destination="CQk-MC-v8G" id="Yut-L4-tFY"/>
                         <outlet property="txtCity" destination="0Da-3L-nww" id="0gD-Sr-Beh"/>

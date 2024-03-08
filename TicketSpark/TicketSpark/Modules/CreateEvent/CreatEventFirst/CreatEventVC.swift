@@ -20,6 +20,7 @@ protocol APICallbackDelegate: AnyObject {
 class CreatEventVC: BaseViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var txtEventTitle: CustomTextFieldView!
     @IBOutlet weak var imgCoverImage: UIImageView!
     @IBOutlet weak var imgViewAdd1: UIImageView!
@@ -106,6 +107,8 @@ class CreatEventVC: BaseViewController {
     @IBOutlet weak var lblToBeAnnouncedCountry: UILabel!
     @IBOutlet weak var lblToBeAnnouncedSendConfirmation: UILabel!
     @IBOutlet weak var txtLocationToBeAnnounced: CustomTextFieldView!
+    
+    @IBOutlet weak var switchDisplayEvent: UISwitch!
     
     @IBOutlet weak var mapViewToBeAnnounced: GMSMapView!
     @IBOutlet weak var mapViewVenue: GMSMapView!
@@ -300,12 +303,15 @@ extension CreatEventVC {
         lblDescribeEvent.attributedText = StringConstants.CreateEvent.description.value.addAttributedString(highlightedString: "*")
         lblTimeZone.attributedText = StringConstants.CreateEvent.timeZone.value.addAttributedString(highlightedString: "*")
         txtStreetAddress.txtFld.placeholder = StringConstants.CreateEvent.enterStreetAddress.value
+        
+        switchDisplayEvent.isOn = false
         switchMediaPastEvent.isOn = false
         stackMediafromPast.isHidden = true
         
         stackSendEmailConfirmation.isHidden = true
         switchSendEmailConfirmation.isOn = false
         
+        switchDisplayEvent.addTarget(self, action: #selector(actionSwitchDisplayEvent(_ :)), for: .valueChanged)
         switchMediaPastEvent.addTarget(self, action: #selector(actionSwitchMediaPast(_ :)), for: .valueChanged)
         switchSendEmailConfirmation.addTarget(self, action: #selector(actionSendEmailConfirmation(_ :)), for: .valueChanged)
         txtDrpState.placeholder = StringConstants.CreateEvent.enterState.value
@@ -496,6 +502,10 @@ extension CreatEventVC {
         self.collectionViewPastImages.reloadData()
     }
     
+    @objc func actionSwitchDisplayEvent(_ sender: UISwitch) {
+        self.viewModel.createEventReq.isEndTimeShow = sender.isOn
+    }
+    
     @objc func actionSwitchMediaPast(_ sender: UISwitch) {
         stackMediafromPast.isHidden = !sender.isOn
     }
@@ -549,12 +559,7 @@ extension CreatEventVC {
         if isValidate.1 {
             if Reachability.isConnectedToNetwork() {
                 LoadingIndicatorView.show()
-                let coverImage = UIImage(systemName: "imgDropDown")?.convertImageToData()
-                let eventAdditionalCoverImagesList = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
-                let mediaFromPastEventImages = [UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData(), UIImage.init(systemName: "plus")?.convertImageToData()]
-                
                 let req =  self.viewModel.createEventReq
-                
                 self.viewModel.createEventBasics(createEventBasicRequest: req) { isSuccess, response, msg in
                     DispatchQueue.main.async {
                         LoadingIndicatorView.hide()
@@ -575,6 +580,30 @@ extension CreatEventVC {
         } else {
             DispatchQueue.main.async {
                 self.showToast(with: isValidate.0, position: .top, type: .warning)
+                switch isValidate.2 {
+                case .eventName: self.viewModel.scrollToTextField(self.txtEventTitle, scrollView: self.scrollView)
+                case .eventType: self.viewModel.scrollToTextField(self.txtDrpEventType, scrollView: self.scrollView)
+                case .eventCover: self.viewModel.scrollToTextField(self.imgCoverImage, scrollView: self.scrollView)
+                case .timeZone: self.viewModel.scrollToTextField(self.txtDrpTimeZone, scrollView: self.scrollView)
+                case .eventStartDate: self.viewModel.scrollToTextField(self.txtStartDate, scrollView: self.scrollView)
+                case .eventEndDate: self.viewModel.scrollToTextField(self.txtEndDate, scrollView: self.scrollView)
+                case .eventStartTime: self.viewModel.scrollToTextField(self.txtStartTime, scrollView: self.scrollView)
+                case .eventEndTime: self.viewModel.scrollToTextField(self.txtEndTime, scrollView: self.scrollView)
+                case .eventDoorOpenDate: self.viewModel.scrollToTextField(self.txtDoorStartTime, scrollView: self.scrollView)
+                case .eventDoorCloseDate: self.viewModel.scrollToTextField(self.txtDoorEndDate, scrollView: self.scrollView)
+                case .eventDoorOpenTime: self.viewModel.scrollToTextField(self.txtDoorStartTime, scrollView: self.scrollView)
+                case .eventDoorCloseTime: self.viewModel.scrollToTextField(self.txtDoorEndTime, scrollView: self.scrollView)
+                case .eventCountryVenue: self.viewModel.scrollToTextField(self.txtTobeAnnouncedCountry, scrollView: self.scrollView)
+                case .eventStateVenue: self.viewModel.scrollToTextField(self.txtDrpState, scrollView: self.scrollView)
+                case .eventCityVenue: self.viewModel.scrollToTextField(self.txtCity, scrollView: self.scrollView)
+                case .eventLinkVirtual: self.viewModel.scrollToTextField(self.txtEventLink, scrollView: self.scrollView)
+                case .eventCountryToBeAnnounced: self.viewModel.scrollToTextField(self.txtTobeAnnouncedCountry, scrollView: self.scrollView)
+                case .eventStateToBeAnnounced: self.viewModel.scrollToTextField(self.txtTobeAnnouncedState, scrollView: self.scrollView)
+                case .eventCityToBeAnnounced: self.viewModel.scrollToTextField(self.txtTobeAnnouncedCity, scrollView: self.scrollView)
+                case .eventLocationToBeAnnounced: self.viewModel.scrollToTextField(self.txtLocationToBeAnnounced, scrollView: self.scrollView)
+                case .none:
+                    break;
+                }
             }
         }
     }
@@ -674,26 +703,21 @@ extension CreatEventVC : UITextFieldDelegate {
             self.txtDoorEndDate.text = self.txtEndDate.text ?? ""
         case self.txtEventTitle.txtFld:
             self.viewModel.createEventReq.name = textField.text
+        //Venue
         case self.txtLocationName:
             self.viewModel.createEventReq.locationName = textField.text
         case self.txtStreetAddress:
             self.viewModel.createEventReq.eventAddress = textField.text
         case self.txtCity:
             self.viewModel.createEventReq.city = textField.text
-        case self.txtDrpState:
-            self.viewModel.createEventReq.state = textField.text
-        case self.txtDrpCountry:
-            self.viewModel.createEventReq.country = textField.text
+         //Virtual
         case self.txtEventLink:
             self.viewModel.createEventReq.virtualEventLink = textField.text
+        //ToBeAnnounced
         case self.txtTobeAnnouncedCity:
-            self.viewModel.createEventReq.city = textField.text
+            self.viewModel.createEventReq.announceCity = textField.text
         case self.txtLocationToBeAnnounced:
-            self.viewModel.createEventReq.locationName = textField.text
-//        case self.txtTobeAnnouncedState:
-//            self.viewModel.createEvent?.eventLocationData?.state = textField.text
-//        case self.txtTobeAnnouncedCountry:
-//            self.viewModel.createEvent?.eventLocationData?.country = textField.text
+            self.viewModel.createEventReq.announceEventAddress = textField.text
         default:
             break
         }

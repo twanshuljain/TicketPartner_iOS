@@ -31,56 +31,90 @@ class CreatEventViewModel {
 }
 //MARK: - Functions
 extension CreatEventViewModel {
-    
-     func validateFields (_ createEventBasicRequest: CreateEventBasicRequest) -> (String,Bool) {
-         if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.name ?? "", validationType: .eventName).0 {
-             let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.name ?? "", validationType: .eventName).1
-            return (errMsg, false)
-         } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventDescription ?? "", validationType: .desc).0 {
-            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventDescription ?? "", validationType: .desc).1
-            return (errMsg, false)
-        }else if Validation.shared.createEventBasicValidation(text: "\(createEventBasicRequest.timeZoneId)", validationType: .timezone).0 {
-            let errMsg = Validation.shared.createEventBasicValidation(text: "\(createEventBasicRequest.timeZoneId)", validationType: .timezone).1
-            return (errMsg, false)
+    func validateFields (_ createEventBasicRequest: CreateEventBasicRequest) -> (String,Bool,ScrollTo) {
+        if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.name ?? "", validationType: .eventName).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.name ?? "", validationType: .eventName).1
+            return (errMsg, false, .eventName)
+        } else if createEventBasicRequest.eventTypeId == nil {
+            let errMsg = ValidationConstantStrings.selectEventType
+            return (errMsg, false, .eventType)
+        } else if createEventBasicRequest.eventCoverImage == nil {
+            let errMsg = ValidationConstantStrings.emptyCoverImage
+            return (errMsg, false, .eventCover)
+        } else if createEventBasicRequest.timeZoneId == nil {
+            let errMsg = ValidationConstantStrings.emptyTimezone
+            return (errMsg, false, .timeZone)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventStartDate ?? "", validationType: .startDate).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventStartDate ?? "", validationType: .startDate).1
+            return (errMsg, false, .eventStartDate)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventEndDate ?? "", validationType: .endDate).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventEndDate ?? "", validationType: .endDate).1
+            return (errMsg, false, .eventEndDate)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventStartTime ?? "", validationType: .startTime).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventStartTime ?? "", validationType: .startTime).1
+            return (errMsg, false, .eventStartTime)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventEndTime ?? "", validationType: .endTime).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventEndTime ?? "", validationType: .endTime).1
+            return (errMsg, false, .eventEndTime)
         }
-         if self.createEventType == .venue {
-             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.locationName ?? "", validationType: .locationName).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.locationName ?? "", validationType: .locationName).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventAddress ?? "", validationType: .streetAddress).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.eventAddress ?? "", validationType: .streetAddress).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.state ?? "", validationType: .state).0 {
+        else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorStartDate ?? "", validationType: .doorOpenDate).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorStartDate ?? "", validationType: .doorOpenDate).1
+            return (errMsg, false, .eventDoorOpenDate)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorCloseDate ?? "", validationType: .doorCloseDate).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorCloseDate ?? "", validationType: .doorCloseDate).1
+            return (errMsg, false, .eventDoorCloseDate)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorOpenTime ?? "", validationType: .doorOpenTime).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorOpenTime ?? "", validationType: .doorOpenTime).1
+            return (errMsg, false,  .eventDoorOpenTime)
+        } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorCloseTime ?? "", validationType: .doorCloseTime).0 {
+            let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.doorCloseTime ?? "", validationType: .doorCloseTime).1
+            return (errMsg, false, .eventDoorCloseTime)
+        }
+        //Venue
+        if self.createEventType == .venue {
+            if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).1
+                return (errMsg, false, .eventCountryVenue)
+            } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.state ?? "", validationType: .state).0 {
                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.state ?? "", validationType: .state).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).1
-                return (errMsg, false)
+                return (errMsg, false, .eventStateVenue)
+            } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).1
+                return (errMsg, false, .eventCityVenue)
             }
-         } else if self.createEventType == .virtual {
-             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.virtualEventLink ?? "", validationType: .eventLink).0 {
+        } else if self.createEventType == .virtual {
+            //Virtual
+            if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.virtualEventLink ?? "", validationType: .eventLink).0 {
                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.virtualEventLink ?? "", validationType: .eventLink).1
-                return (errMsg, false)
+                return (errMsg, false, .eventLinkVirtual)
             }
-         } else {
-             if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.city ?? "", validationType: .city).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.state ?? "", validationType: .state).0 {
-                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.state ?? "", validationType: .state).1
-                return (errMsg, false)
-             } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).0 {
-                 let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.country ?? "", validationType: .country).1
-                return (errMsg, false)
+        } else {
+            //Virtual
+            if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceCountry ?? "", validationType: .country).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceCountry ?? "", validationType: .country).1
+                return (errMsg, false, .eventCountryToBeAnnounced)
+            } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceState ?? "", validationType: .state).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceState ?? "", validationType: .state).1
+                return (errMsg, false, .eventStateToBeAnnounced)
+            } else if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceCity ?? "", validationType: .city).0 {
+                let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceCity ?? "", validationType: .city).1
+                return (errMsg, false, .eventCityToBeAnnounced)
             }
-         }
-        return("", true)
+            if createEventBasicRequest.isEmail ?? false {
+                if Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceEventAddress ?? "", validationType: .locationName).0 {
+                    let errMsg = Validation.shared.createEventBasicValidation(text: createEventBasicRequest.announceEventAddress ?? "", validationType: .locationName).1
+                    return (errMsg, false, .eventLocationToBeAnnounced)
+                }
+            }
+        }
+        return("", true, .none)
     }
     
-    
+    // Function to scroll the UIScrollView to the position of the UITextField
+    func scrollToTextField(_ textField: UIView, scrollView: UIScrollView) {
+            let rect = textField.convert(textField.bounds, to: scrollView)
+            scrollView.scrollRectToVisible(rect, animated: true)
+        }
     
     func createEventBasics(createEventBasicRequest: CreateEventBasicRequest, complition: @escaping CreateEventCompletion) {
         var body = Data()

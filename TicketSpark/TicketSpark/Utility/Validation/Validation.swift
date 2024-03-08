@@ -28,6 +28,14 @@ enum InputValidation: String {
     case eventType
     case desc
     case timezone
+    case startDate
+    case endDate
+    case startTime
+    case endTime
+    case doorOpenDate
+    case doorCloseDate
+    case doorOpenTime
+    case doorCloseTime
     case locationName
     case streetAddress
     case city
@@ -126,7 +134,7 @@ class Validation {
                     text.isEmpty ? ValidationConstantStrings.organizationCountry : ValidationConstantStrings.organizationCountry)
         case .organizationImage:
             return (true, "")
-        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink:
+        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink, .startDate, .endDate, .startTime, .endTime, .doorOpenDate, .doorCloseDate, .doorOpenTime, .doorCloseTime:
             return (true, "")
         }
     }
@@ -146,7 +154,7 @@ class Validation {
         
         case .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword, .organizationName, .organizationCountry, .organizationImage:
             break;
-        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink:
+        case .eventName, .eventType, .desc, .timezone, .locationName, .streetAddress, .city, .state, .country, .eventLink, .startDate, .endDate, .startTime, .endTime, .doorOpenDate, .doorCloseDate, .doorOpenTime, .doorCloseTime:
             break;
         }
         return (true,"")
@@ -196,6 +204,38 @@ class Validation {
                     text.isEmpty ? ValidationConstantStrings.emptyEventLink : ValidationConstantStrings.emptyEventLink)
         case .password, .confirmPassword, .email,.otp,.firstname,.lastname,.name,.number,.description,.signUpPassword,.signUpConfirmPassword, .organizationName, .organizationCountry, .organizationImage:
             break;
+        case .startDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectStartDate : ValidationConstantStrings.selectStartDate)
+        case .endDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectEndDate : ValidationConstantStrings.selectEndDate)
+        case .startTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectStartTime : ValidationConstantStrings.selectStartTime)
+        case .endTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectEndTime : ValidationConstantStrings.selectEndTime)
+        case .doorOpenDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectDoorOpenDate : ValidationConstantStrings.selectDoorOpenDate)
+        case .doorCloseDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectDoorCloseDate : ValidationConstantStrings.selectDoorCloseDate)
+        case .doorOpenTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectDoorOpenTime : ValidationConstantStrings.selectDoorOpenTime)
+        case .doorCloseTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.selectDoorCloseTime : ValidationConstantStrings.selectDoorCloseTime)
         }
         return (true,"")
     }
