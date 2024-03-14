@@ -30,7 +30,7 @@ class CreateAccountViewController: BaseViewController {
     @IBOutlet weak var imgeMobileVerified: UIImageView!
     @IBOutlet weak var btnCountryPicker: UIButton!
     
-    @IBOutlet weak var otpMobileView: OTPView!
+  //  @IBOutlet weak var otpMobileView: OTPView!
     
     @IBOutlet weak var lblPassword: UILabel!
     @IBOutlet weak var txtPassword: UITextField!
@@ -39,6 +39,13 @@ class CreateAccountViewController: BaseViewController {
     @IBOutlet weak var gogleSignInView: GoogleSignInView!
     
     @IBOutlet weak var btnEyePassword: UIButton!
+    
+    @IBOutlet weak var nameView: UIStackView!
+    @IBOutlet weak var mobileView: UIStackView!
+    @IBOutlet weak var passwordView: UIView!
+    
+    @IBOutlet weak var otpEmailViewHt: NSLayoutConstraint!
+    
    // @IBOutlet weak var popOverView: PopOverView!
     
     // MARK: - VARIABLES
@@ -79,6 +86,22 @@ class CreateAccountViewController: BaseViewController {
         }
     }
     
+    var showDropView = false {
+        didSet {
+            if showDropView {
+                self.nameView.isHidden = false
+                self.mobileView.isHidden = false
+           //     self.otpMobileView.isHidden = false
+                self.passwordView.isHidden = false
+            }  else {
+                self.nameView.isHidden = true
+                self.mobileView.isHidden = true
+           //     self.otpMobileView.isHidden = true
+                self.passwordView.isHidden = true
+            }
+        }
+    }
+    
     var emailVerified = false {
         didSet {
             if emailVerified {
@@ -97,14 +120,14 @@ class CreateAccountViewController: BaseViewController {
     var mobileVerified = false {
         didSet {
             if mobileVerified {
-                self.otpMobileView.isHidden = true
+               // self.otpMobileView.isHidden = true
                 self.btnMobileVerify.isHidden = true
                 self.imgeMobileVerified.isHidden = false
                 self.txtMobileNumber.isUserInteractionEnabled = false
                 self.btnCountryPicker.isUserInteractionEnabled = false
             }  else {
-                self.otpMobileView.isHidden = false
-                self.btnMobileVerify.isHidden = false
+               // self.otpMobileView.isHidden = false
+                self.btnMobileVerify.isHidden = true
                 self.imgeMobileVerified.isHidden = true
                 self.txtMobileNumber.isUserInteractionEnabled = true
                 self.btnCountryPicker.isUserInteractionEnabled = true
@@ -143,11 +166,13 @@ extension CreateAccountViewController {
     }
     
     func setText() {
+        self.txtFirstName.delegate = self
+        self.txtLastName.delegate = self
         self.gogleSignInView.lblSeperator.text = "Or Sign up with"
         self.gogleSignInView.lblDontHaveAccount.text = "Already have an account?"
         self.gogleSignInView.btnSignIn.setTitle("Sign in", for: .normal)
         self.otpEmailView.lblOTP.attributedText = self.otpEmailView.lblOTP.text?.addAttributedString(highlightedString: "*")
-        self.otpMobileView.lblOTP.attributedText = self.otpEmailView.lblOTP.text?.addAttributedString(highlightedString: "*")
+       // self.otpMobileView.lblOTP.attributedText = self.otpEmailView.lblOTP.text?.addAttributedString(highlightedString: "*")
     }
     
     func setUpView() {
@@ -155,10 +180,11 @@ extension CreateAccountViewController {
         self.emailVerified = false
         self.txtPassword.isSecureTextEntry = true
         self.otpEmailView.isHidden = !self.otpEmailView.isHidden
-        self.otpMobileView.isHidden = !self.otpMobileView.isHidden
+       // self.otpMobileView.isHidden = !self.otpMobileView.isHidden
         self.hideBackButton = true
         self.popOverView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.popOverView.lblMsg.text = "Congratulations! Your account has been created successfully."
+        self.showDropView = false
     }
     
     func setFont() {
@@ -188,25 +214,29 @@ extension CreateAccountViewController {
             self.otpVerify()
         }
         
-        self.otpMobileView.otpVerifyCallBack = {
-            self.otpVerify()
-        }
+//        self.otpMobileView.otpVerifyCallBack = {
+//            self.otpVerify()
+//        }
         self.popOverView.btnPop.addTarget(self,action:#selector(popOverViewAction), for:.touchUpInside)
         self.gogleSignInView.btnSignIn.addTarget(self,action:#selector(signInAction), for:.touchUpInside)
         txtEmail.addTarget(self, action: #selector(editingChangedEmail), for: .editingChanged)
         txtMobileNumber.addTarget(self, action: #selector(editingChangedMobile), for: .editingChanged)
         [txtEmail, txtFirstName, txtLastName, txtPassword, txtMobileNumber].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
         self.otpEmailView.btnResend.addTarget(self,action:#selector(resendOTPEmailAction), for:.touchUpInside)
-        self.otpMobileView.btnResend.addTarget(self,action:#selector(resendOTPMobileAction), for:.touchUpInside)
+      //  self.otpMobileView.btnResend.addTarget(self,action:#selector(resendOTPMobileAction), for:.touchUpInside)
+        self.otpEmailView.endTimeCallBack = {
+            self.otpEmailViewHt.constant = 20.0
+        }
     }
     
     @objc func resendOTPEmailAction() {
+       self.otpEmailViewHt.constant = 100.0
         self.otpEmailView.btnResend.isHidden = true
         self.sendOTPForEmail()
     }
     
     @objc func resendOTPMobileAction() {
-        self.otpMobileView.btnResend.isHidden = true
+      //  self.otpMobileView.btnResend.isHidden = true
         self.sendOTPForMobile()
     }
     
@@ -272,7 +302,7 @@ extension CreateAccountViewController {
                 let fName = txtFirstName.text, !fName.isEmpty,
                 let lName = txtLastName.text, !lName.isEmpty,
                 let mobileNumber = txtMobileNumber.text, !mobileNumber.isEmpty,
-                self.mobileVerified,
+                //self.mobileVerified,
                 let password = txtPassword.text, !password.isEmpty
             else {
                 self.createAccountBtnEnabled = false
@@ -312,8 +342,8 @@ extension CreateAccountViewController {
                     }
                     if isSuccess {
                             DispatchQueue.main.async {
-                                self.otpMobileView.isHidden = false
-                                self.otpMobileView.startTimer()
+                              //  self.otpMobileView.isHidden = false
+                              //  self.otpMobileView.startTimer()
                                 self.viewModel.otpVerify = .number
                                 self.showToast(with: msg ?? "", position: .top, type: .success)
                             }
@@ -345,6 +375,8 @@ extension CreateAccountViewController {
                     }
                     if isSuccess {
                             DispatchQueue.main.async {
+                                self.txtEmail.isUserInteractionEnabled = false
+                                self.btnEmailVerify.isHidden = true
                                 self.otpEmailView.isHidden = false
                                 self.otpEmailView.startTimer()
                                 self.viewModel.otpVerify = .email
@@ -382,9 +414,9 @@ extension CreateAccountViewController {
                         }
                 } else {
                     DispatchQueue.main.async {
-                        self.otpEmailView.validateOTP(valid: false)
-                        self.otpEmailView.inValidateOTP()
-                        self.otpEmailView.endTimerForInvalidOTP()
+                       // self.otpEmailView.validateOTP(valid: false)
+                        //self.otpEmailView.inValidateOTP()
+                       // self.otpEmailView.endTimerForInvalidOTP()
                         self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }
@@ -397,9 +429,10 @@ extension CreateAccountViewController {
     func setViewForVerified() {
         if self.viewModel.otpVerify == .email {
             self.emailVerified = true
+            self.showDropView = true
             self.validateFields()
         } else {
-            self.mobileVerified = true
+         //   self.mobileVerified = true
             self.validateFields()
         }
     }
@@ -416,13 +449,13 @@ extension CreateAccountViewController {
                             // MOBILE OTP VERIFIED
                             self.setViewForVerified()
                             self.showToast(with: msg ?? "", position: .top, type: .success)
-                            self.otpMobileView.validateOTP(valid: true)
+                          //  self.otpMobileView.validateOTP(valid: true)
                         }
                 } else {
                     DispatchQueue.main.async {
-                        self.otpMobileView.validateOTP(valid: false)
-                        self.otpMobileView.inValidateOTP()
-                        self.otpMobileView.endTimerForInvalidOTP()
+                       // self.otpMobileView.validateOTP(valid: false)
+//                        self.otpMobileView.inValidateOTP()
+//                        self.otpMobileView.endTimerForInvalidOTP()
                         self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }
@@ -446,22 +479,22 @@ extension CreateAccountViewController {
                 }
             }
         } else {
-            let otp = "\(self.otpMobileView.txtOtp1.text ?? "")" + "\(self.otpMobileView.txtOtp2.text ?? "")" + "\(self.otpMobileView.txtOtp3.text ?? "")" + "\(self.otpMobileView.txtOtp4.text ?? "")"
-            if self.otpMobileView.txtOtp1.text ?? "" == "" || self.otpMobileView.txtOtp2.text ?? "" == "" || self.otpMobileView.txtOtp3.text ?? "" == "" || self.otpMobileView.txtOtp4.text ?? "" == "" {
-            } else {
-                if Reachability.isConnectedToNetwork(){
-                    LoadingIndicatorView.show()
-                    self.otpVerifyForMobile(otp: otp)
-                } else {
-                    self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
-                }
-            }
+//            let otp = "\(self.otpMobileView.txtOtp1.text ?? "")" + "\(self.otpMobileView.txtOtp2.text ?? "")" + "\(self.otpMobileView.txtOtp3.text ?? "")" + "\(self.otpMobileView.txtOtp4.text ?? "")"
+//            if self.otpMobileView.txtOtp1.text ?? "" == "" || self.otpMobileView.txtOtp2.text ?? "" == "" || self.otpMobileView.txtOtp3.text ?? "" == "" || self.otpMobileView.txtOtp4.text ?? "" == "" {
+//            } else {
+//                if Reachability.isConnectedToNetwork(){
+//                    LoadingIndicatorView.show()
+//                    self.otpVerifyForMobile(otp: otp)
+//                } else {
+//                    self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+//                }
+//            }
         }
     }
     
     
     @objc func editingChangedEmail(_ textField: UITextField) {
-        var str = textField.text ?? ""
+        let str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
@@ -472,11 +505,11 @@ extension CreateAccountViewController {
             textField.text = str.replacingOccurrences(of: " ", with: "")
             return
         }
-        self.validateMobile()
+        self.validateEmail()
     }
     
     @objc func editingChangedMobile(_ textField: UITextField) {
-        var str = textField.text ?? ""
+        let str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
@@ -515,8 +548,15 @@ extension CreateAccountViewController {
                         LoadingIndicatorView.hide()
                     }
                     if isSuccess {
-                        DispatchQueue.main.async {
-                            self.popOverView.isHidden = !self.popOverView.isHidden
+                        if var signUpData = signUpData {
+                            DispatchQueue.main.async {
+                                if let password = self.txtPassword.text {
+                                    signUpData.password = password
+                                }
+                                UserDefaultManager.share.saveModelDataToUserDefults(userData: signUpData, key: .userData)
+                                UserDefaultManager.share.saveModelDataToUserDefults(userData: signUpData, key: .userData)
+                                self.popOverView.isHidden = !self.popOverView.isHidden
+                            }
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -591,5 +631,27 @@ extension CreateAccountViewController: RSCountrySelectedDelegate, UITextFieldDel
         self.viewModel.strCountryCode = country.country_code
         self.viewModel.strCountryName = country.country_name
         self.txtMobileNumber.becomeFirstResponder()
+    }
+}
+// MARK: - UITextViewDelegate
+extension CreateAccountViewController: UITextViewDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.txtFirstName || textField == self.txtLastName {
+            // Get the character set containing only letters
+            let allowedCharacterSet = CharacterSet.letters
+            
+            // Iterate through each character in the replacement string
+            for character in string {
+                // Check if the character is not in the allowed character set
+                if !allowedCharacterSet.contains(UnicodeScalar(String(character))!) {
+                    // If it's not a letter, disallow the change
+                    return false
+                }
+            }
+            
+            // Allow the change if all characters are letters
+            return true
+        }
+        return true
     }
 }

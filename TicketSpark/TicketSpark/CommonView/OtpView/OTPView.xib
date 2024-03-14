@@ -14,6 +14,7 @@
                 <outlet property="btnResend" destination="8t9-Y5-EeZ" id="vw5-zz-dFh"/>
                 <outlet property="lblOTP" destination="Dyq-A2-L7Z" id="NZe-VD-slj"/>
                 <outlet property="lblReceiveOtp" destination="ICl-do-94F" id="LmB-MB-b0f"/>
+                <outlet property="otpStackView" destination="30E-9P-2HF" id="tPe-NO-3b5"/>
                 <outlet property="txtOtp1" destination="dbx-KC-jfq" id="38S-nL-Cb1"/>
                 <outlet property="txtOtp2" destination="ozc-OW-QQS" id="VLU-3s-zmL"/>
                 <outlet property="txtOtp3" destination="rZt-0c-rqE" id="kmn-7c-vEA"/>

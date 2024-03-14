@@ -285,7 +285,7 @@ extension LoginViewController {
     }
     
     @objc func signInButtonalidation() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountViewController") as! CreateAccountViewController
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -300,7 +300,7 @@ extension LoginViewController {
     
     
     @objc func signUpAction() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "CreateAccountViewController") as! CreateAccountViewController
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -315,6 +315,7 @@ extension LoginViewController {
                     if var loginData = loginData {
                         DispatchQueue.main.async {
                             self.otpView.validateOTP(valid: true)
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .success)
                             if let password = self.txtPassword.text {
                                 loginData.password = password
                             }

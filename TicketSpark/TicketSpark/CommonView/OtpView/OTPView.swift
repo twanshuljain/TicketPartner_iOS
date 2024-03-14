@@ -8,8 +8,6 @@
 import UIKit
 
 class OTPView: UIView {
-    
-    
     @IBOutlet weak var txtOtp1: UITextField!
     @IBOutlet weak var txtOtp2: UITextField!
     @IBOutlet weak var txtOtp3: UITextField!
@@ -17,6 +15,7 @@ class OTPView: UIView {
     @IBOutlet weak var lblReceiveOtp: UILabel!
     @IBOutlet weak var btnResend: UIButton!
     @IBOutlet weak var lblOTP: UILabel!
+    @IBOutlet weak var otpStackView: UIStackView!
     
     var countdownTimer: Timer!
     var totalTime = 30
@@ -48,6 +47,7 @@ class OTPView: UIView {
 extension OTPView {
     func initSetup() {
         self.setFont()
+        self.otpStackView.isHidden = false
         //self.setDelegate()
     }
     
@@ -75,6 +75,7 @@ extension OTPView {
         txtOtp2.text = ""
         txtOtp3.text = ""
         txtOtp4.text = ""
+        self.otpStackView.isHidden = false
         self.validateOTP(valid: true)
        // lblReceiveOtp.isHidden = false
         self.lblReceiveOtp.textColor = .black
@@ -94,7 +95,7 @@ extension OTPView {
     @objc func updateTime() {
         self.btnResend.isHidden = true
         lblReceiveOtp.isHidden = false
-        lblReceiveOtp.text = "You will receive OTP in \(timeFormatted(self.totalTime))s"
+        lblReceiveOtp.text = "You OTP will expire in \(timeFormatted(self.totalTime))s"
         
         if self.totalTime != 0 {
             self.totalTime -= 1
@@ -109,6 +110,7 @@ extension OTPView {
         self.countdownTimer.invalidate()
         self.btnResend.isHidden = false
         lblReceiveOtp.isHidden = true
+       self.otpStackView.isHidden = true
         endTimeCallBack?()
         //btnContinue.isEnabled = false
         //btnContinue.alpha = 0.5

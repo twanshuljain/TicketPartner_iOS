@@ -177,7 +177,13 @@ extension ForgotPasswordViewController {
             self.btnContinueEnabled = false
             return
         }
-        self.btnContinueEnabled = true
+        let isValidate = viewModel.validateFields(self.txtEmail.text ?? "")
+        if isValidate.1 {
+            self.btnContinueEnabled = true
+        } else {
+            self.btnContinueEnabled = false
+        }
+        
     }
     
     func sendLink() {
