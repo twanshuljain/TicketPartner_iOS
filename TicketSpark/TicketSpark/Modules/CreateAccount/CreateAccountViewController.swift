@@ -146,6 +146,8 @@ extension CreateAccountViewController {
         self.gogleSignInView.lblSeperator.text = "Or Sign up with"
         self.gogleSignInView.lblDontHaveAccount.text = "Already have an account?"
         self.gogleSignInView.btnSignIn.setTitle("Sign in", for: .normal)
+        self.otpEmailView.lblOTP.attributedText = self.otpEmailView.lblOTP.text?.addAttributedString(highlightedString: "*")
+        self.otpMobileView.lblOTP.attributedText = self.otpEmailView.lblOTP.text?.addAttributedString(highlightedString: "*")
     }
     
     func setUpView() {
@@ -194,6 +196,18 @@ extension CreateAccountViewController {
         txtEmail.addTarget(self, action: #selector(editingChangedEmail), for: .editingChanged)
         txtMobileNumber.addTarget(self, action: #selector(editingChangedMobile), for: .editingChanged)
         [txtEmail, txtFirstName, txtLastName, txtPassword, txtMobileNumber].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
+        self.otpEmailView.btnResend.addTarget(self,action:#selector(resendOTPEmailAction), for:.touchUpInside)
+        self.otpMobileView.btnResend.addTarget(self,action:#selector(resendOTPMobileAction), for:.touchUpInside)
+    }
+    
+    @objc func resendOTPEmailAction() {
+        self.otpEmailView.btnResend.isHidden = true
+        self.sendOTPForEmail()
+    }
+    
+    @objc func resendOTPMobileAction() {
+        self.otpMobileView.btnResend.isHidden = true
+        self.sendOTPForMobile()
     }
     
     
@@ -206,12 +220,13 @@ extension CreateAccountViewController {
     }
     
     @objc func popOverViewAction() {
-        self.navigationController?.viewControllers.forEach({ vc in
-            if vc is LoginViewController {
-                self.popOverView.isHidden = !self.popOverView.isHidden
-                self.navigationController?.popToViewController(vc as! LoginViewController, animated: false)
-            }
-        })
+//        self.navigationController?.viewControllers.forEach({ vc in
+//            if vc is LoginViewController {
+//                self.popOverView.isHidden = !self.popOverView.isHidden
+//                self.navigationController?.popToViewController(vc as! LoginViewController, animated: false)
+//            }
+//        })
+        AppShareData.shared.setRootToDashboardVC()
     }
     
     func setUpCountryPicker() {
@@ -446,31 +461,46 @@ extension CreateAccountViewController {
     
     
     @objc func editingChangedEmail(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
         }
-        self.validateEmail()
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
+        }
+        self.validateMobile()
     }
     
     @objc func editingChangedMobile(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
+        }
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
         }
         self.validateMobile()
     }
     
     @objc func editingChanged(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
+        }
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
         }
         self.validateFields()
     }

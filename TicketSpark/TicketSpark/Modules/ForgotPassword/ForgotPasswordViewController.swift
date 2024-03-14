@@ -155,11 +155,16 @@ extension ForgotPasswordViewController {
     }
     
     @objc func editingChanged(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
+        }
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
         }
         self.validateFields()
     }

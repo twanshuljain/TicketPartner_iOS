@@ -19,7 +19,7 @@ class OTPView: UIView {
     @IBOutlet weak var lblOTP: UILabel!
     
     var countdownTimer: Timer!
-    var totalTime = 240
+    var totalTime = 30
     
     var endTimeCallBack : (() -> Void)?
     var otpVerifyCallBack : (() -> Void)?
@@ -76,9 +76,9 @@ extension OTPView {
         txtOtp3.text = ""
         txtOtp4.text = ""
         self.validateOTP(valid: true)
-        lblReceiveOtp.isHidden = false
+       // lblReceiveOtp.isHidden = false
         self.lblReceiveOtp.textColor = .black
-        self.totalTime = 240
+        self.totalTime = 30
         self.countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     

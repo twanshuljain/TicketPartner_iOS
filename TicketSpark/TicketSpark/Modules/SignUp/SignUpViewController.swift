@@ -53,6 +53,7 @@ extension SignUpViewController {
         self.gogleSignInView.lblSeperator.text = "Or Sign up with"
         self.gogleSignInView.lblDontHaveAccount.text = "Already have an account?"
         self.gogleSignInView.btnSignIn.setTitle("Sign in", for: .normal)
+        self.lblEmail.attributedText = self.lblEmail.text?.addAttributedString(highlightedString: "*")
     }
     
     func setUpView() {
@@ -83,11 +84,16 @@ extension SignUpViewController {
     }
     
     @objc func editingChanged(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
+        }
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
         }
         self.validateFields()
     }

@@ -564,7 +564,6 @@ extension UIView {
 }
 
 class customSocialLoginView: UIView {
-
         func setup() {
             layer.shadowColor = UIColor.lightGray.cgColor
             self.backgroundColor = .white

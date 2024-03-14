@@ -283,6 +283,7 @@ extension CreatEventVC {
         txtTobeAnnouncedCity.lbl.attributedText = StringConstants.CreateEvent.city.value.addAttributedString(highlightedString: "*")
         txtTobeAnnouncedCity.txtFld.placeholder = StringConstants.CreateEvent.enterCity.value
         
+        self.txtDrpTimeZone.font = CustomFont.shared.regular(sizeOfFont: 16)
         self.txtDrpTimeZone.placeholder = StringConstants.CreateEvent.selectTimeZone.value
        // self.txtDrpTimeZone.setDelegate(vc: self)
         

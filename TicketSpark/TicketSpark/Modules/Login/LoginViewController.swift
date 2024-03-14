@@ -215,6 +215,11 @@ extension LoginViewController {
         self.lblMobileNumber.font = CustomFont.shared.regular(sizeOfFont: 12.0)
         self.txtMobileNumber.font = CustomFont.shared.regular(sizeOfFont: 16.0)
         self.lblDialCountryCode.font = CustomFont.shared.regular(sizeOfFont: 12.0)
+        
+        self.lblEmail.attributedText = self.lblEmail.text?.addAttributedString(highlightedString: "*")
+        self.lblPassword.attributedText = self.lblPassword.text?.addAttributedString(highlightedString: "*")
+        self.lblMobileNumber.attributedText = self.lblMobileNumber.text?.addAttributedString(highlightedString: "*")
+        self.otpView.lblOTP.attributedText = self.otpView.lblOTP.text?.addAttributedString(highlightedString: "*")
     }
     
     func setUpAction() {
@@ -265,11 +270,16 @@ extension LoginViewController {
     }
     
     @objc func editingChanged(_ textField: UITextField) {
+        var str = textField.text ?? ""
         if textField.text?.count == 1 {
             if textField.text?.first == " " {
                 textField.text = ""
                 return
             }
+        }
+        if str.contains(" ") {
+            textField.text = str.replacingOccurrences(of: " ", with: "")
+            return
         }
         self.validateFields()
     }
