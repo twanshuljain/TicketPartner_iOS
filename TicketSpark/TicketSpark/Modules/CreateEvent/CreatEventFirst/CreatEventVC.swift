@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 import GoogleMaps
+import GooglePlaces
 
 protocol RichTextEditiorDelegate: AnyObject {
     func getRichText(text : String?)
@@ -379,6 +380,8 @@ extension CreatEventVC {
                 }
             }
         }
+        // Initialize the places client
+        self.viewModel.placesClient = GMSPlacesClient.shared()
     }
     
     func setDelegate() {
@@ -484,9 +487,9 @@ extension CreatEventVC {
     func addAction() {
         btnnSaveAndContinue.actionSubmit = { [weak self] _ in
             if let self {
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
-//                self.navigationController?.pushViewController(vc, animated: true)
-                self.apiCallForCreateEventBasics()
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
+                self.navigationController?.pushViewController(vc, animated: true)
+                //self.apiCallForCreateEventBasics()
             }
         }
     }
@@ -536,6 +539,7 @@ extension CreatEventVC {
         }
     }
     func loadQuillEditor() {
+        descriptionWebView.navigationDelegate = self
         if let htmlFilePath = Bundle.main.path(forResource: "quill", ofType: "html") {
             let htmlFileURL = URL(fileURLWithPath: htmlFilePath)
             descriptionWebView.loadFileURL(htmlFileURL, allowingReadAccessTo: htmlFileURL)
@@ -543,16 +547,11 @@ extension CreatEventVC {
                 self.loadHtmlData()
             })
         }
-    }
-    func setQuillContent(htmlContent: String) {
-        let javascriptFunction = "setQuillContent('\(htmlContent)');"
-        descriptionWebView.evaluateJavaScript(javascriptFunction, completionHandler: { (_, error) in
-            if let error = error {
-                print("Error setting Quill content: \(error.localizedDescription)")
-            } else {
-                print("Quill content set successfully.")
-            }
-        })
+//        if let url = Bundle.main.url(forResource: "index", withExtension: "html") {
+//            descriptionWebView.loadFileURL(url, allowingReadAccessTo: url)
+//            let request = URLRequest(url: url)
+//            descriptionWebView.load(request)
+//        }
     }
     
     func apiCallForCreateEventBasics(){
@@ -624,30 +623,34 @@ extension CreatEventVC {
       }
     
     @objc func cellTappedMethod(_ sender:AnyObject) {
-        ImagePickerManager().pickImage(self) { image in
+        ImagePickerManager().pickMultipleImage(self, true) { image in
             if self.viewModel.createEventReq.eventAdditionalCoverImagesList == nil {
-                self.viewModel.createEventReq.eventAdditionalCoverImagesList = [image.convertImageToData()]
+                self.viewModel.createEventReq.eventAdditionalCoverImagesList = image.map({ $0.convertImageToData() })
             } else {
-                self.viewModel.createEventReq.eventAdditionalCoverImagesList?.append(image.convertImageToData())
+                image.forEach { img in
+                    self.viewModel.createEventReq.eventAdditionalCoverImagesList?.append(img.convertImageToData())
+                }
             }
             self.collectionViewCoverImages.reloadData()
         }
     }
     
     @objc func addPastImageTapped(_ sender:AnyObject) {
-        ImagePickerManager().pickImage(self) { image in
+        ImagePickerManager().pickMultipleImage(self, true) { image in
             if self.viewModel.createEventReq.mediaFromPastEventImages == nil {
-                self.viewModel.createEventReq.mediaFromPastEventImages = [image.convertImageToData()]
+                self.viewModel.createEventReq.mediaFromPastEventImages = image.map({ $0.convertImageToData() })
             } else {
-                self.viewModel.createEventReq.mediaFromPastEventImages?.append(image.convertImageToData())
+                image.forEach { img in
+                    self.viewModel.createEventReq.mediaFromPastEventImages?.append(img.convertImageToData())
+                }
             }
             self.collectionViewPastImages.reloadData()
         }
     }
     
     @IBAction func btnImageUploadAction(_ sender: UIButton) {
-        ImagePickerManager().pickImage(self) { image in
-            self.viewModel.createEventReq.eventCoverImage = image.convertImageToData()
+        ImagePickerManager().pickMultipleImage(self, false) { image in
+            self.viewModel.createEventReq.eventCoverImage = image.first?.convertImageToData()
             self.imgCoverImage.image = UIImage(data: self.viewModel.createEventReq.eventCoverImage ?? Data())
             self.isCoverImagePicked = self.viewModel.createEventReq.eventCoverImage == nil ? false : true
         }
@@ -672,10 +675,71 @@ extension CreatEventVC : WKNavigationDelegate, WKScriptMessageHandler {
             print("Received content from Quill editor: \(content)")
         }
     }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // Inject JavaScript to prevent bouncing
+        //let preventBounceScript = "document.body.style.overscrollBehavior = 'none';"
+        let disableBounceScript = "document.body.style.webkitOverflowScrolling = 'off';"
+       // webView.evaluateJavaScript(preventBounceScript, completionHandler: nil)
+        
+        
+        let preventBounceScript = """
+                    var style = document.createElement('style');
+                    style.innerHTML = 'body { overscroll-behavior: none; }';
+                    document.head.appendChild(style);
+                    """
+        webView.evaluateJavaScript(preventBounceScript, completionHandler: nil)
+        webView.evaluateJavaScript(disableBounceScript, completionHandler: nil)
+    }
+    
+    func getAutocompleteSuggestions(text: String) {
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        // Create a session token
+        let token = GMSAutocompleteSessionToken.init()
+        self.viewModel.placesClient.findAutocompletePredictions(fromQuery: text, filter: filter, sessionToken: token, callback: { (results, error) in
+            if let error = error {
+                print("Autocomplete error: \(error.localizedDescription)")
+                return
+            }
+            
+            if let results = results {
+                for result in results {
+                    print("Autocomplete result: \(result.attributedFullText.string)")
+                    // Handle the autocomplete suggestions here
+                }
+            }
+        })
+    }
+    
+    func getAddressComponent(place: GMSPlace, type: String) -> String? {
+        for component in place.addressComponents ?? [] {
+             let types = component.types
+            if types.contains(type) {
+                return component.name
+            }
+        }
+        return nil
+    }
+
 }
 
 // MARK: - UITextFieldDelegate
 extension CreatEventVC : UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case self.txtLocationName.txtFld:
+            // Get the text entered by the user
+                    let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            // Call the function to get autocomplete suggestions
+            getAutocompleteSuggestions(text: text)
+            return true
+        default:
+            return true
+        }
+    }
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         switch textField {
         case self.txtStartDate:
@@ -690,6 +754,11 @@ extension CreatEventVC : UITextFieldDelegate {
             txtStartTime.addTimePicker(minimumDate: txtStartTime.text?.convertStringToTimeHMMA(), maximumDate: txtEndTime.text?.convertStringToTimeHMMA() ?? nil)
         case self.txtDoorEndTime:
             txtDoorEndTime.addTimePicker(minimumDate: txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: self.txtEndDate.text?.convertStringToTimeHMMA() ?? nil)
+        case self.txtLocationName.txtFld:
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            present(autocompleteController, animated: true, completion: nil)
+            return false
         default:
             break;
         }
@@ -705,25 +774,53 @@ extension CreatEventVC : UITextFieldDelegate {
         case self.txtEventTitle.txtFld:
             self.viewModel.createEventReq.name = textField.text
         //Venue
-        case self.txtLocationName:
+        case self.txtLocationName.txtFld:
             self.viewModel.createEventReq.locationName = textField.text
-        case self.txtStreetAddress:
+        case self.txtStreetAddress.txtFld:
             self.viewModel.createEventReq.eventAddress = textField.text
-        case self.txtCity:
+        case self.txtCity.txtFld:
             self.viewModel.createEventReq.city = textField.text
          //Virtual
-        case self.txtEventLink:
+        case self.txtEventLink.txtFld:
             self.viewModel.createEventReq.virtualEventLink = textField.text
         //ToBeAnnounced
-        case self.txtTobeAnnouncedCity:
+        case self.txtTobeAnnouncedCity.txtFld:
             self.viewModel.createEventReq.announceCity = textField.text
-        case self.txtLocationToBeAnnounced:
+        case self.txtLocationToBeAnnounced.txtFld:
             self.viewModel.createEventReq.announceEventAddress = textField.text
         default:
             break
         }
     }
 }
+// MARK: - GMSAutocompleteViewControllerDelegate
+extension CreatEventVC : GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        // Handle the selected place
+        print("Place name: \(place.name ?? "")")
+        dismiss(animated: true, completion: nil)
+        
+        // Get country and state from address components
+        let country = self.getAddressComponent(place: place, type: "country")
+        let state = self.getAddressComponent(place: place, type: "administrative_area_level_1")
+        let city = self.getAddressComponent(place: place, type: "locality")
+        
+        self.txtLocationName.txtFld.text = place.formattedAddress ?? ""
+        self.txtDrpCountry.text = country
+        self.txtDrpState.text = state
+        self.txtCity.txtFld.text = city
+        self.viewModel.selectedLatLon = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print("Autocomplete error: \(error.localizedDescription)")
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
 // MARK: - UITextFieldDelegate
 extension CreatEventVC : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     

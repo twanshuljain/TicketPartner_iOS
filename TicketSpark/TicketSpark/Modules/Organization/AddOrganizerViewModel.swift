@@ -92,8 +92,8 @@ extension AddOrganizerViewModel {
         }
     }
     
-    func updateOrganizationInfo(organizationId: Int, websiteURL: String, facebookURL: String, twitterURL: String, linkedinURL: String, complition:@escaping AddOrganizationCompletion) {
-        let param = UpdateOrganizerRequest(organizationId: organizationId, websiteUrl: websiteURL, facebookUrl: facebookURL, twitterUrl: twitterURL, linkedinUrl: linkedinURL)
+    func updateOrganizationInfo(organizationId: Int, websiteURL: String, facebookURL: String, twitterURL: String, instagramUrl: String, complition:@escaping AddOrganizationCompletion) {
+        let param = UpdateOrganizerRequest(organizationId: organizationId, websiteUrl: websiteURL, facebookUrl: facebookURL, twitterUrl: twitterURL, instagramUrl: instagramUrl)
         
         APIHandler.shared.executeRequestWith(apiName: .UpdateOrganization, parameters: param, methodType: .POST) { (result: Result<ResponseModal<AddOrganizerModel>, Error>) in
             switch result {

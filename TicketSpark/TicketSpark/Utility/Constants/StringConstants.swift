@@ -47,8 +47,8 @@ struct StringConstants {
     enum AddOrganizer {
         case website
         case facebookPage
-        case linkdin
-        case  twitter
+        case instagram
+        case twitter
         case organizationName
         case country
         case organizationLogo
@@ -58,6 +58,7 @@ struct StringConstants {
         case saveAndNext
         case aboutOrganization
         case next
+        case emptyWebsite
        
         var value: String {
             switch self {
@@ -65,8 +66,8 @@ struct StringConstants {
                 return "Website"
             case .facebookPage:
                 return "Facebook Page"
-            case .linkdin:
-                return "LinkedIn"
+            case .instagram:
+                return "Instagram"
             case .twitter:
                 return "Twitter"
             case .organizationName:
@@ -87,6 +88,8 @@ struct StringConstants {
                 return "Tell us about your Organization"
             case .next:
                 return "Next"
+            case .emptyWebsite:
+                return "Please enter website url"
             
             }
         }

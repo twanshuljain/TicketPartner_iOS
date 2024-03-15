@@ -24,7 +24,7 @@ class AddOrganizerVC: BaseViewController {
     @IBOutlet weak var txtWebSiteView: CustomTextFieldView!
     @IBOutlet weak var txtFacebookPage: CustomTextFieldView!
     @IBOutlet weak var txtTwitter: CustomTextFieldView!
-    @IBOutlet weak var txtLinkdin: CustomTextFieldView!
+    @IBOutlet weak var txtInstagram: CustomTextFieldView!
     @IBOutlet weak var lblSocialNetwork: UILabel!
     @IBOutlet weak var lblAboutOrganization: UILabel!
     
@@ -34,6 +34,7 @@ class AddOrganizerVC: BaseViewController {
     @IBOutlet weak var addOrgStackView: UIStackView!
     
     @IBOutlet weak var btnCountryPicker: UIButton!
+    @IBOutlet weak var btnDeleteImage: UIButton!
     
     
     // MARK: - VARIABLES
@@ -45,6 +46,15 @@ class AddOrganizerVC: BaseViewController {
             } else {
                 self.hideBackButton = false
                 self.configBackButton()
+            }
+        }
+    }
+    var isImagePicked = false {
+        didSet {
+            if isImagePicked {
+                btnDeleteImage.isHidden = false
+            } else {
+                btnDeleteImage.isHidden = true
             }
         }
     }
@@ -107,13 +117,14 @@ class AddOrganizerVC: BaseViewController {
         lblAboutOrganization.isHidden = true
         btnNext.isHidden = true
         stackSocialFeedView.isHidden = true
-        txtWebSiteView.lbl.text = StringConstants.AddOrganizer.website.value
+        let text = StringConstants.AddOrganizer.website.value + "*"
+        txtWebSiteView.lbl.attributedText = text.addAttributedString(highlightedString: "*")
         txtFacebookPage.lbl.text = StringConstants.AddOrganizer.facebookPage.value
         txtTwitter.lbl.text = StringConstants.AddOrganizer.twitter.value
-        txtLinkdin.lbl.text = StringConstants.AddOrganizer.linkdin.value
+        txtInstagram.lbl.text = StringConstants.AddOrganizer.instagram.value
         btnAddOrgaizer.layer.cornerRadius = btnAddOrgaizer.frame.height/2
         imgViewLogo.setTextFiledBorder()
-        logoContentView.setTextFiledBorder()
+       // logoContentView.setTextFiledBorder()
         countryDropDown.setTextFiledBorder()
         txtOrganizationName.lbl.font = CustomFont.shared.medium(sizeOfFont: 14)
         lblCountry.font = CustomFont.shared.medium(sizeOfFont: 14)
@@ -122,8 +133,6 @@ class AddOrganizerVC: BaseViewController {
         countryDropDown.arrowImage = UIImage(systemName: "imgDropDown")
         countryDropDown.isSearchEnable = false
        // countryDropDown.optionArray = ["India", "Australia", "New Zealand", "Nepal", "Bhutan"]
-        btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14)
-        btnChangeLogo.titleLabel?.tintColor = .grayTextColor
         countryDropDown.font = CustomFont.shared.regular(sizeOfFont: 14)
         lblAboutOrganization.font = CustomFont.shared.bold(sizeOfFont: 18)
         lblAboutOrganization.text = StringConstants.AddOrganizer.aboutOrganization.value
@@ -131,7 +140,11 @@ class AddOrganizerVC: BaseViewController {
         lblSocialNetwork.font = CustomFont.shared.semiBold(sizeOfFont: 18)
         lblSocialNetwork.textColor = .appBlackTextColor
         txtOrganizationName.lbl.attributedText = StringConstants.AddOrganizer.organizationName.value.addAttributedString(highlightedString: "*")
-        btnChangeLogo.addTarget(self, action:#selector(changeImage), for: .touchUpInside)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cellTappedMethod(_:)))
+        imgViewLogo.isUserInteractionEnabled = true
+        imgViewLogo.tag = 10
+        imgViewLogo.addGestureRecognizer(tapGestureRecognizer)
+        self.isImagePicked = self.imgViewLogo.image == nil ? false : true
       //  countryDropDown.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: openCountryPicker()))
     }
     
@@ -142,13 +155,14 @@ class AddOrganizerVC: BaseViewController {
         self.lblOrganzationLogo.font = CustomFont.shared.medium(sizeOfFont: 14.0)
         self.lblOrganizerDescription.font = CustomFont.shared.regular(sizeOfFont: 18.0)
         self.btnAddOrgaizer.titleLabel?.font = CustomFont.shared.bold(sizeOfFont: 16.0)
-        self.btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 14.0)
+        self.btnChangeLogo.titleLabel?.font = CustomFont.shared.regular(sizeOfFont: 16.0)
+        btnChangeLogo.titleLabel?.tintColor = .grayTextColor
     }
     
-    @objc func changeImage() {
-        ImagePickerManager().pickImage(self) {image in
-            self.imgViewLogo.image = image
-            //ImagePickerManager().openGallery(viewController: self)
+    @objc func cellTappedMethod(_ sender:AnyObject) {
+        ImagePickerManager().pickMultipleImage(self, false) { image in
+            self.imgViewLogo.image = image.first
+            self.isImagePicked = self.imgViewLogo.image == nil ? false : true
         }
     }
     
@@ -205,28 +219,32 @@ class AddOrganizerVC: BaseViewController {
     }
     
     func apiCallForOrganizationInfo(){
-            if Reachability.isConnectedToNetwork() {
-                LoadingIndicatorView.show()
-                self.viewModel.updateOrganizationInfo(organizationId: self.viewModel.organizerData?.id ?? 0, websiteURL: self.txtWebSiteView.txtFld.text ?? "", facebookURL: self.txtFacebookPage.txtFld.text ?? "", twitterURL: self.txtTwitter.txtFld.text ?? "", linkedinURL: self.txtLinkdin.txtFld.text ?? "") { isSuccess, response, msg in
-                    DispatchQueue.main.async {
-                        LoadingIndicatorView.hide()
-                    }
-                    if isSuccess {
-                        if let _ = response {
-                            DispatchQueue.main.async {
-                                //MOVE TO NEXT VIEW
-                                self.showToast(with: msg ?? "success", position: .top, type: .success)
-                            }
-                        }
-                    } else {
+        if self.txtWebSiteView.txtFld.text?.isEmpty ?? false {
+            self.showToast(with: StringConstants.AddOrganizer.emptyWebsite.value, position: .top, type: .warning)
+            return
+        }
+        if Reachability.isConnectedToNetwork() {
+            LoadingIndicatorView.show()
+            self.viewModel.updateOrganizationInfo(organizationId: self.viewModel.organizerData?.id ?? 0, websiteURL: self.txtWebSiteView.txtFld.text ?? "", facebookURL: self.txtFacebookPage.txtFld.text ?? "", twitterURL: self.txtTwitter.txtFld.text ?? "", instagramUrl: self.txtInstagram.txtFld.text ?? "") { isSuccess, response, msg in
+                DispatchQueue.main.async {
+                    LoadingIndicatorView.hide()
+                }
+                if isSuccess {
+                    if let _ = response {
                         DispatchQueue.main.async {
-                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                            //MOVE TO NEXT VIEW
+                            self.showToast(with: msg ?? "success", position: .top, type: .success)
                         }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
                     }
                 }
-            } else {
-                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
             }
+        } else {
+            self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+        }
     }
     
     func apiCallForGetAllCountry(){
@@ -263,6 +281,11 @@ class AddOrganizerVC: BaseViewController {
     
     @IBAction func btnCountryPicketAction(_ sender: UIButton) {
         self.apiCallForGetAllCountry()
+    }
+    
+    @IBAction func btnDeleteImageAction(_ sender: UIButton) {
+        self.imgViewLogo.image = nil
+        self.isImagePicked = self.imgViewLogo.image == nil ? false : true
     }
     
 }

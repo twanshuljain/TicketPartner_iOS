@@ -26,14 +26,14 @@ struct UpdateOrganizerRequest: Codable {
     var websiteUrl: String?
     var facebookUrl: String?
     var twitterUrl: String?
-    var linkedinUrl: String?
+    var instagramUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case organizationId = "organization_id"
         case websiteUrl = "website_url"
         case facebookUrl = "facebook_url"
         case twitterUrl = "twitter_url"
-        case linkedinUrl = "linkedin_url"
+        case instagramUrl = "instagram_url"
     }
     
 }

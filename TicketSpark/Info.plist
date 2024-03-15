@@ -26,5 +26,9 @@
     <string>Location usage Description</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>Location usage Description</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>To Add Images</string>
+    <key>GOOGLE_PLACES_API_KEY</key>
+    <string>AIzaSyC73yaRGGiQ-W1qpni-3WlKJJ3A1vWtmUs</string>
 </dict>
 </plist>

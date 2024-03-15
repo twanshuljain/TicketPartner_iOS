@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import GooglePlaces
 
 typealias CreateEventCompletion = (Bool,CreateEvent?,String?)->Void
 typealias GetTimeZoneCompletion = (Bool,[TimeZone]?,String?)->Void
@@ -26,6 +27,8 @@ class CreatEventViewModel {
     var createEventReq = CreateEventBasicRequest()
     var eventTypeData = [EventType]()
     var locationManager = CLLocationManager()
+    var placesClient: GMSPlacesClient!
+    var selectedLatLon: CLLocationCoordinate2D?
     
     
 }
