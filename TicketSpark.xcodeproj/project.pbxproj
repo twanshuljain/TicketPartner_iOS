@@ -36,7 +36,6 @@
 		185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185971852B7A52DE00175D84 /* GoogleSignInView.swift */; };
 		185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65BF2B72435C00FEC922 /* AppDelegate.swift */; };
 		185E65C42B72435C00FEC922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C32B72435C00FEC922 /* ViewController.swift */; };
-		185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */; };
 		185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CB2B72435E00FEC922 /* Assets.xcassets */; };
 		185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185E65CD2B72435E00FEC922 /* LaunchScreen.storyboard */; };
 		187279B12B987D0C006AD989 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187279B02B987D0C006AD989 /* Date+Extension.swift */; };
@@ -65,6 +64,7 @@
 		18C71AE32B876108001170C2 /* TicketCreatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */; };
 		18C71AEA2B87861D001170C2 /* TicketEventListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */; };
 		18C71AEB2B87861D001170C2 /* TicketEventListTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */; };
+		18CB81282BA8150500BEF040 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CB81262BA8150500BEF040 /* TicketSpark.xcdatamodeld */; };
 		18D2FE302B9208A3006202C5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */; };
 		18D7B8002B906B07003B2EFD /* RectangleDashedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */; };
 		18E47A7E2B8F13140078D89A /* AddOrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */; };
@@ -155,7 +155,6 @@
 		185E65BC2B72435C00FEC922 /* TicketSpark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicketSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		185E65BF2B72435C00FEC922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		185E65C32B72435C00FEC922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketSpark.xcdatamodel; sourceTree = "<group>"; };
 		185E65CB2B72435E00FEC922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185E65CE2B72435E00FEC922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185E65D02B72435E00FEC922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,6 +182,7 @@
 		18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCreatViewModel.swift; sourceTree = "<group>"; };
 		18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEventListTableVC.swift; sourceTree = "<group>"; };
 		18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketEventListTableVC.xib; sourceTree = "<group>"; };
+		18CB81272BA8150500BEF040 /* TicketSpark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketSpark.xcdatamodel; sourceTree = "<group>"; };
 		18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDashedBorder.swift; sourceTree = "<group>"; };
 		18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddOrganizerViewModel.swift; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 			children = (
 				185E65D62B7243DA00FEC922 /* TicketSpark */,
 				185E65D02B72435E00FEC922 /* Info.plist */,
-				185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */,
+				18CB81262BA8150500BEF040 /* TicketSpark.xcdatamodeld */,
 			);
 			path = TicketSpark;
 			sourceTree = "<group>";
@@ -951,7 +951,6 @@
 				18E47AA32B8F13B50078D89A /* RSCountryPickerController.swift in Sources */,
 				188F5CA92B8382120039B86C /* CreateEventStepper.swift in Sources */,
 				1874E2292B85E38B00DA4F1F /* TicketsCreateEventVC.swift in Sources */,
-				185E65CA2B72435C00FEC922 /* TicketSpark.xcdatamodeld in Sources */,
 				18E47AB52B8F15100078D89A /* CreateAccountViewModel.swift in Sources */,
 				185E65C02B72435C00FEC922 /* AppDelegate.swift in Sources */,
 				183546A62B7CEB2700649EE2 /* UIWindow+Extension.swift in Sources */,
@@ -960,6 +959,7 @@
 				185971862B7A52DE00175D84 /* GoogleSignInView.swift in Sources */,
 				1802DF8C2B7C9272008B25DB /* ForgotPasswordViewController.swift in Sources */,
 				18E47AD72B8F17B70078D89A /* Array+Extension.swift in Sources */,
+				18CB81282BA8150500BEF040 /* TicketSpark.xcdatamodeld in Sources */,
 				1884FF2D2B9703AC00979327 /* CoverImageCollectionViewCell.swift in Sources */,
 				18E47AB82B8F15290078D89A /* ForgotPasswordModel.swift in Sources */,
 				18EF615B2B7B529A0074C959 /* CreatEventVC.swift in Sources */,
@@ -1295,12 +1295,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		185E65C82B72435C00FEC922 /* TicketSpark.xcdatamodeld */ = {
+		18CB81262BA8150500BEF040 /* TicketSpark.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */,
+				18CB81272BA8150500BEF040 /* TicketSpark.xcdatamodel */,
 			);
-			currentVersion = 185E65C92B72435C00FEC922 /* TicketSpark.xcdatamodel */;
+			currentVersion = 18CB81272BA8150500BEF040 /* TicketSpark.xcdatamodel */;
 			path = TicketSpark.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
