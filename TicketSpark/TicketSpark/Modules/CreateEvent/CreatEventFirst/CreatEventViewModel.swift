@@ -29,7 +29,9 @@ class CreatEventViewModel {
     var locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient!
     var selectedLatLon: CLLocationCoordinate2D?
-    
+    var latValue = CLLocationDegrees()
+    var longValue = CLLocationDegrees()
+    var venueLocationSelected = true
     
 }
 //MARK: - Functions

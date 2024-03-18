@@ -169,6 +169,7 @@ extension CreatEventVC {
         loadQuillEditor()
         self.addAction()
         self.setDatePicker()
+        self.setMapVenue()
     }
     
     func setDatePicker() {
@@ -400,6 +401,53 @@ extension CreatEventVC {
     //    self.txtTobeAnnouncedCountry.txtFld.delegate = self
     }
     
+    func setMapVenue() {
+        getCurrentLocation()
+        mapViewVenue.delegate = self
+        mapViewVenue.isMyLocationEnabled = true
+        mapViewVenue.settings.myLocationButton = true
+    }
+    
+    func setMapToBeAnnounced() {
+        getCurrentLocation()
+        mapViewToBeAnnounced.delegate = self
+        mapViewToBeAnnounced.isMyLocationEnabled = true
+        mapViewToBeAnnounced.settings.myLocationButton = true
+    }
+    
+    func setCameraForMap(title: String, lat:CLLocationDegrees, lon: CLLocationDegrees) {
+        let camera = GMSCameraPosition.camera(withLatitude: lat,
+                                              longitude: lon, zoom: 15.0)
+        if self.viewModel.venueLocationSelected {
+            mapViewVenue.camera = camera
+        } else {
+            mapViewToBeAnnounced.camera = camera
+        }
+        
+        self.drawMarker(title: title, lat: lat, long: lon)
+    }
+    
+    func getCurrentLocation() {
+        
+        self.viewModel.locationManager.delegate = self
+        self.viewModel.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.viewModel.locationManager.requestWhenInUseAuthorization() // Call the authorizationStatus() class
+        self.viewModel.locationManager.startUpdatingLocation()
+    }
+    
+    func drawMarker(title: String, lat: CLLocationDegrees , long: CLLocationDegrees) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        marker.title = title
+      // marker.snippet = "GoogleMap"
+        if self.viewModel.venueLocationSelected {
+            marker.map = mapViewVenue
+        } else {
+            marker.map = mapViewToBeAnnounced
+        }
+       
+    }
+    
     func apiCallForGetTimeZone(){
    //     self.txtDrpTimeZone.apiCall = {
     //        if self.txtDrpTimeZone.optionArray.count != 0 { return }
@@ -613,10 +661,14 @@ extension CreatEventVC {
           switch sender.selectedSegmentIndex {
           case 0:
               self.changeSegment = 0
+              self.viewModel.venueLocationSelected = true
+              self.setMapVenue()
           case 1:
               self.changeSegment = 1
           case 2:
               self.changeSegment = 2
+              self.viewModel.venueLocationSelected = false
+              self.setMapToBeAnnounced()
           default:
               break
           }
@@ -730,6 +782,14 @@ extension CreatEventVC : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch textField {
         case self.txtLocationName.txtFld:
+            viewModel.venueLocationSelected = true
+            // Get the text entered by the user
+                    let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            // Call the function to get autocomplete suggestions
+            getAutocompleteSuggestions(text: text)
+            return true
+        case self.txtLocationToBeAnnounced.txtFld:
+            viewModel.venueLocationSelected = false
             // Get the text entered by the user
                     let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             // Call the function to get autocomplete suggestions
@@ -804,12 +864,32 @@ extension CreatEventVC : GMSAutocompleteViewControllerDelegate {
         let country = self.getAddressComponent(place: place, type: "country")
         let state = self.getAddressComponent(place: place, type: "administrative_area_level_1")
         let city = self.getAddressComponent(place: place, type: "locality")
-        
-        self.txtLocationName.txtFld.text = place.formattedAddress ?? ""
-        self.txtDrpCountry.text = country
-        self.txtDrpState.text = state
-        self.txtCity.txtFld.text = city
         self.viewModel.selectedLatLon = CLLocationCoordinate2D(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        if viewModel.venueLocationSelected {
+            self.viewModel.createEventReq.locationName = place.formattedAddress ?? ""
+            self.viewModel.createEventReq.country = country ?? ""
+            self.viewModel.createEventReq.state = state ?? ""
+            self.viewModel.createEventReq.city = city ?? ""
+            
+            self.txtLocationName.txtFld.text = self.viewModel.createEventReq.locationName ?? ""
+            self.txtDrpCountry.text = self.viewModel.createEventReq.country
+            self.txtDrpState.text = self.viewModel.createEventReq.state
+            self.txtCity.txtFld.text = self.viewModel.createEventReq.city
+            
+        } else {
+            self.viewModel.createEventReq.announceEventAddress = place.formattedAddress ?? ""
+            self.viewModel.createEventReq.announceCountry = country ?? ""
+            self.viewModel.createEventReq.announceState = state ?? ""
+            self.viewModel.createEventReq.announceCity = city ?? ""
+            
+            self.txtLocationToBeAnnounced.txtFld.text = self.viewModel.createEventReq.announceEventAddress ?? ""
+            self.txtTobeAnnouncedCountry.text = self.viewModel.createEventReq.announceCountry
+            self.txtTobeAnnouncedState.text = self.viewModel.createEventReq.announceState
+            self.txtTobeAnnouncedCity.txtFld.text = self.viewModel.createEventReq.announceCity
+        }
+        
+        self.setCameraForMap(title: place.formattedAddress ?? "", lat: self.viewModel.selectedLatLon?.latitude ?? self.viewModel.latValue, lon: self.viewModel.selectedLatLon?.longitude ?? self.viewModel.longValue)
+        
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -857,5 +937,15 @@ extension CreatEventVC : UICollectionViewDataSource, UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: 62)
+    }
+}
+extension CreatEventVC : CLLocationManagerDelegate, GMSMapViewDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations.last
+        self.viewModel.latValue = userLocation!.coordinate.latitude
+        self.viewModel.longValue = userLocation!.coordinate.longitude
+        let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
+        self.setCameraForMap(title: "", lat: center.latitude, lon: center.longitude)
+        self.viewModel.locationManager.stopUpdatingLocation()
     }
 }

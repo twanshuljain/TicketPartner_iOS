@@ -22,10 +22,12 @@
         <key>NSAllowsArbitraryLoads</key>
         <true/>
     </dict>
+    <key>NSLocationUsageDescription</key>
+    <string>Location usage Description</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Location usage Description</string>
+    <string>Location when in usage Description</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Location usage Description</string>
+    <string>Location always and when in use usage Description</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>To Add Images</string>
     <key>GOOGLE_PLACES_API_KEY</key>

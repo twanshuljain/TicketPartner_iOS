@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-ry-obT">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="748.99999999999977"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0wi-Fd-Vnk">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="2416.3333333333335"/>
@@ -998,7 +998,7 @@
                                                                                     <constraint firstAttribute="height" constant="65" id="LrE-3d-B4V"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMc-5g-lj8">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMc-5g-lj8" customClass="GMSMapView">
                                                                                 <rect key="frame" x="0.0" y="85" width="361" height="208"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
@@ -1123,6 +1123,7 @@
                         <outlet property="lblToBeAnnouncedState" destination="Xuo-O9-l31" id="8DK-rF-TjT"/>
                         <outlet property="lblVenueType" destination="yYB-fK-liw" id="xZn-Ag-X5C"/>
                         <outlet property="lblVirtualEventLink" destination="l7U-9m-hVj" id="KrJ-is-2wy"/>
+                        <outlet property="mapViewToBeAnnounced" destination="UMc-5g-lj8" id="nEI-Sb-Hup"/>
                         <outlet property="mapViewVenue" destination="TVx-Bh-uya" id="gmU-mv-Pxc"/>
                         <outlet property="scrollView" destination="yZX-ry-obT" id="fOm-n6-S6K"/>
                         <outlet property="segmentControl" destination="F6z-Kv-cLW" id="lmx-Dl-riT"/>
