@@ -60,24 +60,24 @@ struct CreateEventBasicRequest : Encodable {
     var mediaFromPastEventImages: [Data?]?
     var isEndTimeShow: Bool?
     //VENUE
-    var isVenue: Bool?
-    var locationName: String?
-    var city: String?
-    var state: String?
-    var country: String?
-    var eventAddress: String?
+    var isVenue: Bool? = true
+    var locationName: String? = ""
+    var city: String? = ""
+    var state: String? = ""
+    var country: String? = ""
+    var eventAddress: String? = ""
     var venueLat:CLLocationDegrees? = 0.0
     var venueLon:CLLocationDegrees? = 0.0
     //Virtual
-    var isVirtual: Bool?
-    var virtualEventLink: String?
+    var isVirtual: Bool? = false
+    var virtualEventLink: String? = ""
     //ToBeAnnounced
-    var isToBeAnnounced: Bool?
-    var announceEventAddress: String?
-    var announceCity: String?
-    var announceState: String?
-    var announceCountry: String?
-    var isEmail: Bool?
+    var isToBeAnnounced: Bool? = false
+    var announceEventAddress: String? = ""
+    var announceCity: String? = ""
+    var announceState: String? = ""
+    var announceCountry: String? = ""
+    var isEmail: Bool? = false
     var announceLat:CLLocationDegrees? = 0.0
     var announceLon:CLLocationDegrees? = 0.0
 

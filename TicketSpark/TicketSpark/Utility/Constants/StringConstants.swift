@@ -141,6 +141,12 @@ struct StringConstants {
         case coverImage
         case eventDate
         case eventDoorDate
+        case enterStartDate
+        case enterStartTime
+        case enterEndDate
+        case enterEndTime
+        case enterDoorStartTime
+        case enterDoorEndTime
        var value: String {
             switch self {
             case .selectEventType:
@@ -233,6 +239,20 @@ struct StringConstants {
                 return "Event Start & End*"
             case .eventDoorDate:
                 return "Door open at*"
+            case .enterStartDate:
+                return "Please enter start date first"
+            case .enterStartTime:
+                return "Please enter start time first"
+            case .enterEndDate:
+                return "Please enter end date first"
+            case .enterEndTime:
+                return "Please enter end time first"
+            case .enterDoorStartTime:
+                return "Please enter door start time first"
+            case .enterDoorEndTime:
+                return "Please enter door start time first"
+                
+                
             }
         }
     }

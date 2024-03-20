@@ -662,12 +662,22 @@ extension CreatEventVC {
           case 0:
               self.changeSegment = 0
               self.viewModel.venueLocationSelected = true
+              self.viewModel.createEventReq.isVenue = true
+              self.viewModel.createEventReq.isVirtual = false
+              self.viewModel.createEventReq.isToBeAnnounced = false
               self.setMapVenue()
           case 1:
               self.changeSegment = 1
+              self.viewModel.createEventReq.isVenue = false
+              self.viewModel.createEventReq.isVirtual = true
+              self.viewModel.createEventReq.isToBeAnnounced = false
+              
           case 2:
               self.changeSegment = 2
               self.viewModel.venueLocationSelected = false
+              self.viewModel.createEventReq.isVenue = false
+              self.viewModel.createEventReq.isVirtual = false
+              self.viewModel.createEventReq.isToBeAnnounced = true
               self.setMapToBeAnnounced()
           default:
               break
@@ -805,14 +815,34 @@ extension CreatEventVC : UITextFieldDelegate {
         case self.txtStartDate:
             txtStartDate.addDatePicker(minimumDate: Date(), maximumDate: self.txtEndDate.text?.convertStringToDateFormatMMDDYYY() ?? nil)
         case self.txtEndDate:
+            if self.viewModel.createEventReq.eventStartDate == nil {
+                self.showToast(with: StringConstants.CreateEvent.enterStartDate.value, position: .top, type: .warning)
+                return false
+            }
             txtEndDate.addDatePicker(minimumDate: txtStartDate.text?.convertStringToDateFormatMMDDYYY(), maximumDate: nil)
         case self.txtStartTime:
+            if self.viewModel.createEventReq.eventStartDate == nil {
+                self.showToast(with: StringConstants.CreateEvent.enterStartDate.value, position: .top, type: .warning)
+                return false
+            }
              txtStartTime.addTimePicker(minimumDate: txtStartDate.text != self.txtEndDate.text ? nil :  txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: txtEndTime.text?.convertStringToTimeHMMA() ?? nil)
         case self.txtEndTime:
+            if self.viewModel.createEventReq.eventStartTime == nil {
+                self.showToast(with: StringConstants.CreateEvent.enterStartTime.value, position: .top, type: .warning)
+                return false
+            }
             txtEndTime.addTimePicker(minimumDate: txtStartDate.text != self.txtEndDate.text ? nil : txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: nil)
         case self.txtDoorStartTime:
+            if self.viewModel.createEventReq.eventStartTime == nil {
+                self.showToast(with: StringConstants.CreateEvent.enterStartTime.value, position: .top, type: .warning)
+                return false
+            }
             txtStartTime.addTimePicker(minimumDate: txtStartTime.text?.convertStringToTimeHMMA(), maximumDate: txtEndTime.text?.convertStringToTimeHMMA() ?? nil)
         case self.txtDoorEndTime:
+            if self.viewModel.createEventReq.eventEndTime == nil {
+                self.showToast(with: StringConstants.CreateEvent.enterEndTime.value, position: .top, type: .warning)
+                return false
+            }
             txtDoorEndTime.addTimePicker(minimumDate: txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: self.txtEndDate.text?.convertStringToTimeHMMA() ?? nil)
         case self.txtLocationName.txtFld:
             let autocompleteController = GMSAutocompleteViewController()
@@ -834,20 +864,20 @@ extension CreatEventVC : UITextFieldDelegate {
         switch textField {
         case self.txtStartDate:
             self.txtDoorStartDate.text = self.txtStartDate.text ?? ""
-            self.viewModel.createEventReq.eventStartDate = self.txtStartDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
-            self.viewModel.createEventReq.doorStartDate = self.txtDoorStartDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.eventStartDate = self.txtStartDate.text?.changeDateFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorStartDate = self.txtDoorStartDate.text?.changeDateFormatFromMMddyyyTOyyyMMdd()
         case self.txtEndDate:
             self.txtDoorEndDate.text = self.txtEndDate.text ?? ""
-            self.viewModel.createEventReq.eventEndDate = self.txtEndDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
-            self.viewModel.createEventReq.doorCloseDate = self.txtDoorEndDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.eventEndDate = self.txtEndDate.text?.changeDateFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorCloseDate = self.txtDoorEndDate.text?.changeDateFormatFromMMddyyyTOyyyMMdd()
         case self.txtStartTime:
-            self.viewModel.createEventReq.eventStartTime = self.txtStartTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.eventStartTime = self.txtStartTime.text?.changeTimeFormatFromMMddyyyTOyyyMMdd()
         case self.txtEndTime:
-            self.viewModel.createEventReq.eventEndTime = self.txtEndTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.eventEndTime = self.txtEndTime.text?.changeTimeFormatFromMMddyyyTOyyyMMdd()
         case self.txtDoorStartTime:
-            self.viewModel.createEventReq.doorOpenTime = self.txtDoorStartTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorOpenTime = self.txtDoorStartTime.text?.changeTimeFormatFromMMddyyyTOyyyMMdd()
         case self.txtDoorEndTime:
-            self.viewModel.createEventReq.doorCloseTime = self.txtDoorEndTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorCloseTime = self.txtDoorEndTime.text?.changeTimeFormatFromMMddyyyTOyyyMMdd()
         case self.txtEventTitle.txtFld:
             self.viewModel.createEventReq.name = textField.text
         //Venue

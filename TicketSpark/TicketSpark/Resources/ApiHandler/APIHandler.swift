@@ -268,8 +268,8 @@ class APIHandler: NSObject {
         
         debugPrint("finalURL is \(finalURL)")
         print("\(request.httpMethod ?? "") \(request.url!)")
-        let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
-        print("BODY \n \(str)")
+       // let str = String(decoding: request.httpBody ?? Data(), as: UTF8.self)
+        //print("BODY \n \(str)")
         print("HEADERS \n \(request.allHTTPHeaderFields ?? [:])")
         
         session.dataTask(with: request) { data, response, error in

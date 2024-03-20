@@ -117,22 +117,24 @@ extension CreatEventViewModel {
     
     // Function to scroll the UIScrollView to the position of the UITextField
     func scrollToTextField(_ textField: UIView, scrollView: UIScrollView) {
-            let rect = textField.convert(textField.bounds, to: scrollView)
-            scrollView.scrollRectToVisible(rect, animated: true)
-        }
+        let rect = textField.convert(textField.bounds, to: scrollView)
+        scrollView.scrollRectToVisible(rect, animated: true)
+    }
     
     func createEventBasics(createEventBasicRequest: CreateEventBasicRequest, complition: @escaping CreateEventCompletion) {
         var body = Data()
         do {
-            var arr = try createEventReq.asArrayDictionary()
+            let arr = try createEventReq.asArrayDictionary()
             // Iterating over each dictionary in the array
             for dictionary in arr {
                 // Iterating over key-value pairs in each dictionary
                 for (key, value) in dictionary {
-                    body.append("--\(boundary)\r\n")
-                    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                    body.append(String(describing: value).data(using: .utf8)!)
-                    body.append("\r\n")
+                    if key != "event_cover_image" && key != "media_from_past_event_images" && key != "event_additional_cover_images_list" {
+                        body.append("--\(boundary)\r\n")
+                        body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                        body.append(String(describing: value).data(using: .utf8)!)
+                        body.append("\r\n")
+                    }
                 }
             }
             
@@ -145,51 +147,51 @@ extension CreatEventViewModel {
                 body.append("\r\n")
             }
             
-            body.append("--\(boundary)\r\n")
-            body.append("Content-Disposition: form-data; name=\"event_additional_cover_images_list\"; filename=\"event_additional_cover_images_list.png\"\r\n")
-            body.append("Content-Type: event_additional_cover_images_list/png\r\n\r\n")
-            body.append((createEventBasicRequest.eventAdditionalCoverImagesList?.first!)!)
-            body.append("\r\n")
+//            body.append("--\(boundary)\r\n")
+//            body.append("Content-Disposition: form-data; name=\"event_additional_cover_images_list\"; filename=\"event_additional_cover_images_list.png\"\r\n")
+//            body.append("Content-Type: event_additional_cover_images_list/png\r\n\r\n")
+//            body.append((createEventBasicRequest.eventAdditionalCoverImagesList?.first!)!)
+//            body.append("\r\n")
+//
+//            body.append("--\(boundary)\r\n")
+//            body.append("Content-Disposition: form-data; name=\"media_from_past_event_images\"; filename=\"media_from_past_event_images.png\"\r\n")
+//            body.append("Content-Type: media_from_past_event_images/png\r\n\r\n")
+//            body.append((createEventBasicRequest.mediaFromPastEventImages?.first!)!)
+//            body.append("\r\n")
             
-            body.append("--\(boundary)\r\n")
-            body.append("Content-Disposition: form-data; name=\"media_from_past_event_images\"; filename=\"media_from_past_event_images.png\"\r\n")
-            body.append("Content-Type: media_from_past_event_images/png\r\n\r\n")
-            body.append((createEventBasicRequest.mediaFromPastEventImages?.first!)!)
-            body.append("\r\n")
+           //  mediaFromPastEventImages
+            if let mediaFromPastEventImages = createEventBasicRequest.mediaFromPastEventImages {
+                // Append each image to the body
+                for (index, image) in mediaFromPastEventImages.enumerated() {
+                    // Add boundary for each image
+                    body.append("--\(boundary)\r\n")
+                    
+                    // Add content disposition header
+                    body.append("Content-Disposition: form-data; name=\"image[\(index)]\"; filename=\"image\(index).png\"\r\n")
+                    
+                    // Add content type header
+                    body.append("Content-Type: image/png\r\n\r\n")
+                    
+                    // Convert image to data and append to body
+                    // if let imageData = image.pngData() {
+                    body.append(image!)
+                    //}
+                    
+                    // Add newline after each image
+                    body.append("\r\n")
+                }
+            }
             
-            // mediaFromPastEventImages
-            //        if let mediaFromPastEventImages = createEventBasicRequest.mediaFromPastEventImages {
-            //            // Append each image to the body
-            //            for (index, image) in mediaFromPastEventImages.enumerated() {
-            //                   // Add boundary for each image
-            //                   body.append("--\(boundary)\r\n")
-            //
-            //                   // Add content disposition header
-            //                   body.append("Content-Disposition: form-data; name=\"image[\(index)]\"; filename=\"image\(index).png\"\r\n")
-            //
-            //                   // Add content type header
-            //                   body.append("Content-Type: image/png\r\n\r\n")
-            //
-            //                   // Convert image to data and append to body
-            //                  // if let imageData = image.pngData() {
-            //                       body.append(image!)
-            //                   //}
-            //
-            //                   // Add newline after each image
-            //                   body.append("\r\n")
-            //               }
-            //        }
-            //
-            //        // eventAdditionalCoverImagesList
-            //        if let eventAdditionalCoverImagesList = createEventBasicRequest.eventAdditionalCoverImagesList {
-            //            for (index, image) in eventAdditionalCoverImagesList.enumerated() {
-            //                   body.append("--\(boundary)\r\n")
-            //                   body.append("Content-Disposition: form-data; name=\"image[\(index)]\"; filename=\"image\(index).png\"\r\n")
-            //                   body.append("Content-Type: image/png\r\n\r\n")
-            //                   body.append(image!)
-            //                   body.append("\r\n")
-            //               }
-            //        }
+                    // eventAdditionalCoverImagesList
+            if let eventAdditionalCoverImagesList = createEventBasicRequest.eventAdditionalCoverImagesList {
+                for (index, image) in eventAdditionalCoverImagesList.enumerated() {
+                    body.append("--\(boundary)\r\n")
+                    body.append("Content-Disposition: form-data; name=\"image[\(index)]\"; filename=\"image\(index).png\"\r\n")
+                    body.append("Content-Type: image/png\r\n\r\n")
+                    body.append(image!)
+                    body.append("\r\n")
+                }
+            }
             
             // Add final boundary to indicate the end of the request
             body.append("--\(boundary)--\r\n")

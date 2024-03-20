@@ -57,7 +57,6 @@
 		18906B182B98DC9A00B21F1F /* PastImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18906B162B98DC9A00B21F1F /* PastImageCollectionViewCell.swift */; };
 		18906B192B98DC9A00B21F1F /* PastImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18906B172B98DC9A00B21F1F /* PastImageCollectionViewCell.xib */; };
 		189D06162BA420FD002950CE /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 189D06152BA420FD002950CE /* BSImagePicker */; };
-		189D06192BA42BD0002950CE /* FMPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 189D06182BA42BD0002950CE /* FMPhotoPicker */; };
 		18A7E6D32B91ABCA005997AD /* CreateEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7E6D22B91ABCA005997AD /* CreateEventModel.swift */; };
 		18C71ADD2B875ECC001170C2 /* TicketTypeCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71ADB2B875ECC001170C2 /* TicketTypeCollectionVC.swift */; };
 		18C71ADE2B875ECC001170C2 /* TicketTypeCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71ADC2B875ECC001170C2 /* TicketTypeCollectionVC.xib */; };
@@ -128,6 +127,7 @@
 		18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093382B7B414800BFB4C3 /* Lato-BoldItalic.ttf */; };
 		18F093412B7B414800BFB4C3 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F093392B7B414800BFB4C3 /* Lato-Light.ttf */; };
 		18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F093422B7B456500BFB4C3 /* CustomFont.swift */; };
+		F249C0693B9373E969154B03 /* Pods_TicketSpark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBD756BAAAEF65D44133C07 /* Pods_TicketSpark.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -245,6 +245,9 @@
 		18F093382B7B414800BFB4C3 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		18F093392B7B414800BFB4C3 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		18F093422B7B456500BFB4C3 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		370A04316EC009C6FCFAC937 /* Pods-TicketSpark.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicketSpark.release.xcconfig"; path = "Target Support Files/Pods-TicketSpark/Pods-TicketSpark.release.xcconfig"; sourceTree = "<group>"; };
+		92BD6AC5A3EA74CE7FA4E559 /* Pods-TicketSpark.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicketSpark.debug.xcconfig"; path = "Target Support Files/Pods-TicketSpark/Pods-TicketSpark.debug.xcconfig"; sourceTree = "<group>"; };
+		ADBD756BAAAEF65D44133C07 /* Pods_TicketSpark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TicketSpark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +256,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				18544A9A2B99998B00C5EDC8 /* GoogleMapsBase in Frameworks */,
-				189D06192BA42BD0002950CE /* FMPhotoPicker in Frameworks */,
 				18544AA32B999A1500C5EDC8 /* GoogleMapsUtils in Frameworks */,
 				18544A9C2B99998B00C5EDC8 /* GoogleMapsCore in Frameworks */,
 				189D06162BA420FD002950CE /* BSImagePicker in Frameworks */,
@@ -261,6 +263,7 @@
 				18544AA02B99998B00C5EDC8 /* GooglePlaces in Frameworks */,
 				18544A9E2B99998B00C5EDC8 /* GoogleMapsM4B in Frameworks */,
 				18EF61612B7B6CBA0074C959 /* IQKeyboardManagerSwift in Frameworks */,
+				F249C0693B9373E969154B03 /* Pods_TicketSpark.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +356,8 @@
 			children = (
 				185E65BE2B72435C00FEC922 /* TicketSpark */,
 				185E65BD2B72435C00FEC922 /* Products */,
+				41DE3373CC9EAD406939F74B /* Pods */,
+				A4A388A791411DDD9E471577 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -795,6 +800,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		41DE3373CC9EAD406939F74B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				92BD6AC5A3EA74CE7FA4E559 /* Pods-TicketSpark.debug.xcconfig */,
+				370A04316EC009C6FCFAC937 /* Pods-TicketSpark.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A4A388A791411DDD9E471577 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADBD756BAAAEF65D44133C07 /* Pods_TicketSpark.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -802,9 +824,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 185E65D32B72435E00FEC922 /* Build configuration list for PBXNativeTarget "TicketSpark" */;
 			buildPhases = (
+				3051DEE53008CA4A872D5A53 /* [CP] Check Pods Manifest.lock */,
 				185E65B82B72435C00FEC922 /* Sources */,
 				185E65B92B72435C00FEC922 /* Frameworks */,
 				185E65BA2B72435C00FEC922 /* Resources */,
+				2F7721BD6A4D89813DECBB06 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -820,7 +844,6 @@
 				18544A9F2B99998B00C5EDC8 /* GooglePlaces */,
 				18544AA22B999A1500C5EDC8 /* GoogleMapsUtils */,
 				189D06152BA420FD002950CE /* BSImagePicker */,
-				189D06182BA42BD0002950CE /* FMPhotoPicker */,
 			);
 			productName = TicketSpark;
 			productReference = 185E65BC2B72435C00FEC922 /* TicketSpark.app */;
@@ -855,7 +878,6 @@
 				18544A962B99998B00C5EDC8 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */,
 				18544AA12B999A1500C5EDC8 /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
 				189D06142BA420FD002950CE /* XCRemoteSwiftPackageReference "BSImagePicker" */,
-				189D06172BA42BD0002950CE /* XCRemoteSwiftPackageReference "FMPhotoPicker" */,
 			);
 			productRefGroup = 185E65BD2B72435C00FEC922 /* Products */;
 			projectDirPath = "";
@@ -910,6 +932,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F7721BD6A4D89813DECBB06 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicketSpark/Pods-TicketSpark-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TicketSpark/Pods-TicketSpark-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TicketSpark/Pods-TicketSpark-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3051DEE53008CA4A872D5A53 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TicketSpark-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		185E65B82B72435C00FEC922 /* Sources */ = {
@@ -1126,6 +1190,7 @@
 		};
 		185E65D42B72435E00FEC922 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92BD6AC5A3EA74CE7FA4E559 /* Pods-TicketSpark.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1154,6 +1219,7 @@
 		};
 		185E65D52B72435E00FEC922 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 370A04316EC009C6FCFAC937 /* Pods-TicketSpark.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1228,14 +1294,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		189D06172BA42BD0002950CE /* XCRemoteSwiftPackageReference "FMPhotoPicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/congnd/FMPhotoPicker.git";
-			requirement = {
-				kind = exactVersion;
-				version = 1.3.0;
-			};
-		};
 		18EF615F2B7B6CBA0074C959 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -1281,11 +1339,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 189D06142BA420FD002950CE /* XCRemoteSwiftPackageReference "BSImagePicker" */;
 			productName = BSImagePicker;
-		};
-		189D06182BA42BD0002950CE /* FMPhotoPicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 189D06172BA42BD0002950CE /* XCRemoteSwiftPackageReference "FMPhotoPicker" */;
-			productName = FMPhotoPicker;
 		};
 		18EF61602B7B6CBA0074C959 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;

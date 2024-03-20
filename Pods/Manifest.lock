@@ -1,0 +1,16 @@
+PODS:
+  - FMPhotoPicker (1.3.0)
+
+DEPENDENCIES:
+  - FMPhotoPicker
+
+SPEC REPOS:
+  trunk:
+    - FMPhotoPicker
+
+SPEC CHECKSUMS:
+  FMPhotoPicker: 954d3c3e72521baffecdc23422ae149fdde3cd63
+
+PODFILE CHECKSUM: 23b3235162c0842e1f2d8c3e4614245914e4505e
+
+COCOAPODS: 1.12.1
