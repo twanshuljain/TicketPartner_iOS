@@ -345,6 +345,52 @@ extension String {
         }
     }
     
+    func changeFormatFromMMddyyyTOyyyMMdd() -> String {
+        // Create a date formatter to parse the input date string
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "MMM dd, yyyy"
+
+        // Parse the input date string
+        if let inputDate = inputDateFormatter.date(from: self) {
+            // Create a date formatter to format the output date string
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            // Format the parsed date to the desired output format
+            let outputDateString = outputDateFormatter.string(from: inputDate)
+            
+            // Print the result
+            return outputDateString
+        } else {
+            print("Failed to parse input date")
+        }
+        return ""
+    }
+    
+    func changeFormatFromMMddyyyTOyyyMMdd() {
+        // Input time string
+        let inputTime = self
+
+        // Create a date formatter to parse the input time string
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "h:mm a"
+
+        // Parse the input time string
+        if let date = inputDateFormatter.date(from: inputTime) {
+            // Create a date formatter to format the output time string
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "HH:mm"
+            
+            // Format the parsed date to the desired output format
+            let outputTime = outputDateFormatter.string(from: date)
+            
+            // Print the result
+            print(outputTime) // Output: 12:30
+        } else {
+            print("Failed to parse input time")
+        }
+    }
+    
 //    func convertStringToTimeHMMA() -> Date? {
 //        let dateString = self
 //        let dateFormatter = DateFormatter()

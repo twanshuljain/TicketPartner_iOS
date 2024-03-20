@@ -29,10 +29,11 @@ extension TicketCreateViewModel {
     }
     
     func appendTicketType() {
-        let paid = TicketTypeModel(ticketType: "Paid Ticket")
+        var paid = TicketTypeModel(ticketType: "Paid Ticket")
         let freeTicket = TicketTypeModel(ticketType: "Free Ticket")
         let group = TicketTypeModel(ticketType: "Group")
         let donation = TicketTypeModel(ticketType: "Donation")
+        paid.isSelected = true
         ticketType.append(paid)
         ticketType.append(freeTicket)
         ticketType.append(group)

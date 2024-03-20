@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 enum CreateEventType {
     case venue
@@ -65,6 +66,8 @@ struct CreateEventBasicRequest : Encodable {
     var state: String?
     var country: String?
     var eventAddress: String?
+    var venueLat:CLLocationDegrees? = 0.0
+    var venueLon:CLLocationDegrees? = 0.0
     //Virtual
     var isVirtual: Bool?
     var virtualEventLink: String?
@@ -75,6 +78,8 @@ struct CreateEventBasicRequest : Encodable {
     var announceState: String?
     var announceCountry: String?
     var isEmail: Bool?
+    var announceLat:CLLocationDegrees? = 0.0
+    var announceLon:CLLocationDegrees? = 0.0
 
     
     enum CodingKeys: String, CodingKey {

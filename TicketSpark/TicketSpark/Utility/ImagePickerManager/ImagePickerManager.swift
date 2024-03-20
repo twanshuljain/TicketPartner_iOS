@@ -232,8 +232,9 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
 
 extension ImagePickerManager: FMPhotoPickerViewControllerDelegate {
     func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
-        picker.dismiss(animated: true, completion: nil)
-        pickMultipleImageCallback?(photos)
+        picker.dismiss(animated: false) {
+            self.pickMultipleImageCallback?(photos)
+        }        
     }
 }
 

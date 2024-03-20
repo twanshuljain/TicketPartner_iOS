@@ -20,7 +20,7 @@ class TicketTypeCollectionVC: UICollectionViewCell {
         lblTicketType.font = CustomFont.shared.bold(sizeOfFont: 14)
         lblTicketType.text = data.ticketType
         if data.isSelected {
-            viewSelection.layer.cornerRadius = viewSelection.frame.height/2
+            viewSelection.layer.cornerRadius = 15
             lblTicketType.textColor = .appBlackTextColor
             viewSelection.backgroundColor = .white
         } else {

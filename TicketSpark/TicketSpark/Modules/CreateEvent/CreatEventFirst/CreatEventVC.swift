@@ -535,9 +535,9 @@ extension CreatEventVC {
     func addAction() {
         btnnSaveAndContinue.actionSubmit = { [weak self] _ in
             if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
-                self.navigationController?.pushViewController(vc, animated: true)
-                //self.apiCallForCreateEventBasics()
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketsCreateEventVC") as! TicketsCreateEventVC
+//                self.navigationController?.pushViewController(vc, animated: true)
+                self.apiCallForCreateEventBasics()
             }
         }
     }
@@ -819,6 +819,11 @@ extension CreatEventVC : UITextFieldDelegate {
             autocompleteController.delegate = self
             present(autocompleteController, animated: true, completion: nil)
             return false
+        case self.txtLocationToBeAnnounced.txtFld:
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            present(autocompleteController, animated: true, completion: nil)
+            return false
         default:
             break;
         }
@@ -829,8 +834,20 @@ extension CreatEventVC : UITextFieldDelegate {
         switch textField {
         case self.txtStartDate:
             self.txtDoorStartDate.text = self.txtStartDate.text ?? ""
+            self.viewModel.createEventReq.eventStartDate = self.txtStartDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorStartDate = self.txtDoorStartDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
         case self.txtEndDate:
             self.txtDoorEndDate.text = self.txtEndDate.text ?? ""
+            self.viewModel.createEventReq.eventEndDate = self.txtEndDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
+            self.viewModel.createEventReq.doorCloseDate = self.txtDoorEndDate.text?.changeFormatFromMMddyyyTOyyyMMdd()
+        case self.txtStartTime:
+            self.viewModel.createEventReq.eventStartTime = self.txtStartTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+        case self.txtEndTime:
+            self.viewModel.createEventReq.eventEndTime = self.txtEndTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+        case self.txtDoorStartTime:
+            self.viewModel.createEventReq.doorOpenTime = self.txtDoorStartTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
+        case self.txtDoorEndTime:
+            self.viewModel.createEventReq.doorCloseTime = self.txtDoorEndTime.text?.changeFormatFromMMddyyyTOyyyMMdd()
         case self.txtEventTitle.txtFld:
             self.viewModel.createEventReq.name = textField.text
         //Venue
@@ -870,6 +887,8 @@ extension CreatEventVC : GMSAutocompleteViewControllerDelegate {
             self.viewModel.createEventReq.country = country ?? ""
             self.viewModel.createEventReq.state = state ?? ""
             self.viewModel.createEventReq.city = city ?? ""
+            self.viewModel.createEventReq.venueLat = place.coordinate.latitude
+            self.viewModel.createEventReq.venueLon = place.coordinate.longitude
             
             self.txtLocationName.txtFld.text = self.viewModel.createEventReq.locationName ?? ""
             self.txtDrpCountry.text = self.viewModel.createEventReq.country
@@ -881,6 +900,8 @@ extension CreatEventVC : GMSAutocompleteViewControllerDelegate {
             self.viewModel.createEventReq.announceCountry = country ?? ""
             self.viewModel.createEventReq.announceState = state ?? ""
             self.viewModel.createEventReq.announceCity = city ?? ""
+            self.viewModel.createEventReq.announceLat = place.coordinate.latitude
+            self.viewModel.createEventReq.announceLon = place.coordinate.longitude
             
             self.txtLocationToBeAnnounced.txtFld.text = self.viewModel.createEventReq.announceEventAddress ?? ""
             self.txtTobeAnnouncedCountry.text = self.viewModel.createEventReq.announceCountry
@@ -945,7 +966,20 @@ extension CreatEventVC : CLLocationManagerDelegate, GMSMapViewDelegate {
         self.viewModel.latValue = userLocation!.coordinate.latitude
         self.viewModel.longValue = userLocation!.coordinate.longitude
         let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
-        self.setCameraForMap(title: "", lat: center.latitude, lon: center.longitude)
+        if self.viewModel.venueLocationSelected {
+            if let lat = self.viewModel.createEventReq.venueLat, lat != 0.0, let lon = self.viewModel.createEventReq.venueLon, lon != 0.0 {
+                self.setCameraForMap(title: self.viewModel.createEventReq.locationName ?? "", lat: lat, lon: lon)
+            } else {
+                self.setCameraForMap(title: "", lat: center.latitude, lon: center.longitude)
+            }
+        } else {
+            if let lat = self.viewModel.createEventReq.announceLat, lat != 0.0, let lon = self.viewModel.createEventReq.announceLon, lon != 0.0 {
+                self.setCameraForMap(title: self.viewModel.createEventReq.announceEventAddress ?? "", lat: lat, lon: lon)
+            } else {
+                self.setCameraForMap(title: "", lat: center.latitude, lon: center.longitude)
+            }
+        }
+        
         self.viewModel.locationManager.stopUpdatingLocation()
     }
 }
