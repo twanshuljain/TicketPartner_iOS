@@ -147,6 +147,10 @@ struct StringConstants {
         case enterEndTime
         case enterDoorStartTime
         case enterDoorEndTime
+        case ticketSaleStartDate
+        case ticketSaleEndDate
+        case ticketSaleStartTime
+        case ticketSaleEndTime
        var value: String {
             switch self {
             case .selectEventType:
@@ -251,8 +255,14 @@ struct StringConstants {
                 return "Please enter door start time first"
             case .enterDoorEndTime:
                 return "Please enter door start time first"
-                
-                
+            case .ticketSaleStartDate:
+                return "Please enter ticket sale start date first"
+            case .ticketSaleEndDate:
+                return "Please enter ticket sale  end date first"
+            case .ticketSaleStartTime:
+                return "Please enter ticket sale  start time first"
+            case .ticketSaleEndTime:
+                return "Please enter ticket sale  end time first"
             }
         }
     }

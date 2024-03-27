@@ -64,6 +64,7 @@
 		18C71AEA2B87861D001170C2 /* TicketEventListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */; };
 		18C71AEB2B87861D001170C2 /* TicketEventListTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */; };
 		18CB81282BA8150500BEF040 /* TicketSpark.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CB81262BA8150500BEF040 /* TicketSpark.xcdatamodeld */; };
+		18D1E8FB2BB2D1C00011890D /* CreateTicketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1E8FA2BB2D1C00011890D /* CreateTicketModel.swift */; };
 		18D2FE302B9208A3006202C5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */; };
 		18D7B8002B906B07003B2EFD /* RectangleDashedBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */; };
 		18E47A7E2B8F13140078D89A /* AddOrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */; };
@@ -183,6 +184,7 @@
 		18C71AE82B87861D001170C2 /* TicketEventListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketEventListTableVC.swift; sourceTree = "<group>"; };
 		18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketEventListTableVC.xib; sourceTree = "<group>"; };
 		18CB81272BA8150500BEF040 /* TicketSpark.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketSpark.xcdatamodel; sourceTree = "<group>"; };
+		18D1E8FA2BB2D1C00011890D /* CreateTicketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTicketModel.swift; sourceTree = "<group>"; };
 		18D2FE2F2B9208A3006202C5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDashedBorder.swift; sourceTree = "<group>"; };
 		18E47A7C2B8F13140078D89A /* AddOrganizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddOrganizerViewModel.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 		1874E2272B85E35B00DA4F1F /* TicketsCreateEvent */ = {
 			isa = PBXGroup;
 			children = (
+				18D1E8F92BB2D1A80011890D /* Model */,
 				18C71AE12B8760F5001170C2 /* ViewModel */,
 				18C71AE02B87605A001170C2 /* View */,
 				18C71ADF2B875ED3001170C2 /* Cell */,
@@ -564,6 +567,14 @@
 				18C71AE92B87861D001170C2 /* TicketEventListTableVC.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		18D1E8F92BB2D1A80011890D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18D1E8FA2BB2D1C00011890D /* CreateTicketModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		18E47A832B8F13B40078D89A /* LoadingIndicatorView */ = {
@@ -993,6 +1004,7 @@
 				18EF616E2B7B92C00074C959 /* CustomButton.swift in Sources */,
 				18E47ACA2B8F16CB0078D89A /* ResponseModal.swift in Sources */,
 				18E47A7F2B8F13140078D89A /* AddOrganizerModel.swift in Sources */,
+				18D1E8FB2BB2D1C00011890D /* CreateTicketModel.swift in Sources */,
 				187C28AA2B90A2D70082C458 /* CreatEventViewModel.swift in Sources */,
 				18E47AE12B8F18A90078D89A /* ImagePickerManager.swift in Sources */,
 				1802DF8A2B7C9262008B25DB /* ResetPasswordViewController.swift in Sources */,
@@ -1124,7 +1136,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1178,7 +1190,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1196,6 +1208,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5KQQ4NSG87;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TicketSpark/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1204,6 +1217,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1225,6 +1239,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5KQQ4NSG87;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TicketSpark/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1233,6 +1248,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

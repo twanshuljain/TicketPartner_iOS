@@ -338,11 +338,34 @@ extension String {
         let dateString = self
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
+        dateFormatter.timeZone = .current
+        dateFormatter.locale = Locale(identifier: Locale.current.identifier) // Set the locale to ensure consistent date formatting
         if let date = dateFormatter.date(from: dateString) {
             return date
         } else {
            return nil
         }
+    }
+    
+    func getMinimumTime(startDate: String) -> Date? {
+        let calendar = Calendar.current
+        // Get today's date
+        let currentDate = startDate.convertStringToDateFormatMMDDYYY() ?? Date()
+        
+        // Get the components of today's date
+        var components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        
+        // Set the hour and minute
+        components.hour = (self.getHourFromTime() as NSString).integerValue
+        components.minute = 0
+        
+        // Get the date for today at 4 PM
+        if let minimumDate = calendar.date(from: components) {
+            // Set the minimum date for the time picker
+            return minimumDate
+        }
+        
+        return nil
     }
     
     func changeDateFormatFromMMddyyyTOyyyMMdd() -> String {
@@ -394,6 +417,32 @@ extension String {
         return ""
     }
     
+    func getHourFromTime() -> String {
+        // Input time string
+        let inputTime = self
+
+        // Create a date formatter to parse the input time string
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "h:mm a"
+
+        // Parse the input time string
+        if let date = inputDateFormatter.date(from: inputTime) {
+            // Create a date formatter to format the output time string
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "HH"
+            
+            // Format the parsed date to the desired output format
+            let outputTime = outputDateFormatter.string(from: date)
+            
+            // Print the result
+            print(outputTime) // Output: 12:30
+            return outputTime
+        } else {
+            print("Failed to parse input time")
+        }
+        
+        return ""
+    }
 //    func convertStringToTimeHMMA() -> Date? {
 //        let dateString = self
 //        let dateFormatter = DateFormatter()
@@ -421,6 +470,28 @@ extension String {
         }
         
         return nil
+    }
+    
+    func changeDateFormattt(time: String) -> Date? {
+        let finalTime = time.changeTimeFormatFromMMddyyyTOyyyMMdd()
+        let date = self.changeDateFormatFromMMddyyyTOyyyMMdd()
+        
+        let finalDate = "\(date)T\(finalTime):00"
+        
+        // Create a date formatter with the desired format
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+        // Get the current date and time
+        let currentDate = finalDate
+
+        // Convert the date to a string in the specified format
+        let formattedDate = dateFormatter.date(from: finalDate)
+
+        print(formattedDate)
+        
+        return formattedDate
     }
 }
 

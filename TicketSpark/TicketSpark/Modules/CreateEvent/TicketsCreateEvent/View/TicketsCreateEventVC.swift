@@ -61,6 +61,8 @@ class TicketsCreateEventVC: UIViewController {
         super.viewDidLoad()
         setCollectionView()
         setUI()
+        
+        self.setTextView()
         setActions()
     }
 }
@@ -74,6 +76,24 @@ extension TicketsCreateEventVC {
         collectionViewTicketType.reloadData()
         
     }
+    
+    func setDelegate() {
+        self.txtTicketName.txtFld.delegate = self
+        self.txtQuantity.txtFld.delegate = self
+        self.txtPrice.txtFld.delegate = self
+        self.txtMinOrder.txtFld.delegate = self
+        self.txtMaxOrder.txtFld.delegate = self
+        self.txtTicketPerUser.txtFld.delegate = self
+    }
+    
+    func setTextView() {
+        txtDescription.delegate = self
+        txtDescription.text = "Enter detail"
+        txtDescription.textColor = UIColor.lightGray
+       // txtDescription.becomeFirstResponder()
+        txtDescription.selectedTextRange = txtDescription.textRange(from: txtDescription.beginningOfDocument, to: txtDescription.beginningOfDocument)
+    }
+    
     func setUI() {
         let ticketName = StringConstants.CreateEvent.ticketName.value + "*"
         txtTicketName.lbl.attributedText = ticketName.addAttributedString(highlightedString: "*")
@@ -105,7 +125,7 @@ extension TicketsCreateEventVC {
         lblDescription.textColor = .appBlackTextColor
         lblTicketsPerOrder.attributedText = StringConstants.CreateEvent.ticketPerOrder.value.addAttributedString(highlightedString: "*")
         lblTicketsPerOrder.font = CustomFont.shared.medium(sizeOfFont: 14)
-       
+        
         lblTicketsPerUser.text = StringConstants.CreateEvent.ticketPerUser.value
         lblTicketsPerUser.font = CustomFont.shared.medium(sizeOfFont: 16)
         lblTicketsPerUser.textColor = .appBlackTextColor
@@ -118,7 +138,12 @@ extension TicketsCreateEventVC {
         txtMinOrder.placeholder = StringConstants.CreateEvent.minimum.value
         txtTicketPerUser.placeholder =  StringConstants.CreateEvent.enterTicketPerUser.value
         txtTicketPerUser.lbl.isHidden = true
+        
+        txtDrpFees.placeholder = "Select Currency"
+        
         let borderView = [txtDrpFees, txtDescription, txtDescription, txtDrpTicketVisibility, viewStartDate, viewStartTime, viewEndDate, viewEndTime]
+        
+        txtDrpTicketVisibility.optionArray = ["Visible", "Sold Out", "Hidden"]
         
         for view in borderView {
             view?.setTextFiledBorder()
@@ -129,6 +154,7 @@ extension TicketsCreateEventVC {
         txtEndTime.placeholder = StringConstants.CreateEvent.endTime.value
         let txtDates = [txtStartDate, txtStartTime, txtEndDate, txtEndTime]
         for txtDate in txtDates {
+            txtDate?.delegate = self
             txtDate?.floatingLabelFont = CustomFont.shared.regular(sizeOfFont: 12)
             txtDate?.font = CustomFont.shared.semiBold(sizeOfFont: 14)
         }
@@ -151,6 +177,18 @@ extension TicketsCreateEventVC {
         switchTicketPerUser.isOn = false
         btnCreateTicket.title = StringConstants.CreateEvent.createTicket.value
         
+        let dropDowns = [txtDrpTicketVisibility]
+        dropDowns.forEach { data in
+            data?.completionForSelection = { [self]  txtField in
+                switch txtField {
+                case self.txtDrpTicketVisibility :
+                    self.txtDrpTicketVisibility.text = txtField.text ?? ""
+                    self.viewModel.createTicketRequest.ticketVisibility = self.txtDrpTicketVisibility.text?.uppercased().replacingOccurrences(of: " ", with: "")
+                default:
+                    break;
+                }
+            }
+        }
     }
     
     func setActions() {
@@ -167,15 +205,18 @@ extension TicketsCreateEventVC {
     @objc func actionSwitchSettings(_ sender: UISwitch) {
         UIView.animate(withDuration: 0.2) {
             self.stackAdvanceSetting.isHidden = !sender.isOn
+            self.viewModel.createTicketRequest.advanceSetting = !sender.isOn
         }
         if !sender.isOn {
             switchTicketPerUser.isOn = false
             self.txtTicketPerUser.isHidden = !switchTicketPerUser.isOn
+            self.viewModel.createTicketRequest.ticketPerUser = !switchTicketPerUser.isOn
         }
     }
     @objc func actionTicketsPerUser(_ sender: UISwitch) {
         UIView.animate(withDuration: 0.2) {
             self.txtTicketPerUser.isHidden = !sender.isOn
+            self.viewModel.createTicketRequest.ticketPerUser = !sender.isOn
         }
         
     }
@@ -200,5 +241,131 @@ extension TicketsCreateEventVC: UICollectionViewDataSource, UICollectionViewDele
         }
         viewModel.ticketType[indexPath.row].isSelected = true
         collectionViewTicketType.reloadData()
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension TicketsCreateEventVC : UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        switch textField {
+        case self.txtStartDate:
+            txtStartDate.addDatePicker(minimumDate: Date(), maximumDate: self.txtEndDate.text?.convertStringToDateFormatMMDDYYY() ?? nil)
+        case self.txtEndDate:
+            if self.viewModel.createTicketRequest.ticketSaleStartDate == nil {
+                self.showToast(with: StringConstants.CreateEvent.ticketSaleStartDate.value, position: .top, type: .warning)
+                return false
+            }
+            txtEndDate.addDatePicker(minimumDate: txtStartDate.text?.convertStringToDateFormatMMDDYYY(), maximumDate: nil)
+        case self.txtStartTime:
+            if self.viewModel.createTicketRequest.ticketSaleStartDate == nil {
+                self.showToast(with: StringConstants.CreateEvent.ticketSaleStartDate.value, position: .top, type: .warning)
+                return false
+            }
+             txtStartTime.addTimePicker(minimumDate: txtStartDate.text != Date().convertDateToStringFormatMMMDDYYY() ? nil :  Date(), maximumDate: nil)
+        case self.txtEndTime:
+            if self.viewModel.createTicketRequest.ticketSaleStartTime == nil {
+                self.showToast(with: StringConstants.CreateEvent.ticketSaleStartTime.value, position: .top, type: .warning)
+                return false
+            }
+            if txtStartDate.text == txtEndDate.text {
+//                txtStartDate.text?.changeDateFormattt(time: txtStartTime.text ?? "")
+                let minDate = txtStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
+               txtEndTime.addTimePicker(minimumDate: minDate, maximumDate: nil)
+            } else {
+                txtEndTime.addTimePicker(minimumDate: nil, maximumDate: nil)
+            }
+        default:
+            break;
+        }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case self.txtTicketName.txtFld:
+            let newText = (self.txtTicketName.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketName = newText
+        case self.txtQuantity.txtFld:
+            let newText = (self.txtQuantity.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketQuantity = newText
+        case self.txtPrice.txtFld:
+            let newText = (self.txtPrice.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketPrice = newText
+        case self.txtMinOrder.txtFld:
+            let newText = (self.txtMinOrder.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketPerOrderMinimumQuantity = (newText as? NSString)?.integerValue
+        case self.txtMaxOrder.txtFld:
+            let newText = (self.txtMaxOrder.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketPerOrderMaximumQuantity = (newText as? NSString)?.integerValue
+        case self.txtTicketPerUser.txtFld:
+            let newText = (self.txtTicketPerUser.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
+            self.viewModel.createTicketRequest.ticketPerUserQuantity = (newText as? NSString)?.integerValue
+        default:
+            break;
+        }
+        return true
+    }
+    
+}
+// MARK: - UITextViewDelegate
+extension TicketsCreateEventVC : UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Enter detail"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        // Combine the textView text and the replacement text to
+        // create the updated text string
+        let currentText:String = textView.text
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
+        
+        // If updated text view will be empty, add the placeholder
+        // and set the cursor to the beginning of the text view
+        if updatedText.isEmpty {
+            
+            textView.text = "Enter detail"
+            textView.textColor = UIColor.lightGray
+            
+            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+        }
+        
+        // Else if the text view's placeholder is showing and the
+        // length of the replacement string is greater than 0, set
+        // the text color to black then set its text to the
+        // replacement string
+        else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+            textView.textColor = UIColor.black
+            textView.text = text
+            self.viewModel.createTicketRequest.ticketDescription = text
+        }
+        
+        // For every other case, the text should change with the usual
+        // behavior...
+        else {
+            return true
+        }
+        
+        // ...otherwise return false since the updates have already
+        // been made
+        return false
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if self.view.window != nil {
+            if textView.textColor == UIColor.lightGray {
+                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+            }
+        }
     }
 }

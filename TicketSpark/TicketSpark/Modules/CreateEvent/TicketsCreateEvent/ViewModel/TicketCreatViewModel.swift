@@ -13,6 +13,7 @@ struct TicketTypeModel {
 }
 class TicketCreateViewModel {
     // MARK: - Variables
+    var createTicketRequest = CreateTicketRequest()
     var ticketType: [TicketTypeModel] = []
 //    ["Paid Ticket", "Free Ticket", "Group", "Donation"]
     var numberOfRow: Int {

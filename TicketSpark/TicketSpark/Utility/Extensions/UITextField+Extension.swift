@@ -39,9 +39,10 @@ extension UITextField {
         
         if let minDate = minimumDate {
             datePicker.minimumDate = minDate
-        } else {
-            datePicker.minimumDate = Date()
         }
+//        else {
+//            datePicker.minimumDate = Date()
+//        }
         
         if let maxDate = maximumDate {
             datePicker.maximumDate = maxDate
