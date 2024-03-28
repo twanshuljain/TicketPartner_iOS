@@ -351,7 +351,7 @@ extension String {
         }
     }
     
-    func getMinimumTime(startDate: String) -> Date? {
+    func getMinMaxTime(startDate: String) -> Date? {
         let calendar = Calendar.current
         // Get today's date
         let currentDate = startDate.convertStringToDateFormatMMDDYYY() ?? Date()
