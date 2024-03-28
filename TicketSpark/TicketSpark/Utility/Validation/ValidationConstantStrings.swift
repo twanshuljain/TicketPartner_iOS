@@ -66,4 +66,23 @@ class ValidationConstantStrings: NSObject {
     static let emptyState = "Please enter state"
     static let emptyCountry = "Please enter country"
     static let emptyEventLink = "Please enter event link"
+    
+    static let emptyTicketName = "Please enter ticket name "
+    static let emptyTicketQuantity = "Please enter ticket quantity "
+    static let ticketQuantityZero = "Quantity must be greater than 0 "
+    static let ticketQuantityExceed = "Quantity must be less than or equal to 50000 "
+    static let emptyTicketPrice = "Please enter ticket price "
+    static let ticketPriceZero = "Price must be greater than 0 "
+    static let emptyTicketStartDate = "Please select ticket start date "
+    static let emptyTicketEndDate = "Please select ticket end date "
+    static let emptyTicketStartTime = "Please select ticket start time "
+    static let emptyTicketEndTime = "Please select ticket end time "
+    static let emptyTicketVisibility = "Please select ticket visibility "
+    static let emptyTicketAdmissionPerTicket = "Please enter admission per ticket "
+    static let ticketAdmissionPerTicketZero = "Admission per ticket quantity must be greater than 0 "
+    static let emptyTicketTimeZone = "Please select time zone "
+    static let emptyTicketAmountType = "Please select amount type "
+    
+    
+    
 }

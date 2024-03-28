@@ -10,6 +10,7 @@ import UIKit
 class TicketsCreateEventVC: UIViewController {
 
     // MARK: - IBOutlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var lblFees: UILabel!
     @IBOutlet weak var lblBuyerPrice: UILabel!
     @IBOutlet weak var lblRevenuePerTicket: UILabel!
@@ -61,7 +62,7 @@ class TicketsCreateEventVC: UIViewController {
         super.viewDidLoad()
         setCollectionView()
         setUI()
-        
+        setDelegate()
         self.setTextView()
         setActions()
     }
@@ -196,8 +197,9 @@ extension TicketsCreateEventVC {
         switchTicketPerUser.addTarget(self, action: #selector(self.actionTicketsPerUser(_ :)), for: .valueChanged)
         btnCreateTicket.actionSubmit = { [weak self] _ in
             if let self {
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketEventListViewController") as! TicketEventListViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.apiCallForCreateTicket()
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TicketEventListViewController") as! TicketEventListViewController
+//                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }
@@ -220,6 +222,50 @@ extension TicketsCreateEventVC {
         }
         
     }
+    
+    func apiCallForCreateTicket(){
+        let isValidate = self.viewModel.validateFields(self.viewModel.createTicketRequest)
+        if isValidate.1 {
+            if Reachability.isConnectedToNetwork() {
+                LoadingIndicatorView.show()
+                self.viewModel.apiCallCreatePaidTicket { isSuccess, response, msg in
+                    DispatchQueue.main.async {
+                        LoadingIndicatorView.hide()
+                    }
+                    if isSuccess {
+                        if let response = response {
+                            print(response)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.showToast(with: msg ?? "No response from server", position: .top, type: .warning)
+                        }
+                    }
+                }
+            } else {
+                self.showToast(with: ValidationConstantStrings.networkLost, position: .top, type: .warning)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.showToast(with: isValidate.0, position: .top, type: .warning)
+                switch isValidate.2 {
+                case .ticketName: self.viewModel.scrollToTextField(self.txtTicketName, scrollView: self.scrollView)
+                case .ticketQuantity : self.viewModel.scrollToTextField(self.txtQuantity, scrollView: self.scrollView)
+                case .ticketPrice : self.viewModel.scrollToTextField(self.txtPrice, scrollView: self.scrollView)
+                case .ticketStartDate : self.viewModel.scrollToTextField(self.txtStartDate, scrollView: self.scrollView)
+                case .ticketEndDate : self.viewModel.scrollToTextField(self.txtEndDate, scrollView: self.scrollView)
+                case .ticketStartTime : self.viewModel.scrollToTextField(self.txtStartTime, scrollView: self.scrollView)
+                case .ticketEndTime : self.viewModel.scrollToTextField(self.txtEndTime, scrollView: self.scrollView)
+                case .ticketVisibility : self.viewModel.scrollToTextField(self.txtDrpTicketVisibility, scrollView: self.scrollView)
+                case .ticketAdmissionPerTicket : break;
+                case .ticketTimeZone : break;
+                case .ticketAmountType : break;
+                case .none:
+                    break;
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -240,6 +286,19 @@ extension TicketsCreateEventVC: UICollectionViewDataSource, UICollectionViewDele
             viewModel.ticketType[$0].isSelected = false
         }
         viewModel.ticketType[indexPath.row].isSelected = true
+        if viewModel.ticketType[indexPath.row].isSelected {
+            if indexPath.row == 0 {
+                self.viewModel.createTicketType = .paid
+            } else if indexPath.row == 1 {
+                self.viewModel.createTicketType = .free
+            } else if indexPath.row == 2 {
+                self.viewModel.createTicketType = .group
+            } else if indexPath.row == 3 {
+                self.viewModel.createTicketType = .donation
+            } else {
+                self.viewModel.createTicketType = .paid
+            }
+        }
         collectionViewTicketType.reloadData()
     }
 }
@@ -286,10 +345,10 @@ extension TicketsCreateEventVC : UITextFieldDelegate {
             self.viewModel.createTicketRequest.ticketName = newText
         case self.txtQuantity.txtFld:
             let newText = (self.txtQuantity.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
-            self.viewModel.createTicketRequest.ticketQuantity = newText
+            self.viewModel.createTicketRequest.ticketQuantity = (newText as? NSString)?.integerValue
         case self.txtPrice.txtFld:
             let newText = (self.txtPrice.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
-            self.viewModel.createTicketRequest.ticketPrice = newText
+            self.viewModel.createTicketRequest.ticketPrice = (newText as? NSString)?.integerValue
         case self.txtMinOrder.txtFld:
             let newText = (self.txtMinOrder.txtFld.text as? NSString)?.replacingCharacters(in: range, with: string)
             self.viewModel.createTicketRequest.ticketPerOrderMinimumQuantity = (newText as? NSString)?.integerValue

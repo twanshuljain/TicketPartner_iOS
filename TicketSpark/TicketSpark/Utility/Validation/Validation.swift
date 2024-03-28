@@ -43,6 +43,22 @@ enum InputValidation: String {
     case country
     case eventLink
 }
+
+enum CreateTicketValidation: String {
+    //Create Ticket
+    case ticketName
+    case ticketQuantity
+    case ticketPrice
+    case ticketStartDate
+    case ticketEndDate
+    case ticketStartTime
+    case ticketEndTime
+    case ticketVisibility
+    case ticketAdmissionPerTicket
+    case ticketTimeZone
+    case ticketAmountType
+}
+
 enum ValidationType: String {
     case reqName = "reqName"
     case reqFullname = "reqFullName"
@@ -236,6 +252,67 @@ class Validation {
             return(text.isEmpty ? true :
                         text.count < 1 ? true : false,
                     text.isEmpty ? ValidationConstantStrings.selectDoorCloseTime : ValidationConstantStrings.selectDoorCloseTime)
+        }
+        return (true,"")
+    }
+    
+    func createTicketValidation(text: String, validationType: CreateTicketValidation) -> (Bool, String) {
+        switch validationType {
+        case .ticketName:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketName : ValidationConstantStrings.emptyTicketName)
+        case .ticketQuantity:
+            let ticketQuantity = (text as NSString).integerValue
+            if text.isEmpty {
+                return(false, ValidationConstantStrings.emptyTicketQuantity)
+            } else if ticketQuantity <= 0 {
+                return(false, ValidationConstantStrings.ticketQuantityZero)
+            } else if ticketQuantity > 50000 {
+                return(false, ValidationConstantStrings.ticketQuantityExceed)
+            }
+        case .ticketPrice:
+            let ticketPrice = (text as NSString).integerValue
+            if text.isEmpty {
+                return(false, ValidationConstantStrings.emptyTicketPrice)
+            } else if ticketPrice <= 0 {
+                return(false, ValidationConstantStrings.ticketPriceZero)
+            }
+        case .ticketStartDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketStartDate : ValidationConstantStrings.emptyTicketStartDate)
+        case .ticketEndDate:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketEndDate : ValidationConstantStrings.emptyTicketEndDate)
+        case .ticketStartTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketStartTime : ValidationConstantStrings.emptyTicketStartTime)
+        case .ticketEndTime:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketEndTime : ValidationConstantStrings.emptyTicketEndTime)
+        case .ticketVisibility:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketVisibility : ValidationConstantStrings.emptyTicketVisibility)
+        case .ticketAdmissionPerTicket:
+            let ticketAdmissionPerTicket = (text as NSString).integerValue
+            if text.isEmpty {
+                return(false, ValidationConstantStrings.ticketQuantityZero)
+            } else if ticketAdmissionPerTicket <= 0 {
+                return(false, ValidationConstantStrings.ticketAdmissionPerTicketZero)
+            }
+        case .ticketTimeZone:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTimezone : ValidationConstantStrings.emptyTimezone)
+        case .ticketAmountType:
+            return(text.isEmpty ? true :
+                        text.count < 1 ? true : false,
+                    text.isEmpty ? ValidationConstantStrings.emptyTicketAmountType : ValidationConstantStrings.emptyTicketAmountType)
         }
         return (true,"")
     }

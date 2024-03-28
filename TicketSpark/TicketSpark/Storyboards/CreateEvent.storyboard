@@ -1707,7 +1707,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="eII-T4-OcM"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWI-2D-3mY">
-                                <rect key="frame" x="0.0" y="762" width="393" height="90"/>
+                                <rect key="frame" x="0.0" y="728" width="393" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bch-2J-3EO" customClass="NextButton" customModule="TicketSpark" customModuleProvider="target">
                                         <rect key="frame" x="16" y="16" width="361" height="48"/>
@@ -1726,7 +1726,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Um-re-uwF">
-                                <rect key="frame" x="0.0" y="761" width="393" height="1"/>
+                                <rect key="frame" x="0.0" y="727" width="393" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="8Nn-GY-joN"/>
@@ -1745,7 +1745,7 @@
                             <constraint firstItem="oyZ-Sy-dK4" firstAttribute="leading" secondItem="YIs-AP-hiw" secondAttribute="leading" id="GNU-TL-dLH"/>
                             <constraint firstItem="1Um-re-uwF" firstAttribute="trailing" secondItem="MWI-2D-3mY" secondAttribute="trailing" id="H8Z-eF-r1t"/>
                             <constraint firstItem="1Um-re-uwF" firstAttribute="leading" secondItem="MWI-2D-3mY" secondAttribute="leading" id="Jid-M1-bN1"/>
-                            <constraint firstAttribute="bottom" secondItem="MWI-2D-3mY" secondAttribute="bottom" id="bVE-CX-RkF"/>
+                            <constraint firstItem="YIs-AP-hiw" firstAttribute="bottom" secondItem="MWI-2D-3mY" secondAttribute="bottom" id="bVE-CX-RkF"/>
                             <constraint firstItem="MWI-2D-3mY" firstAttribute="leading" secondItem="YIs-AP-hiw" secondAttribute="leading" id="gWi-gA-BSH"/>
                             <constraint firstItem="MWI-2D-3mY" firstAttribute="trailing" secondItem="YIs-AP-hiw" secondAttribute="trailing" id="hLm-Ye-wAs"/>
                             <constraint firstItem="YIs-AP-hiw" firstAttribute="trailing" secondItem="oyZ-Sy-dK4" secondAttribute="trailing" id="jVV-LF-Ubx"/>
@@ -1766,6 +1766,7 @@
                         <outlet property="lblTicketVisibility" destination="3zg-IP-I1Z" id="y2C-cX-IkI"/>
                         <outlet property="lblTicketsPerOrder" destination="4f2-xG-4z2" id="9Y0-cq-cfN"/>
                         <outlet property="lblTicketsPerUser" destination="VrZ-8P-IHN" id="Nka-vI-Bw9"/>
+                        <outlet property="scrollView" destination="oyZ-Sy-dK4" id="6AI-9H-OxB"/>
                         <outlet property="stackAdvanceSetting" destination="kph-MH-cFt" id="Y6Z-RO-W57"/>
                         <outlet property="startDateCenterCons" destination="vVw-qC-1Ga" id="Jeg-bl-5w8"/>
                         <outlet property="startTimeCenterCons" destination="hON-RS-JZO" id="Ctf-10-Cca"/>

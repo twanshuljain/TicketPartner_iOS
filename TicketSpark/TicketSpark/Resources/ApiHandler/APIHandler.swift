@@ -40,6 +40,12 @@ public enum APIName: String {
     case GetEventList = "/event/event-type/list/"
     case GetStates = "/default/data/state/"
     
+    //MARK: - CREATE TICKET
+    case CreatePaidTicket = "/ticket/create/paid-ticket/"
+    case CreateFreeTicket = "/ticket/create/free-ticket/"
+    case CreateGroupTicket = "/ticket/create/group-ticket/"
+    case CreateDonationTicket = "/ticket/create/donation-ticket/"
+    
 }
 // MARK: - EmptyModel
 struct EmptyModel: Codable {
