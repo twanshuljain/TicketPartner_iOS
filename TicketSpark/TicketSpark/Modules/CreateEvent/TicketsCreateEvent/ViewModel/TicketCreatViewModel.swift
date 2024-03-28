@@ -7,6 +7,30 @@
 
 import Foundation
 
+enum CreateTicketScroll {
+    case eventName
+    case eventType
+    case eventCover
+    case timeZone
+    case eventStartDate
+    case eventEndDate
+    case eventStartTime
+    case eventEndTime
+    case eventDoorOpenDate
+    case eventDoorCloseDate
+    case eventDoorOpenTime
+    case eventDoorCloseTime
+    case eventCountryVenue
+    case eventStateVenue
+    case eventCityVenue
+    case eventLinkVirtual
+    case eventCountryToBeAnnounced
+    case eventStateToBeAnnounced
+    case eventCityToBeAnnounced
+    case eventLocationToBeAnnounced
+    case none
+}
+
 struct TicketTypeModel {
     let ticketType: String
     var isSelected: Bool = false

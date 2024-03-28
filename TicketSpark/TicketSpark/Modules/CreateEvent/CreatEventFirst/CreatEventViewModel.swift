@@ -11,7 +11,7 @@ import CoreLocation
 import GooglePlaces
 
 typealias CreateEventCompletion = (Bool,CreateEvent?,String?)->Void
-typealias GetTimeZoneCompletion = (Bool,[TimeZone]?,String?)->Void
+typealias GetTimeZoneCompletion = (Bool,[TimeZoneData]?,String?)->Void
 typealias GetCountryDataCompletion = (Bool,[CountrySpecificData]?,String?)->Void
 typealias GetEventTypeDataCompletion = (Bool,[EventType]?,String?)->Void
 typealias GetStateDataCompletion = (Bool,[StatesData]?,String?)->Void
@@ -20,7 +20,7 @@ class CreatEventViewModel {
     //MARK: - Variables
     var createEventType: CreateEventType = .venue
     var createEvent = CreateEvent(eventData: EventData(), eventDateTimeData: EventDateTimeData(), eventLocationData: EventLocationData())
-    var timeZoneData = [TimeZone]()
+    var timeZoneData = [TimeZoneData]()
     var countryData = [CountrySpecificData]()
     var dispatchGroup = DispatchGroup()
     var dispatchGroup1 = DispatchGroup()
@@ -32,6 +32,7 @@ class CreatEventViewModel {
     var latValue = CLLocationDegrees()
     var longValue = CLLocationDegrees()
     var venueLocationSelected = true
+    
     
 }
 //MARK: - Functions
@@ -214,7 +215,7 @@ extension CreatEventViewModel {
     }
         
         func getTimeZoneList(complition:@escaping GetTimeZoneCompletion) {
-            APIHandler.shared.executeRequestWith(apiName: .GetTimeZone, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[TimeZone]>, Error>) in
+            APIHandler.shared.executeRequestWith(apiName: .GetTimeZone, parameters: EmptyModel?.none, methodType: .GET) { (result: Result<ResponseModal<[TimeZoneData]>, Error>) in
                 switch result {
                 case .success(let response):
                     defer { self.dispatchGroup.leave() }

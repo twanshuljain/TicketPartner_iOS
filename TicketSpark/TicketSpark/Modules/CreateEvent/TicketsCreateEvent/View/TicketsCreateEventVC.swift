@@ -268,8 +268,7 @@ extension TicketsCreateEventVC : UITextFieldDelegate {
                 return false
             }
             if txtStartDate.text == txtEndDate.text {
-//                txtStartDate.text?.changeDateFormattt(time: txtStartTime.text ?? "")
-                let minDate = txtStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
+                let minDate = txtStartTime.text?.getMinMaxTime(startDate: txtStartDate.text ?? "")
                txtEndTime.addTimePicker(minimumDate: minDate, maximumDate: nil)
             } else {
                 txtEndTime.addTimePicker(minimumDate: nil, maximumDate: nil)

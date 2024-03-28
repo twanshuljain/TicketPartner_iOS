@@ -242,7 +242,7 @@ struct EventLocationData: Codable {
 
 
 // MARK: - Time Zone
-struct TimeZone: Codable {
+struct TimeZoneData: Codable {
     var isActive: Bool?
     var timeZoneID: String?
     var id: Int?

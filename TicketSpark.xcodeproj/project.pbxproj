@@ -58,6 +58,8 @@
 		18906B192B98DC9A00B21F1F /* PastImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18906B172B98DC9A00B21F1F /* PastImageCollectionViewCell.xib */; };
 		189D06162BA420FD002950CE /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 189D06152BA420FD002950CE /* BSImagePicker */; };
 		18A7E6D32B91ABCA005997AD /* CreateEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7E6D22B91ABCA005997AD /* CreateEventModel.swift */; };
+		18C213592BB44CED005EFA47 /* CustomTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C213582BB44CED005EFA47 /* CustomTimePicker.swift */; };
+		18C2135B2BB44CFD005EFA47 /* CustomTimePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C2135A2BB44CFD005EFA47 /* CustomTimePicker.xib */; };
 		18C71ADD2B875ECC001170C2 /* TicketTypeCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71ADB2B875ECC001170C2 /* TicketTypeCollectionVC.swift */; };
 		18C71ADE2B875ECC001170C2 /* TicketTypeCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C71ADC2B875ECC001170C2 /* TicketTypeCollectionVC.xib */; };
 		18C71AE32B876108001170C2 /* TicketCreatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */; };
@@ -178,6 +180,8 @@
 		18906B162B98DC9A00B21F1F /* PastImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		18906B172B98DC9A00B21F1F /* PastImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PastImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		18A7E6D22B91ABCA005997AD /* CreateEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventModel.swift; sourceTree = "<group>"; };
+		18C213582BB44CED005EFA47 /* CustomTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimePicker.swift; sourceTree = "<group>"; };
+		18C2135A2BB44CFD005EFA47 /* CustomTimePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTimePicker.xib; sourceTree = "<group>"; };
 		18C71ADB2B875ECC001170C2 /* TicketTypeCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTypeCollectionVC.swift; sourceTree = "<group>"; };
 		18C71ADC2B875ECC001170C2 /* TicketTypeCollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketTypeCollectionVC.xib; sourceTree = "<group>"; };
 		18C71AE22B876108001170C2 /* TicketCreatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCreatViewModel.swift; sourceTree = "<group>"; };
@@ -509,6 +513,15 @@
 			path = EventStepsView;
 			sourceTree = "<group>";
 		};
+		18C213572BB44CBA005EFA47 /* CustomTimePicker */ = {
+			isa = PBXGroup;
+			children = (
+				18C213582BB44CED005EFA47 /* CustomTimePicker.swift */,
+				18C2135A2BB44CFD005EFA47 /* CustomTimePicker.xib */,
+			);
+			path = CustomTimePicker;
+			sourceTree = "<group>";
+		};
 		18C71ADF2B875ED3001170C2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,6 +694,7 @@
 		18EF614A2B7B51E50074C959 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
+				18C213572BB44CBA005EFA47 /* CustomTimePicker */,
 				18D7B7FF2B906B07003B2EFD /* RectangleDashedBorder.swift */,
 				18E47AA52B8F143D0078D89A /* CustomSetpper */,
 				18E47AA42B8F14340078D89A /* BottomSheet */,
@@ -921,6 +935,7 @@
 				18C71AEB2B87861D001170C2 /* TicketEventListTableVC.xib in Resources */,
 				188F5C7B2B7B9EB20039B86C /* AppColors.xcassets in Resources */,
 				18F093402B7B414800BFB4C3 /* Lato-BoldItalic.ttf in Resources */,
+				18C2135B2BB44CFD005EFA47 /* CustomTimePicker.xib in Resources */,
 				185E65CF2B72435E00FEC922 /* LaunchScreen.storyboard in Resources */,
 				185E65CC2B72435E00FEC922 /* Assets.xcassets in Resources */,
 				18906B192B98DC9A00B21F1F /* PastImageCollectionViewCell.xib in Resources */,
@@ -1069,6 +1084,7 @@
 				18EF61522B7B52340074C959 /* DropDownTextField.swift in Sources */,
 				18F093432B7B456500BFB4C3 /* CustomFont.swift in Sources */,
 				184B8B382B75F5750035FF3E /* LoginViewModel.swift in Sources */,
+				18C213592BB44CED005EFA47 /* CustomTimePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,7 +1233,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1248,7 +1264,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

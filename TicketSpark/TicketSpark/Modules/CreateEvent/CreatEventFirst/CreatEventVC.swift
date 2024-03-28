@@ -826,36 +826,36 @@ extension CreatEventVC : UITextFieldDelegate {
                 self.showToast(with: StringConstants.CreateEvent.enterStartDate.value, position: .top, type: .warning)
                 return false
             }
-             txtStartTime.addTimePicker(minimumDate: txtStartDate.text != Date().convertDateToStringFormatMMMDDYYY() ? nil :  Date(), maximumDate: nil)
+            txtStartTime.addTimePicker(minimumDate: txtStartDate.text != Date().convertDateToStringFormatMMMDDYYY() ? nil :  Date(), maximumDate: nil)
         case self.txtEndTime:
             if self.viewModel.createEventReq.eventStartTime == nil {
                 self.showToast(with: StringConstants.CreateEvent.enterStartTime.value, position: .top, type: .warning)
                 return false
             }
             if txtStartDate.text == txtEndDate.text {
-//                txtStartDate.text?.changeDateFormattt(time: txtStartTime.text ?? "")
-                let minDate = txtStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
-               txtEndTime.addTimePicker(minimumDate: minDate, maximumDate: nil)
+                //                txtStartDate.text?.changeDateFormattt(time: txtStartTime.text ?? "")
+                let minDate = txtStartTime.text?.getMinMaxTime(startDate: txtStartDate.text ?? "")
+                txtEndTime.addTimePicker(minimumDate: minDate, maximumDate: nil)
             } else {
                 txtEndTime.addTimePicker(minimumDate: nil, maximumDate: nil)
             }
             
-           // txtEndTime.addTimePicker(minimumDate: txtStartDate.text != self.txtEndDate.text ? nil : txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: nil)
+            // txtEndTime.addTimePicker(minimumDate: txtStartDate.text != self.txtEndDate.text ? nil : txtStartDate.text?.convertStringToTimeHMMA(), maximumDate: nil)
         case self.txtDoorStartTime:
             if self.viewModel.createEventReq.eventStartTime == nil {
                 self.showToast(with: StringConstants.CreateEvent.enterStartTime.value, position: .top, type: .warning)
                 return false
             }
             
-           let maxDate = txtStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
-           txtDoorStartTime.addTimePicker(minimumDate: nil, maximumDate: maxDate)
+            let maxDate = txtStartTime.text?.getMinMaxTime(startDate: txtStartDate.text ?? "")
+            txtDoorStartTime.addTimePicker(minimumDate: txtStartDate.text?.convertStringToDateFormatMMDDYYY(), maximumDate: maxDate)
         case self.txtDoorEndTime:
             if self.viewModel.createEventReq.eventEndTime == nil {
                 self.showToast(with: StringConstants.CreateEvent.enterEndTime.value, position: .top, type: .warning)
                 return false
             }
-            let minDate = txtDoorStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
-            let maxDate = txtStartTime.text?.getMinimumTime(startDate: txtStartDate.text ?? "")
+            let minDate = txtDoorStartTime.text?.getMinMaxTime(startDate: txtStartDate.text ?? "")
+            let maxDate = txtStartTime.text?.getMinMaxTime(startDate: txtStartDate.text ?? "")
             txtDoorEndTime.addTimePicker(minimumDate: minDate, maximumDate: maxDate)
         case self.txtLocationName.txtFld:
             let autocompleteController = GMSAutocompleteViewController()
